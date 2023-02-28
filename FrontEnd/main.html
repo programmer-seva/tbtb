@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty</title>
+    <style>
+        /*공통*/
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul, ol {list-style: none;}
+        a {text-decoration: none; color: black;}
+        #wrap {width: 100%; height: auto}
+        /*헤더*/
+        header {
+            width: 100%;
+            height: 150px; 
+            position: relative;
+            box-sizing: border-box;
+        }
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 150px;
+        }
+        .logo > a {
+            font-weight: bold;
+            line-height: 150px;
+            margin-left: 50px;
+        }
+        .category {
+            width: 800px;
+            height: auto;
+            margin: 0 auto;
+            line-height: 150px;
+        }
+        .category > table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .category > table tr > td {width: 16.6%; text-align: center;}
+        .category > table tr > td > a {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            font-size: 12px;
+        }
+        .navigation {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 300px;
+            height: 150px;
+            line-height: 150px;
+        }
+        .navigation > div {float: left; margin-right: 40px;}
+        .navigation > div > a {font-size: 12px;}
+        /*푸터*/
+        footer {
+            width: 100%;
+            height: 200px;
+        }
+        footer > div {
+            display: inline-block;
+            width: 500px;
+            height: 200px;
+            margin-left: 100px;
+        }
+        footer > div > table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 30px;
+        }
+        footer > div > table tr {
+        }
+        footer > div > table tr td {
+            width: 33.3%;
+            font-size: 12px;
+            padding-bottom: 15px;
+            color: #777;
+        }
+        footer > div > table tr td > a {color: #777;}
+        .footerinfo {
+            float: right;
+            box-sizing: border-box;
+            padding-top: 30px;
+        }
+        .footerinfo > span {
+            display: block;
+            font-size: 12px;
+            line-height: 18px;
+            color: #777;
+        }
+
+        /*메인*/
+        .banner {
+            height: 900px;
+            background: url("./img/MainBanner.webp") no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <div class="logo"><a href="#">Beauty Shop</a></div>
+            <div class="category">
+                <table>
+                    <tr>
+                        <td><a href="#">OUTER</a></td>
+                        <td><a href="#">KNIT</a></td>
+                        <td><a href="#">TOPS</a></td>
+                        <td><a href="#">PANTS</a></td>
+                        <td><a href="#">DRESS</a></td>
+                        <td><a href="#">SKIRT</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="navigation">
+                <div><a href="#">CART</a></div>
+                <div><a href="#">MY PAGE</a></div>
+                <div><a href="#">JOIN</a></div>
+            </div>
+        </header>
+        <main>
+            <div class="banner"></div>
+        </main>
+        <footer>
+            <div>
+                <table>
+                    <tr>
+                        <td><a href="#">About Us</a></td>
+                        <td><a href="#">Mypage</a></td>
+                        <td>000-0000-0000</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#">Guide</a></td>
+                        <td><a href="#">Cart</a></td>
+                        <td>Mon - Fri AM 09:00 ~ 18:00</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="#">Wishlist</a></td>
+                        <td>Sat.Sun.Red-Day Off</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="footerinfo">
+                <span>SEOUL, KOREA</span>
+                <span>BIZ LICENSE 000-00-00000</span>
+                <span>Communication sales business report 0000-Seoul-0000</span>
+                <span>Copyright ⓒ UX IDENTITY</span>
+                <span>Hosting by I'MWEB</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
