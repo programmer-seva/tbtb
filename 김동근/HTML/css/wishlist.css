@@ -1,0 +1,108 @@
+main > div.mainBackgorund {
+    background-color: #f5f6f7;
+}
+main div.mainContent {
+    width: 1280px;
+    box-sizing: border-box;
+    margin: 0px auto;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+/*마이페이지*/
+/*마이페이지 - 메뉴*/
+main div.mainContent > aside.myMenu {
+    width: 15%;
+    float: left;
+}
+main div.mainContent > aside.myMenu > ul {
+    font-size: 12px;
+    line-height: 1.6;
+}
+main div.mainContent > aside.myMenu > ul > li {
+    margin-bottom: 12px;
+    font-family: 'Nanum Gothic', 'Noto Sans','sans-serif';
+}
+main div.mainContent > aside.myMenu > ul > li.on > a{
+    color: #000 !important;
+    border-bottom: solid 2px #4f4f4f;
+    padding-bottom: 1px;
+    box-sizing: border-box;
+    
+}
+main div.mainContent > aside.myMenu > ul > li > a:hover {
+    cursor: pointer;
+}
+
+/*마이페이지 - 콘텐츠*/
+main div.mainContent > section.menuContent {
+    width: 85%;
+    float: left;
+}
+/*마이페이지 - 콘텐츠 - 회원정보(고정)*/
+main div.mainContent > section.menuContent > .head {
+    padding: 50px 0 40px 45px;
+    margin-bottom: 70px;
+    background: #fff;
+    box-sizing: border-box;
+    display: table;
+}
+main div.mainContent > section.menuContent > .head > .userThumb {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+main div.mainContent > section.menuContent > .head > .userThumb > a > img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin-right: 25px;
+}
+
+main div.mainContent > section.menuContent > .head > .userInfo {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+main div.mainContent > section.menuContent > .head > .userInfo > div:first-child {
+    font-size: 18px;
+}
+main div.mainContent > section.menuContent > .head > .userInfo > div:first-child > span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+main div.mainContent > section.menuContent > .head > .userInfo > div:last-child {
+    font-size: 15px;
+}
+main div.mainContent > section.menuContent > .head > .userInfo > div:last-child > span {
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+/*마이페이지 - 콘텐츠 - 위시리스트*/
+main div.mainContent > section.menuContent > .wishListHead {
+    height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+main div.mainContent > section.menuContent > .wishListHead > .wishCount{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-color: #4f4f4f;
+    border-radius: 100%;
+    font-family: Arial;
+    font-size: 11px;
+    color: #fff;
+    line-height: 20px;
+    text-align: center;
+    position: relative;
+    right: -5px;
+    top: -2px;
+}
+
+main div.mainContent > section.menuContent > .wishList {
+
+}
