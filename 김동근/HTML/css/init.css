@@ -1,0 +1,89 @@
+/*공통*/
+* {
+    margin: 0;
+    padding: 0;
+}
+ul, ol {list-style: none;}
+a {text-decoration: none; color: black;}
+#wrap {width: 100%; height: auto}
+/*헤더*/
+header {
+    width: 100%;
+    height: 150px; 
+    position: relative;
+    box-sizing: border-box;
+}
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 150px;
+}
+.logo > a {
+    font-weight: bold;
+    line-height: 150px;
+    margin-left: 50px;
+}
+.category {
+    width: 800px;
+    height: auto;
+    margin: 0 auto;
+    line-height: 150px;
+}
+.category > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.category > table tr > td {width: 16.6%; text-align: center;}
+.category > table tr > td > a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+}
+.navigation {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 300px;
+    height: 150px;
+    line-height: 150px;
+}
+.navigation > div {float: left; margin-right: 40px;}
+.navigation > div > a {font-size: 12px;}
+/*푸터*/
+footer {
+    width: 100%;
+    height: 200px;
+}
+footer > div {
+    display: inline-block;
+    width: 500px;
+    height: 200px;
+    margin-left: 100px;
+}
+footer > div > table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 30px;
+}
+footer > div > table tr {
+}
+footer > div > table tr td {
+    width: 33.3%;
+    font-size: 12px;
+    padding-bottom: 15px;
+    color: #777;
+}
+footer > div > table tr td > a {color: #777;}
+.footerinfo {
+    float: right;
+    box-sizing: border-box;
+    padding-top: 30px;
+}
+.footerinfo > span {
+    display: block;
+    font-size: 12px;
+    line-height: 18px;
+    color: #777;
+}
