@@ -2,8 +2,6 @@ $(function(){
     $('.cate').mouseenter(function(){
         $(this).children('ul').css('display','block');
         $(this).children('.cate1').css('color',"#c59e51");
-        
-        
     });
     $('.cate').mouseleave(function(){
         $(this).children('ul').css('display','none');
@@ -13,8 +11,10 @@ $(function(){
         let now = $(document).scrollTop();
         console.log(now);
         if(now >= 200){
+            $('.moveNavi').css({'position':'fixed','top':'-70px','background':'rgba(255,255,255,0.8)'});
             $('.up').fadeIn(500);
         }else{
+            $('.moveNavi').css({'position':'absolute','top':'-21px'});
             $('.up').fadeOut(500);
         }
     });
