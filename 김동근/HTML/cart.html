@@ -20,10 +20,10 @@
         <!-- css -->
         <link rel="stylesheet" href="./css/init.css">
         <link rel="stylesheet" href="./css/myPage.css">
-        <link rel="stylesheet" href="./css/wishlist.css">
+        <link rel="stylesheet" href="./css/cart.css">
         <!-- js -->
         <script src="./js/main.js"></script>
-        <title>WishList</title>
+        <title>Cart</title>
         <style>
             
         </style>
@@ -118,104 +118,34 @@
             <main>
                 <div class="mainBackgorund">
                     <div class="mainContent">
-                        <!-- 마이페이지 메뉴 -->
-                        <aside class="myMenu">
-                            <ul>
-                                <li class="on"><a href="#">주문 조회</a></li>
-                                <li><a href="#">위시 리스트</a></li>
-                                <li><a href="#">취소/교환/반품</a></li>
-                                <li><a href="#">1:1문의</a></li>
-                                <li><a href="#">정보 수정</a></li>
-                                <li><a href="#">회원탈퇴</a></li>
-                            </ul>
-                        </aside>
                         <!-- 콘텐츠 -->
                         <section class="myContent">
-                            <!-- 회원 정보 -->
-                            <nav class="head">
-                                <div class="userThumb" >
-                                    <a href="#">
-                                        <img src="./images/default_profile.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="userInfo">
-                                    <div><span id="userNick">김동근</span>님 안녕하세요.</div>
-                                    <div>누적 구매금액: <span id="boughtPrice">70,000</span>원</div>
-                                </div>
-                            </nav>
 
-                            <!-- 위시리스트 -->
-                            <div class="wishListFrame">
-                                <div class="wishListHead">
-                                    위시리스트
+                            <!-- 각 페이지 내용 -->
+                            <div class="cartFrame">
+                                <div class="cartListHead">
+                                    장바구니
                                     <span class="headCount" id="headCount">5</span>
-                                    <a href="#">비우기 X</a>
                                 </div>
-                                <article class="wishList">
-                                    <!-- 아이템 반복 -->
-                                    <div class="item">
-                                        <div class="itemThumb">
-                                            <a href="#">
-                                                <img src="./images/default_profile.png" alt="">
-                                            </a>
-                                            <a class="delete" href="#">x</a>
-                                        </div>
-                                        <div class="itemInfo">
-                                            <a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                            <span class="price">40,000원</span>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="itemThumb">
-                                            <a href="#">
-                                                <img src="./images/default_profile.png" alt="">
-                                            </a>
-                                            <a class="delete" href="#">x</a>
-                                        </div>
-                                        <div class="itemInfo">
-                                            <a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                            <span class="price">40,000원</span>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="itemThumb">
-                                            <a href="#">
-                                                <img src="./images/default_profile.png" alt="">
-                                            </a>
-                                            <a class="delete" href="#">x</a>
-                                        </div>
-                                        <div class="itemInfo">
-                                            <a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                            <span class="price">40,000원</span>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="itemThumb">
-                                            <a href="#">
-                                                <img src="./images/default_profile.png" alt="">
-                                            </a>
-                                            <a class="delete" href="#">x</a>
-                                        </div>
-                                        <div class="itemInfo">
-                                            <a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                            <span class="price">40,000원</span>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="itemThumb">
-                                            <a href="#">
-                                                <img src="./images/default_profile.png" alt="">
-                                            </a>
-                                            <a class="delete" href="#">x</a>
-                                        </div>
-                                        <div class="itemInfo">
-                                            <a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                            <span class="price">40,000원</span>
-                                        </div>
-                                    </div>
+
+                                <!-- 카트 테이블 -->
+                                <article class="cartList">
+                                    <table border="1">
+                                        <thead>
+                                            <tr>
+                                                <th><input class="chkAll" type="checkbox"></th>
+                                                <th>상품 정보</th>
+                                                <th>선택</th>
+                                                <th>판매가</th>
+                                                <th>수량</th>
+                                                <th>적립금</th>
+                                                <th>주문금액</th>
+                                                <th>배송정보</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </article>
                             </div>
-
                         </section>
                     </div>
                 </div>
