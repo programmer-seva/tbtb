@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{list-style: none;}
+        a{
+            text-decoration: none;
+            color: #111;
+        }
+        input{outline: none;}
+
+
+        header{
+            width: 100%;
+            text-align: center;
+            padding: 50px;
+        }
+        header > div{}
+        header > div > h3{
+            margin-bottom: 20px;
+        }
+        header > div > .register{
+            border-left: 1px solid #dad6d6;
+            color: #dad6d6;
+            padding: 0 10px;
+        }
+        header > div > a{
+            color: #dad6d6;
+            padding: 0 10px;
+        }
+               
+        main{
+            width: 100%;
+            height: auto;
+        }
+        main > aside{
+            float: left;
+            margin: -168px 0 0 20px;
+        }
+        main > aside > ul{}
+        main > aside > ul > li{
+            margin: 30px;
+            text-align: center;
+        }
+        main > aside > ul > li > a{
+            border-bottom: 1px solid #bdb5b58f;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        main > aside > ul > li > ul{
+            margin-top: 25px;
+        }
+        main > aside > ul > li > ul > li{
+            font-size: 13px;
+            padding: 5px;
+            text-align: left;
+        }
+        main > aside > ul > li > ul > li > label > input{
+            margin-right: 5px;
+        }
+        
+        #admin-product-list{
+            float: left;
+            width: 80%;
+            padding: 30px;
+            height: auto;
+        }
+        #admin-product-list > div{
+            padding: 0 30px 10px;
+        }
+        #admin-product-list > div #search{
+            padding: 2px;
+            border: 1px solid #dad6d6;
+        }
+        #admin-product-list > div input{
+            border: 0px;
+            border-bottom: 1px solid #dad6d6;
+            height: 22px;
+        }
+        #admin-product-list > div .searchClick{}
+        #admin-product-list > table{
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+        #admin-product-list > table tr{}
+        #admin-product-list > table tr > th{}
+        #admin-product-list > table tr > th > #checkAll{}
+        #admin-product-list > table tr > td{
+            text-align: center;
+        }
+        #admin-product-list > table tr > td > .rowCheck{}
+        #admin-product-list > table tr > td:last-child > input{
+            border: 0px;
+            background: white;
+        }
+        #admin-product-list > table tr > td > img{}
+        #admin-product-list > .delete{}
+        #admin-product-list > .register{}
+        #admin-product-list > div{}
+        #admin-product-list > div > span{}
+        #admin-product-list > div > span > a{}
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <div>
+                <h3>상품관리</h3>
+                <a href="#">상품현황</a>
+                <a href="#" class="register">상품등록</a>
+            </div>
+        </header>
+        <main>
+            <aside>
+                <ul>
+                    <li>
+                        <a href="#">ALL</a>
+                    </li>
+                    <li>
+                        <a href="#">OUTER</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">가디건</input></label></li>
+                            <li><label><input type="checkbox">자켓/코트</input></label></li>
+                            <li><label><input type="checkbox">패딩/점퍼</input></label></li>
+                            <li><label><input type="checkbox">집업/조끼</input></label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">TOP</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">티셔츠</label></li>
+                            <li><label><input type="checkbox">니트/스웨터</label></li>
+                            <li><label><input type="checkbox">맨투맨/후드</label></li>
+                            <li><label><input type="checkbox">조끼/나시</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">BOTTOM</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">스커트</label></li>
+                            <li><label><input type="checkbox">데님</label></li>
+                            <li><label><input type="checkbox">팬츠</label></li>
+                            <li><label><input type="checkbox">슬랙스</label></li>
+                            <li><label><input type="checkbox">레깅스</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">DRESS</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">원피스</label></li>
+                            <li><label><input type="checkbox">투피스</label></li>
+                            <li><label><input type="checkbox">점프수트</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">ETC</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">신발</label></li>
+                            <li><label><input type="checkbox">가방</label></li>
+                            <li><label><input type="checkbox">모자</label></li>
+                            <li><label><input type="checkbox">쥬얼리</label></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+            <section id="admin-product-list">
+                <div>
+                    <form action="#">
+                        <select name="search" id="search">
+                            <option value="search1">상품명</option>
+                            <option value="search2">상품번호</option>
+                        </select>
+                        <input type="text">
+                        <button class="searchClick">
+                            <i class="fa fa-search" ></i>
+                        </button>
+                    </form>
+                </div>
+                <table>
+                    <tr>
+                        <th><input type="checkbox" name="전체체크" id="checkAll"></th>
+                        <th>사진</th>
+                        <th>품번</th>
+                        <th>대분류</th>
+                        <th>소분류</th>
+                        <th>상품명</th>
+                        <th>판매가격</th>
+                        <th>재고</th>
+                        <th>조회</th>
+                        <th>관리</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
+                        <td><img src="#"></td>
+                        <td>0000</td>
+                        <td>대분류</td>
+                        <td>소분류</td>
+                        <td>상품명</td>
+                        <td>00,000</td>
+                        <td>0000</td>
+                        <td>000</td>
+                        <td>
+                            <input type="button" value="삭제"><br>
+                            <input type="button" value="수정">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
+                        <td><img src="#"></td>
+                        <td>0000</td>
+                        <td>대분류</td>
+                        <td>소분류</td>
+                        <td>상품명</td>
+                        <td>00,000</td>
+                        <td>0000</td>
+                        <td>000</td>
+                        <td>
+                            <input type="button" value="삭제"><br>
+                            <input type="button" value="수정">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
+                        <td><img src="#"></td>
+                        <td>0000</td>
+                        <td>대분류</td>
+                        <td>소분류</td>
+                        <td>상품명</td>
+                        <td>00,000</td>
+                        <td>0000</td>
+                        <td>000</td>
+                        <td>
+                            <input type="button" value="삭제"><br>
+                            <input type="button" value="수정">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
+                        <td><img src="#"></td>
+                        <td>0000</td>
+                        <td>대분류</td>
+                        <td>소분류</td>
+                        <td>상품명</td>
+                        <td>00,000</td>
+                        <td>0000</td>
+                        <td>000</td>
+                        <td>
+                            <input type="button" value="삭제"><br>
+                            <input type="button" value="수정">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
+                        <td><img src="#"></td>
+                        <td>0000</td>
+                        <td>대분류</td>
+                        <td>소분류</td>
+                        <td>상품명</td>
+                        <td>00,000</td>
+                        <td>0000</td>
+                        <td>000</td>
+                        <td>
+                            <input type="button" value="삭제"><br>
+                            <input type="button" value="수정">
+                        </td>
+                    </tr>
+                </table>
+                <input type="button" value="선택삭제" class="delete">
+                <input type="button" value="상품등록" class="register">
+                <div>
+                    <span><a href="#">이전</a></span>
+                    <span>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">7</a>
+                        <a href="#">8</a>
+                        <a href="#">9</a>
+                        <a href="#">10</a>
+                    </span>
+                    <span><a href="#">다음</a></span>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
