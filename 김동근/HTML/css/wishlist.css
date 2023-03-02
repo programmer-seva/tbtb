@@ -1,93 +1,22 @@
-main > div.mainBackgorund {
-    background-color: #f5f6f7;
-}
-main div.mainContent {
-    width: 1280px;
-    box-sizing: border-box;
-    margin: 0px auto;
-    padding: 80px 20px;
-    position: relative;
-    overflow: hidden;
-}
-/*마이페이지*/
-/*마이페이지 - 메뉴*/
-main div.mainContent > aside.myMenu {
-    width: 15%;
-    float: left;
-}
-main div.mainContent > aside.myMenu > ul {
-    font-size: 12px;
-    line-height: 1.6;
-}
-main div.mainContent > aside.myMenu > ul > li {
-    margin-bottom: 12px;
-    font-family: 'Nanum Gothic', 'Noto Sans','sans-serif';
-}
-main div.mainContent > aside.myMenu > ul > li.on > a{
-    color: #000 !important;
-    border-bottom: solid 2px #4f4f4f;
-    padding-bottom: 1px;
-    box-sizing: border-box;
-    
-}
-main div.mainContent > aside.myMenu > ul > li > a:hover {
-    cursor: pointer;
-}
-
-/*마이페이지 - 콘텐츠*/
-main div.mainContent > section.menuContent {
-    width: 85%;
-    float: left;
-}
-/*마이페이지 - 콘텐츠 - 회원정보(고정)*/
-main div.mainContent > section.menuContent > .head {
-    padding: 50px 0 40px 45px;
-    margin-bottom: 70px;
-    background: #fff;
-    box-sizing: border-box;
-    display: table;
-}
-main div.mainContent > section.menuContent > .head > .userThumb {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-main div.mainContent > section.menuContent > .head > .userThumb > a > img {
-    width: 85px;
-    height: 85px;
-    border-radius: 50%;
-    margin-right: 25px;
-}
-
-main div.mainContent > section.menuContent > .head > .userInfo {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-main div.mainContent > section.menuContent > .head > .userInfo > div:first-child {
-    font-size: 18px;
-}
-main div.mainContent > section.menuContent > .head > .userInfo > div:first-child > span {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-main div.mainContent > section.menuContent > .head > .userInfo > div:last-child {
-    font-size: 15px;
-}
-main div.mainContent > section.menuContent > .head > .userInfo > div:last-child > span {
-    font-size: 15px;
-    font-weight: lighter;
-}
-
 /*마이페이지 - 콘텐츠 - 위시리스트*/
-main div.mainContent > section.menuContent > .wishListHead {
-    height: 20px;
+main div.wishListFrame {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+main div.wishListFrame > .wishListHead {
+    width: 100%;
+    height: 30px;
+    color: #4f4f4f;
     font-size: 14px;
     font-weight: bold;
-    margin-bottom: 10px;
+    position: relative;
 }
-main div.mainContent > section.menuContent > .wishListHead > .wishCount{
+main div.wishListFrame > .wishListHead > a{
+    position: absolute;
+    right: 10px;
+}
+main div.wishListFrame > .wishListHead > .headCount{
     width: 20px;
     height: 20px;
     display: inline-block;
@@ -103,6 +32,68 @@ main div.mainContent > section.menuContent > .wishListHead > .wishCount{
     top: -2px;
 }
 
-main div.mainContent > section.menuContent > .wishList {
+/*마이페이지 - 콘텐츠 - 위시리스트 - 아이템 반복*/
+main div.wishListFrame > .wishList > .item {
+    width: 200px;
+    height: auto;
+    display: inline-block;
+    margin: 0 60px 25px 0;
+}
+main div.wishListFrame > .wishList > .item:nth-child(4n+0){
+    margin-right: 0px;
+}
 
+main div.wishListFrame > .wishList > .item > .itemThumb {
+    height: 200px;
+    background-color: #4f4f4f;
+    margin-bottom: 3px;
+    position: relative;
+}
+
+main div.wishListFrame > .wishList > .item > .itemThumb img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+main div.wishListFrame > .wishList > .item > .itemThumb:hover img {
+    opacity: 0.5;
+}
+
+main div.wishListFrame > .wishList > .item > .itemThumb .delete {
+    display: none;
+}
+
+main div.wishListFrame > .wishList > .item > .itemThumb:hover .delete {
+    width: 15px;
+    height: 15px;
+    color: #e5e5e5;
+    font-size: 15px;
+    line-height: 12px;
+    text-align: center;
+    border: solid 1px #e5e5e5;
+    border-radius: 100%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: inline-block;
+}
+
+main div.wishListFrame > .wishList > .item > .itemInfo {
+    text-align: center;
+    font-size: 13px;
+}
+
+main div.wishListFrame > .wishList > .item > .itemInfo > a {
+    display: block;
+    font-weight: lighter;
+    border-bottom: solid 1px #e5e5e5;
+    margin: 0 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis
+}
+main div.wishListFrame > .wishList > .item > .itemInfo > span {
+    color: #555555;
+    font-weight: bold;
 }
