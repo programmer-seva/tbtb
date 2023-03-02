@@ -9,10 +9,9 @@ a {text-decoration: none; color: black;}
 /*헤더*/
 header {
     width: 100%;
-    height: 120px; 
+    height: 100px; 
     box-sizing: border-box;
     background: #fff;
-    position: fixed;
     top: 0;
     z-index: 3;
     border-bottom: 1px solid #e5e5e5;
@@ -21,22 +20,31 @@ header {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 101;
 }
 .logo > a {
     font-weight: bold;
-    line-height: 120px;
+    line-height: 100px;
     margin-left: 50px;
     font-size: 20px;
     color: #212121;
+}
+.moveNavi {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    margin-top: 70px;
+    z-index: 100;
+    background: #fff;
 }
 .category {
     width: 800px;
     height: 100%;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 15px;
 }
 .category > ul > li {
-    width: 12.5%;
+    width: 14%;
     height: 45px;
     float: left;
     text-align: center;
@@ -50,7 +58,7 @@ header {
 .dep {
     display: none;
     position: absolute;
-    top: 90px;
+    top: 85px;
     left: 0px;
     width: 130px;
     height: auto;
@@ -58,8 +66,7 @@ header {
     padding: 15px;
     box-sizing: border-box;
     border: 1px solid #e5e5e5;
-    background: #fff;
-    opacity: 0.8;
+    background: rgba(255,255,255,0.8);
 }
 .dep > li {
     text-align: left;
@@ -92,8 +99,9 @@ header {
 .navigation > div > a:hover {color: #999;}
 .search {
     position: absolute;
-    top: 80px;
+    top: 65px;
     right: 200px;
+    z-index: 101;
 }
 .search input {
     width: 150px;
