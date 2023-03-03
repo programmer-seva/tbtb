@@ -2,7 +2,7 @@
 main > div.mainBackgorund {
 }
 main div.mainContent {
-    width: 1280px;
+    width: 100%;
     box-sizing: border-box;
     margin: 0px auto;
     padding: 50px 20px;
