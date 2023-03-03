@@ -11,18 +11,18 @@ main {
     height: 800px;
 }
 .banner1 {
-    background: url("../img/MainBanner1.png");
+    background: url("../img/MainBanner1.png") no-repeat;
     background-size: cover;
 }
 .banner2 {
-    background: url("../img/MainBanner2.jpg");
+    background: url("../img/MainBanner2.jpg") no-repeat;
     background-size: cover;
     background-position-y: -35px;
 }
 .banner3 {
-    background: url("../img/MainBanner3.jpg");
+    background: url("../img/MainBanner3.jpg") no-repeat;
     background-size: cover;
-    background-position: -25px 25px;
+    background-position: -25px 0px;
 }
 .swiper-pagination-bullet-active {background: #fff;}
 main > section {
