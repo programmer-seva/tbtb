@@ -5,9 +5,8 @@
     <title>Beauty</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./css/headfoot.css">
     <link rel="stylesheet" href="./css/community.css">
     <script src="./js/main.js"></script>
@@ -15,7 +14,7 @@
 <body>
     <div id="wrap">
         <header>
-            <div class="logo"><a href="#">Beauty Shop</a></div>
+            <div class="logo"><a href="./index.html">Beauty Shop</a></div>
             <section class="moveNavi">
                 <div class="category">
                     <ul>
@@ -75,17 +74,17 @@
                 </div>
             </section>  
             <div class="search">
-                <input type="text" name="item"><ion-icon class="icon" name="search-outline"></ion-icon></input>
+                <input type="text" name="item"><span class="material-icons">search</span></input>
             </div>
             <div class="navigation">
                 <div><a href="#">LOGIN</a></div>
                 <div><a href="#">JOIN</a></div>
                 <div><a href="#">CART</a></div>
                 <div><a href="#">MYPAGE</a></div>
-                <div><a href="#">NOTICE</a></div>
-                <div><a href="#">Q&A</a></div>
-                <div><a href="#">REVIEW</a></div>
-                <div><a href="#">EVENT</a></div>
+                <div><a href="./notice.html">NOTICE</a></div>
+                <div><a href="./qna.html">Q&A</a></div>
+                <div><a href="./review.html">REVIEW</a></div>
+                <div><a href="./event.html">EVENT</a></div>
             </div>
         </header>
         <main>
@@ -110,31 +109,31 @@
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td class="title">공지사항 게시판입니다.</td>
+                        <td class="title"><a href="#">공지사항 게시판입니다.</a></td>
                         <td>뷰티샵</td>
                         <td>2023-03-02</td>
                         <td>1</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td class="title">공지사항 게시판입니다.</td>
+                        <td class="title"><a href="#">공지사항 게시판입니다.</a></td>
                         <td>뷰티샵</td>
                         <td>2023-03-02</td>
                         <td>1</td>
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td class="title">공지사항 게시판입니다.</td>
+                        <td class="title"><a href="#">공지사항 게시판입니다.</a></td>
                         <td>뷰티샵</td>
                         <td>2023-03-02</td>
                         <td>1</td>
                     </tr>
                 </table>
-                <div>
-                    <input type="text" name="search" placeholder="Search"><ion-icon class="icon" name="search-outline"></ion-icon></input>
+                <div id="boardSearch">
+                    <input type="text" name="search" placeholder="Search"><span class="material-icons">search</span></input>
                 </div>
                 <div class="page">
-                    <a href="#" class="prev"><ion-icon name="chevron-back-outline"></ion-icon></a>
+                    <a href="#" class="prev"><span class="material-icons">chevron_left</span></a>
                     <a href="#" class="num current">1</a>
                     <a href="#" class="num">2</a>
                     <a href="#" class="num">3</a>
@@ -145,12 +144,12 @@
                     <a href="#" class="num">8</a>
                     <a href="#" class="num">9</a>
                     <a href="#" class="num">10</a>
-                    <a href="#" class="next"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+                    <a href="#" class="next"><span class="material-icons">chevron_right</span></a>
                 </div>
             </div>
         </main>
         <footer>
-            <div class="up"><ion-icon class="upIcon" name="chevron-up-outline"></ion-icon></div>
+            <div class="up"><span class="material-icons">expand_less</span></div>
             <div>
                 <ul>
                     <li><a href="#">홈</a></li>
