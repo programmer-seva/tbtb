@@ -1,0 +1,15 @@
+main div.mainBackgorund {
+}
+main div.mainContent {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0px auto;
+    padding: 50px 20px;
+    position: relative;
+    overflow: hidden;
+}
+/*상품 - 주문*/
+main div.orderFrame {
+    width: 1280px;
+    margin: 0 auto;
+}
