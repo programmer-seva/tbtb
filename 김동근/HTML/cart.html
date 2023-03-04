@@ -13,12 +13,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
         <!-- 라이브러리 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <!-- css -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/fonts/im-icon/style.css?1671430692">
@@ -31,11 +32,9 @@
         <style>
             
         </style>
-        <script type="text/javascript">
+        <script>
             $(function(){
-                $('#test').click(function(){
-                    console.log('아니');
-                });
+                $('[data-toggle="popover"]').popover(); 
             });
         </script>
     </head>
@@ -128,9 +127,14 @@
                     <div class="mainContent">
                         <!-- 콘텐츠 -->
                         <section class="myContent">
-
+                            
                             <!-- 각 페이지 내용 -->
                             <div class="cartFrame">
+                                <section class="nav">
+                                    <p class="current"><span>1</span>장바구니</p> 
+                                    <p><span>2</span> 주문/결제</p> 
+                                    <p><span>3</span> 주문완료</p>
+                                </section>
                                 <div class="cartListHead">
                                     장바구니
                                     <span class="headCount" id="headCount">5</span>
@@ -146,7 +150,7 @@
                                                 <th>상품 정보</th>
                                                 <th>판매가</th>
                                                 <th>수량</th>
-                                                <th>적립금</th>
+                                                <th>적립</th>
                                                 <th>합계</th>
                                                 <th>배송비</th>
                                                 <th>선택</th>
@@ -178,10 +182,10 @@
                                                 <td><span>40,000</span>원</td>
                                                 <td rowspan="3">
                                                     무료
-                                                    <button type="button" id="test" data-toggle="popover" title="조건부 무료배송" 
-                                                        data-content="<div class=&quot;&quot;><label class=&quot;text-bold text-15&quot;>배송비 안내</label><div class=&quot;table-responsive&quot;><table class=&quot;table no-margin&quot;><caption class=&quot;text-bold no-padding-top&quot;>조건부 무료배송</caption><tr><td colspan=&quot;2&quot;><p>기본 배송비 2,500원<br>50,000원 이상 구매 시 무료배송</p></td></tr></table></div></div>" data-placement="top"> 
-                                                        <span class="material-symbols-outlined">help</span> 
-                                                    </button>
+                                                    <a href="#" data-toggle="popover" title="조건부 무료배송" data-placement="top" data-html="true"
+                                                        data-content="기본 배송비 2,500원 <br/> 50,000원 이상 구매 시 무료배송"> 
+                                                        <span id="deliIcon" class="material-symbols-outlined">help</span> 
+                                                    </a>
                                                 </td>
                                                 <td>
                                                     <a class="btn" href="#">주문하기</a>
@@ -190,7 +194,62 @@
                                                 </td>
                                             </tr>
                                             <!-- 아이템 반복 끝-->
-                                            
+                                            <tr>
+                                                <td><input class="chkItem" type="checkbox"></td>
+                                                <td> <a href="#"> <img src="./images/default_profile.png" alt=""> </a> </td>
+                                                <td>
+                                                    <strong><a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a></strong><br>
+                                                    <span>[옵션: <span>베이지</span>]<br></span>
+                                                    <span><a class="btn" href="#">옵션변경</a></span>
+                                                </td>
+                                                <td>
+                                                    <span class="oriPrice">50,000</span>원 <br>
+                                                    <span class="price">40,000</span>원 <span class="discount">20</span>
+                                                </td>
+                                                <td>
+                                                    <span class="countFrame">
+                                                        <input type="text" value="3">
+                                                        <a class="btnIncrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif" alt="수량증가"></a>
+                                                        <a class="btnDecrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소"></a>
+                                                        <a class="apply" href="#">변경</a>
+                                                    </span>
+                                                </td>
+                                                <td><span>400</span>원</td>
+                                                <td><span>40,000</span>원</td>
+                                                <td>
+                                                    <a class="btn" href="#">주문하기</a>
+                                                    <a class="btn" href="#">관심상품등록</a>
+                                                    <a class="btn" href="#">삭제</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="chkItem" type="checkbox"></td>
+                                                <td> <a href="#"> <img src="./images/default_profile.png" alt=""> </a> </td>
+                                                <td>
+                                                    <strong><a href="#">[매스티지] 바오바오 루센트ㄴㄴ</a></strong><br>
+                                                    <span>[옵션: <span>베이지</span>]<br></span>
+                                                    <span><a class="btn" href="#">옵션변경</a></span>
+                                                </td>
+                                                <td>
+                                                    <span class="oriPrice">50,000</span>원 <br>
+                                                    <span class="price">40,000</span>원 <span class="discount">20</span>
+                                                </td>
+                                                <td>
+                                                    <span class="countFrame">
+                                                        <input type="text" value="3">
+                                                        <a class="btnIncrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif" alt="수량증가"></a>
+                                                        <a class="btnDecrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소"></a>
+                                                        <a class="apply" href="#">변경</a>
+                                                    </span>
+                                                </td>
+                                                <td><span>400</span>원</td>
+                                                <td><span>40,000</span>원</td>
+                                                <td>
+                                                    <a class="btn" href="#">주문하기</a>
+                                                    <a class="btn" href="#">관심상품등록</a>
+                                                    <a class="btn" href="#">삭제</a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <!-- 삭제 버튼 -->

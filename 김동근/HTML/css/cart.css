@@ -1,6 +1,40 @@
+/* 현재페이지 */
+main div.cartFrame > .nav {
+    display: block;
+    text-align: right;
+    margin: 30px 0;
+}
+main div.cartFrame > .nav > p {
+    display: inline-block;
+    margin-left: 20px;
+    font-weight: normal;
+    font-size: 10px;
+    text-align: left;
+    color: #555;
+}
+main div.cartFrame > .nav > p > span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    background: #e5e5e5;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 3px;
+}
+main div.cartFrame > .nav > p.current {
+    color: #212121;
+    font-weight: bold;
+}
+main div.cartFrame > .nav > p.current span {
+    background: #81cb49;
+}
+
 /*마이페이지 - 콘텐츠 - 위시리스트*/
 main div.cartFrame {
-    width: 1400px;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -178,7 +212,7 @@ main div.cartFrame > .cartList > .cartBtns {
 }
 /*마이페이지 - 콘텐츠 - 카트 - 토탈 테이블*/
 main div.cartFrame .totalTable {
-    width: 1400px;
+    width: 1200px;
     border-top: 1px solid;
     border-bottom: 1px solid;
     margin-top: 90px;
@@ -214,6 +248,12 @@ main div.cartFrame .totalTable .priceWrap p:last-child {
 main div.cartFrame .totalTable .im-icon {
     margin: 10px 20px;
     font-size: 10px;
+}
+
+#deliIcon {
+    font-size: 17px;
+    font-weight: bold;
+    color: #666666;
 }
 
 /*마이페이지 - 콘텐츠 - 카트 - 주문버튼*/
