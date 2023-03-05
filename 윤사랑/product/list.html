@@ -3,110 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Beauty</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        li{list-style: none;}
-        a{
-            text-decoration: none;
-            color: #111;
-        }
-        input{outline: none;}
-
-
-        header{
-            width: 100%;
-            text-align: center;
-            padding: 50px;
-        }
-        header > div{}
-        header > div > h3{
-            margin-bottom: 20px;
-        }
-        header > div > .register{
-            border-left: 1px solid #dad6d6;
-            color: #dad6d6;
-            padding: 0 10px;
-        }
-        header > div > a{
-            color: #dad6d6;
-            padding: 0 10px;
-        }
-               
-        main{
-            width: 100%;
-            height: auto;
-        }
-        main > aside{
-            float: left;
-            margin: -168px 0 0 20px;
-        }
-        main > aside > ul{}
-        main > aside > ul > li{
-            margin: 30px;
-            text-align: center;
-        }
-        main > aside > ul > li > a{
-            border-bottom: 1px solid #bdb5b58f;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        main > aside > ul > li > ul{
-            margin-top: 25px;
-        }
-        main > aside > ul > li > ul > li{
-            font-size: 13px;
-            padding: 5px;
-            text-align: left;
-        }
-        main > aside > ul > li > ul > li > label > input{
-            margin-right: 5px;
-        }
-        
-        #admin-product-list{
-            float: left;
-            width: 80%;
-            padding: 30px;
-            height: auto;
-        }
-        #admin-product-list > div{
-            padding: 0 30px 10px;
-        }
-        #admin-product-list > div #search{
-            padding: 2px;
-            border: 1px solid #dad6d6;
-        }
-        #admin-product-list > div input{
-            border: 0px;
-            border-bottom: 1px solid #dad6d6;
-            height: 22px;
-        }
-        #admin-product-list > div .searchClick{}
-        #admin-product-list > table{
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 10px;
-        }
-        #admin-product-list > table tr{}
-        #admin-product-list > table tr > th{}
-        #admin-product-list > table tr > th > #checkAll{}
-        #admin-product-list > table tr > td{
-            text-align: center;
-        }
-        #admin-product-list > table tr > td > .rowCheck{}
-        #admin-product-list > table tr > td:last-child > input{
-            border: 0px;
-            background: white;
-        }
-        #admin-product-list > table tr > td > img{}
-        #admin-product-list > .delete{}
-        #admin-product-list > .register{}
-        #admin-product-list > div{}
-        #admin-product-list > div > span{}
-        #admin-product-list > div > span > a{}
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/admin_product.css">
+    <script>
+        $(document).ready(function(){
+            $('aside > ul > li > a').click(function(){
+                $(this).parent().children('ul').slideToggle();
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -114,7 +19,7 @@
             <div>
                 <h3>상품관리</h3>
                 <a href="#">상품현황</a>
-                <a href="#" class="register">상품등록</a>
+                <a href="#">상품등록</a>
             </div>
         </header>
         <main>
@@ -183,10 +88,14 @@
                             <option value="search2">상품번호</option>
                         </select>
                         <input type="text">
-                        <button class="searchClick">
-                            <i class="fa fa-search" ></i>
-                        </button>
+                        <button class="searchClick">검색</button>
                     </form>
+                </div>
+                <div>
+                    <a href="#">최신순 |</a>
+                    <a href="#">판매가격순 |</a>
+                    <a href="#">재고순 |</a>
+                    <a href="#">조회순</a>
                 </div>
                 <table>
                     <tr>
@@ -282,7 +191,7 @@
                 <div>
                     <span><a href="#">이전</a></span>
                     <span>
-                        <a href="#">1</a>
+                        <a href="#" class="current">1</a>
                         <a href="#">2</a>
                         <a href="#">3</a>
                         <a href="#">4</a>

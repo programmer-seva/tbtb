@@ -3,20 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>Beauty</title>
+    <link rel="stylesheet" href="./css/admin_product.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('aside > ul > li > a').click(function(){
+                $(this).parent().children('ul').slideToggle();
+            });
+
+            $('.selectColor td:nth-child(n+5)').hide();
+            $('.more').click(function(){
+                $(this).parent().next().show();
+                $(this).hide();
+            }); 
+        });
+    </script>
 </head>
 <body>
     <div id="wrapper">
         <header>
             <div>
-                <div>상품기본정보</div>
+                <h3>상품관리</h3>
+                <a href="#">상품현황</a>
+                <a href="#">상품등록</a>
             </div>
         </header>
         <main>
             <aside>
-                <table>
-                    <tr><td>상품관리</td></tr>
-                    <tr><td>상품등록</td></tr>
-                </table>
+                <ul>
+                    <li>
+                        <a href="#">ALL</a>
+                    </li>
+                    <li>
+                        <a href="#">OUTER</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">가디건</input></label></li>
+                            <li><label><input type="checkbox">자켓/코트</input></label></li>
+                            <li><label><input type="checkbox">패딩/점퍼</input></label></li>
+                            <li><label><input type="checkbox">집업/조끼</input></label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">TOP</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">티셔츠</label></li>
+                            <li><label><input type="checkbox">니트/스웨터</label></li>
+                            <li><label><input type="checkbox">맨투맨/후드</label></li>
+                            <li><label><input type="checkbox">조끼/나시</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">BOTTOM</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">스커트</label></li>
+                            <li><label><input type="checkbox">데님</label></li>
+                            <li><label><input type="checkbox">팬츠</label></li>
+                            <li><label><input type="checkbox">슬랙스</label></li>
+                            <li><label><input type="checkbox">레깅스</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">DRESS</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">원피스</label></li>
+                            <li><label><input type="checkbox">투피스</label></li>
+                            <li><label><input type="checkbox">점프수트</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">ETC</a>
+                        <ul>
+                            <li><label><input type="checkbox">전체</input></label></li>
+                            <li><label><input type="checkbox">신발</label></li>
+                            <li><label><input type="checkbox">가방</label></li>
+                            <li><label><input type="checkbox">모자</label></li>
+                            <li><label><input type="checkbox">쥬얼리</label></li>
+                        </ul>
+                    </li>
+                </ul>
             </aside>
             <section id="admin-product-register">
                 <form action="#">
@@ -90,10 +158,36 @@
                     <article>
                         <h3>상품 상세 정보</h3>
                         <table>                           
-                            <tr>
-                                <th>색상</th>
-                                <td><input type="text"></td>
-                            </tr>                     
+                            <tr class="selectColor">
+                                <th style="width: 68px;">색상</th>
+                                <td>
+                                    <input type="color" value="#111" class="color">
+                                    <input type="text">
+                                </td>
+                                <td>
+                                    <input type="color" value="#111" class="color">
+                                    <input type="text">
+                                </td>
+                                <td>
+                                    <input type="color" value="#111" class="color">
+                                    <input type="text">
+                                    <button class="more">more ></button>
+                                </td>
+                                <td>
+                                    <input type="color" value="#111" class="color">
+                                    <input type="text">
+                                    <button class="more">more ></button>
+                                </td>
+                                <td>
+                                    <input type="color" value="#111" class="color">
+                                    <input type="text">
+                                    <button class="more">more ></button>
+                                </td>
+                                <td>
+                                    <input type="color" value="#111" class="color">
+                                    <input type="text">
+                                </td>
+                            </tr>                   
                             <tr>
                                 <th>소재</th>
                                 <td><input type="text"></td>
@@ -101,10 +195,11 @@
                             <tr>
                                 <th>사이즈</th>
                                 <td>
-                                    <label><input type="radio" name="size">S</label>
-                                    <label><input type="radio" name="size">M</label>
-                                    <label><input type="radio" name="size">L</label>
-                                    <label><input type="radio" name="size">XL</label>
+                                    <label><input type="checkbox" name="size">free</label>
+                                    <label><input type="checkbox" name="size">S</label>
+                                    <label><input type="checkbox" name="size">M</label>
+                                    <label><input type="checkbox" name="size">L</label>
+                                    <label><input type="checkbox" name="size">XL</label>
                                 </td>
                             </tr>                
                             <tr>
@@ -139,47 +234,41 @@
                                     <label><input type="radio" name="flex">없음</label>
                                 </td>
                             </tr>       
-                            <tr>
-                                <td>
-                                    <table>
-                                        <tr><th>상품 상세 이미지()</th></tr>
-                                        <tr>
-                                            <td>
-                                                <input type="file" name="#"><br>
-                                                <input type="file" name="#"><br>
-                                                <input type="file" name="#"><br>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td>
-                                    <table>
-                                        <tr><th>상품 상세 이미지()</th></tr>
-                                        <tr>
-                                            <td>
-                                                <input type="file" name="#"><br>
-                                                <input type="file" name="#"><br>
-                                                <input type="file" name="#"><br>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td>
-                                    <table>
-                                        <tr><th>상품 상세 이미지()</th></tr>
-                                        <tr>
-                                            <td>
-                                                <input type="file" name="#"><br>
-                                                <input type="file" name="#"><br>
-                                                <input type="file" name="#"><br>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>         
                         </table>
+                        <section class="image">
+                            <table>
+                                <tr><th>상품 메인 이미지()</th></tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="#"><br>
+                                        <input type="file" name="#"><br>
+                                        <input type="file" name="#"><br>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr><th>상품 목록 이미지()</th></tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="#"><br>
+                                        <input type="file" name="#"><br>
+                                        <input type="file" name="#"><br>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr><th>상품 상세 이미지()</th></tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="#"><br>
+                                        <input type="file" name="#"><br>
+                                        <input type="file" name="#"><br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
                     </article>
-                    <input type="submit" value="등록">
+                    <input type="submit" value="등록" class="register">
                 </form>
             </section>
         </main>
