@@ -1,10 +1,444 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Beauty</title>
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" th:href="@{/css/headfoot.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
-	<h3>hi</h3>
+    <div id="wrap">
+        <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <main>
+            <div class="swiper swiperBanner">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide banner1"></div>
+                    <div class="swiper-slide banner2"></div>
+                    <div class="swiper-slide banner3"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <script>
+                const swiper1 = new Swiper('.swiperBanner', {
+                    // Optional parameters
+                    slidesPerView: 1,
+                    loop: true,
+            
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+            
+                    // And if we need scrollbar
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                    },
+            
+                    autoplay: {     //자동슬라이드 (false-비활성화)
+                    delay: 5000, // 시간 설정
+                    disableOnInteraction: false, // false-스와이프 후 자동 재생
+                    },
+                });
+            </script>
+            <article>
+                <span>WEEKLY BEST ITEMS</span>
+                <div class="swiper swiperItem">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="./img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="./img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="./img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="./img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="./img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample7.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </article>
+            <script>
+                let bullet = ["OUTER", "TOP", "BOTTOM", "DRESS", "ACC"];
+                const swiper2 = new Swiper('.swiperItem', {
+                    // Optional parameters
+                    slidesPerView: 1,
+                    loop: true,
+    
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                        renderBullet: function (index, className) {
+                        return '<div class="' + className + '"><span>' + (bullet[index]) + '</span></div>';
+                        }
+                    },
+    
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+    
+                    // And if we need scrollbar
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                    },
+    
+                    autoplay: {     //자동슬라이드 (false-비활성화)
+                    delay: 5000, // 시간 설정
+                    disableOnInteraction: false, // false-스와이프 후 자동 재생
+                    },
+                });
+            </script>
+            <section>
+                <span>NEW</span>
+                <div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample1.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample2.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample3.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample4.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample5.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample1.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample2.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample3.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample1.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample2.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample3.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample4.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample5.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample1.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample2.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                    <div class="product">
+                        <a href="#"><img src="./img/sample3.jpg" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">상품명</span></a>
+                        <span class="oriPrice">20,000원</span>
+                        <span class="price">15,000원<span class="discount">25%</span></span>
+                        <span class="descript">상품설명</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+    </div>
 </body>
 </html>
