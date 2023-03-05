@@ -1,35 +1,27 @@
-# Beauty 쇼핑몰 포트폴리오
-## --1차개발--
-#### 메인페이지		/index
-
-### 회원
-#### 로그인		/member/login
-#### 약관동의		/member/join
-#### 회원가입		/member/register
-#### 아이디찾기		/member/findId
-#### 비밀번호찾기	/member/findPw
-
-### 상품
-#### 상품목록		/shop/list
-#### 상품보기		/shop/view
-
-### 마이페이지
-#### 마이페이지홈	/myshop/home
-#### 위시리스트		/myshop/wish
-
-### 구매
-#### 장바구니		/order/cart
-#### 주문/결제		/order/orderform
-#### 구매완료		/order/ordercomplete
-
-### 관리자 
-#### 상품등록		/admin/product/register
-#### 상품현황		/admin/product/list
-
-## --2차개발--
-### 고객센터
-#### 공지사항		/community/notice
-#### 리뷰		/community/review
-#### 이벤트		/community/event
-#### 문의하기		/community/qna
-#### 자주묻는질문	/community/faq
+# Beauty 쇼핑몰
+20-30대를 위한 온라인 여성 쇼핑몰
+## 목차
+> 1.웹 서비스 소개  
+  2.프로젝트 구성  
+  3.구현 기능  
+  4.역할  
+  5.후기  
+## 1.웹 서비스 소개
+* 바로가기 URL링크
+* 기획의도
+* 주요기능
+## 2.프로젝트 구성
+### 기술 스택 및 라이브러리
+## 3.구현 기능
+1 필수 구현
+2 선택 구현
+## 4.역할
+|이름|역할|담당 업무|
+|---|---|---|
+|박진휘|팀장|팀프로젝트 총괄 및 Fullstack|
+|김동근|팀원|Fullstack|
+|강중현|팀원|Fullstack|
+|윤사랑|팀원|Fullstack|
+|김보성|팀원|Fullstack|
+## 5.후기
+느낀점...
