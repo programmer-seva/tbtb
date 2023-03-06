@@ -1,12 +1,12 @@
 api설계
 --1차 개발--
-메인페이지		/index
+메인페이지	/index
 
 회원가입
 로그인		/member/login
 약관동의		/member/join
 회원가입		/member/register
-아이디찾기		/member/findId
+아이디찾기	/member/findId
 비밀번호찾기	/member/findPw
 
 상품
@@ -15,7 +15,8 @@ api설계
 
 마이페이지
 마이페이지홈	/myshop/home
-위시리스트		/myshop/wish
+위시리스트	/myshop/wish
+주문내역상세	/myshop/orderDetail
 
 구매
 장바구니		/order/cart

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace = mapper파일의 아이디 값 -->
+<mapper namespace="kr.co.beauty.dao.Order2DAO">
+	<select id="selectOrdercomplete" resultType="kr.co.beauty.vo.OrdercompleteVO">
+		SELECT * FROM `ordercomplete` WHERE `ordNo`=#{ordNo};
+	</select>
+	<select id="selectOrder" resultType="kr.co.beauty.vo.OrderVO">
+		SELECT a.*,b.prodName FROM `order` AS a JOIN `product` AS b ON a.prodNo=b.prodNo  WHERE `ordNo`=#{ordNo}; 
+	</select>
+</mapper>
