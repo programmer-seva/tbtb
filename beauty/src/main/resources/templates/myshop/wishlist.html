@@ -1,0 +1,82 @@
+<!--
+날짜 : 2023/03/01
+이름 : 김동근
+내용 : 포트폴리오01 HTML wishlist
+-->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+		<meta charset="UTF-8">
+        <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+        
+        <!-- Private index, headfoot settings -->
+        <!-- font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@300&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+        <!-- library -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <!-- css -->
+        <link rel="stylesheet" th:href="@{/css/myshop/init.css}">
+        <link rel="stylesheet" th:href="@{/css/myshop/myPage.css}">
+        <link rel="stylesheet" th:href="@{/css/myshop/wishlist.css}">
+        <!-- js -->
+        
+        <title>WishList</title>
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- 헤더 -->
+            <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+            
+            <!-- 메인 -->
+            <main>
+                <div class="mainBackgorund">
+                    <div class="mainContent">
+                        <!-- 콘텐츠 -->
+                        <section class="myContent">
+                        	<!-- 마이페이지 메뉴-->
+	                        <th:block th:replace="~{/myshop/_mymenu :: mymenuFragment}"></th:block>
+	                        
+	                        <!-- 회원정보 -->
+							<th:block th:replace="~{/myshop/_mymenu :: myheadFragment}"></th:block>
+							
+                            <!-- 위시리스트 -->
+                            <div class="wishListFrame">
+                                <div class="wishListHead">
+                                    위시리스트
+                                    <span class="headCount" id="headCount">5</span>
+                                    <a href="#">비우기 X</a>
+                                </div>
+                                <article class="wishList">
+                                    <!-- 아이템 반복 -->
+                                    <div class="item">
+                                        <div class="itemThumb">
+                                            <a th:href="@{/myshop/deleteAllWish}">
+                                                <img th:src="@{/img/default_profile.png}" alt="">
+                                            </a>
+                                            <a class="delete" th:href="@{/myshop/deleteSelectedWish(prodNo=${product?.prodNo})}">x</a>
+                                        </div>
+                                        <div class="itemInfo">
+                                            <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
+                                            <span class="price">40,000원</span>
+                                        </div>
+                                    </div>
+                                    <!-- 아이템 반복 종료 -->
+                                </article>
+                            </div>
+
+                        </section>
+                    </div>
+                </div>
+            </main>
+
+            <!-- 푸터 -->
+            <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        </div>
+    </body>
+</html>
