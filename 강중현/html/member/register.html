@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>JOIN</title>
+    <title>register</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -13,8 +13,17 @@
 
 </head>
 <STYLE>
-    .rg {
+    .mb {
         margin: 0px 287.5px;
+    }
+
+    main>.mb>form>h2 {
+        height: 22px;
+        width: 900px;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: left;
+
     }
 
     .invalid-feedback {
@@ -25,13 +34,7 @@
         color: #dc3545
     }
 
-    /* input size */
-    /* .input-size {
-        height: 22px;
-        width: 137px;
-        border: 1px solid #d5d5d5;
-        padding: 2px 4px 2px 4px;
-    } */
+    
 
     .zip {
         height: 22px;
@@ -62,10 +65,9 @@
         display: inline-block;
     }
 
-    input {
+    .mb-input {
         font-size: 12px;
         line-height: 22px;
-        vertical-align: middle;
         height: 22px;
         width: 137px;
         border: 1px solid #d5d5d5;
@@ -79,15 +81,17 @@
         vertical-align: top;
         height: 20px;
         width: 131.5px;
+        border: 1px solid #e5e5e5;
         padding: 12px 0 12px 18px;
     }
 
     td {
         font-size: 12px;
         line-height: 18px;
-        vertical-align: middle;
         height: 28px;
-        width: 730px;
+        width: 729.5px;
+        border: 1px solid #e5e5e5;
+        padding: 8px 10px 7px 10px;
     }
 
     .birth_year {
@@ -128,36 +132,66 @@
     input[type=checkbox],
     input[type=radio] {
         box-sizing: border-box;
-        padding: 0
-    }
-
-    .terms-checkbox {
+        padding: 0;
         width: 13px;
         height: 13px;
     }
 
-    .terms-label {}
-
-    .terms {
-        color: blue;
-    }
-
-    .privacy {
-        color: blue;
-    }
-
-    .btn-primary {
+    .btn-terms {
         color: #fff;
         background-color: #007bff;
-        border-color: #007bff
+        border-color: #007bff;
+        height: 48px;
+        width: 180px;
+        border: 1px solid #fff;
+        padding: 14px 8px 14px 8px;
+        font-size: 15px;
+        line-height: 18px;
+        text-align: center;
     }
 
-    .btn-primary:hover {
+    .btn-terms:hover {
         color: #fff;
         background-color: #0069d9;
         border-color: #0062cc
     }
 
+    h3 {
+        height: 20px;
+        width: 858px;
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+    }
+
+    textarea {
+        height: 110px;
+        width: 799px;
+        padding: 20px 20px 20px 20px;
+        font-size: 12px;
+        line-height: 20px;
+        border: 1px solid #d5d5d5;
+    }
+
+    .base-box {
+        height: 209px;
+        width: 858px;
+        border: 1px solid #e5e5e5;
+        margin: -1px 0 0 0;
+        padding: 20px 20px 20px 20px;
+        font-size: 12px;
+        line-height: 20px;
+        background-color: #f9f9f9;
+    }
+    
+    .btn-base-box{
+        height: 48px;
+        width: 900px;
+        padding: 10px 0 10px 0;
+        background-color: #fff;
+        text-align: center;
+    }
     
 </STYLE>
 
@@ -240,7 +274,7 @@
         </header>
         <main>
 
-            <div class="rg">
+            <div class="mb">
                 <form action="validation-form">
                     <h2>JOIN US</h2>
                     <h4>기본정보</h4>
@@ -248,15 +282,16 @@
                         <tr>
                             <th>이메일</th>
                             <td>
-                                <input type="email" class="input-size" id="email" placeholder="" required>
+                                <input type="email" class="mb-input" id="email" placeholder="" required>
                                 <span>이메일을 입력해주세요.</span>
+                                <p>(아이디 찾기에 사용 문구 넣기)</p>
                             </td>
                             <div class="invalid-feedback">이메일을 입력해주세요.</div>
                         </tr>
                         <tr>
                             <th>비밀번호</th>
                             <td>
-                                <input type="password" class="input-size" id="pass1" placeholder="" required>
+                                <input type="password" class="mb-input" id="pass1" placeholder="" required>
                                 <span>영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                             </td>
                             <div class="invalid-feedback">비밀번호를 입력 하세요</div>
@@ -264,7 +299,7 @@
                         <tr>
                             <th>비밀번호 확인</th>
                             <td>
-                                <input type="password" class="input-size" id="pass2" placeholder="" required>
+                                <input type="password" class="mb-input" id="pass2" placeholder="" required>
                                 <span>영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                             </td>
                             <div class="invalid-feedback">비밀번호를 한번 더 입력 하세요</div>
@@ -272,7 +307,7 @@
                         <tr>
                             <th>이름</th>
                             <td>
-                                <input type="name" class="input-size" id="name" placeholder="" required>
+                                <input type="name" class="mb-input" id="name" placeholder="" required>
                                 <span>한글 2자 이상 이어야 합니다.</span>
                             </td>
                             <div class="invalid-feedback">이름을(를)입력하세요</div>
@@ -299,7 +334,7 @@
                         <tr>
                             <th>휴대전화</th>
                             <td>
-                                <input type="text" class="input-size" id="pass" placeholder="" required>
+                                <input type="text" class="mb-input" id="pass" placeholder="" required>
                                 <span>010-1234-5678</span>
                             </td>
                             <div class="invalid-feedback">이름을(를)입력하세요</div>
@@ -320,23 +355,51 @@
                         <tr>
                             <th>키/몸무게</th>
                             <td>
-                                <input type="text">cm
-                                <input type="text">kg
+                                <input type="text" class="mb-input">cm
+                                <input type="text" class="mb-input">kg
                             </td>
                         </tr>
                     </table>
                     <table>
                         <h4>약관</h4>
                         <div>
-                            <label><input type="checkbox" class="terms-checkbox" required>
-                                <a href="#" class="privacy">개인정보 수집</a>
-                                및
-                                <a href="#" class="terms">이용약관</a>
-                                에 동의합니다
+                            <label>
+                                <input type="checkbox" class="terms-checkbox" required>
+                                개인정보 수집 및 이용약관에 동의합니다
+                            </label>
                         </div>
+                        <section>
+                            <div class="base-box">
+                                <h3><span class="essential">[필수]</span> 이용약관 동의</h3>
+                                <textarea class="" readonly>이용약관 동의</textarea>
+                                <div>
+                                    <label>
+                                        이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="base-box">
+                                <h3><span class="essential">[필수]</span>개인정보 수집 및 이용 동의</h3>
+                                <textarea class="" readonly> 개인정보 수집 동의</textarea>
+                                <div>
+                                    <label>
+                                        이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="base-box">
+                                <h3><span>[선택]</span> 쇼핑정보 수신 동의</h3>
+                                <textarea class="" readonly>할인쿠폰 등등</textarea>
+                                <div>
+                                    <label>
+                                        이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
                     </table>
-                    <div>
-                        <button class="btn-primary" type="submit">회원가입</button>
+                    <div class="btn-base-box">
+                        <input class="btn-terms" type="submit" value="회원가입">
                     </div>
                 </form>
             </div>

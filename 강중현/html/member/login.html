@@ -10,7 +10,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="../css/headfoot.css">
-    
+
     <script src="../js/main.js"></script>
 </head>
 
@@ -90,12 +90,160 @@
                 <div><a href="#">EVENT</a></div>
             </div>
         </header>
-        <main>
-            <section>
-                <span>LOGIN</span>
-            </section>
+        <style>
+            main>.lg {
+                height: 510px;
+                width: 900px;
+                margin: 0 50px 0 50px;
+                min-height: 500px;
+                max-width: 1328px;
 
-            
+            }
+
+            main>.lg>h2 {
+                height: 22px;
+                width: 1328px;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: left;
+            }
+
+            main>.lg>fieldset {
+                font-size: 11px;
+                line-height: 18px;
+                text-align: center;
+                vertical-align: top;
+                height: 435px;
+                width: 400px;
+                border: 0px none rgb(46, 46, 46);
+            }
+
+            .lg-input {
+                display: inline-block;
+                font-size: 13px;
+                line-height: 45px;
+                padding: 2px 2px 2px 7px;
+                height: 45px;
+                width: 398px;
+                border: 1px solid #d5d5d5;
+            }
+
+            p {
+                height: 18px;
+                width: 400px;
+                margin: 10px 0 20px 0;
+                text-align: left;
+            }
+
+            label {
+                height: auto;
+                width: auto;
+                margin: 0 4px 0 2px;
+            }
+
+            .lg-save-id {
+                height: 13px;
+                width: 13px;
+                margin: -1px 2px 0 0;
+            }
+
+            .btn-base-box {
+                height: 110px;
+                width: 400px;
+                margin: 0 0 3px 0;
+                padding: 10px 0 10px 0;
+            }
+
+            .btn-login {
+                height: 48px;
+                width: 400px;
+                border: 1px solid #fff;
+                margin: 0 0 7px 0;
+                padding: 14px 16px 14px 16px;
+                min-width: 80px;
+                font-size: 13px;
+                line-height: 18px;
+                text-align: center;
+                background-color: #444444;
+            }
+
+            .btn-register {
+                height: 48px;
+                width: 400px;
+                border: 1px solid #d5d5d5;
+                margin: 0 0 7px 0;
+                padding: 14px 16px 14px 16px;
+                min-width: 80px;
+                font-size: 13px;
+                line-height: 18px;
+                text-align: center;
+                background-color: #fff;
+            }
+
+            .btn-none-order {
+                height: 48px;
+                width: 400px;
+                border: 1px solid #d5d5d5;
+                margin: 0 0 7px 0;
+                padding: 14px 16px 14px 16px;
+                min-width: 80px;
+                font-size: 13px;
+                line-height: 18px;
+                text-align: center;
+                background-color: #fff;
+            }
+
+            main>.lg>fieldset>ul {
+                height: 25px;
+                width: 400px;
+                padding: 20px 0 5px 0;
+                font-size: 0px;
+                line-height: 0px;
+                text-align: center;
+            }
+
+            main>.lg>fieldset>ul>li {
+                height: 25px;
+                width: auto;
+                padding: 0 9px 0 13px;
+
+            }
+
+            main>.lg>fieldset>ul>li>a {
+
+                height: auto;
+                width: auto;
+                font-size: 12px;
+                line-height: 25px;
+                text-align: center;
+            }
+        </style>
+        <main>
+            <div class="lg">
+
+                <h2>LOGIN</h2>
+                <fieldset>
+                    <input type="text" class="lg-input" placeholder="이메일">
+                    <br>
+                    <input type="password" class="lg-input" placeholder="비밀번호">
+                    <p>
+                        <label><input type="checkbox" class="lg-save-id">아이디 저장</label>
+                    </p>
+                    <div class="btn-base-box">
+                        <input class="btn-login" type="submit" value="LOGIN">
+                        <input class="btn-register" type="submit" value="회원가입">
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#">find ID | </a>
+                            <a href="#">find Password</a>
+                        </li>
+                    </ul>
+                    <!-- <ul>
+                            <input class="btn-none-order" type="submit" value="비회원 주문하기 예시">
+                        </ul> -->
+                </fieldset>
+            </div>
         </main>
         <footer>
             <div class="up"><ion-icon class="upIcon" name="chevron-up-outline"></ion-icon></div>
