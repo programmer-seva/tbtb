@@ -22,7 +22,8 @@
         <link rel="stylesheet" href="./css/order.css">
         <!-- js -->
         <script src="./js/main.js"></script>
-        <title>WishList</title>
+        <script src="./js/order.js"></script>
+        <title>Order</title>
         <style>
             
         </style>
@@ -314,12 +315,14 @@
                                         <div class="orderBox">
                                             <div class="totalLeft">
                                                 <p>상품가격</p>
+                                                <p>할인금액</p>
                                                 <p>배송비</p>
                                                 <p>사용적립금</p>
                                                 <p>적립금</p>
                                             </div>
                                             <div class="totalRight">
                                                 <p>370,000원</p>
+                                                <p>-50,000원</p>
                                                 <p>무료</p>
                                                 <p>-0원</p>
                                                 <p>500원</p>
@@ -334,36 +337,25 @@
                                     <section class="payment">
                                         <p>결제수단</p>
                                         <div class="orderBox">
-                                            <!-- 결제방식 -->
-                                            <ul class="paymentList">
-                                                <li>
-                                                    <input type="radio" name="chkPayment" checked="">
-                                                    <label for="creditCart">카드</label>
-                                                </li>
-                                                <li>
-                                                    <input type="radio" name="chkPayment" >
-                                                    <label for="virtualAccount">무통장입금</label>
-                                                </li>
-                                                <li>
-                                                    <input type="radio" name="chkPayment">
-                                                    <label for="others">기타</label>
-                                                </li>
-                                            </ul>
-                                            <!-- 결제수단 -->
-                                            <ul class="paymentItemList">
-                                                <li>
-                                                    <a href="#"><img src="./images/kakaopay.png" alt="">카카오페이</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><img src="./images/naverpay.png" alt="">네이버페이</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><img src="./images/kakaopay.png" alt="">카카오페이</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><img src="./images/naverpay.png" alt="">네이버페이</a>
-                                                </li>
-                                            </ul>
+                                            <div class="paymentList">
+                                                    <input type="radio" id="chk1" name="chkPayment" value="1" checked="checked">
+                                                    <label for="chk1">카드결제</label>
+
+                                                    <input type="radio" id="chk2" name="chkPayment" value="2">
+                                                    <label for="chk2">실시간계좌이체</label>
+
+                                                    <input type="radio" id="chk3" name="chkPayment" value="3">
+                                                    <label for="chk3">무통장입금</label>
+                                                    
+                                                    <input type="radio" id="chk4" name="chkPayment" value="4">
+                                                    <label for="chk4">휴대폰결제</label>
+                                                
+                                                    <input type="radio" id="chk5" name="chkPayment" value="5">
+                                                    <label for="chk5">카카오페이</label>
+                                                
+                                                    <input type="radio" id="chk6" name="chkPayment" value="6">
+                                                    <label for="chk6">네이버페이</label>
+                                            </div>
                                         </div>
                                     </section>
 
