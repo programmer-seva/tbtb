@@ -273,17 +273,6 @@ main div.orderFrame .terms > .orderBox > div:nth-child(n+2) input[type=checkbox]
     position: relative;
     top: 2px;
 }
-
-main div.orderFrame .terms > .orderBox > div:nth-child(n+2) > label::before {
-    color: #a5a5a5;
-    content: "├";
-}
-
-main div.orderFrame .terms > .orderBox > div:last-child > label::before {
-    color: #a5a5a5;
-    content: "└";
-}
-
 /* btnOrder */
 
 main div.orderFrame a.btnOrder {
@@ -299,4 +288,29 @@ main div.orderFrame a.btnOrder {
     border-color: #4f4f4f;
     border-radius: 6px;
     margin: 0 auto;
+}
+input {
+	outline: none;
+}
+textarea {
+	outline: none;
+	resize: none;
+}
+.totalRight input {
+	border: none;
+	text-align: right;
+}
+.totalBottom input {
+	border: none;
+	text-align: right;
+}
+.terms {
+	float: left;
+	clear: both;
+	width: 100%;
+}
+.terms textarea {
+	width: 95%;
+	height: 150px;
+	margin-top: 10px;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.co.beauty.dao.Order2DAO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
+import kr.co.beauty.vo.Product2VO;
 
 @Service
 public class Order2Service {
@@ -20,6 +21,9 @@ public class Order2Service {
 	}
 	public List<OrderVO> selectOrder(int ordNo){
 		return dao.selectOrder(ordNo);
+	}
+	public Product2VO selectProduct(int prodNo) {
+		return dao.selectProduct(prodNo);
 	}
 	
 }
