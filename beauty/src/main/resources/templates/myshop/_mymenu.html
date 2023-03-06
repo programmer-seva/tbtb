@@ -22,8 +22,8 @@
 	        </a>
 	    </div>
 	    <div class="userInfo">
-	        <div><span id="userNick">김동근</span>님 안녕하세요.</div>
-	        <div>누적 구매금액: <span id="boughtPrice">70,000</span>원</div>
+	        <div><span id="userNick" th:text="${member.name}"></span>님 안녕하세요.</div>
+	        <div>적립금: <span id="memberPoint" th:text="${#numbers.formatInteger(member.point, 0, 'COMMA')}"></span>원</div>
 	    </div>
 	</nav>
 </th:block>

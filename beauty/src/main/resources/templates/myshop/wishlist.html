@@ -49,23 +49,28 @@
                             <div class="wishListFrame">
                                 <div class="wishListHead">
                                     위시리스트
-                                    <span class="headCount" id="headCount">5</span>
-                                    <a href="#">비우기 X</a>
+                                    <span class="headCount" id="headCount" th:text="${#lists.size(wishList)}"></span>
+                                    <a th:href="@{/myshop/deleteAllWish}">비우기 X</a>
                                 </div>
                                 <article class="wishList">
                                     <!-- 아이템 반복 -->
+                                    <th:block  th:each="wish:${wishList}">
                                     <div class="item">
                                         <div class="itemThumb">
-                                            <a th:href="@{/myshop/deleteAllWish}">
-                                                <img th:src="@{/img/default_profile.png}" alt="">
+                                            <a th:href="@{/product/view(prodNo=${wish.prodNo})}">
+                                                <!--
+													<img th:src="@{/image/}+${wish.thumb1}" alt="">
+                                                -->
+                                                <img th:src="@{/img/}+${wish.thumb1}" alt="">
                                             </a>
-                                            <a class="delete" th:href="@{/myshop/deleteSelectedWish(prodNo=${product?.prodNo})}">x</a>
+                                            <a class="delete" th:href="@{/myshop/deleteSelectedWish(wishNo=${wish.wishNo})}">x</a>
                                         </div>
                                         <div class="itemInfo">
-                                            <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                            <span class="price">40,000원</span>
+                                            <a th:href="@{/product/view(prodNo=${wish.prodNo})}" th:text="${wish.prodName}"></a>
+                                            <span class="price" th:text="${#numbers.formatInteger(wish.getSalePrice, 0, 'COMMA')}"></span>
                                         </div>
                                     </div>
+                                    </th:block>
                                     <!-- 아이템 반복 종료 -->
                                 </article>
                             </div>
@@ -76,7 +81,7 @@
             </main>
 
             <!-- 푸터 -->
-            <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+            <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
         </div>
     </body>
 </html>
