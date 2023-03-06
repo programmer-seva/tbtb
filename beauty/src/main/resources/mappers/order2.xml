@@ -10,10 +10,7 @@
 	<select id="selectOrder" resultType="kr.co.beauty.vo.OrderVO">
 		SELECT a.*,b.prodName FROM `order` AS a JOIN `product` AS b ON a.prodNo=b.prodNo  WHERE `ordNo`=#{ordNo}; 
 	</select>
-<<<<<<< HEAD
-=======
 	<select id="selectProduct" resultType="kr.co.beauty.vo.Product2VO">
 		SELECT * FROM `product` WHERE `prodNo`=#{prodNo};
 	</select>
->>>>>>> 627fbcdc07db02e94bf7a2e3166caf3e66feaabf
 </mapper>
