@@ -74,7 +74,16 @@ main > .complete > section > div {
     line-height: 70px;
     padding: 0 30px;
     box-sizing: border-box;
+    position: relative;
 }
+main > .complete > section > div > .material-icons {
+	position: absolute;
+    top: 23px;
+    right: 40px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 main > .complete > section > div span {
     font-weight: bold;
     font-size: 14px;

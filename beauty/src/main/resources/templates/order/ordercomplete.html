@@ -44,8 +44,9 @@
                 <section>
                     <p>주문상품 (총 상품 [[${vo.ordCount}]]건)</p>
                     <div> 
+                    <span class="material-icons" style="width: 10px;">expand_more</span>
                     	<th:block th:each="order : ${orders}">
-                        	<span th:text="${order.prodName}"></span>
+                        	<span th:text="${order.prodName}+' '+${order.count}+개"></span>
                         </th:block>
                     </div>
                 </section>

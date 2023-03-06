@@ -74,7 +74,7 @@ main div.orderFrame .orderBox {
     border-radius: 20px;
     border: 1px solid #e5e5e5;
     margin-top: 20px;
-    padding: 5px 30px;
+    padding: 10px 30px;
     box-sizing: border-box;
 }
 
@@ -165,17 +165,17 @@ main div.orderFrame .infoTable tr:last-child {
 }
 
 main div.orderFrame .infoTable th {
-    width: 90px;
+    width: 112px;
     background-color: #fff;
     color: #353535;
     text-align: left;
     font-weight: normal;
-    padding: 12px 18px;
+    padding: 10px;
     border-right: 1px solid #e5e5e5;
 }
 
 main div.orderFrame .infoTable td {
-    padding: 12px 10px;
+    padding: 10px;
     color: #353535;
     font-size: 12px;
 }
@@ -253,7 +253,7 @@ main div.orderFrame .payment .paymentList  input[type=radio]+label {
     text-align: center;
     line-height: 50px;
     border: 1px solid #6d6bff;
-    border-radius: 6px;
+    border-radius: 10px;
     background-color: #fff;
     color: #333;
     margin-top: 5px;
@@ -269,6 +269,10 @@ main div.orderFrame .terms > .orderBox > div {
     margin: 5px 0;
 }
 input[type=checkbox] {
+    position: relative;
+    top: 2px;
+}
+input[type=radio] {
     position: relative;
     top: 2px;
 }

@@ -33,7 +33,7 @@
     			let top = $(document).scrollTop();
     			console.log(top);
 				if(top >= 580){
-					$('.wrap-right').css({"position":"absolute","top":"528px","right":"450px"});
+					$('.wrap-right').css({"position":"absolute","top":"600px","right":"450px"});
 				}else if(top > 100){
 					$('.wrap-right').css({"position":"fixed","top":"90px","right":"450px"});
 				}else{
@@ -125,7 +125,7 @@
 							<tbody>
 							<tr>
 								<th>
-									주문하시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
+									고객명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
 								</th>
 								<td>
 									<input id="bName" name="orderer" placeholder="" size="10" type="text">
@@ -193,8 +193,28 @@
 									<p>
 										<input id="input_mile" name="input_mile" size="10" type="text"> 원 (총 사용가능 적립금 : <strong id="usedPoint">1,000</strong>원)
 									</p>
-									<br>
-									 적립금은 최소 3,000원 이상일 때 결제가 가능합니다.
+									적립금은 최소 3,000원 이상일 때 결제가 가능합니다.
+								</td>
+							</tr>
+							<tr>
+								<th>
+									주문조회 비밀번호 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
+								</th>
+								<td>
+									<p>
+										<input id="password" name="password" size="16" type="text"/>
+									</p>
+									(영문대소문자/숫자/특수문자 중 2가지 이상 조합,6자~16자)
+								</td>
+							</tr>
+							<tr>
+								<th>
+									주문조회 비밀번호 확인 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
+								</th>
+								<td>
+									<p>
+										<input id="password" name="password" size="16" type="text"/>
+									</p>
 								</td>
 							</tr>
 							</tbody>
@@ -210,13 +230,17 @@
 							<tbody>
 							<tr>
 								<th>
-									받으시는 분 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
+									수령인 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
 								</th>
 								<td>
 									<input id="rName" name="recipName" placeholder="" size="10" type="text">
 									<label>
-									<input type="checkbox" id="chkSame">
+									<input type="radio" id="chkSame">
 									<span>주문자 정보와 동일</span>
+									</label>
+									<label>
+									<input type="radio" id="chkSame" checked>
+									<span>새로운 배송지</span>
 									</label>
 								</td>
 							</tr>
@@ -314,7 +338,7 @@
 									<input type="number" name="ordPrice" value="24000" readonly></input>원
 								</p>
 								<p>
-									<input type="number" name="ordDisprice" value="2400" readonly></input>원
+									<input type="number" name="ordDisprice" value="-2400" readonly></input>원
 								</p>
 								<p>
 									<input type="number" name="ordDelivery" value="2500" readonly></input>원
