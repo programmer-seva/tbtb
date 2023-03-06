@@ -9,222 +9,8 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="./css/headfoot.css">
+    <link rel="stylesheet" href="./css/list.css">
     <script src="./js/main.js"></script>
-    <style>
-        
-        /* 리스트 메인 */
-        main {
-            width: 100%;
-            height: auto;
-            margin: 0 auto;
-            padding: 0;
-        }
-        
-        .swiper-pagination-bullet-active {background: #fff;}
-        main > section {
-            width: 1700px;
-            height: auto;
-            margin: 0px auto;
-            overflow: hidden;
-            text-align: center;
-        }
-        main > article {
-            width: 100%;
-            height: 400px;
-            background: #faf6f4;
-            text-align: center;
-            padding: 30px 0;
-        }
-        main > article > span {
-            display: inline-block;
-            width: 100%;
-            color: #555;
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 0px;
-        }
-        main > article > div.swiper {
-            display: inline-block;
-            position: relative;
-            width: 1400px;
-            height: 300px;
-            padding-top: 30px;
-            overflow: hidden;
-        }
-        main > article > div.swiper .swiper-slide > ul {
-            overflow: hidden;
-            width: 1200px;
-            padding-left: 10px;
-            margin: 0 auto;
-        }
-        main > article > div.swiper .swiper-slide > ul > li > .bestItem {
-            float: left;
-            width: 24%; 
-            height: 300px;
-            margin: 0 5px;
-            background: #999;
-        }
-        main > article > div.swiper .swiper-slide > ul > li > .bestItem img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 100;
-        }
-        main > article > div.swiper .swiper-slide > ul > li > .bestItem img:hover {
-            background: #fff;
-            opacity: 0.5;
-        }
-        main > article > div.swiper .swiper-pagination {top: 0px; height: 25px;}
-        main > article > div.swiper .swiper-pagination-bullet {
-            width: 100px;
-            display: inline-block;
-            height: 22px;
-            font-size: 12px;
-            font-weight: bold;
-            background: none;
-            border-radius: 0px;
-        }
-        main > article > div.swiper .swiper-pagination-bullet-active > span {padding-bottom: 5px; border-bottom: 2px solid #edd4c7;}
-        main > article > div.swiper > .swiper-button-prev {color: #999; margin-left: 50px; margin-top: 10px;}
-        main > article > div.swiper > .swiper-button-next {color: #999; margin-right: 50px; margin-top: 10px;}
-        main > section > div > .product {
-            display: inline-block;
-            width: 22%;
-            height: 500px;
-            margin: 10px;
-            margin-bottom: 30px;
-            box-sizing: border-box;
-        }
-        main > section > span {
-            display: inline-block;
-            font-size: 24px;
-            font-family: Arial, Helvetica, sans-serif;
-            letter-spacing: 13px;
-            margin-bottom: 40px;
-        }
-        .product > a > img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-        }
-        .product > span {
-            display: inline-block; 
-            width: 100%;
-            text-align: left;
-        }
-        .colorCodeBox {text-align: left;}
-        .colorCode {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border: 1px solid #efefef;
-            border-radius: 20px;
-
-        }
-        .name {
-            display: inline-block; 
-            width: 100%;
-            text-align: left;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 6px 0;
-            margin-bottom: 6px;
-            color: #212121;
-            border-bottom: 1px solid #e5e5e5;
-        }
-        .oriPrice {
-            font-size: 16px;
-            font-weight: bold;
-            color: #999; 
-            text-decoration: line-through;
-        }
-        .price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #555;
-        }
-        .discount {
-            font-size: 20px;
-            font-weight: bold;
-            color: pink;
-            margin-left: 10px; 
-        }
-        .descript {
-            font-size: 12px;
-            color: #999;
-            margin-top: 6px;
-        }
-
-        .title2 {
-            display: inline-block;
-            position: relative;
-            margin-top: 40px;
-        }
-        .title2 h2 {
-            font-weight: bold;
-            font-weight: 900;
-            font-size: 18px;
-            color: #545454;
-            letter-spacing: 2px;
-        }
-        .menuCategory {
-            display: inline-block;
-            font-size: 0;
-            line-height: 0;
-            text-align: center;
-        }
-
-        .menuCategory > li {
-            display: inline-block;
-            margin: 0 10px 0;
-            font-size: 12px;
-        }
-
-        .menuCategory > li > a {
-            color: #a8a8a8;
-            padding: 7px 0 5px;
-        }
-
-        .headcate {
-            text-align: left;
-            display: inline-block;
-            width: 100%;
-            height: 80px;
-            margin-left: 70px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        .s_title {
-            display: inline-block;
-            margin: 0 10px 0;
-        }
-        .s_title a {
-            color: #a8a8a8;
-            padding: 7px 0 5px;
-            font-size: 12px;
-        }
-        .headcate .selected > a {
-            border-bottom: 2px solid #e0d8d0;
-        }
-        .headcate .selected a {
-            color: #545454 !important;
-            font-weight: bold
-        }
-
-        .bestDescript {
-          display: block;  
-        }
-        .bestDescript div {
-            
-        }
-
-        
-       
-
-       
-
-    </style>
  
 </head>
 <body>
@@ -398,20 +184,71 @@
                                 <li><div class="bestItem"><a href="#"><img src="./img/sample7.jpg" alt="상품"></a></div></li>
                             </ul>
                         </div>
-                        
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample8.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample9.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="./img/sample10.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="swiper-pagination"></div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
-                    <div class="pager">
-                        <div class="pager-item">
-                            <a href data-slide-index="0" class="pager-link">1</a>
-                        </div>
-                        <div class="pager-item">
-                            <a href data-slide-index="1" class="pager-link">2</a>
-                        </div>
-                    </div>
                 </div>
             </article>
+            <script>
+                
+                const swiper2 = new Swiper('.swiperItem', {
+                    // Optional parameters
+                    slidesPerView: 1,
+                    loop: true,
+    
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                        renderBullet: function (index, className) {
+                        return '<div class="' + className + '"><span>' + (bullet[index]) + '</span></div>';
+                        }
+                    },
+    
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+    
+                    // And if we need scrollbar
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                    },
+    
+                    autoplay: {     //자동슬라이드 (false-비활성화)
+                    delay: 5000, // 시간 설정
+                    disableOnInteraction: false, // false-스와이프 후 자동 재생
+                    },
+                });
+            </script>
             
             <!-- 리스트 -->
             <section>
@@ -426,6 +263,18 @@
                         <li><a href="#">패딩/점퍼</a></li>
                         <li><a href="#">집업/조끼</a></li>
                     </ul>
+                    <div class="item-info">
+                        <div class="item-total">
+                            Total <b>100</b> items
+                        </div>
+                        <ul class="item-order">
+                            <li><a href="#">신상품</a></li>
+                            <li><a href="#">낮은가격</a></li>
+                            <li><a href="#">높은가격</a></li>
+                            <li><a href="#">인기순</a></li>
+                            <li><a href="#">많이 본 순</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div>
@@ -597,11 +446,18 @@
                         <span class="price">15,000원<span class="discount">25%</span></span>
                         <span class="descript">상품설명</span>
                     </div>
-                    <nav class="paging-block">
-                        <ul>
-                            <li></li>
-                        </ul>
-                    </nav>
+                    <div class="center">
+                        <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#">&lsaquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">&rsaquo;</a>
+                        <a href="#">&raquo;</a>
+                        </div>
+                    </div>
+                    
                 </div>
             </section>
         </main>
