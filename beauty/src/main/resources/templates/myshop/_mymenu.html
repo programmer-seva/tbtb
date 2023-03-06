@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="mymenuFragment">
+	<!-- 마이페이지 메뉴 -->
+    <aside class="myMenu">
+        <ul>
+            <li class="on"><a th:href="@{#}">주문 조회</a></li>
+            <li><a th:href="@{/myshop/wishlist}">위시 리스트</a></li>
+            <li><a th:href="@{#}">취소/교환/반품</a></li>
+            <li><a th:href="@{#}">1:1문의</a></li>
+            <li><a th:href="@{#}">정보 수정</a></li>
+            <li><a th:href="@{#}">회원탈퇴</a></li>
+        </ul>
+    </aside>
+</th:block>
+<th:block th:fragment="myheadFragment">
+	<!-- 회원 정보 -->
+	<nav class="head">
+	    <div class="userThumb" >
+	        <a th:href="@{#}">
+	            <img th:src="@{/img/default_profile.png}" alt="">
+	        </a>
+	    </div>
+	    <div class="userInfo">
+	        <div><span id="userNick">김동근</span>님 안녕하세요.</div>
+	        <div>누적 구매금액: <span id="boughtPrice">70,000</span>원</div>
+	    </div>
+	</nav>
+</th:block>
+</html>
