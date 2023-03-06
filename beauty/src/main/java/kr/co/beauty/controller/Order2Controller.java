@@ -19,9 +19,9 @@ public class Order2Controller {
 	@Autowired
 	private Order2Service service;
 	
-	//주문결제
+	//장바구니 > 주문결제
 	@GetMapping("order/orderform")
-	public String order2() {
+	public String order2byCart() {
 		return "order/orderform";
 	}
 	//주문완료
