@@ -119,10 +119,11 @@ main div.orderFrame .prodList table td:nth-child(1) > img {
 
 main div.orderFrame .prodList table td:nth-child(2) > span {
     display: block;
+    font-weight: bold;
 }
 main div.orderFrame .prodList table td:nth-child(2) > span:nth-child(2) {
     font-size: 12px;
-    color: #666;
+    color: #555;
 }
 main div.orderFrame .prodList table td:nth-child(2) > span:nth-child(2)::before {
     content: "[옵션: ";
@@ -220,11 +221,13 @@ main div.orderFrame .total .totalBottom {
 }
 main div.orderFrame .total .totalBottom > p:first-child{
     float: left;
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: bold;
+	color: #555;
 }
 main div.orderFrame .total .totalBottom > p:last-child{
     float: right;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* payment */
@@ -245,18 +248,19 @@ main div.orderFrame .payment .paymentList  input[type=radio]+label {
     cursor: pointer;
     width: 100px;
     height: 50px;
-    font-size:14px;
+    font-size:12px;
     font-weight:bold;
     text-align: center;
     line-height: 50px;
-    border: 1px solid #333;
-    background-color: #f9f9f9;
+    border: 1px solid #6d6bff;
+    border-radius: 6px;
+    background-color: #fff;
     color: #333;
     margin-top: 5px;
 }
 
 main div.orderFrame .payment .paymentList  input[type=radio]:checked+label{
-    background-color: #333;
+    background-color: #6d6bff;
     color: #fff;
 }
 
@@ -264,12 +268,7 @@ main div.orderFrame .payment .paymentList  input[type=radio]:checked+label{
 main div.orderFrame .terms > .orderBox > div {
     margin: 5px 0;
 }
-main div.orderFrame .terms > .orderBox input[type=checkbox] {
-    width: 15px;
-    height: 15px;
-    border: #4f4f4f;
-}
-main div.orderFrame .terms > .orderBox > div:nth-child(n+2) input[type=checkbox] {
+input[type=checkbox] {
     position: relative;
     top: 2px;
 }
@@ -284,8 +283,7 @@ main div.orderFrame a.btnOrder {
     font-weight: bold;
     line-height: 60px;
     text-align: center;
-    background-color: #4f4f4f;
-    border-color: #4f4f4f;
+    background-color: #6d6bff;
     border-radius: 6px;
     margin: 0 auto;
 }
@@ -296,13 +294,23 @@ textarea {
 	outline: none;
 	resize: none;
 }
+.totalLeft > p {
+	font-weight: bold;
+	color: #555;
+}
+.totalRight > p {font-size: 14px;}
 .totalRight input {
 	border: none;
 	text-align: right;
+	font-weight: bold;
+	font-size: 16px;
 }
+.totalBottom > p {font-size: 14px;}
 .totalBottom input {
 	border: none;
 	text-align: right;
+	font-weight: bold;
+	font-size: 16px;
 }
 .terms {
 	float: left;
@@ -313,4 +321,12 @@ textarea {
 	width: 95%;
 	height: 150px;
 	margin-top: 10px;
+}
+.wrap-right {
+	position: absolute;
+	top: 130px;
+	right: 450px;
+}
+.terms div span {
+	font-size: 12px;
 }
