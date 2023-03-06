@@ -9,7 +9,6 @@ $(function(){
     });
     $(window).scroll(function(){
         let now = $(document).scrollTop();
-        console.log(now);
         if(now >= 200){
             $('.moveNavi').css({'position':'fixed','top':'-70px','background':'rgba(255,255,255,0.8)'});
             $('.up').fadeIn(500);
