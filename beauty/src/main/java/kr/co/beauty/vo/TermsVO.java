@@ -11,4 +11,5 @@ public class TermsVO {
 	private String join2;
 	private String join3;
 	private String nonmember;
+  
 }
