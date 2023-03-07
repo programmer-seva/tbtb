@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty</title>
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" th:href="@{/css/headfoot.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/member/register.css}">
+    <script th:src="@{/js/main.js}"></script>
+    <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+</head>
+
+
+<body>
+    <div id="wrap">
+        <main>
+        	<div class="mb">
+                <form action="validation-form">
+                    <h2>JOIN US</h2>
+                    <h4>기본정보</h4>
+                    <table border="1">
+                        <tr>
+                            <th>이메일</th>
+                            <td>
+                                <input type="email" class="mb-input" id="email" placeholder="" required>
+                                <span>이메일을 입력해주세요.</span>
+                                <p>(아이디 찾기에 사용 문구 넣기)</p>
+                            </td>
+                            <div class="invalid-feedback">이메일을 입력해주세요.</div>
+                        </tr>
+                        <tr>
+                            <th>비밀번호</th>
+                            <td>
+                                <input type="password" class="mb-input" id="pass1" placeholder="" required>
+                                <span>영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                            </td>
+                            <div class="invalid-feedback">비밀번호를 입력 하세요</div>
+                        </tr>
+                        <tr>
+                            <th>비밀번호 확인</th>
+                            <td>
+                                <input type="password" class="mb-input" id="pass2" placeholder="" required>
+                                <span>영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                            </td>
+                            <div class="invalid-feedback">비밀번호를 한번 더 입력 하세요</div>
+                        </tr>
+                        <tr>
+                            <th>이름</th>
+                            <td>
+                                <input type="name" class="mb-input" id="name" placeholder="" required>
+                                <span>한글 2자 이상 이어야 합니다.</span>
+                            </td>
+                            <div class="invalid-feedback">이름을(를)입력하세요</div>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td>
+                                <div>
+                                    <input type="text" class="zip" id="zip" placeholder="" required>
+                                    <span></span>
+                                    <button type="button">우편번호</button>
+                                    <div class="invalid-feedback">주소를 입력하세요</div>
+                                </div>
+                                <div>
+                                    <input type="text" class="addr" id="addr1" placeholder="" readonly required>
+                                    <span>기본주소</span>
+                                </div>
+                                <div>
+                                    <input type="text" class="addr" id="addr2" placeholder="">
+                                    <span>나머지주소</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>휴대전화</th>
+                            <td>
+                                <input type="text" class="mb-input" id="pass" placeholder="" required>
+                                <span>010-1234-5678</span>
+                            </td>
+                            <div class="invalid-feedback">이름을(를)입력하세요</div>
+                        </tr>
+                    </table>
+                    <h4>추가정보</h4>
+                    <table border="1">
+                        <tr>
+                            <th>생년월일</th>
+                            <td>
+                                <input type="text" class="birth_year">년
+                                <input type="text" class="birth_month">월
+                                <input type="text" class="birth_day">일
+                                <label><input type="radio" id="calender" value="1">양력</label>
+                                <label><input type="radio" id="calender" value="2">음력</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>키/몸무게</th>
+                            <td>
+                                <input type="text" class="mb-input">cm
+                                <input type="text" class="mb-input">kg
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <h4>약관</h4>
+                        <div>
+                            <label>
+                                <input type="checkbox" class="terms-checkbox" required>
+                                개인정보 수집 및 이용약관에 동의합니다
+                            </label>
+                        </div>
+                        <section>
+                            <div class="base-box">
+                                <h3><span class="essential">[필수]</span> 이용약관 동의</h3>
+                                <textarea class="" readonly>이용약관 동의</textarea>
+                                <div>
+                                    <label>
+                                        이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="base-box">
+                                <h3><span class="essential">[필수]</span>개인정보 수집 및 이용 동의</h3>
+                                <textarea class="" readonly> 개인정보 수집 동의</textarea>
+                                <div>
+                                    <label>
+                                        이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="base-box">
+                                <h3><span>[선택]</span> 쇼핑정보 수신 동의</h3>
+                                <textarea class="" readonly>할인쿠폰 등등</textarea>
+                                <div>
+                                    <label>
+                                        이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+                    </table>
+                    <div class="btn-base-box">
+                        <input class="btn-terms" type="submit" value="회원가입">
+                    </div>
+                </form>
+            </div>
+
+        </main>
+        
+        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+       	</div>
+
+</body>
+
+</html>

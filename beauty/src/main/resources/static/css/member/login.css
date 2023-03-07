@@ -1,0 +1,132 @@
+/**
+ * 날짜 : 2023/03/07
+ * 이름 : 강중현 
+ * 내용 : Beauty member login css
+ */
+main>.lg {
+    height: 510px;
+    width: 1328px;
+    margin: 0 288px 0 288px;
+    min-height: 500px;
+    max-width: 1328px;
+
+}
+
+main>.lg>h2 {
+    height: 22px;
+    width: 1328px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+}
+
+main>.lg>fieldset {
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: top;
+    height: 435px;
+    width: 400px;
+    border: 0px none rgb(46, 46, 46);
+    margin-left: 459.5px;
+}
+
+main>.lg>fieldset>.lg-input {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 45px;
+    padding: 2px 2px 2px 7px;
+    height: 45px;
+    width: 398px;
+    border: 1px solid #d5d5d5;
+}
+
+main>.lg>fieldset>p {
+    height: 18px;
+    width: 400px;
+    margin: 10px 0 20px 0;
+    text-align: left;
+}
+
+main>.lg>fieldset>p>label {
+    height: auto;
+    width: auto;
+    margin: 0 4px 0 2px;
+}
+
+main>.lg>fieldset>p>label>.lg-save-id {
+    height: 13px;
+    width: 13px;
+    margin: -1px 2px 0 0;
+}
+
+main>.lg>fieldset>.btn-base-box {
+    height: 110px;
+    width: 400px;
+    margin: 0 0 3px 0;
+    padding: 10px 0 10px 0;
+}
+
+main>.lg>fieldset>div>.btn-login {
+    height: 48px;
+    width: 400px;
+    border: 1px solid #fff;
+    margin: 0 0 7px 0;
+    padding: 14px 16px 14px 16px;
+    min-width: 80px;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    background-color: #444444;
+}
+
+main>.lg>fieldset>div>.btn-register {
+    height: 48px;
+    width: 400px;
+    border: 1px solid #d5d5d5;
+    margin: 0 0 7px 0;
+    padding: 14px 16px 14px 16px;
+    min-width: 80px;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    background-color: #fff;
+}
+
+main>.lg>fieldset>ul>.btn-nonecus-order {
+    height: 48px;
+    width: 400px;
+    border: 1px solid #d5d5d5;
+    margin: 0 0 7px 0;
+    padding: 14px 16px 14px 16px;
+    min-width: 80px;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    background-color: #fff;
+}
+
+main>.lg>fieldset>ul {
+    height: 25px;
+    width: 400px;
+    padding: 20px 0 5px 0;
+    font-size: 0px;
+    line-height: 0px;
+    text-align: center;
+}
+
+main>.lg>fieldset>ul>li {
+    height: 25px;
+    width: auto;
+    padding: 0 9px 0 13px;
+
+}
+
+main>.lg>fieldset>ul>li>a {
+
+    height: auto;
+    width: auto;
+    font-size: 12px;
+    line-height: 25px;
+    text-align: center;
+}
