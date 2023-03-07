@@ -4,6 +4,8 @@
  */
 package kr.co.beauty.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,4 +45,15 @@ public class Product1VO {
 	private String color;
 	private String size;
 	private String rdate;
+	
+	//상품등록 추가
+	private MultipartFile file1;
+	private MultipartFile file2;
+	private MultipartFile file3;
+	private MultipartFile file4;
+	private MultipartFile file5;
+	private MultipartFile file6;
+	private MultipartFile file7;
+	private MultipartFile file8;
+	private MultipartFile file9;
 }
