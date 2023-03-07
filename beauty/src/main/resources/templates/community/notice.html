@@ -4,15 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Beauty</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/headfoot.css}">
+    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/community/community.css}">
-    <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
+	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
     <div id="wrap">
         <th:block th:replace="~{/_header :: headerFragment}"></th:block>
         <main>

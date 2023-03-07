@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="modileFragment">
+	<div id="modile">
+        <span>아직 모바일 환경은 지원하지 않아요.</span><br/>
+        <span>최대한 빠른 시일 내에 지원하도록 노력할게요!</span>
+    </div>
+</th:block>
 <th:block th:fragment="headerFragment">
 	<header>
 	    <div class="logo"><a th:href="@{/index}">Beauty Shop</a></div>
