@@ -22,6 +22,15 @@
 		`thick`=#{thick},
 		`through`=#{through},
 		`lining`=#{lining},
-		`flex`=#{flex};
+		`flex`=#{flex},
+		`thumb1`=#{thumb1},
+		`thumb2`=#{thumb2},
+		`thumb3`=#{thumb3},
+		`thumb4`=#{thumb4},
+		`thumb5`=#{thumb5},
+		`thumb6`=#{thumb6},
+		`detail1`=#{detail1},
+		`detail2`=#{detail2},
+		`detail3`=#{detail3};
 	</insert>
 </mapper>
