@@ -41,7 +41,7 @@ main > aside{
     width: 200px;
 }
 main > aside > ul{
-    margin-top: -150px;
+    
 }
 main > aside > ul > li{
     margin: 30px;
@@ -65,8 +65,6 @@ main > aside > ul > li > ul > li > label > input{
 }
 
 main > section{
-    float: left;
-    width: 80%;
     padding: 30px;
     height: auto;
     position: relative;
@@ -192,20 +190,16 @@ main > section{
 #admin-product-register article > table tr > td > label > input{
     margin-right: 5px;
 }
-
-#admin-product-register article:nth-child(2) > table tr > td > .color{
-    width: 19px;
-    height: 23px;
-    padding: 0;
-    border: 0px;
+#admin-product-register article:nth-child(2) > table tr > td{}
+#admin-product-register article:nth-child(2) > table tr > td > label{}
+#admin-product-register article:nth-child(2) > table tr > td > label > input{}
+#admin-product-register article:nth-child(2) > table tr > td > label > span{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
 }
-#admin-product-register article:nth-child(2) > table tr > td > button{
-    background: #fff;
-    border: 0px;
-    margin-left: 5px;
-    color: #dad6d9;
-    font-size: 9px;
-}
+#admin-product-register article:nth-child(2) > table tr > td > label:last-child > span{border: 1px solid #000000;}
 #admin-product-register article:nth-child(2) > .image{    
     position: relative;
 }

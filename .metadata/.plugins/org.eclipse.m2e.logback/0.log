@@ -1,0 +1,30 @@
+2023-03-06 13:47:38,679 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-03-06 13:47:57,771 [Worker-3: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: full
+2023-03-06 13:47:57,807 [Worker-3: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Checking project: beauty
+2023-03-06 13:53:44,782 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-06 13:53:44,809 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/community/event.html
+2023-03-06 13:53:44,811 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/community/notice.html
+2023-03-06 13:53:44,811 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/community/qna.html
+2023-03-06 13:53:44,811 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/community/review.html
+2023-03-06 13:53:44,812 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/mypage/ordercomplete.html
+2023-03-06 13:54:00,532 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-03-06 13:54:03,087 [Worker-3: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 08:59:42,762 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-03-07 09:07:43,383 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-03-07 09:09:15,114 [Worker-7: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: full
+2023-03-07 09:09:15,145 [Worker-7: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Checking project: beauty
+2023-03-07 09:09:26,087 [Worker-1: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:10:00,143 [Worker-6: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:10:05,055 [Worker-9: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:10:17,191 [Worker-2: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:10:37,877 [Worker-0: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:10:37,878 [Worker-0: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/admin/product/register.html
+2023-03-07 09:10:37,879 [Worker-0: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/src/main/resources/templates/admin/product/register.html
+2023-03-07 09:10:44,285 [Worker-6: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:10:44,285 [Worker-6: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/admin/product/list.html
+2023-03-07 09:10:44,286 [Worker-6: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/src/main/resources/templates/admin/product/list.html
+2023-03-07 09:13:41,247 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:13:57,630 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:17:08,333 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
+2023-03-07 09:17:08,334 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/admin/product/register.html
+2023-03-07 09:17:08,334 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/src/main/resources/templates/admin/product/register.html

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty</title>
+    <link rel="stylesheet" th:href="@{/css/admin/product.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/admin.js}"></script>
+    <script type="text/javascript">
+    	function checkBoxArr(){
+    		let checkArr = [];
+    		
+    		
+    	}
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <th:block th:replace="~{/admin/product/_header :: headerFragment}"></th:block>
+        <main>
+            <section id="admin-product-register">
+                <form th:action="@{#}">
+                    <article>
+                        <h3>상품 기본 정보</h3>
+                        <table>
+                            <tr>
+                                <th>대분류</th>
+                                <td>
+                                    <select name="prodCate1" id="cate1" onChange="cateChange();">
+                                        <option value="0">대분류 선택</option>
+                                        <option value="1">OUTER</option>
+                                        <option value="2">TOP</option>
+                                        <option value="3">BOTTOM</option>
+                                        <option value="4">DRESS</option>
+                                        <option value="5">ACC</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>소분류</th>
+                                <td>
+                                    <select name="prodCate2" id="cate2">
+                                        <option value="0">소분류 선택</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>상품명</th>
+                                <td><input type="text" name="prodName"></td>
+                            </tr>
+                            <tr>
+                                <th>기본설명</th>
+                                <td><input type="text" name="descript"></td>
+                            </tr>
+                            <tr>
+                                <th>원가</th>
+                                <td><input type="text" name="price"></td>
+                            </tr>
+                            <tr>
+                                <th>할인율</th>
+                                <td><input type="text" name="discount"></td>
+                            </tr>
+                            <tr>
+                                <th>포인트</th>
+                                <td><input type="text" readonly></td>
+                            </tr>
+                            <tr>
+                                <th>재고</th>
+                                <td><input type="text" name="stock"></td>
+                            </tr>
+                            <tr>
+                                <th>제조업체</th>
+                                <td><input type="text" name="company"></td>
+                            </tr>
+                            <tr>
+                                <th>제조국</th>
+                                <td><input type="text" name="origin"></td>
+                            </tr>
+                            <tr>
+                                <th>제조일</th>
+                                <td><label><input type="date" name="rdate" style="width:206px;"></label></td>
+                            </tr>                     
+                        </table>
+                    </article>
+                    <article>
+                        <h3>상품 상세 정보</h3>
+                        <table>                           
+                            <tr>
+                                <th style="width: 68px;">색상</th>
+                                <td>
+                                    <label>
+                                    <input type="checkbox" value="#000000" name="color"><span style="background: #000000;"></span>블랙</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#000080" name="color"><span style="background: #000080;"></span>네이비</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#808080" name="color"><span style="background: #808080;"></span>그레이</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#0000ff" name="color"><span style="background: #0000ff;"></span>블루</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#ff0000" name="color"><span style="background: #ff0000;"></span>레드</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#ffb6c1" name="color"><span style="background: #ffb6c1;"></span>핑크</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#ffff00" name="color"><span style="background: #ffff00;"></span>옐로우</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#008000" name="color"><span style="background: #008000;"></span>그린</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#800080" name="color"><span style="background: #800080;"></span>퍼플</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#f5f5dc" name="color"><span style="background: #f5f5dc;"></span>베이지</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#696969" name="color"><span style="background: #696969;"></span>차콜</input>
+                                    </label>    
+                                    <label>
+                                    <input type="checkbox" value="#ffffff" name="color"><span style="background: #ffffff;"></span>화이트</input>
+                                    </label>    
+                                </td>
+                            </tr>                   
+                            <tr>
+                                <th>소재</th>
+                                <td><input type="text" name="status"></td>
+                            </tr>     
+                            <tr>
+                                <th>사이즈</th>
+                                <td>
+                                    <label><input type="checkbox" name="size" value="free">free</label>
+                                    <label><input type="checkbox" name="size" value="S">S</label>
+                                    <label><input type="checkbox" name="size" value="M">M</label>
+                                    <label><input type="checkbox" name="size" value="L">L</label>
+                                    <label><input type="checkbox" name="size" value="XL">XL</label>
+                                </td>
+                            </tr>                
+                            <tr>
+                                <th>두께감</th>
+                                <td>
+                                    <label><input type="radio" name="thick" value="두꺼움">두꺼움</label>
+                                    <label><input type="radio" name="thick" value="보통">보통</label>
+                                    <label><input type="radio" name="thick" value="얇음">얇음</label>
+                                 </td>
+                            </tr>                
+                            <tr>
+                                <th>비침</th>
+                                <td>
+                                    <label><input type="radio" name="through" value="비침">비침</label>
+                                    <label><input type="radio" name="through" value="약간있음">약간있음</label>
+                                    <label><input type="radio" name="through" value="없음">없음</label>
+                                </td>
+                            </tr>                
+                            <tr>
+                                <th>안감</th>
+                                <td>
+                                    <label><input type="radio" name="lining" value="있음">있음</label>
+                                    <label><input type="radio" name="lining" value="없음">없음</label>
+                                    <label><input type="radio" name="lining" value="부분안감">부분안감</label>
+                                </td>
+                            </tr>                
+                            <tr>
+                                <th>신축성</th>
+                                <td>
+                                    <label><input type="radio" name="flex" value="좋음">좋음</label>
+                                    <label><input type="radio" name="flex" value="보통">보통</label>
+                                    <label><input type="radio" name="flex" value="없음">없음</label>
+                                </td>
+                            </tr>       
+                        </table>
+                        <section class="image">
+                            <table>
+                                <tr><th>상품 메인 이미지()</th></tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="thumb1"><br>
+                                        <input type="file" name="thumb2"><br>
+                                        <input type="file" name="thumb3"><br>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr><th>상품 목록 이미지()</th></tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="thumb4"><br>
+                                        <input type="file" name="thumb5"><br>
+                                        <input type="file" name="thumb6"><br>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr><th>상품 상세 이미지()</th></tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="detail1"><br>
+                                        <input type="file" name="detail2"><br>
+                                        <input type="file" name="detail3"><br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
+                    </article>
+                    <input type="submit" value="등록" class="register">
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -11,11 +11,20 @@
                 $(this).parent().children('ul').slideToggle();
             });
 
-            $('.selectColor td:nth-child(n+5)').hide();
-            $('.more').click(function(){
-                $(this).parent().next().show();
-                $(this).hide();
-            }); 
+            $("#selectColor").on("change", function(){
+
+                let text = $("#selectColor option:selected").text();
+                let value = $("#selectColor option:selected").val();
+
+                $(this).next().next().text(text);
+                $(this).next().next().attr('value', value);
+
+                $('.more').click(function(){
+                    $("#color").append('<span>',text,'</span>');
+                }); 
+
+            });
+  
         });
     </script>
 </head>
@@ -135,7 +144,7 @@
                             </tr>
                             <tr>
                                 <th>포인트</th>
-                                <td><input type="text"></td>
+                                <td><input type="text" readonly></td>
                             </tr>
                             <tr>
                                 <th>재고</th>
@@ -158,34 +167,45 @@
                     <article>
                         <h3>상품 상세 정보</h3>
                         <table>                           
-                            <tr class="selectColor">
+                            <tr>
                                 <th style="width: 68px;">색상</th>
                                 <td>
-                                    <input type="color" value="#111" class="color">
-                                    <input type="text">
-                                </td>
-                                <td>
-                                    <input type="color" value="#111" class="color">
-                                    <input type="text">
-                                </td>
-                                <td>
-                                    <input type="color" value="#111" class="color">
-                                    <input type="text">
-                                    <button class="more">more ></button>
-                                </td>
-                                <td>
-                                    <input type="color" value="#111" class="color">
-                                    <input type="text">
-                                    <button class="more">more ></button>
-                                </td>
-                                <td>
-                                    <input type="color" value="#111" class="color">
-                                    <input type="text">
-                                    <button class="more">more ></button>
-                                </td>
-                                <td>
-                                    <input type="color" value="#111" class="color">
-                                    <input type="text">
+                                    <label>
+                                    <input type="radio" value="#000000"><span style="background: #000000;"></span>블랙</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#000080"><span style="background: #000080;"></span>네이비</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#808080"><span style="background: #808080;"></span>그레이</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#0000ff"><span style="background: #0000ff;"></span>블루</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#ff0000"><span style="background: #ff0000;"></span>레드</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#ffb6c1"><span style="background: #ffb6c1;"></span>핑크</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#ffff00"><span style="background: #ffff00;"></span>옐로우</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#008000"><span style="background: #008000;"></span>그린</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#800080"><span style="background: #800080;"></span>퍼플</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#f5f5dc"><span style="background: #f5f5dc;"></span>베이지</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#696969"><span style="background: #696969;"></span>차콜</input>
+                                    </label>    
+                                    <label>
+                                    <input type="radio" value="#ffffff"><span style="background: #ffffff;"></span>화이트</input>
+                                    </label>    
                                 </td>
                             </tr>                   
                             <tr>
