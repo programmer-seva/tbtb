@@ -1,3 +1,8 @@
+/* 카트는 나중에 myContent div바꿔야 함 */
+main div.mainContent > .myContent {
+    width: 1200px;
+}
+
 /* 현재페이지 */
 main div.cartFrame > .nav {
     display: block;
@@ -109,6 +114,12 @@ main div.cartFrame > .cartList > table td:nth-child(1) {
 main div.cartFrame > .cartList > table td:nth-child(2) {
     width: 130px;
 }
+main div.cartFrame > .cartList > table td:nth-child(4) {
+	width: 120px;
+}
+main div.cartFrame > .cartList > table td:nth-child(n+5) {
+	width: 100px;
+}
 
 main div.cartFrame > .cartList > table td:nth-child(2) img {
     display: block;
@@ -140,7 +151,6 @@ main div.cartFrame > .cartList > table td:nth-child(4) > .price {
 }
 main div.cartFrame > .cartList > table td:nth-child(4) > .discount {
     font-size: 14px;
-    position: absolute;
     margin-left: 0px;
     color: #ff6292;
 }
@@ -180,9 +190,6 @@ main div.cartFrame > .cartList > table td:nth-child(7) span {
     font-weight: bold;
 }
 
-main div.cartFrame > .cartList > table td:last-child {
-    width: 100px;
-}
 main div.cartFrame > .cartList > table td:last-child a {
     display: block;
     width: 100px;
@@ -260,23 +267,23 @@ main div.cartFrame > .cartBtns > a {
 
 main div.cartFrame > .cartBtns > a.btnOrder {
     display: inline-block;
-    width: 180px;
-    height: 48px;
+    width: 200px;
+    height: 50px;
     color: #fff;
     font-size: 15px;
     line-height: 48px;
-    background-color: #4f4f4f;
-    border-color: #4f4f4f;
-    border-width: 1px;
+    background-color: #6d6bff;
+    border: 1px solid #6d6bff;
+    border-radius: 9px;
     padding: 0 24px;
+    margin: 0 5px;
 }
 main div.cartFrame > .cartBtns > a.all {
-
+    border: none;
 }
 main div.cartFrame > .cartBtns > a.select {
-    background-color: #c9c9c9;
-    border-color: #c9c9c9;
-    color: #000;
+    color: #6d6bff;
+    background: #fff;
 }
 main div.cartFrame > .cartBtns > a.keepShopping {
     text-decoration: underline;
@@ -321,10 +328,11 @@ main div.wishListFrame > .wishListHead > .headCount{
 /*마이페이지 - 콘텐츠 - 위시리스트 - 아이템 반복*/
 main div.wishListFrame > .wishList > .item {
     width: 200px;
-    height: auto;
+    height: 275px;
     display: inline-block;
-    margin: 10px 40px 25px 0;
+    margin: 10px 40px 0 0;
     box-sizing: border-box;
+    position: relative;
 }
 main div.wishListFrame > .wishList > .item:nth-child(5n+0){
     margin-right: 0px;
@@ -334,7 +342,8 @@ main div.wishListFrame > .wishList > .item > .itemThumb {
     height: 200px;
     background-color: #555555;
     margin-bottom: 3px;
-    position: relative;
+    position: absolute;
+    top: 0px;
 }
 
 main div.wishListFrame > .wishList > .item > .itemThumb img {
@@ -369,6 +378,8 @@ main div.wishListFrame > .wishList > .item > .itemThumb:hover .delete {
 main div.wishListFrame > .wishList > .item > .itemInfo {
     text-align: center;
     font-size: 13px;
+    position: absolute;
+    top: 200px;
 }
 
 main div.wishListFrame > .wishList > .item > .itemInfo > a {

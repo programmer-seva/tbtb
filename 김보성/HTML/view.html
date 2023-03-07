@@ -9,8 +9,217 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="./css/headfoot.css">
-    <link rel="stylesheet" href="./css/list.css">
     <script src="./js/main.js"></script>
+
+    <style>
+        /* 메인 */
+        main {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            padding: 0;
+        }
+        #cnt {
+            min-height: 950px;
+            padding: 0px 0px;
+            position: relative;
+        }
+        .cntbody {
+            width: 1400px;
+            margin: 0 auto;
+        }
+        #detail {margin-top: 50px;}
+        #detail .wrap_prd {
+            overflow: visible;
+            position: relative;
+        }
+        /* 상품 이미지 */
+        #detail .wrap_prd > .prdimg {
+            position: relative;
+            width: 740px;
+            height: 740px;
+            float: left;
+        }
+
+        #detail .wrap_prd > .prdimg .img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            text-align: center;
+            overflow: hidden;
+        }
+        #detail .wrap_prd > .prdimg .img img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+        #goods_video {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        #changeimg {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #changeimg > img {
+            width: 30px;
+            height: 40px;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        #detail .wrap_prd > .prdimg .addimg {margin-top: 10px;}
+        #detail .wrap_prd > .prdimg .addimg .box_add_slide {
+            width: calc(100% + 10px);
+            margin-left: -5px;
+            overflow: hidden;
+        }
+        #detail .wrap_prd > .prdimg .addimg .add_slide.slick-initialized {
+            display: block;
+        }
+        #detail .wrap_prd > .prdimg .addimg .add_slide {
+            width: 100%;
+        }
+        #detail .wrap_prd > .prdimg .addimg .add_slide .slick-prev {
+            width: 48px;
+            height: 48px;
+            background-image: url(./img/btn_slide_prev02.png);
+            background-repeat: no-repeat;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .box_add_slide .slick-list {
+            padding: 2px 0;
+        }
+        .slick-initialized .slick-slide {
+            display: block;
+        }
+        .slick-slide img {
+            display: block;
+        }
+
+        .slick-slider {
+            position: relative;
+            display: block;
+            box-sizing: border-box;
+            user-select: none;
+            touch-action: pan-y;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .slick-list {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .slick-track {
+            position: relative;
+            top: 0;
+            left: 0;
+            display: block;
+        }
+        img {
+            vertical-align: top;
+        }
+        .slick-arrow[aria-disabled="true"] {
+            display: none !important;
+        }
+
+        #detail .wrap_prd > .prdimg .addimg .add_slide .slick-arrow {
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            width: 30px;
+            height: 126px;
+            border: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+            color: transparent;
+            font-size: 0;
+            cursor: pointer;
+        }
+
+        .slick-slide {
+            display: none;
+            float: left;
+            height: 100%;
+            min-height: 1px;
+        }
+        .box_add_slide .slick-slide.on {
+            outline: 2px solid #925fff;
+        }
+
+        .box_add_slide .slick-slide {
+            margin: 0px 5px;
+            position: relative;
+        }
+        .slick-initialized .slick-slide {
+            transform: translateZ(0);
+        }
+        .add_slide img {
+            cursor: pointer;
+        }
+
+        .box_add_slide .slick-slide {
+            width: 140px;
+            height: 140px;
+            overflow: hidden;
+            margin-right: 5px;
+            border-radius: 10px;
+        }
+        #detail .wrap_prd > .prdimg .addimg .add_slide > div img {
+            width: 100%;
+            height: auto;
+            margin-left: 0;
+        }
+        #detail .wrap_prd > .prdimg .addimg .add_slide .slick-next {
+            width: 48px;
+            height: 48px;
+            background-image: url(/img/btn_slide_next02.png);
+            background-repeat: no-repeat;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slick-slide img {
+            display: block;
+        }
+        .box_add_slide .slick-slide.on:after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #ffffff70;
+        }
+
+        /* 상품 정보 */
+        .info {float: right;}
+        
+    </style>
  
 </head>
 <body>
@@ -91,7 +300,107 @@
         </header>
 
         <main>
-            
+            <div id="cnt">
+                <div class="cntbody">
+                    <div id="detail">
+                        <div class="wrap_prd">
+                            <div class="prdimg">
+                                <div id="mimg_div" class="img">
+                                    <img id="main-img" src="/img/sample4.jpg" alt="대표이미지">
+                                    <div id="goods_video"></div>
+                                    <div id="changeimg">
+                                        <img src="/img/ａ_01.png" onclick="imgChange(-1)" style="width: 30px;height: 40px; position: absolute; left: 10px; top: 50%; transform:translateY(-50%); cursor: pointer;">
+                                        <img src="/img/ａ_03.png" onclick="imgChange(+1)" style="width: 30px;height: 40px; left:auto; right:10px !important; position: absolute; top: 50%; transform:translateY(-50%); cursor: pointer;">
+                                    </div>
+                                </div>
+                                <div class="addimg">
+                                    <!-- 반복문시작 -->
+                                    <div class="box_add_slide" >
+                                        <div class="add_slide slick-initialized slick-slider">
+                                            
+                                            <div aria-live="polite" class="slick-list draggable">
+                                                <div class="slick-track" style="opacity: 1; width: 1350px; transform: translate3d(0px, 0px, 0px);" role="listbox">
+                                                    <div class="slick-slide on slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 140px;" tabindex="-1" role="option" aria-describedby="slick-slide00">
+                                                        <img src="/img/sample4.jpg">
+                                                    </div>
+                                                    <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 140px;" tabindex="-1" role="option" aria-describedby="slick-slide01">
+                                                        <img src="/img/sample6.jpg">
+                                                    </div>
+                                                    <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" style="width: 140px;" tabindex="-1" role="option" aria-describedby="slick-slide02">
+                                                        <img src="/img/sample5.jpg">
+                                                    </div>
+                                                    <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" style="width: 140px;" tabindex="-1" role="option" aria-describedby="slick-slide02">
+                                                        <img src="/img/sample2.jpg">
+                                                    </div>
+                                                    <div class="blur slick-slide" data-slick-index="3" aria-hidden="false" style="width: 140px;" tabindex="-1" role="option" aria-describedby="slick-slide03">
+                                                        <img src="/img/sample3.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                    $('.add_slide img').click(function(){
+                                        $(this).closest('.slick-slide').addClass("on").siblings().removeClass("on");
+                        
+                                        $('#goods_video').empty();
+                        
+                                        if( !$(this).data('video') ){
+                        
+                                            imgChange(0);
+                                        }else{
+                                            $('#goods_video').append( $(this).data('video') );
+                                        }
+                                    });
+                        
+                                    $('.add_slide').slick({
+                                        // lazyLoad: 'ondemand',
+                                        slidesToShow: 5,
+                                        slidesToScroll: 5,
+                                        arrows: true,
+                                        dots: false,
+                                        swipe: false,
+                                        infinite: false
+                                    });
+                        
+                                    function imgChange(num){
+                                        var obj = $('.add_slide .slick-slide.on');
+                                        var eq = $('.add_slide .slick-slide.on').index();
+                                        var maxLength = $('.add_slide .slick-slide').length-1;
+
+                                        eq += num;
+                                        if(eq < 0 ){
+                                            eq = maxLength;
+                                        }else if( eq > maxLength ){
+                                            eq = 0;
+                                        }
+                                        if($('.add_slide .slick-slide').eq(eq).hasClass('blur')){
+                                            $('#mimg_div').addClass('blur');
+                                        }else{
+                                            $('#mimg_div').removeClass('blur');
+                                        }
+
+                                        $('.add_slide .slick-slide').eq(eq).addClass('on').siblings().removeClass('on');
+                                        var src = $('.add_slide .slick-slide').eq(eq).find('img').attr('src');
+                                        $('#main-img').attr('src', src);
+                                        $('.add_slide').slick('slickGoTo',eq);
+                                    }
+                                    </script>
+                                    <!-- 반복문끝 -->
+                                </div>
+                            </div>
+                            <div class="info">
+                                <h3>상품이름</h3>
+                                
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </main>
 
         <footer>
