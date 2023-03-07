@@ -13,4 +13,22 @@
 	<select id="selectProduct" resultType="kr.co.beauty.vo.Product2VO">
 		SELECT * FROM `product` WHERE `prodNo`=#{prodNo};
 	</select>
+	<select id="orderTerms" resultType="TermsVO">
+		SELECT `nonmember` FROM `terms`;
+	</select>
+	
+	<insert id="completeInsert">
+		INSERT INTO `ordercomplete` 
+		(`email`,`ordCount`,`ordPrice`,`ordDisprice`,`ordDelivery`,`savePoint`,`usedPoint`,`total`,`orderer`,`orderHp`,`orderZip`,`orderAddr1`,`orderAddr2`,`orderEmail`,
+		`recipName`,`recipHp`,`recipZip`,`recipAddr1`,`recipAddr2`,`message`,`payment`,`ordDate`) VALUES 
+		(#{email},#{ordCount},#{ordPrice},#{ordDisprice},#{ordDelivery},#{savePoint},#{usedPoint},#{total},#{orderer},#{orderHp},#{orderZip},#{orderAddr1},#{orderAddr2},#{orderEmail},
+		#{recipName},#{recipHp},#{recipZip},#{recipAddr1},#{recipAddr2},#{message},#{payment},NOW());
+	</insert>
+	<insert id="non_completeInsert">
+		INSERT INTO `ordercomplete` 
+		(`password`,`ordCount`,`ordPrice`,`ordDisprice`,`ordDelivery`,`savePoint`,`usedPoint`,`total`,`orderer`,`orderHp`,`orderZip`,`orderAddr1`,`orderAddr2`,`orderEmail`,
+		`recipName`,`recipHp`,`recipZip`,`recipAddr1`,`recipAddr2`,`message`,`payment`,`ordDate`) VALUES 
+		(#{password},#{ordCount},#{ordPrice},#{ordDisprice},#{ordDelivery},#{savePoint},#{usedPoint},#{total},#{orderer},#{orderHp},#{orderZip},#{orderAddr1},#{orderAddr2},#{orderEmail},
+		#{recipName},#{recipHp},#{recipZip},#{recipAddr1},#{recipAddr2},#{message},#{payment},NOW());
+	</insert>
 </mapper>
