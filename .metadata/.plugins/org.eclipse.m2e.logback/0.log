@@ -28,3 +28,4 @@
 2023-03-07 09:17:08,333 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
 2023-03-07 09:17:08,334 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/bin/main/templates/admin/product/register.html
 2023-03-07 09:17:08,334 [Worker-14: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating resource: /beauty/src/main/resources/templates/admin/product/register.html
+2023-03-07 09:17:36,543 [Worker-18: Building] INFO  o.t.e.e.builder.ThymeleafBuilder - Unvalidating HTML files for Thymeleaf attribute processors.  Build kind: auto
