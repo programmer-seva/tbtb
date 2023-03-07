@@ -3,29 +3,24 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+    <title>Beauty</title>
+    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
     <!-- 웹 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@300&family=Quicksand:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
     <!-- 라이브러리 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- css -->
     <link rel="stylesheet" th:href="@{/css/order/init.css}">
-    <link rel="stylesheet" th:href="@{/css/headfoot.css}">
     <link rel="stylesheet" th:href="@{/css/order/order.css}">
     <!-- 주소 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script th:src="@{/js/postcode.js}"></script>
     <!-- js -->
-    <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/non-order.js}"></script>
-    <title>Beauty</title>
     <script th:inline="javascript">
     	$(function(){
 			let value = [[${list}]];
