@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <title>Beauty</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./css/admin/product.css">
+    <link rel="stylesheet" th:href="@{/css/admin/product.css}">
     <script th:src="@{/js/admin.js}"></script>
+    <script type="text/javascript">
+    	$('input[name=category2]').on("click", function(){
+    		var checkBoxArr = [];
+    		
+    	});
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -14,56 +20,56 @@
             <aside>
 			    <ul>
 			        <li>
-			            <a href="#">ALL</a>
+			            <a th:href="@{/admin/product/list(param1=prodNo)}">ALL</a>
 			        </li>
 			        <li>
-			            <a href="#">OUTER</a>
+			            <a th:href="@{#}">OUTER</a>
 			            <ul>
-			                <li><label><input type="checkbox">전체</input></label></li>
-			                <li><label><input type="checkbox">가디건</input></label></li>
-			                <li><label><input type="checkbox">자켓/코트</input></label></li>
-			                <li><label><input type="checkbox">패딩/점퍼</input></label></li>
-			                <li><label><input type="checkbox">집업/조끼</input></label></li>
+			                <li><label><input type="checkbox" name="category1" class="allCheck">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2">가디건</input></label></li>
+			                <li><label><input type="checkbox" name="category2">자켓/코트</input></label></li>
+			                <li><label><input type="checkbox" name="category2">패딩/점퍼</input></label></li>
+			                <li><label><input type="checkbox" name="category2">집업/조끼</input></label></li>
 			            </ul>
 			        </li>
 			        <li>
-			            <a href="#">TOP</a>
+			            <a th:href="@{#}">TOP</a>
 			            <ul>
-			                <li><label><input type="checkbox">전체</input></label></li>
-			                <li><label><input type="checkbox">티셔츠</label></li>
-			                <li><label><input type="checkbox">니트/스웨터</label></li>
-			                <li><label><input type="checkbox">맨투맨/후드</label></li>
-			                <li><label><input type="checkbox">조끼/나시</label></li>
+			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2">티셔츠</label></li>
+			                <li><label><input type="checkbox" name="category2">니트/스웨터</label></li>
+			                <li><label><input type="checkbox" name="category2">맨투맨/후드</label></li>
+			                <li><label><input type="checkbox" name="category2">조끼/나시</label></li>
 			            </ul>
 			        </li>
 			        <li>
-			            <a href="#">BOTTOM</a>
+			            <a th:href="@{#}">BOTTOM</a>
 			            <ul>
-			                <li><label><input type="checkbox">전체</input></label></li>
-			                <li><label><input type="checkbox">스커트</label></li>
-			                <li><label><input type="checkbox">데님</label></li>
-			                <li><label><input type="checkbox">팬츠</label></li>
-			                <li><label><input type="checkbox">슬랙스</label></li>
-			                <li><label><input type="checkbox">레깅스</label></li>
+			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2">스커트</label></li>
+			                <li><label><input type="checkbox" name="category2">데님</label></li>
+			                <li><label><input type="checkbox" name="category2">팬츠</label></li>
+			                <li><label><input type="checkbox" name="category2">슬랙스</label></li>
+			                <li><label><input type="checkbox" name="category2">레깅스</label></li>
 			            </ul>
 			        </li>
 			        <li>
-			            <a href="#">DRESS</a>
+			            <a th:href="@{#}">DRESS</a>
 			            <ul>
-			                <li><label><input type="checkbox">전체</input></label></li>
-			                <li><label><input type="checkbox">원피스</label></li>
-			                <li><label><input type="checkbox">투피스</label></li>
-			                <li><label><input type="checkbox">점프수트</label></li>
+			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2">원피스</label></li>
+			                <li><label><input type="checkbox" name="category2">투피스</label></li>
+			                <li><label><input type="checkbox" name="category2">점프수트</label></li>
 			            </ul>
 			        </li>
 			        <li>
-			            <a href="#">ETC</a>
+			            <a th:href="@{#}">ETC</a>
 			            <ul>
-			                <li><label><input type="checkbox">전체</input></label></li>
-			                <li><label><input type="checkbox">신발</label></li>
-			                <li><label><input type="checkbox">가방</label></li>
-			                <li><label><input type="checkbox">모자</label></li>
-			                <li><label><input type="checkbox">쥬얼리</label></li>
+			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2">신발</label></li>
+			                <li><label><input type="checkbox" name="category2">가방</label></li>
+			                <li><label><input type="checkbox" name="category2">모자</label></li>
+			                <li><label><input type="checkbox" name="category2">쥬얼리</label></li>
 			            </ul>
 			        </li>
 			    </ul>
@@ -80,10 +86,10 @@
                     </form>
                 </div>
                 <div>
-                    <a href="#">최신순 |</a>
-                    <a href="#">판매가격순 |</a>
-                    <a href="#">재고순 |</a>
-                    <a href="#">조회순</a>
+                    <a th:classappend="${param1}=='prodNo'?'on'" th:href="@{/admin/product/list(param1=prodNo)}">최신순 </a>|
+                    <a th:classappend="${param1}=='disPrice'?'on'" th:href="@{/admin/product/list(param1=disPrice)}">판매가격순 </a>|
+                    <a th:classappend="${param1}=='stock'?'on'" th:href="@{/admin/product/list(param1=stock)}">재고순 </a>|
+                    <a th:classappend="${param1}=='hit'?'on'" th:href="@{/admin/product/list(param1=hit)}">조회순</a>
                 </div>
                 <table>
                     <tr>
@@ -98,79 +104,18 @@
                         <th>조회</th>
                         <th>관리</th>
                     </tr>
-                    <tr>
+                    <tr th:each="prod:${products}">
                         <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
-                        <td><img src="#"></td>
-                        <td>0000</td>
-                        <td>대분류</td>
-                        <td>소분류</td>
-                        <td>상품명</td>
-                        <td>00,000</td>
-                        <td>0000</td>
-                        <td>000</td>
+                        <td><img th:src="@{#}"></td>
+                        <td>[[${prod.prodNo}]]</td>
+                        <td>[[${prod.prodCate1}]]</td>
+                        <td>[[${prod.prodCate2}]]</td>
+                        <td>[[${prod.prodName}]]</td>
+                        <td>[[${prod.disPrice}]]</td>
+                        <td>[[${prod.stock}]]</td>
+                        <td>[[${prod.hit}]]</td>
                         <td>
-                            <input type="button" value="삭제"><br>
-                            <input type="button" value="수정">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
-                        <td><img src="#"></td>
-                        <td>0000</td>
-                        <td>대분류</td>
-                        <td>소분류</td>
-                        <td>상품명</td>
-                        <td>00,000</td>
-                        <td>0000</td>
-                        <td>000</td>
-                        <td>
-                            <input type="button" value="삭제"><br>
-                            <input type="button" value="수정">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
-                        <td><img src="#"></td>
-                        <td>0000</td>
-                        <td>대분류</td>
-                        <td>소분류</td>
-                        <td>상품명</td>
-                        <td>00,000</td>
-                        <td>0000</td>
-                        <td>000</td>
-                        <td>
-                            <input type="button" value="삭제"><br>
-                            <input type="button" value="수정">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
-                        <td><img src="#"></td>
-                        <td>0000</td>
-                        <td>대분류</td>
-                        <td>소분류</td>
-                        <td>상품명</td>
-                        <td>00,000</td>
-                        <td>0000</td>
-                        <td>000</td>
-                        <td>
-                            <input type="button" value="삭제"><br>
-                            <input type="button" value="수정">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
-                        <td><img src="#"></td>
-                        <td>0000</td>
-                        <td>대분류</td>
-                        <td>소분류</td>
-                        <td>상품명</td>
-                        <td>00,000</td>
-                        <td>0000</td>
-                        <td>000</td>
-                        <td>
-                            <input type="button" value="삭제"><br>
-                            <input type="button" value="수정">
+                            <input type="button" value="삭제">
                         </td>
                     </tr>
                 </table>

@@ -1,7 +1,26 @@
-//product-list 메뉴 슬라이드
+
 $(document).ready(function(){
+	//메뉴 클릭했을 때
     $('aside > ul > li > a').click(function(){
+		//상품목록 메뉴 슬라이드
         $(this).parent().children('ul').slideToggle();
+        $(this).parent().siblings().children('ul').slideUp();
+        
+        //상품목록 메뉴 클릭시 전체체크되도록
+        $('.allCheck').attr("checked", true);
+        
+        //전체체크
+        if($(".allCheck").prop("checked")){
+				$("input[name='category2']").attr("checked", true);	
+			}
+        
+        $('.allCheck').on("click", function(){
+			if($(".allCheck").prop("checked")){
+				$("input[name='category2']").attr("checked", true);	
+			}else{
+				$("input[name='category2']").attr("checked", false);	
+			}
+		});
     });
 });
 
