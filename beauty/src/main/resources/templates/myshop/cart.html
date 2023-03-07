@@ -30,6 +30,7 @@
         <link rel="stylesheet" th:href="@{/css/myshop/myPage.css}">
         <link rel="stylesheet" th:href="@{/css/myshop/cart.css}">
         <!-- js -->
+        <script th:src="@{/js/cart.js}"></script>
         
         <title>Cart</title>
         <script>
@@ -59,7 +60,7 @@
                                 </section>
                                 <div class="cartListHead">
                                     장바구니
-                                    <span class="headCount" id="headCount">5</span>
+                                    <span class="headCount" id="headCount" th:text="${#lists.size(cartList)}"></span>
                                 </div>
 
                                 <!-- 카트 테이블 -->
@@ -67,7 +68,7 @@
                                     <table border="1">
                                         <thead>
                                             <tr>
-                                                <th><input class="chkAll" type="checkbox"></th>
+                                                <th><input name="chkAll" type="checkbox"></th>
                                                 <th></th>
                                                 <th>상품 정보</th>
                                                 <th>판매가</th>
@@ -80,29 +81,40 @@
                                         </thead>
                                         <tbody>
                                             <!-- 아이템 반복 -->
+                                            <th:block th:each="cart:${cartList}">
                                             <tr>
-                                                <td><input class="chkItem" type="checkbox"></td>
-                                                <td> <a th:href="@{#}"> <img th:src="@{/img/default_profile.png}" alt=""> </a> </td>
+                                                <td><input name="chkCart" type="checkbox" th:value="${cart.cartNo}"></td>
+                                                <td> <a th:href="@{/product/view(prodNo=${cart.prodNo})}"> <img th:src="@{/img/}+${cart.thumb1}" alt=""> </a> </td>
                                                 <td>
-                                                    <strong><a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a></strong><br>
-                                                    <span>[옵션: <span>베이지</span>]<br></span>
+                                                    <strong><a th:href="@{/product/view(prodNo=${cart.prodNo})}" th:text="${cart.prodName}"></a></strong><br>
+                                                    <span>[옵션: <span th:text="${cart.prodName}"></span>]<br></span>
                                                     <span><a class="btn" href="#">옵션변경</a></span>
                                                 </td>
                                                 <td>
-                                                    <span class="oriPrice">50,000</span>원 <br>
-                                                    <span class="price">40,000</span>원 <span class="discount">20</span>
+                                                	<!-- 할인 상품 구분 -->
+                                                    <th:block th:if="${cart.discount == 0}">
+                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원
+                                                	</th:block>
+                                                	<th:block th:unless="${cart.discount == 0}">
+                                                    	<span class="oriPrice" th:text="${#numbers.formatInteger(cart.price, 0, 'COMMA')}"></span>원 <br>
+                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원 <span class="discount">20</span>
+                                                	</th:block>
                                                 </td>
                                                 <td>
                                                     <span class="countFrame">
-                                                        <input type="text" value="3" readonly="readonly">
+                                                        <input id="count" type="text" th:value="${cart.count}" readonly="readonly">
                                                         <a class="btnIncrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif" alt="수량증가"></a>
                                                         <a class="btnDecrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소"></a>
                                                     </span>
                                                 </td>
-                                                <td><span>400</span>원</td>
-                                                <td><span>40,000</span>원</td>
-                                                <td rowspan="100">
-                                                    무료
+                                                <!-- 비회원 포인트란 - 표시 -->
+                                                <td><span th:text="${#numbers.formatInteger(cart.point * cart.count, 0, 'COMMA')}"></span>원</td>
+                                                <td><span th:text="${#numbers.formatInteger(cart.getTotalPrice, 0, 'COMMA')}"></span>원</td>
+												<!-- 첫행에만 나올것 -->
+                                                <td rowspan="100" th:if="${cartStat.index == 0}"> 
+                                                	<!-- 배송비 체크 -->
+                                                    <span th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">무료</span>
+                                                    <span th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">2500원</span>
                                                     <label data-toggle="popover" title="조건부 무료배송" data-placement="top" data-html="true"
                                                         data-content="기본 배송비 2,500원 <br/> 50,000원 이상 구매 시 무료배송"> 
                                                         <span id="deliIcon" class="material-symbols-outlined">help</span> 
@@ -110,10 +122,11 @@
                                                 </td>
                                                 <td>
                                                     <a class="btn" href="#">주문하기</a>
-                                                    <a class="btn" href="#">관심상품등록</a>
-                                                    <a class="btn" href="#">삭제</a>
+                                                    <a class="btn" th:href="@{/myshop/addWish(prodNo=${cart.prodNo})}">관심상품등록</a>
+                                                    <a class="btn" th:href="@{/myshop/deleteSelectedCart(cartNo=${cart.cartNo})}">삭제</a>
                                                 </td>
                                             </tr>
+                                            </th:block>
                                             <!-- 아이템 반복 끝-->
                                             
                                         </tbody>
@@ -128,14 +141,14 @@
                                 <div>
                                     <table class="totalTable">
                                         <thead>
-                                            <tr><th>총 주문 상품 <span>3</span>개</th></tr>
+                                            <tr><th>총 주문 상품 <span th:text="${#lists.size(cartList)}"></span>개</th></tr>
                                         </thead>
                                         <tbody>
                                             <tr><td>
                                                 <div class="priceInfoContainer">
                                                     <div class="cartPrice">
                                                         <div class="priceWrap">
-                                                            <p class="">120,000원</p>
+                                                            <p th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![price*count]), 0, 'COMMA')}+'원'"></p>
                                                             <p>상품금액</p>
                                                         </div>
                                                     </div>
@@ -144,27 +157,18 @@
                                                             <i class="im-icon im-ico-plus-plain"></i>
                                                         </div>
                                                         <div class="priceWrap">
-                                                            <p class="free">무료</p>
-                                                            <p class="" style="display:none;">2500원</p>
+                                                            <p class="free" th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">무료</p>
+                                                            <p class="" th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">2500원</p>
                                                             <p>배송비</p>
                                                         </div>
                                                     </div>
-                                                    <div class="disPrice" style="display: none;">
+                                                    <div class="disPrice">
                                                         <div>
                                                             <i class="im-icon im-ico-minus-plain"></i>
                                                         </div>
                                                         <div class="priceWrap">
-                                                            <p class="">-</p>
+                                                            <p th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![disPrice*count]), 0, 'COMMA')}+'원'"></p>
                                                             <p>상품 할인금액</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="usePoint" style="display: none;">
-                                                        <div>
-                                                            <i class="im-icon im-ico-minus-plain"></i>
-                                                        </div>
-                                                        <div class="priceWrap">
-                                                            <p class="">-</p>
-                                                            <p>포인트 사용</p>
                                                         </div>
                                                     </div>
                                                     <div class="totalPrice">
@@ -172,7 +176,10 @@
                                                             <i class="im-icon im-ico-equals-plain"></i>
                                                         </div>
                                                         <div class="priceWrap">
-                                                            <p class="">120,000원</p>
+                                                            <p 	th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}" 
+                                                            	th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![getTotalPrice]), 0, 'COMMA')}+'원'"></p>
+                                                            <p 	th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}" 
+                                                            	th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![getTotalPrice])+2500, 0, 'COMMA')}+'원'"></p>
                                                             <p>총 주문금액</p>
                                                         </div>
                                                     </div>
@@ -191,70 +198,28 @@
                                 <div class="wishListFrame">
                                     <div class="wishListHead">
                                         위시리스트
-                                        <a class="btn" href="#">더보기</a>
+                                        <a class="btn" th:href="@{/myshop/wishlist}">더보기</a>
                                     </div>
                                     <article class="wishList">
-                                        <!-- 아이템 반복 -->
-                                        <div class="item">
-                                            <div class="itemThumb">
-                                                <a th:href="@{#}">
-                                                    <img src="./images/default_profile.png" alt="">
-                                                </a>
-                                                <a class="delete" href="#">x</a>
-                                            </div>
-                                            <div class="itemInfo">
-                                                <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                                <span class="price">40,000원</span>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="itemThumb">
-                                                <a th:href="@{#}">
-                                                    <img src="./images/default_profile.png" alt="">
-                                                </a>
-                                                <a class="delete" href="#">x</a>
-                                            </div>
-                                            <div class="itemInfo">
-                                                <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                                <span class="price">40,000원</span>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="itemThumb">
-                                                <a th:href="@{#}">
-                                                    <img src="./images/default_profile.png" alt="">
-                                                </a>
-                                                <a class="delete" href="#">x</a>
-                                            </div>
-                                            <div class="itemInfo">
-                                                <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                                <span class="price">40,000원</span>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="itemThumb">
-                                                <a th:href="@{#}">
-                                                    <img src="./images/default_profile.png" alt="">
-                                                </a>
-                                                <a class="delete" href="#">x</a>
-                                            </div>
-                                            <div class="itemInfo">
-                                                <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                                <span class="price">40,000원</span>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="itemThumb">
-                                                <a th:href="@{#}">
-                                                    <img src="./images/default_profile.png" alt="">
-                                                </a>
-                                                <a class="delete" href="#">x</a>
-                                            </div>
-                                            <div class="itemInfo">
-                                                <a th:href="@{#}">[매스티지] 바오바오 루센트ㄴㄴ</a>
-                                                <span class="price">40,000원</span>
-                                            </div>
-                                        </div>
+	                                    <!-- 아이템 반복 -->
+	                                    <th:block  th:each="wish:${wishList}">
+	                                    <div class="item" th:if="${wishStat.index < 5}">
+	                                        <div class="itemThumb">
+	                                            <a th:href="@{/product/view(prodNo=${wish.prodNo})}">
+	                                                <!--
+														<img th:src="@{/image/}+${wish.thumb1}" alt="">
+	                                                -->
+	                                                <img th:src="@{/img/}+${wish.thumb1}" alt="">
+	                                            </a>
+	                                            <a class="delete" th:href="@{/myshop/deleteSelectedWishFromCart(wishNo=${wish.wishNo})}">x</a>
+	                                        </div>
+	                                        <div class="itemInfo">
+	                                            <a th:href="@{/product/view(prodNo=${wish.prodNo})}" th:text="${wish.prodName}"></a>
+	                                            <span class="price" th:text="${#numbers.formatInteger(wish.getSalePrice, 0, 'COMMA')}"></span>
+	                                        </div>
+	                                    </div>
+	                                    </th:block>
+	                                    <!-- 아이템 반복 종료 -->
                                     </article>
                                 </div>
                             </div>
