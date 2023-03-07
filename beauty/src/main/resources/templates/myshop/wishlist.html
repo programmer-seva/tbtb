@@ -25,6 +25,7 @@
         <link rel="stylesheet" th:href="@{/css/myshop/myPage.css}">
         <link rel="stylesheet" th:href="@{/css/myshop/wishlist.css}">
         <!-- js -->
+        <script th:src="@{/js/myshop/wishlist.js}"></script>
         
         <title>WishList</title>
     </head>
@@ -50,9 +51,10 @@
                                 <div class="wishListHead">
                                     위시리스트
                                     <span class="headCount" id="headCount" th:text="${#lists.size(wishList)}"></span>
-                                    <a th:href="@{/myshop/deleteAllWish}">비우기 X</a>
+                                    <a class="deleteAllWish" href="#">비우기 X</a>
                                 </div>
                                 <article class="wishList">
+									<div class="emptyWish" th:if="${#lists.size(wishList) == 0}">찜한 상품이 없습니다.</div>
                                     <!-- 아이템 반복 -->
                                     <th:block  th:each="wish:${wishList}">
                                     <div class="item">
