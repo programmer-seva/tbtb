@@ -31,12 +31,12 @@ public class Myshop1Controller {
 	public String cart(Principal principal, Model model) {
 		//회원 비회원 체크할 것.
 		/*
-		 * 	if(principal != null){
-		 *		Member1VO member = service.selectMember("gpaj123ehdm@gmail.com");
-		 *		model.addAttribute("member", member);
-		 * 	}else {
-		 * 		//to do...
-		 * 	}
+		  	if(principal != null){
+		 		Member1VO member = service.selectMember("gpaj123ehdm@gmail.com");
+		 		model.addAttribute("member", member);
+		  	}else {
+		  		//to do...
+		  	}
 		*/
 		
 		//카트리스트 가져오기
@@ -48,32 +48,42 @@ public class Myshop1Controller {
 		return "myshop/cart";
 	}
 	
-	//카트리스트 비우기
+	//카트 - 리스트 비우기 -> ajax 동적처리
 	@GetMapping("myshop/deleteAllCart")
 	public String deleteAllCart(Principal principal) {
-		//전체삭제 js로 확인받을지?
+		//service.deleteAllCart(principal.getName());
 		service.deleteAllCart("gpaj123ehdm@gmail.com");
-		
 		return "redirect:/myshop/wishlist";
 	}
 	
-	//카트 선택삭제
+	//카트 - 선택삭제 -> ajax처리 새로고침
 	@GetMapping("myshop/deleteSelectedCart")
 	public String deleteSelectedCart(int cartNo) {
 		service.deleteSelectedCart(cartNo);
-		
-		return "redirect:/myshop/cart";
-	}	
-	
-	//위시리스트 선택삭제 fromCart
-	@GetMapping("myshop/deleteSelectedWishFromCart")
-	public String deleteSelectedWishFromCart(int wishNo) {
-		service.deleteSelectedWish(wishNo);
-		
 		return "redirect:/myshop/cart";
 	}
 	
-	//카트 수량 변경
+	//카트 - 선택삭제 -> ajax처리 새로고침
+	@PostMapping("myshop/deleteSelectedCart")
+	public String deleteSelectedCart(int[] deleteList) {
+		//service.deleteSelectedCart(cartNo);
+		return "redirect:/myshop/cart";
+	}
+	
+	//카트 - 위시리스트 추가 -> ajax 동적처리 해볼 것
+	public String addWishFromCart(Principal principal, CartVO vo) {
+		service.addWish(vo);
+		return "redirect:/myshop/cart";
+	}
+	
+	//카트 - 위시리스트 삭제 fromCart
+	@GetMapping("myshop/deleteSelectedWishFromCart")
+	public String deleteSelectedWishFromCart(int wishNo) {
+		service.deleteSelectedWish(wishNo);
+		return "redirect:/myshop/wishlist";
+	}
+	
+	//카트 - 수량 변경
 	@ResponseBody
 	@PostMapping("myshop/cartIncrease")
 	public int cartIncrease(int cartNo) {
@@ -102,28 +112,19 @@ public class Myshop1Controller {
 		return "myshop/wishlist";
 	}
 	
-	//위시리스트 추가
-	public String addWishFromCart(Principal principal, CartVO vo) {
-		service.addWish(vo);
-		return "redirect:/myshop/cart";
+	//위시리스트 전체삭제
+	@ResponseBody
+	@PostMapping("myshop/deleteAllWish")
+	public int deleteAllWish(Principal principal) {
+		//deleteAllWish(principal.getName());
+		//service.deleteAllWish("gpaj123ehdm@gmail.com");
+		return 1;
 	}
 	
-	//위시리스트 비우기
-	@GetMapping("myshop/deleteAllWish")
-	public String deleteAllWish(Principal principal) {
-		//전체삭제 js로 확인받을지?
-		service.deleteAllWish("gpaj123ehdm@gmail.com");
-		
-		return "redirect:/myshop/wishlist";
-	}
-	
-	//위시리스트 선택삭제
+	//위시리스트 선택삭제(1개씩만 가능)
 	@GetMapping("myshop/deleteSelectedWish")
 	public String deleteSelectedWish(int wishNo) {
-		//prodNo값 지우기(하나씩 받음)
-		//wishNo로 할지, Username and prodNo로 할지?
 		service.deleteSelectedWish(wishNo);
-		
 		return "redirect:/myshop/wishlist";
 	}	
 }

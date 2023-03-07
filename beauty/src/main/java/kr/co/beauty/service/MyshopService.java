@@ -46,9 +46,10 @@ public class MyshopService {
 	}
 	public int cartDecrease(int cartNo) {
 		if(daoMy.checkCountForUpdate(cartNo) < 2) {
-			System.out.println("불가능"+daoMy.checkCountForUpdate(cartNo));
+			return 0;
+		}else {
+			return daoMy.cartDecrease(cartNo);
 		}
-		return 1;
 	}
 	
 	

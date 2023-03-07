@@ -102,3 +102,11 @@ main div.wishListFrame > .wishList > .item > .itemInfo > span {
     color: #555555;
     font-weight: bold;
 }
+
+.wishListFrame > article.wishList > div.emptyWish {
+	color: #555555;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin: 30px 0;	
+}

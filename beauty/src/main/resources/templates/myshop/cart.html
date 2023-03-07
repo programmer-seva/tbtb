@@ -30,7 +30,7 @@
         <link rel="stylesheet" th:href="@{/css/myshop/myPage.css}">
         <link rel="stylesheet" th:href="@{/css/myshop/cart.css}">
         <!-- js -->
-        <script th:src="@{/js/cart.js}"></script>
+        <script th:src="@{/js/myshop/cart.js}"></script>
         
         <title>Cart</title>
         <script>
@@ -133,22 +133,22 @@
                                     </table>
                                     <!-- 삭제 버튼 -->
                                     <div class="cartBtns">
-                                        <a class="btn" href="#">선택상품 삭제</a>
-                                        <a class="btn" href="">비우기</a>
+                                        <a id="btnDeleteSelectedCart" class="btn" href="#">선택상품 삭제</a>
+                                        <a id="btnDeleteAllCart" class="btn" href="#">비우기</a>
                                     </div>
                                 </article>
                                 <!-- Total 테이블-->
                                 <div>
                                     <table class="totalTable">
                                         <thead>
-                                            <tr><th>총 주문 상품 <span th:text="${#lists.size(cartList)}"></span>개</th></tr>
+                                            <tr><th>총 주문 상품 <span id="totalCount" th:text="${#lists.size(cartList)}"></span>개</th></tr>
                                         </thead>
                                         <tbody>
                                             <tr><td>
                                                 <div class="priceInfoContainer">
                                                     <div class="cartPrice">
                                                         <div class="priceWrap">
-                                                            <p th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![price*count]), 0, 'COMMA')}+'원'"></p>
+                                                            <p id="totalPrice" th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![price*count]), 0, 'COMMA')}+'원'"></p>
                                                             <p>상품금액</p>
                                                         </div>
                                                     </div>
@@ -157,8 +157,8 @@
                                                             <i class="im-icon im-ico-plus-plain"></i>
                                                         </div>
                                                         <div class="priceWrap">
-                                                            <p class="free" th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">무료</p>
-                                                            <p class="" th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">2500원</p>
+                                                            <p id="totalDelivery" th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">무료</p>
+                                                            <p id="totalDelivery" th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">2500원</p>
                                                             <p>배송비</p>
                                                         </div>
                                                     </div>
@@ -167,7 +167,7 @@
                                                             <i class="im-icon im-ico-minus-plain"></i>
                                                         </div>
                                                         <div class="priceWrap">
-                                                            <p th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![disPrice*count]), 0, 'COMMA')}+'원'"></p>
+                                                            <p id="totalDisPrice" th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![disPrice*count]), 0, 'COMMA')}+'원'"></p>
                                                             <p>상품 할인금액</p>
                                                         </div>
                                                     </div>
@@ -176,9 +176,9 @@
                                                             <i class="im-icon im-ico-equals-plain"></i>
                                                         </div>
                                                         <div class="priceWrap">
-                                                            <p 	th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}" 
+                                                            <p 	id="totalTotalPrice" th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}" 
                                                             	th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![getTotalPrice]), 0, 'COMMA')}+'원'"></p>
-                                                            <p 	th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}" 
+                                                            <p 	id="totalTotalPrice" th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}" 
                                                             	th:text="${#numbers.formatInteger(#aggregates.sum(cartList.![getTotalPrice])+2500, 0, 'COMMA')}+'원'"></p>
                                                             <p>총 주문금액</p>
                                                         </div>
@@ -201,6 +201,7 @@
                                         <a class="btn" th:href="@{/myshop/wishlist}">더보기</a>
                                     </div>
                                     <article class="wishList">
+										<div class="emptyWish" th:if="${#lists.size(wishList) == 0}">찜한 상품이 없습니다.</div>
 	                                    <!-- 아이템 반복 -->
 	                                    <th:block  th:each="wish:${wishList}">
 	                                    <div class="item" th:if="${wishStat.index < 5}">
