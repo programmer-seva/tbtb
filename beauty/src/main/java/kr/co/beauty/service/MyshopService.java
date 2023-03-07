@@ -2,12 +2,14 @@ package kr.co.beauty.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.beauty.dao.Member1DAO;
 import kr.co.beauty.dao.MyshopDAO;
 import kr.co.beauty.dao.Product1DAO;
+import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.Member1VO;
 import kr.co.beauty.vo.WishVO;
 
@@ -27,8 +29,35 @@ public class MyshopService {
 		return daoMem.selectMember(email);
 	}
 	
+	
+	//cart
+	public List<CartVO> selectCartList(String email) {
+		return daoMy.selectCartList(email);
+	}
+	public void deleteSelectedCart(int cartNo) {
+		daoMy.deleteSelectedCart(cartNo);
+	}
+	public void deleteAllCart(String email) {
+		daoMy.deleteAllCart(email);
+	}
+	
+	public int cartIncrease(int cartNo) {
+		return daoMy.cartIncrease(cartNo);
+	}
+	public int cartDecrease(int cartNo) {
+		if(daoMy.checkCountForUpdate(cartNo) < 2) {
+			System.out.println("불가능"+daoMy.checkCountForUpdate(cartNo));
+		}
+		return 1;
+	}
+	
+	
 	//wishlist
-	public List<WishVO> selectWishlist(String email){
+	public void addWish(CartVO vo) {
+		daoMy.addWish(vo);
+	}
+
+	public List<WishVO> selectWishlist(String email) {
 		return daoMy.selectWishlist(email);
 	}
 	
