@@ -9,6 +9,7 @@ import kr.co.beauty.dao.Order2DAO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
 import kr.co.beauty.vo.Product2VO;
+import kr.co.beauty.vo.TermsVO;
 
 @Service
 public class Order2Service {
@@ -26,4 +27,17 @@ public class Order2Service {
 		return dao.selectProduct(prodNo);
 	}
 	
+	//구매약관
+	public TermsVO orderTerms() {
+		return dao.orderTerms();
+	}
+	
+	//주문(회원)
+	public int completeInsert(OrdercompleteVO vo) {
+		return dao.completeInsert(vo);
+	}
+	//주문(비회원)
+	public int non_completeInsert(OrdercompleteVO vo) {
+		return dao.non_completeInsert(vo);
+	}
 }

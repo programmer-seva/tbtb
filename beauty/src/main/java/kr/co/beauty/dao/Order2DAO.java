@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
 import kr.co.beauty.vo.Product2VO;
+import kr.co.beauty.vo.TermsVO;
 
 @Mapper
 @Repository
@@ -17,4 +18,11 @@ public interface Order2DAO {
 	public List<OrderVO> selectOrder(int ordNo);
 	public Product2VO selectProduct(int prodNo);
 	
+	//구매약관
+	public TermsVO orderTerms();
+	
+	//주문(회원)
+	public int completeInsert(OrdercompleteVO vo);
+	//주문(비회원)
+	public int non_completeInsert(OrdercompleteVO vo);
 }
