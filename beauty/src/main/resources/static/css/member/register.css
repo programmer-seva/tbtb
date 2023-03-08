@@ -184,3 +184,18 @@ main > .mb > form > .btn-base-box{
     background-color: #fff;
     text-align: center;
 }
+
+main > .mb > form > table > tbody > tr > th > .essential {
+    color: #ef3f43;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+main > div > form > section > div > h3 > .essential {
+    color: #ef3f43;
+    margin-right: 5px;
+  }
+
+textarea{
+	resize: none;
+}

@@ -18,7 +18,9 @@ import lombok.ToString;
 @ToString
 public class MemberVO {
 	private String email;
-	private String password;
+	private String pass1;
+	private String pass2;
+	private String pass;
 	private String name;
 	private String level;
 	private int point;
@@ -31,9 +33,11 @@ public class MemberVO {
 	private String height;
 	private String weight;
 	
-	// terms 추가
+	
+	// terms
 	private String terms;
 	private String privacy;
 	private String location;
+	
 	
 }

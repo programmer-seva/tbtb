@@ -14,7 +14,6 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- css -->
-    <link rel="stylesheet" th:href="@{/css/order/init.css}">
     <link rel="stylesheet" th:href="@{/css/order/order.css}">
     <!-- 주소 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -23,7 +22,7 @@
     <script th:src="@{/js/non-order.js}"></script>
     <script th:inline="javascript">
     	$(function(){
-			let value = [[${list}]];
+    		let value = [[${list}]];
 			totalPrice(value);
     		function totalPrice(value){
     			let price = 0;
@@ -55,6 +54,7 @@
     </script>
 </head>
 <body>
+	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
     <div id="wrap">
         <th:block th:replace="~{/_header :: headerFragment}"></th:block>   
 		<!-- 메인 -->
@@ -157,7 +157,7 @@
 									</select>
 									 - <input id="bPh2" name="oHp2" maxlength="4" size="4" type="text">
 									- <input id="bPh3" name="oHp3" maxlength="4" size="4" type="text">
-									<input type="text" name="orderHp"/>
+									<input type="hidden" name="orderHp"/>
 								</td>
 							</tr>
 							<tr>
@@ -189,7 +189,7 @@
 										<option value="gmail.com">gmail.com</option>
 										<option value="etc">직접입력</option>
 									</select>
-									<input type="text" name="orderEmail">
+									<input type="hidden" name="orderEmail">
 									<ul>
 										<li>- 이메일을 통해 주문처리과정을 보내드립니다.</li>
 										<li>- 반드시 수신가능한 이메일주소를 입력해 주세요</li>
@@ -206,6 +206,7 @@
 									</p>
 									(숫자, 특수문자가 각각 최소 1개이상, 최소 6자이상)
 									<p class="misValid" style="display:none; color:red;">유효하지 않는 비밀번호입니다.</p>
+									<p class="misValidOK" style="display:none; color:green;">유효한 비밀번호입니다.</p>
 								</td>
 							</tr>
 							<tr>
@@ -217,6 +218,7 @@
 										<input id="text" name="password" size="16" type="password"/>
 									</p>
 									<p class="misMatch" style="display:none; color:red;">비밀번호가 일치하지 않습니다.</p>
+									<p class="misMatchOk" style="display:none; color:green;">비밀번호가 일치합니다.</p>
 								</td>
 							</tr>
 							</tbody>
@@ -261,7 +263,7 @@
 									</select>
 									 - <input id="rPh2" name="rHp2" maxlength="4" size="4" type="text">
 									- <input id="rPh3" name="rHp3" maxlength="4" size="4" type="text">
-									<input type="text" name="recipHp"/>
+									<input type="hidden" name="recipHp"/>
 								</td>
 							</tr>
 							<tr>
@@ -314,19 +316,19 @@
 							</div>
 							<div class="totalRight">
 								<p>
-									<input type="number" name="ordPrice" value="24000" readonly></input>원
+									<input type="number" name="ordPrice"  readonly></input>원
 								</p>
 								<p>
-									<input type="number" name="ordDisprice" value="-2400" readonly></input>원
+									<input type="number" name="ordDisprice" readonly></input>원
 								</p>
 								<p>
-									<input type="number" name="ordDelivery" value="2500" readonly></input>원
+									<input type="number" name="ordDelivery" readonly></input>원
 								</p>
 								<p>
 									<input type="number" name="usedPoint" value="0" readonly></input>원
 								</p>
 								<p>
-									<input type="number" name="savePoint" value="240" readonly></input>원
+									<input type="number" name="savePoint" readonly></input>원
 								</p>
 							</div>
 							<div class="totalBottom">
@@ -334,7 +336,7 @@
 									총 주문금액
 								</p>
 								<p>
-									<strong><input type="number" name="total" value="24100" readonly></input></strong>원
+									<strong><input type="number" name="total" readonly><input type="hidden" name="oriTotal" readonly></input><input type="hidden" name="ordCount" readonly></input></strong>원
 								</p>
 							</div>
 						</div>

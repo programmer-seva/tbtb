@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Beauty::list</title>
+	<th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/product/list.css}">
+</head>
+<body>
+	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+    <div id="wrap">
+       	<th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <main>
+            <!-- 베스트상품 -->
+            <article>
+                <span>OUTER BEST ITEMS</span>
+                <div class="swiper swiperItem">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <ul>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="../img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="../img/sample7.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="../img/sample8.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="../img/sample9.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="bestItem">
+                                        <a href="#"><img src="../img/sample6.jpg" alt="상품"></a>
+                                        <div class="bestDescript">
+                                            <div class="colorCodeBox">
+                                                <span class="colorCode" style="background: #fac8c8;"></span>
+                                                <span class="colorCode" style="background: #fffdf0;"></span>
+                                                <span class="colorCode" style="background: #fff5a0;"></span>
+                                                <span class="colorCode" style="background: #3a55ed;"></span>
+                                            </div>
+                                            <span>상품명</span><br/>
+                                            <span>15,000원</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample7.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample7.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample8.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample8.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample9.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample9.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                        <div class="swiper-slide">
+                            <ul>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample10.jpg" alt="상품"></a></div></li>
+                                <li><div class="bestItem"><a href="#"><img src="../img/sample10.jpg" alt="상품"></a></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </article>
+            <script>
+			  const numberOfSlides = 10;
+			  const swiper2 = new Swiper('.swiperItem', {
+			    // Optional parameters
+			    slidesPerView: 1,
+			    loop: true,
+			
+			    // If we need pagination
+			    pagination: {
+			      el: '.swiper-pagination',
+			      clickable: true,
+			      renderBullet: function (index, className) {
+			        if (index < numberOfSlides) {
+			          return '<div class="' + className + '"><span>' + (bullet[index]) + '</span></div>';
+			        }
+			      },
+			    },
+			
+			    navigation: {
+			      nextEl: '.swiper-button-next',
+			      prevEl: '.swiper-button-prev',
+			    },
+			
+			    // And if we need scrollbar
+			    scrollbar: {
+			      el: '.swiper-scrollbar',
+			    },
+			
+			    autoplay: {     //자동슬라이드 (false-비활성화)
+			      delay: 5000, // 시간 설정
+			      disableOnInteraction: false, // false-스와이프 후 자동 재생
+			    },
+			  });
+			</script>
+            
+            <!-- 리스트 -->
+            <section>
+                <div class="headcate">
+                    <div class="title2">
+                        <h2>OUTER</h2>
+                    </div>
+                    <ul class="menuCategory">
+                        <span class="s_title selected"><a href="#">ALL</a></span>
+                        <li><a href="#">가디건</a></li>
+                        <li><a href="#">자켓/코트</a></li>
+                        <li><a href="#">패딩/점퍼</a></li>
+                        <li><a href="#">집업/조끼</a></li>
+                    </ul>
+                    <div class="item-info">
+                        <div class="item-total">
+                            Total <b>100</b> items
+                        </div>
+                        <ul class="item-order">
+                            <li><a href="#">신상품</a></li>
+                            <li><a href="#">낮은가격</a></li>
+                            <li><a href="#">높은가격</a></li>
+                            <li><a href="#">인기순</a></li>
+                            <li><a href="#">많이 본 순</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div th:each="product : ${products}" class="product">
+                        <a href="#"><img th:src="@{/image/}+${product.thumb1}" alt="상품"></a>
+                        <div class="colorCodeBox">
+                            <span class="colorCode" style="background: #fac8c8;"></span>
+                            <span class="colorCode" style="background: #fffdf0;"></span>
+                            <span class="colorCode" style="background: #fff5a0;"></span>
+                            <span class="colorCode" style="background: #3a55ed;"></span>
+                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        </div>
+                        <a href="#"><span class="name">[[${product.prodName}]]</span></a>
+                        <span class="oriPrice">[[${product.price}]]</span>
+                        <span class="price">[[${product.disPrice}]]<span class="discount">[[${product.discount}]]%</span></span>
+                        <span class="descript">[[${product.descript}]]</span>
+                    </div>
+                   
+                    <div class="center">
+                        <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a href="#">&lsaquo;</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">&rsaquo;</a>
+                        <a href="#">&raquo;</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+        </main>
+		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+    </div>
+</body>
+</html>

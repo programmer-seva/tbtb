@@ -8,7 +8,7 @@ import lombok.Setter;
 public class OrdercompleteVO {
 
 	private int ordNo;
-	private String email;
+	private String uid;
 	private String password;
 	private int ordCount;
 	private int ordPrice;

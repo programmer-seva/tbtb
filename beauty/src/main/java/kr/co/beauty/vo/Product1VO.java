@@ -6,11 +6,19 @@ package kr.co.beauty.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 public class Product1VO {
 	private int prodNo;
 	private String prodName;
@@ -56,4 +64,10 @@ public class Product1VO {
 	private MultipartFile file7;
 	private MultipartFile file8;
 	private MultipartFile file9;
+	
+	private String keyword;
+	private Integer count;
+	
+	
+	private String  total;
 }
