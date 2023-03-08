@@ -6,10 +6,81 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/admin/product.css}">
     <script th:src="@{/js/admin.js}"></script>
-    <script type="text/javascript">
-    	$('input[name=category2]').on("click", function(){
-    		var checkBoxArr = [];
+    <script type="text/javascript" th:inline="javascript">
+    	$(document).ready(function(){
+    		var arg1 = [[${arg1}]];
+    		//대분류에 따른 소분류 메뉴 보이기
+    		if(arg1 == 'OUTER'){
+    			$("a:contains('OUTER')").siblings('ul').show();
+    		}else if(arg1 == 'TOP'){
+   				$("a:contains('TOP')").siblings('ul').show();
+    		}else if(arg1 == 'BOTTOM'){
+    			$("a:contains('BOTTOM')").siblings('ul').show();
+    		}else if(arg1 == 'DRESS'){
+    			$("a:contains('DRESS')").siblings('ul').show();
+    		}else if(arg1 == 'ETC'){
+    			$("a:contains('ETC')").siblings('ul').show();
+    		}
     		
+    		//기본적으로 메뉴가 전체체크 되어있게
+    		$("ul:visible").find(".allCheck").attr("checked", true);
+    		
+    		if($("ul:visible").find('.allCheck').prop("checked")== true){
+    			$("ul:visible").find('input[name=category2]').attr("checked", true);
+    		}
+    		
+    		//메뉴 클릭하면 전체체크
+    		$("aside> ul > li > a").on("click", function(){
+    			$('ul:visible').find("input[type=checkbox]").attr("checked", true);
+    		});
+    		
+    		//전체체크박스 클릭
+    		$("ul:visible").find('.allCheck').on("click", function(){    
+       			if($(this).prop("checked")){
+       				$("ul:visible").find("input[name=category2]").prop("checked", true);	
+       			}else{
+       				$("ul:visible").find("input[name=category2]").prop("checked", false);	
+       			}
+       		});
+    		
+    		
+            //체크박스 개별선택
+            $("ul:visible").find("input[name=category2]").on("click",function(){
+            	if($(this).prop("checked") == false){
+            		$("ul:visible").find(".allCheck").prop("checked", false);
+            	}else if($(this).closest("ul").find(":checked").length == $(this).closest("ul").find("input[name=category2]").length){
+            		$("ul:visible").find(".allCheck").prop("checked", true);
+            	}
+            });
+
+            
+          //체크된 메뉴 상품목록 불러오기
+        	function CheckBoxArr(){
+    			//체크박스 값 배열에 담기
+    			var checkBoxArr = [];
+
+    			$('input[name=category2]:checked').each(function(){
+    				checkBoxArr.push($(this).val());
+    			});
+    			console.log(checkBoxArr);
+    			//AJAX 요청 보내기
+    			$.ajax({
+    				type:"post",
+    				url:"/Beauty/admin/product/list",
+    				data: JSON.stringify(checkBoxArr),
+    			    contentType: "application/json; charset=UTF-8",
+    				success:function(data){
+    					location.reload();
+    					console.log(data);
+    				}
+    			});
+    			
+    		}
+    		
+    		
+        	$("ul:visible").find("input[name=category2]").on("change",function(){
+            	CheckBoxArr();
+            });
     	});
     </script>
 </head>
@@ -25,51 +96,51 @@
 			        <li>
 			            <a th:href="@{#}">OUTER</a>
 			            <ul>
-			                <li><label><input type="checkbox" name="category1" class="allCheck">전체</input></label></li>
-			                <li><label><input type="checkbox" name="category2">가디건</input></label></li>
-			                <li><label><input type="checkbox" name="category2">자켓/코트</input></label></li>
-			                <li><label><input type="checkbox" name="category2">패딩/점퍼</input></label></li>
-			                <li><label><input type="checkbox" name="category2">집업/조끼</input></label></li>
+			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="가디건">가디건</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="자켓/코트">자켓/코트</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="패딩/점퍼">패딩/점퍼</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="집업/조끼">집업/조끼</input></label></li>
 			            </ul>
 			        </li>
 			        <li>
 			            <a th:href="@{#}">TOP</a>
 			            <ul>
-			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
-			                <li><label><input type="checkbox" name="category2">티셔츠</label></li>
-			                <li><label><input type="checkbox" name="category2">니트/스웨터</label></li>
-			                <li><label><input type="checkbox" name="category2">맨투맨/후드</label></li>
-			                <li><label><input type="checkbox" name="category2">조끼/나시</label></li>
+			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="티셔츠">티셔츠</label></li>
+			                <li><label><input type="checkbox" name="category2" value="니트/스웨터">니트/스웨터</label></li>
+			                <li><label><input type="checkbox" name="category2" value="맨투맨/후드">맨투맨/후드</label></li>
+			                <li><label><input type="checkbox" name="category2" value="조끼/나시">조끼/나시</label></li>
 			            </ul>
 			        </li>
 			        <li>
 			            <a th:href="@{#}">BOTTOM</a>
 			            <ul>
-			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
-			                <li><label><input type="checkbox" name="category2">스커트</label></li>
-			                <li><label><input type="checkbox" name="category2">데님</label></li>
-			                <li><label><input type="checkbox" name="category2">팬츠</label></li>
-			                <li><label><input type="checkbox" name="category2">슬랙스</label></li>
-			                <li><label><input type="checkbox" name="category2">레깅스</label></li>
+			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="스커트">스커트</label></li>
+			                <li><label><input type="checkbox" name="category2" value="데님">데님</label></li>
+			                <li><label><input type="checkbox" name="category2" value="팬츠">팬츠</label></li>
+			                <li><label><input type="checkbox" name="category2" value="슬랙스">슬랙스</label></li>
+			                <li><label><input type="checkbox" name="category2" value="레깅스">레깅스</label></li>
 			            </ul>
 			        </li>
 			        <li>
 			            <a th:href="@{#}">DRESS</a>
 			            <ul>
-			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
-			                <li><label><input type="checkbox" name="category2">원피스</label></li>
-			                <li><label><input type="checkbox" name="category2">투피스</label></li>
-			                <li><label><input type="checkbox" name="category2">점프수트</label></li>
+			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="원피스">원피스</label></li>
+			                <li><label><input type="checkbox" name="category2" value="투피스">투피스</label></li>
+			                <li><label><input type="checkbox" name="category2" value="점프수트">점프수트</label></li>
 			            </ul>
 			        </li>
 			        <li>
 			            <a th:href="@{#}">ETC</a>
 			            <ul>
-			                <li><label><input type="checkbox" name="category1">전체</input></label></li>
-			                <li><label><input type="checkbox" name="category2">신발</label></li>
-			                <li><label><input type="checkbox" name="category2">가방</label></li>
-			                <li><label><input type="checkbox" name="category2">모자</label></li>
-			                <li><label><input type="checkbox" name="category2">쥬얼리</label></li>
+			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
+			                <li><label><input type="checkbox" name="category2" value="신발">신발</label></li>
+			                <li><label><input type="checkbox" name="category2" value="가방">가방</label></li>
+			                <li><label><input type="checkbox" name="category2" value="모자">모자</label></li>
+			                <li><label><input type="checkbox" name="category2" value="쥬얼리">쥬얼리</label></li>
 			            </ul>
 			        </li>
 			    </ul>
