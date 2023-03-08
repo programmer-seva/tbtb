@@ -40,7 +40,18 @@
 	<select id="selectProducts" resultType="kr.co.beauty.vo.Product1VO">
 		select * from `product` order by ${param1} desc;
 	</select>
+	<!-- 관리자 페이지에서 대분류로 나뉜 상품 목록 불러오기 -->
 	<select id="selectProductByCate1" resultType="kr.co.beauty.vo.Product1VO">
 		select * from `product` where `prodCate1`=#{arg1} order by ${param1} desc;
+	</select>
+	<!-- 관리자 페이지에서 체크된 소분류 상품 목록 불러오기 -->
+	<select id="selectProductByCheckBox" resultType="Product1VO">
+		select * from `product`
+		<where>
+			<if test="checkBoxArr != null and checkBoxArr.size() > 0">
+			and `prodCate2` in
+			<foreach item="checkBox" collection="checkBoxArr" open="(" separator="," close=")">#{checkBox}</foreach>
+			</if>
+		</where>
 	</select>
 </mapper>
