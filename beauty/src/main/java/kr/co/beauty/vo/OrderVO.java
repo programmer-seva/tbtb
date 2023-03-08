@@ -18,4 +18,5 @@ public class OrderVO {
 
 	//join
 	private String prodName;
+	private String thumb1;
 }

@@ -35,11 +35,11 @@
                 <span>주문번호 [[${vo.ordNo}]]</span>
                 <section>
                     <p>주문상품 (총 상품 [[${vo.ordCount}]]건)</p>
-                    <div> 
-                    <span class="material-icons" style="width: 10px;">expand_more</span>
-                    	<th:block th:each="order : ${orders}">
+                    <div>
+                    	<article th:each="order : ${orders}">
+                    		<img th:src="@{/image/}+${order.thumb1}" alt="상품썸네일">
                         	<span th:text="${order.prodName}+' '+${order.count}+개"></span>
-                        </th:block>
+                        </article>
                     </div>
                 </section>
                 <section>

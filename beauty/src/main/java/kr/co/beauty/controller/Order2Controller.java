@@ -34,20 +34,28 @@ public class Order2Controller {
 	@GetMapping("order/orderform/type1")
 	public String order2type1(Model model, HttpSession session) {
 		List<CartVO> list = new ArrayList<>();
-		int[] no = {1,18,19};
+		int[] no = {30,31,32,33,34,35};
+		
+		int count = 0;
 		for(int i=0; i<no.length; i++) {
 			CartVO vo = service.selectCart(no[i]);
 			list.add(vo);
+			count++;
 		}
+		
 		session.setAttribute("orderItem", list);
 		model.addAttribute("list",list);
+		model.addAttribute("count",count);
 		return "order/orderform";
 	}
 	@ResponseBody
 	@PostMapping("order/orderform/type1")
-	public Map<String, Integer> order2type1(OrdercompleteVO vo) {
+	public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session) {
 		log.debug("실행확인");
-		service.completeInsert(vo);
+		List<CartVO> item = (List<CartVO>)session.getAttribute("orderItem");
+		service.complete(vo, item);
+		session.removeAttribute("orderItem");
+		
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", vo.getOrdNo());
 		return result;
@@ -57,22 +65,31 @@ public class Order2Controller {
 	@GetMapping("order/orderform/type2")
 	public String order2type2(Model model, HttpSession session) {
 		List<CartVO> list = new ArrayList<>();
-		int[] no = {20,21};
+		int[] no = {26,27,28,29};
+		
+		int count = 0;
 		for(int i=0; i<no.length; i++) {
 			CartVO vo = service.selectCart(no[i]);
 			list.add(vo);
+			count++;
 		}
+		
 		session.setAttribute("orderItem", list);
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		
 		TermsVO terms = service.orderTerms();
 		model.addAttribute("terms",terms);
-		model.addAttribute("list",list);
 		return "order/non-orderform";
 	}
 	@ResponseBody
 	@PostMapping("order/orderform/type2")
-	public Map<String, Integer> order2type2(OrdercompleteVO vo) {
+	public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session) {
 		log.debug("실행확인");
-		service.non_completeInsert(vo);
+		List<CartVO> item = (List<CartVO>)session.getAttribute("orderItem");
+		service.complete(vo, item);
+		session.removeAttribute("orderItem");
+		
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", vo.getOrdNo());
 		return result;
@@ -80,19 +97,8 @@ public class Order2Controller {
 	
 	//주문완료
 	@GetMapping("order/ordercomplete")
-	public String ordercomplete2(Model model, int ordNo, HttpSession session) {
-		//Cart 정보
-		List<CartVO> item = (List<CartVO>)session.getAttribute("orderItem");
-		
+	public String ordercomplete2(Model model, int ordNo) {
 		OrdercompleteVO vo = service.selectOrdercomplete(ordNo);
-		
-		//Order Insert
-		if(item != null) {
-			for(int i=0; i<item.size(); i++) {
-				service.complete(ordNo, item.get(i), item.get(i).getCartNo());
-			}
-		}
-		session.removeAttribute("orderItem");
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("orders", orders);
