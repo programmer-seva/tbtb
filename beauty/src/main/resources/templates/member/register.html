@@ -24,66 +24,66 @@
     <div id="wrap">
         <main>
         	<div class="mb">
-                <form action="validation-form">
+                <form th:action="@{/member/register}" method="POST">
                     <h2>JOIN US</h2>
                     <h4>기본정보</h4>
                     <table border="1">
                         <tr>
-                            <th>이메일</th>
+                            <th><span class="essential">*</span>이메일</th>
                             <td>
-                                <input type="email" class="mb-input" id="email" placeholder="" required>
+                                <input type="email" class="mb-input" name="email" placeholder="" required>
                                 <span>이메일을 입력해주세요.</span>
                                 <p>(아이디 찾기에 사용 문구 넣기)</p>
                             </td>
                             <div class="invalid-feedback">이메일을 입력해주세요.</div>
                         </tr>
                         <tr>
-                            <th>비밀번호</th>
+                            <th><span class="essential">*</span>비밀번호</th>
                             <td>
-                                <input type="password" class="mb-input" id="pass1" placeholder="" required>
+                                <input type="password" class="mb-input" name="pass1" placeholder="" required>
                                 <span>영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                             </td>
                             <div class="invalid-feedback">비밀번호를 입력 하세요</div>
                         </tr>
                         <tr>
-                            <th>비밀번호 확인</th>
+                            <th><span class="essential">*</span>비밀번호 확인</th>
                             <td>
-                                <input type="password" class="mb-input" id="pass2" placeholder="" required>
+                                <input type="password" class="mb-input" name="pass2" placeholder="" required>
                                 <span>영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
                             </td>
                             <div class="invalid-feedback">비밀번호를 한번 더 입력 하세요</div>
                         </tr>
                         <tr>
-                            <th>이름</th>
+                            <th><span class="essential">*</span>이름</th>
                             <td>
-                                <input type="name" class="mb-input" id="name" placeholder="" required>
+                                <input type="name" class="mb-input" name="name" placeholder="" required>
                                 <span>한글 2자 이상 이어야 합니다.</span>
                             </td>
                             <div class="invalid-feedback">이름을(를)입력하세요</div>
                         </tr>
                         <tr>
-                            <th>주소</th>
+                            <th><span class="essential">*</span>주소</th>
                             <td>
                                 <div>
-                                    <input type="text" class="zip" id="zip" placeholder="" required>
+                                    <input type="text" class="zip" name="zip" placeholder="" required>
                                     <span></span>
                                     <button type="button">우편번호</button>
                                     <div class="invalid-feedback">주소를 입력하세요</div>
                                 </div>
                                 <div>
-                                    <input type="text" class="addr" id="addr1" placeholder="" readonly required>
+                                    <input type="text" class="addr" name="addr1" placeholder="" readonly required>
                                     <span>기본주소</span>
                                 </div>
                                 <div>
-                                    <input type="text" class="addr" id="addr2" placeholder="">
+                                    <input type="text" class="addr" name="addr2" placeholder="">
                                     <span>나머지주소</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <th>휴대전화</th>
+                            <th><span class="essential">*</span>휴대전화</th>
                             <td>
-                                <input type="text" class="mb-input" id="pass" placeholder="" required>
+                                <input type="text" class="mb-input" name="phone" placeholder="" required>
                                 <span>010-1234-5678</span>
                             </td>
                             <div class="invalid-feedback">이름을(를)입력하세요</div>
@@ -104,8 +104,8 @@
                         <tr>
                             <th>키/몸무게</th>
                             <td>
-                                <input type="text" class="mb-input">cm
-                                <input type="text" class="mb-input">kg
+                                <input type="text" class="mb-input" name="height">cm
+                                <input type="text" class="mb-input" name="weight">kg
                             </td>
                         </tr>
                     </table>
@@ -114,13 +114,13 @@
                         <div>
                             <label>
                                 <input type="checkbox" class="terms-checkbox" required>
-                                개인정보 수집 및 이용약관에 동의합니다
+                                [전체선택] 개인정보 수집 및 이용약관에 동의합니다
                             </label>
                         </div>
                         <section>
                             <div class="base-box">
                                 <h3><span class="essential">[필수]</span> 이용약관 동의</h3>
-                                <textarea class="" readonly>이용약관 동의</textarea>
+                                <textarea class="" readonly>[[${memberVO.terms}]]</textarea>
                                 <div>
                                     <label>
                                         이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
@@ -129,7 +129,7 @@
                             </div>
                             <div class="base-box">
                                 <h3><span class="essential">[필수]</span>개인정보 수집 및 이용 동의</h3>
-                                <textarea class="" readonly> 개인정보 수집 동의</textarea>
+                                <textarea class="" readonly>[[${memberVO.privacy}]]</textarea>
                                 <div>
                                     <label>
                                         이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">
@@ -138,7 +138,7 @@
                             </div>
                             <div class="base-box">
                                 <h3><span>[선택]</span> 쇼핑정보 수신 동의</h3>
-                                <textarea class="" readonly>할인쿠폰 등등</textarea>
+                                <textarea class="" readonly>[[${memberVO.location}]]</textarea>
                                 <div>
                                     <label>
                                         이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree">

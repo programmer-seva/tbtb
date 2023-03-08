@@ -24,27 +24,29 @@
         <main>
             <div class="lg">
                 <h2>LOGIN</h2>
-                <fieldset>
-                    <input type="text" class="lg-input" placeholder="이메일">
-                    <br>
-                    <input type="password" class="lg-input" placeholder="비밀번호">
-                    <p>
-                        <label><input type="checkbox" class="lg-save-id">아이디 저장</label>
-                    </p>
-                    <div class="btn-base-box">
-                        <input class="btn-login" type="submit" value="LOGIN">
-                        <input class="btn-register" type="submit" value="회원가입">
-                    </div>
-                    <ul>
-                        <li>
-                            <a href="#">find ID | </a>
-                            <a href="#">find Password</a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <input class="btn-nonecus-order" type="submit" value="비회원 주문하기 예시">
-                    </ul>
-                </fieldset>
+                <form action="#" method="POST">
+	                <fieldset>
+	                    <input type="text" class="lg-input" name="email" placeholder="이메일">
+	                    <br>
+	                    <input type="password" class="lg-input" name="pass" placeholder="비밀번호">
+	                    <p>
+	                        <label><input type="checkbox" name="remember-me" class="lg-save-id">아이디 저장</label>
+	                    </p>
+	                    <div class="btn-base-box">
+	                        <input class="btn-login" type="submit" value="LOGIN">
+	                        <input class="btn-register" type="submit" value="회원가입">
+	                    </div>
+	                    <ul>
+	                        <li>
+	                            <a href="#">find ID | </a>
+	                            <a href="#">find Password</a>
+	                        </li>
+	                    </ul>
+	                    <ul>
+	                        <input class="btn-nonecus-order" type="submit" value="비회원 주문하기 예시">
+	                    </ul>
+	                </fieldset>
+                </form>
             </div>
         </main>
         <footer>
