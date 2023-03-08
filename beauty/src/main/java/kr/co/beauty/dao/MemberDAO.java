@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import kr.co.beauty.vo.MemberVO;
+import kr.co.beauty.vo.TermsVO;
 
 @Mapper
 @Repository
