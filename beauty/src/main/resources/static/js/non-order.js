@@ -10,7 +10,7 @@ $(function(){
 	
 	//고객명 유효성검사
 	let ordererOk = false;
-	$('input[name=orderer]').keyup(function(){
+	$('input[name=orderer]').focusout(function(){
 		let value = $(this).val();
 		if(value.match(regName)){
 			ordererOk = true;
@@ -20,7 +20,7 @@ $(function(){
 	});
 	//수령인 유효성검사
 	let recipNameOk = false;
-	$('input[name=recipName]').keyup(function(){
+	$('input[name=recipName]').focusout(function(){
 		recipName();
 	});
 	function recipName(){
@@ -30,17 +30,16 @@ $(function(){
 		}else{
 			recipNameOk = false;
 		}
-		console.log(recipNameOk);
 	}
 	
 	//주문자 휴대전화 조립
 	$('select[name=oHp1]').change(function(){
 		orderHp();
 	});
-	$('input[name=oHp2]').keyup(function(){
+	$('input[name=oHp2]').focusout(function(){
 		orderHp();
 	});
-	$('input[name=oHp3]').keyup(function(){
+	$('input[name=oHp3]').focusout(function(){
 		orderHp();
 	});
 	let orderHpOk = false;
@@ -59,10 +58,10 @@ $(function(){
 	$('select[name=rHp1]').change(function(){
 		recipHp();
 	});
-	$('input[name=rHp2]').keyup(function(){
+	$('input[name=rHp2]').focusout(function(){
 		recipHp();
 	});
-	$('input[name=rHp3]').keyup(function(){
+	$('input[name=rHp3]').focusout(function(){
 		recipHp();
 	});
 	let recipHpOk = false;
@@ -81,10 +80,10 @@ $(function(){
 		}
 	}
 	//주문자 이메일 조립
-	$('input[name=bEmail1]').keyup(function(){
+	$('input[name=bEmail1]').focusout(function(){
 		orderMail();
 	});
-	$('input[name=bEmail2]').keyup(function(){
+	$('input[name=bEmail2]').focusout(function(){
 		orderMail();
 		$('select[name=bEmail3]').val("etc").prop("selected", true);
 	});
@@ -133,27 +132,34 @@ $(function(){
 	//비회원 비밀번호
 	let passOk = false;
 	let passOk2 = false;
-	$('input[name=pass]').focusout(function(){
+	$('input[name=pass]').keyup(function(){
 		passOk = false;
+	});
+	$('input[name=password]').keyup(function(){
 		passOk2 = false;
+	});
+	$('input[name=pass]').focusout(function(){
 		let pass = $(this).val();
 		if(pass.match(regPass)){
 			$('.misValid').hide();
+			$('.misValidOK').show();
 			passOk = true;
 		}else{
 			$('.misValid').show();
+			$('.misValidOK').hide();
 			passOk = false;
 		}
 	});
 	$('input[name=password]').focusout(function(){
-		passOk2 = false;
 		let pass1 = $('input[name=pass]').val();
 		let pass2 = $(this).val();
 		if(pass1 == pass2){
 			$('.misMatch').hide();
+			$('.misMatchOk').show();
 			passOk2 = true;
 		}else{
 			$('.misMatch').show();
+			$('.misMatchOk').hide();
 			passOk2 = false;
 		}
 	});
@@ -167,24 +173,24 @@ $(function(){
 			return false;
 		}
 		if(!orderHpOk){
-			alert('휴대전화를 확인하세요.')
+			alert('주문자 휴대전화를 확인하세요.')
 			$('input[name=oHp2]').focus();
 			return false;
 		}
 		if($('input[name=orderZip]').val().trim() == ""){
-			alert('주소를 확인하세요.');
+			alert('주문자 주소를 확인하세요.');
 			return false;
 		}
 		if($('input[name=orderAddr2]').val().trim() == ""){
-			alert('상세주소를 확인하세요.');
+			alert('주문자 상세주소를 확인하세요.');
 			return false;
 		}
 		if(!orderEmailOk){
-			alert('이메일 확인하세요.')
+			alert('주문자 이메일 확인하세요.')
 			$('input[name=bEmail1]').focus();
 			return false;
 		}
-		if(passOk && passOk2){
+		if(!passOk && !passOk2){
 			alert('비밀번호를 확인하세요.')
 			$('input[name=pass').focus();
 			return false;
@@ -195,21 +201,16 @@ $(function(){
 			return false;
 		}
 		if(!recipHpOk){
-			alert('휴대전화를 확인하세요.')
+			alert('수령인 휴대전화를 확인하세요.')
 			$('input[name=rHp2]').focus();
 			return false;
 		}
 		if($('input[name=recipZip]').val().trim() == ""){
-			alert('주소를 확인하세요.');
+			alert('수령인 주소를 확인하세요.');
 			return false;
 		}
 		if($('input[name=recipAddr2]').val().trim() == ""){
-			alert('상세주소를 확인하세요.');
-			return false;
-		}
-		//약관
-		if(!$('input[name=chkTerms]').is(":checked")){
-			alert('약관에 동의해주세요.');
+			alert('수령인 상세주소를 확인하세요.');
 			return false;
 		}
 		//비회원약관
@@ -218,29 +219,30 @@ $(function(){
 			return false;
 		}
 		
-		let password = $('input[name=password').val();
-		let ordCount = $('input[name=ordCount').val();
-		let ordPrice = $('input[name=orderEmail').val();
-		let ordDisprice = $('input[name=ordDisprice').val();
-		let ordDelivery = $('input[name=ordDelivery').val();
-		let savePoint = $('input[name=savePoint').val();
-		let usedPoint = $('input[name=usedPoint').val();
-		let total = $('input[name=total').val();
-		let orderer = $('input[name=orderer').val();
-		let orderHp = $('input[name=orderHp').val();
-		let orderZip = $('input[name=orderZip').val();
-		let orderAddr1 = $('input[name=orderAddr1').val();
-		let orderAddr2 = $('input[name=orderAddr2').val();
-		let orderEmail = $('input[name=orderEmail').val();
-		let recipName = $('input[name=recipName').val();
-		let recipHp = $('input[name=recipHp').val();
-		let recipZip = $('input[name=recipZip').val();
-		let recipAddr1 = $('input[name=recipAddr1').val();
-		let recipAddr2 = $('input[name=recipAddr2').val();
-		let message = $('textarea[name=message').val();
-		let payment = $('input[name=payment').val();
+		let password = $('input[name=password]').val();
+		let ordCount = $('input[name=ordCount]').val();
+		let ordPrice = $('input[name=ordPrice]').val();
+		let ordDisprice = $('input[name=ordDisprice]').val();
+		let ordDelivery = $('input[name=ordDelivery]').val();
+		let savePoint = $('input[name=savePoint]').val();
+		let usedPoint = $('input[name=usedPoint]').val();
+		let total = $('input[name=total]').val();
+		let orderer = $('input[name=orderer]').val();
+		let orderHp = $('input[name=orderHp]').val();
+		let orderZip = $('input[name=orderZip]').val();
+		let orderAddr1 = $('input[name=orderAddr1]').val();
+		let orderAddr2 = $('input[name=orderAddr2]').val();
+		let orderEmail = $('input[name=orderEmail]').val();
+		let recipName = $('input[name=recipName]').val();
+		let recipHp = $('input[name=recipHp]').val();
+		let recipZip = $('input[name=recipZip]').val();
+		let recipAddr1 = $('input[name=recipAddr1]').val();
+		let recipAddr2 = $('input[name=recipAddr2]').val();
+		let message = $('textarea[name=message]').val();
+		let payment = $('input[name=payment]').val();
 		
 		let jsonData = {
+			'uid' : 'sessionId',
 			'password' : password,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,
@@ -261,16 +263,16 @@ $(function(){
 			'recipAddr1' : recipAddr1,
 			'recipAddr2' : recipAddr2,
 			'message' : message,
-			'payment' : payment,
+			'payment' : payment
 		}
-		
+		console.log(jsonData);
 		$.ajax({
-			url : '/Beauty/order/orderform/type1',
-			method : 'post',
+			url : '/Beauty/order/orderform/type2',
+			method : 'POST',
 			data : jsonData,
-			dataType : 'json',
+			dataType : 'JSON',
 			success : function(data){
-				console.log(data.result);
+				location.href="/Beauty/order/ordercomplete?ordNo="+data.result;
 			}
 		});
 	});
