@@ -242,7 +242,7 @@ $(function(){
 		let payment = $('input[name=payment]').val();
 		
 		let jsonData = {
-			'uid' : 'sessionId',
+			'uid' : 'notMember',
 			'password' : password,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,
