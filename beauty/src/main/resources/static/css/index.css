@@ -8,21 +8,31 @@ main {
 }
 .swiper-slide {
     width: 100%;
-    height: 800px;
+    height: 680px;
 }
 .banner1 {
-    background: url("../img/MainBanner1.png") no-repeat;
+    background: url("../img/MainBanner1.jpg") no-repeat;
     background-size: cover;
 }
 .banner2 {
     background: url("../img/MainBanner2.jpg") no-repeat;
     background-size: cover;
-    background-position-y: -35px;
 }
 .banner3 {
     background: url("../img/MainBanner3.jpg") no-repeat;
     background-size: cover;
-    background-position: -25px 0px;
+}
+.banner4 {
+    background: url("../img/MainBanner4.jpg") no-repeat;
+    background-size: cover;
+}
+.banner5 {
+    background: url("../img/MainBanner5.jpg") no-repeat;
+    background-size: cover;
+}
+.banner6 {
+    background: url("../img/MainBanner6.jpg") no-repeat;
+    background-size: cover;
 }
 .swiper-pagination-bullet-active {background: #fff;}
 main > section {
@@ -78,10 +88,10 @@ main > article > div.swiper .swiper-slide > ul > li > .bestItem img {
 main > article > div.swiper .swiper-slide > ul > li > .bestItem > .bestDescript {
     position: absolute;
     display: none;
-    top: 175px;
+    top: 150px;
     left: 0px;
     width: auto;
-    height: 110px;
+    height: 130px;
     background: #fff;
     opacity: 0.9;
     z-index: 100;
@@ -114,10 +124,11 @@ main > article > div.swiper > .swiper-button-next {color: #999; margin-right: 50
 main > section > div > div {
     display: inline-block;
     width: 23%;
-    height: 500px;
+    height: 550px;
     margin: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 100px;
     box-sizing: border-box;
+    vertical-align: top;
 }
 main > section > span {
     display: inline-block;
@@ -178,4 +189,5 @@ main > section > span {
     font-size: 12px;
     color: #999;
     margin-top: 6px;
+    white-space: pre-wrap;
 }
