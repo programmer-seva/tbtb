@@ -29,10 +29,10 @@ public class Myshop1Controller {
 	@GetMapping("myshop/wishlist")
 	public String wishlist(Principal principal, Model model) {
 		//유저 정보 받기
-		Member1VO member = service.selectMember("gpaj123ehdm@gmail.com");
+		Member1VO member = service.selectMember(principal.getName());
 		model.addAttribute("member", member);
 		//위시리스트 가져오기
-		List<WishVO> wishList = service.selectWishlist("gpaj123ehdm@gmail.com");
+		List<WishVO> wishList = service.selectWishlist(principal.getName());
 		model.addAttribute("wishList", wishList);
 		
 		return "myshop/wishlist";
@@ -42,8 +42,7 @@ public class Myshop1Controller {
 	@ResponseBody
 	@PostMapping("myshop/deleteAllWish")
 	public int deleteAllWish(Principal principal) {
-		//deleteAllWish(principal.getName());
-		service.deleteAllWish("gpaj123ehdm@gmail.com");
+		service.deleteAllWish(principal.getName());
 		return 1;
 	}
 	

@@ -13,7 +13,7 @@ import lombok.Setter;
 public class WishVO {
 	private int wishNo;
 	private int prodNo;
-	private String email;
+	private String uid;
 	private String rdate;
 	
 	//Add
