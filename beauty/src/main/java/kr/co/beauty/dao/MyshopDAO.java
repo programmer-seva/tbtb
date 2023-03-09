@@ -18,7 +18,7 @@ import kr.co.beauty.vo.WishVO;
 public interface MyshopDAO {
 	//wishlist
 	public void addWish(WishVO vo);
-	public List<WishVO> selectWishlist(@Param("email") String email);
+	public List<WishVO> selectWishlist(@Param("uid") String uid);
 	public void deleteSelectedWish(@Param("wishNo") int wishNo);
-	public void deleteAllWish(@Param("email") String email);
+	public void deleteAllWish(@Param("uid") String uid);
 }

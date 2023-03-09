@@ -13,5 +13,5 @@ import kr.co.beauty.vo.Member1VO;
 @Mapper
 @Repository
 public interface Member1DAO {
-	public Member1VO selectMember(@Param("email") String email);
+	public Member1VO selectMember(@Param("uid") String uid);
 }

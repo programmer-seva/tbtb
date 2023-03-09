@@ -20,8 +20,8 @@ public class MyshopService {
 	private MyshopDAO daoMy;
 	
 	//public
-	public Member1VO selectMember(String email) {
-		return daoMem.selectMember(email);
+	public Member1VO selectMember(String uid) {
+		return daoMem.selectMember(uid);
 	}
 	
 	//wishlist
@@ -29,16 +29,16 @@ public class MyshopService {
 		daoMy.addWish(vo);
 	}
 
-	public List<WishVO> selectWishlist(String email) {
-		return daoMy.selectWishlist(email);
+	public List<WishVO> selectWishlist(String uid) {
+		return daoMy.selectWishlist(uid);
 	}
 	
 	public void deleteSelectedWish(int wishNo) {
 		daoMy.deleteSelectedWish(wishNo);
 	}
 	
-	public void deleteAllWish(String email) {
-		daoMy.deleteAllWish(email);
+	public void deleteAllWish(String uid) {
+		daoMy.deleteAllWish(uid);
 	}
 	
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.beauty.service.MyshopService;
@@ -37,9 +38,10 @@ public class Order1Controller {
 	/* 비회원 테스트 */
 	@GetMapping("order/test")
 	public String test(Model model, HttpServletResponse response, HttpServletRequest req) {
-		sessionManager.createSession("check", response);
-		System.out.println((String)sessionManager.getSession(req));
 		
+		if(sessionManager.getSession(req) == null) {
+			sessionManager.createSession("check", response);
+		}
 		return "redirect:/order/cart";
 	}
 	
