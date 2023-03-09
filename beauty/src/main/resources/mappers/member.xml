@@ -10,7 +10,7 @@
 
 	<insert id="insertMember">
 		insert into `member` set
-			`email`=#{email},
+			`uid`=#{uid},
 			`pass`=#{pass},
 			`name`=#{name},
 			`zip`=#{zip},

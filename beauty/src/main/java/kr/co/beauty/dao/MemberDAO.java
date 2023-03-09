@@ -12,10 +12,10 @@ import kr.co.beauty.vo.TermsVO;
 @Repository
 public interface MemberDAO {
 	public int insertMember(MemberVO vo);
-	public MemberVO selectMember(String email);
+	public MemberVO selectMember(String uid);
 	public List<MemberVO> selectMembers();
 	public void updateMember(MemberVO vo);
-	public void deleteMember(String email);
+	public void deleteMember(String uid);
 	public MemberVO selectTerms();
 	
 }
