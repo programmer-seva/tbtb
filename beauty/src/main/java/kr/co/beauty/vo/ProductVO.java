@@ -1,11 +1,9 @@
-/* 
- * 김동근
- * Product1DAO
- */
 package kr.co.beauty.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +15,13 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table
 @ToString
-@Builder
-public class Product1VO {
+public class ProductVO {
+	
+	@Id
 	private int prodNo;
+	
 	private String prodName;
 	private String descript;
 	private String prodCate1;
@@ -64,5 +65,10 @@ public class Product1VO {
 	private MultipartFile file7;
 	private MultipartFile file8;
 	private MultipartFile file9;
+	
+	// join추가
+	private int count;
+	private String  total;
+	
 	
 }

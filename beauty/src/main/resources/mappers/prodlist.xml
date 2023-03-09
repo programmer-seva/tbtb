@@ -3,13 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 김보성 -->
-<mapper namespace="kr.co.beauty.dao.Product1DAO">
-	<select id="selectCate" resultType="ProdCateVO">
-		select * from `cate`;
+<mapper namespace="kr.co.beauty.dao.ProductDAO">
+	<select id="selectProductByParam" resultType="ProductVO">
+		SELECT * FROM `product` ORDER BY ${param} DESC LIMIT 8;
 	</select>
 
-	<select id="listProducts" resultType="kr.co.beauty.vo.Product1VO">
-	  	select * from `product` limit 20;
-	</select>
+	<select id="selectProducts" resultType="ProductVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{arg0} AND `prodCate2`=#{arg1};
 		
+	</select>
+	
+	<select id="selectProductByPrice" resultType="ProductVO">
+  		SELECT * FROM `product` WHERE `prodCate1`=#{arg0} AND `prodCate2`=#{arg1} ORDER BY `price` ASC;
+	</select>
+	
+	<select id="selectCountTotal" resultType="int">
+  		SELECT count(prodNo) FROM `product` WHERE `prodCate1`=#{arg0} AND `prodCate2`=#{arg1};
+	</select>
 </mapper>
