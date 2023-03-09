@@ -7,9 +7,7 @@ import lombok.Setter;
 @Setter
 public class TermsVO {
 
-	private String join1;
-	private String join2;
-	private String join3;
+	
 	private String nonmember;
   
 }

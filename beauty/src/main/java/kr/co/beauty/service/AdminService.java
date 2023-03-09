@@ -43,6 +43,10 @@ public class AdminService {
 		return dao.selectProductByCate1(param1,arg1);
 	}
 	
+	public List<Product1VO> selectProductByCheckBox(List<String> checkBoxArr){
+		return dao.selectProductByCheckBox(checkBoxArr);
+	}
+	
 	//파일 업로드
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;

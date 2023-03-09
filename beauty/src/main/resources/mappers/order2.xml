@@ -8,7 +8,7 @@
 		SELECT * FROM `ordercomplete` WHERE `ordNo`=#{ordNo};
 	</select>
 	<select id="selectOrder" resultType="OrderVO">
-		SELECT a.*,b.prodName FROM `order` AS a JOIN `product` AS b ON a.prodNo=b.prodNo  WHERE `ordNo`=#{ordNo}; 
+		SELECT a.*,b.prodName,b.thumb1 FROM `order` AS a JOIN `product` AS b ON a.prodNo=b.prodNo  WHERE `ordNo`=#{ordNo}; 
 	</select>
 	<select id="selectCart" resultType="CartVO">
 		SELECT * FROM `cart` WHERE `cartNo`=#{cartNo};

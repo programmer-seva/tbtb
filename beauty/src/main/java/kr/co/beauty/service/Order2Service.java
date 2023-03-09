@@ -25,11 +25,32 @@ public class Order2Service {
 	public List<OrderVO> selectOrder(int ordNo){
 		return dao.selectOrder(ordNo);
 	}
-	@Transactional
-	public void complete(int ordNo, CartVO vo, int cartNo) {
-		insertOrder(ordNo, vo);
-		deleteCart(cartNo);
+	
+	//주문결제 페이지
+	public CartVO selectCart(int cartNo) {
+		return dao.selectCart(cartNo);
 	}
+	
+	//구매약관
+	public TermsVO orderTerms() {
+		return dao.orderTerms();
+	}
+	
+	@Transactional
+	public void complete(OrdercompleteVO vo, List<CartVO> item) {
+		
+		if(vo.getUid().equals("notMember")) {
+			non_completeInsert(vo);
+		}else {
+			completeInsert(vo);
+		}
+		
+		for(int i=0; i<item.size(); i++) {
+			insertOrder(vo.getOrdNo(), item.get(i));
+			deleteCart(item.get(i).getCartNo());
+		}
+	}
+	
 	//주문완료전 주문테이블삽입
 	public void insertOrder(int ordNo, CartVO vo) {
 		OrderVO result = new OrderVO();
@@ -47,17 +68,6 @@ public class Order2Service {
 	public void deleteCart(int cartNo) {
 		dao.deleteCart(cartNo);
 	}
-	
-	//주문결제 페이지
-	public CartVO selectCart(int cartNo) {
-		return dao.selectCart(cartNo);
-	}
-	
-	//구매약관
-	public TermsVO orderTerms() {
-		return dao.orderTerms();
-	}
-	
 	//주문(회원)
 	public void completeInsert(OrdercompleteVO vo) {
 		dao.completeInsert(vo);

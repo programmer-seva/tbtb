@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 김보성 -->
+<mapper namespace="kr.co.beauty.dao.Product1DAO">
+	<select id="selectCate" resultType="ProdCateVO">
+		select * from `cate`;
+	</select>
+
+	<select id="listProducts" resultType="kr.co.beauty.vo.Product1VO">
+	  	select * from `product` limit 20;
+	</select>
+		
+</mapper>

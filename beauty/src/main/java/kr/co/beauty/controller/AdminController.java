@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.beauty.service.AdminService;
 import kr.co.beauty.vo.Product1VO;
@@ -44,6 +46,17 @@ public class AdminController {
 		}
 		model.addAttribute("products",  products);
 		model.addAttribute("param1",  param1);
+		model.addAttribute("arg1",  arg1);
+		
+		return "admin/product/list";
+	}
+	
+	@PostMapping(value="admin/product/list")
+	@ResponseBody
+	public String list(@RequestParam("checkBoxArr") List<String> checkBoxArr,Model model) {
+		List<Product1VO> products = service.selectProductByCheckBox(checkBoxArr);
+		System.out.println(products);
+		model.addAttribute("products",products);
 		
 		return "admin/product/list";
 	}
