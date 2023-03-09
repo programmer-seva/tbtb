@@ -65,7 +65,6 @@ public class Order2Controller {
 	public String order2type2(Model model, HttpSession session) {
 		List<CartVO> list = new ArrayList<>();
 		int[] no = {45,46,47,48};
-		
 		int count = 0;
 		for(int i=0; i<no.length; i++) {
 			CartVO vo = service.selectCart(no[i]);
