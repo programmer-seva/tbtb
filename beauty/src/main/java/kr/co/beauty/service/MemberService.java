@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.co.beauty.dao.MemberDAO;
+import kr.co.beauty.repository.MemberRepo;
 import kr.co.beauty.vo.MemberVO;
 
 @Service
@@ -13,6 +14,9 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private MemberRepo repo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -29,7 +33,10 @@ public class MemberService {
 		return result;
 	}
 	
-	
+	// JPA
+	public int countMember(String uid) {
+		return repo.countByUid(uid);
+	}
 	
 	
 }
