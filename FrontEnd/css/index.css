@@ -126,7 +126,8 @@ main > section > span {
     letter-spacing: 13px;
     margin-bottom: 40px;
 }
-.product > a > img {
+.product > img {
+    display: inline-block;
     width: 100%;
     height: 350px;
     object-fit: cover;

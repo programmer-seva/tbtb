@@ -8,17 +8,8 @@
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" th:href="@{/css/order/ordercomplete.css}">
-    <script>
-    	$(function(){
-    		$('.continue').click(function(){
-    			location.href="/Beauty/index";
-    		});
-    		$('.detail').click(function(){
-    			location.href="/Beauty/myshop/orderDetail";
-    		});
-    	});
-    </script>
+    <link rel="stylesheet" th:href="@{/css/order/ordercomplete.css?ver=1}">
+    <script type="text/javascript" th:src="@{/js/order/ordercomplete.js?ver=1}"></script>
 </head>
 <body>
 	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
@@ -35,8 +26,10 @@
                 <span>주문번호 [[${vo.ordNo}]]</span>
                 <section>
                     <p>주문상품 (총 상품 [[${vo.ordCount}]]건)</p>
-                    <div>
-                    	<article th:each="order : ${orders}">
+                    <div class="order">
+                    	<span class="material-icons" id="more">expand_more</span>
+                    	<span class="material-icons" id="less" style="display: none">expand_less</span>
+                    	<article th:each="order : ${orders}" class="orderItem" style="display: none">
                     		<img th:src="@{/image/}+${order.thumb1}" alt="상품썸네일">
                         	<span th:text="${order.prodName}+' '+${order.count}+개"></span>
                         </article>

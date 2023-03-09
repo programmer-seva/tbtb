@@ -92,10 +92,15 @@ main > .complete > section > div {
 }
 main > .complete > section > div > .material-icons {
 	position: absolute;
-    top: 23px;
-    right: 40px;
     font-size: 24px;
     cursor: pointer;
+    right: 40px;
+}
+#more {
+	top: 37px;
+}
+#less {
+	bottom : 37px;
 }
 
 main > .complete > section > div span {
