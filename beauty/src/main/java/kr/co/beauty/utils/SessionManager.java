@@ -34,6 +34,9 @@ public class SessionManager {
 		sessionStore.put(sessionId, value);
 		//쿠키 생성
 		Cookie noMemberCookie = new Cookie(NO_MEMBER_COOKIE, sessionId);
+		noMemberCookie.setHttpOnly(true);
+		noMemberCookie.setDomain("localhost");
+		noMemberCookie.setPath("/Beauty");
 		response.addCookie(noMemberCookie);
 	}
 	
@@ -43,6 +46,11 @@ public class SessionManager {
 		if(noMemberCookie == null) {
 			return null;
 		}
+		
+		System.out.println(noMemberCookie.getValue());
+		System.out.println(sessionStore.keySet());
+		System.out.println(sessionStore.get(noMemberCookie.getValue()));
+		
 		return sessionStore.get(noMemberCookie.getValue());
 	}
 	
@@ -57,9 +65,9 @@ public class SessionManager {
 	
 	//쿠키 찾는 로직
 	public Cookie findCookie(HttpServletRequest request, String cookieName) {
-		if(request.getCookies() == null) {
-			return null;
-		}
+		if (request.getCookies() == null) {
+            return null;
+        }
 		//쿠키 이름으로 찾아서 반환
 		return Arrays.stream(request.getCookies())
 				.filter(cookie -> cookie.getName().equals(cookieName))
