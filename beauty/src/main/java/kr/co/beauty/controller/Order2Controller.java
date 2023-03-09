@@ -33,7 +33,7 @@ public class Order2Controller {
 	@GetMapping("order/orderform/type1")
 	public String order2type1(Model model, HttpSession session) {
 		List<CartVO> list = new ArrayList<>();
-		int[] no = {43};
+		int[] no = {49};
 		
 		int count = 0;
 		for(int i=0; i<no.length; i++) {
