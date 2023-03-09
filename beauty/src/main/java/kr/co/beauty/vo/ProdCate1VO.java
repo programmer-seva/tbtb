@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProdCateVO {
-	private String prodCate1;
-	private String prodCate2;
+public class ProdCate1VO {
+	private int cate;
+	private String c1Name;
 }
