@@ -239,7 +239,7 @@ $(function(){
 		let recipAddr1 = $('input[name=recipAddr1]').val();
 		let recipAddr2 = $('input[name=recipAddr2]').val();
 		let message = $('textarea[name=message]').val();
-		let payment = $('input[name=payment]').val();
+		let payment = $('input[name=payment]:checked').val();
 		
 		let jsonData = {
 			'uid' : 'notMember',
@@ -265,7 +265,6 @@ $(function(){
 			'message' : message,
 			'payment' : payment
 		}
-		console.log(jsonData);
 		$.ajax({
 			url : '/Beauty/order/orderform/type2',
 			method : 'POST',

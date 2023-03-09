@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import ch.qos.logback.classic.Logger;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.Order2Service;
 import kr.co.beauty.vo.CartVO;
@@ -34,7 +33,7 @@ public class Order2Controller {
 	@GetMapping("order/orderform/type1")
 	public String order2type1(Model model, HttpSession session) {
 		List<CartVO> list = new ArrayList<>();
-		int[] no = {30,31,32,33,34,35};
+		int[] no = {43};
 		
 		int count = 0;
 		for(int i=0; i<no.length; i++) {
@@ -65,8 +64,7 @@ public class Order2Controller {
 	@GetMapping("order/orderform/type2")
 	public String order2type2(Model model, HttpSession session) {
 		List<CartVO> list = new ArrayList<>();
-		int[] no = {26,27,28,29};
-		
+		int[] no = {45,46,47,48};
 		int count = 0;
 		for(int i=0; i<no.length; i++) {
 			CartVO vo = service.selectCart(no[i]);
