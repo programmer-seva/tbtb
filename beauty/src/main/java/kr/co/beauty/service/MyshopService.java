@@ -25,8 +25,14 @@ public class MyshopService {
 	}
 	
 	//wishlist
-	public void addWish(WishVO vo) {
-		daoMy.addWish(vo);
+	public int addWish(WishVO vo) {
+		//중복체크
+		if(daoMy.checkWish(vo) > 0) {
+			return 0;
+		}else {
+			daoMy.addWish(vo);
+			return 1;
+		}
 	}
 
 	public List<WishVO> selectWishlist(String uid) {

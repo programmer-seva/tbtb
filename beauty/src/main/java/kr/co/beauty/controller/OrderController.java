@@ -109,8 +109,7 @@ public class OrderController {
 	@PostMapping("order/addWishFromCart")
 	public int addWishFromCart(Principal principal, WishVO vo) {
 		vo.setUid(principal.getName());
-		serviceMy.addWish(vo);
-		return 1;
+		return serviceMy.addWish(vo);
 	}
 	
 	//카트 - tableBtns(테이블내부) - 삭제

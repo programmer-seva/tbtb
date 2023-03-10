@@ -111,6 +111,7 @@ $(function(){
 				if(data == 1){
 					alert('등록되었습니다.');
 				}else{
+					alert('이미 등록된 상품입니다.');
 				}
 			}
 		});

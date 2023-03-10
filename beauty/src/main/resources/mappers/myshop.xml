@@ -13,6 +13,11 @@
 			`rdate` = NOW();
 	</insert>
 	
+	<select id="checkWish" resultType="int">
+		SELECT COUNT(wishNo) FROM `wish`
+		WHERE `uid`=#{uid} AND `prodNo`=#{prodNo}
+	</select>
+	
 	<select id="selectWishlist" resultType="WishVO">
 		SELECT A.*, B.prodName, B.price, B.disPrice, B.thumb1 
 		FROM `wish` as A JOIN `product` as B 
