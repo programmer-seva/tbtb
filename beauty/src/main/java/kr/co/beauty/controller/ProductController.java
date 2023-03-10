@@ -8,9 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.beauty.service.ProductService;
-import kr.co.beauty.vo.ProdCate1VO;
-import kr.co.beauty.vo.ProdCate2VO;
-import kr.co.beauty.vo.Product1VO;
 import kr.co.beauty.vo.ProductVO;
 
 @Controller

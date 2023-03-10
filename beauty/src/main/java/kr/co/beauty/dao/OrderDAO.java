@@ -1,8 +1,14 @@
+/* 
+ * 김동근
+ * CartVO
+ * WishVO
+ */
 package kr.co.beauty.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.beauty.vo.CartVO;
@@ -12,8 +18,20 @@ import kr.co.beauty.vo.TermsVO;
 
 @Mapper
 @Repository
-public interface Order2DAO {
+public interface OrderDAO {
+	/* 김동근 */
+	//cart
+	public List<CartVO> selectCartList(@Param("uid") String uid);
+	public void deleteSelectedCart(@Param("cartNo") int cartNo);
+	public void deleteAllCart(@Param("uid") String uid);
+	
+	//cart - change count
+	public int checkCountForUpdate(@Param("cartNo") int cartNo);
+	public int cartIncrease(@Param("cartNo") int cartNo);
+	public int cartDecrease(@Param("cartNo") int cartNo);
 
+	
+	/* 박진휘 */
 	//주문완료
 	public OrdercompleteVO selectOrdercomplete(int ordNo);
 	public List<OrderVO> selectOrder(int ordNo);
