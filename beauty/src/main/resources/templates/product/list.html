@@ -13,6 +13,7 @@
        	<th:block th:replace="~{/_header :: headerFragment}"></th:block>
         <main>
             <!-- 베스트상품 -->
+            <!-- 
             <article>
                 <span>OUTER BEST ITEMS</span>
                 <div class="swiper swiperItem">
@@ -172,52 +173,67 @@
 			    },
 			  });
 			</script>
-            
+             -->
             <!-- 리스트 -->
             <section>
                 <div class="headcate">
                     <div class="title2">
-                        <h2>OUTER</h2>
+                        <h2 th:if="${now/100 == 1}">OUTER</h2>
+                        <h2 th:if="${now/100 == 2}">TOP</h2>
+                        <h2 th:if="${now/100 == 3}">BOTTOM</h2>
+                        <h2 th:if="${now/100 == 4}">DRESS</h2>
+                        <h2 th:if="${now/100 == 5}">ETC</h2>
+                        <h2 th:if="${now == 1000}">NEW 새로 나온 신상품 !!!</h2>
+                        <h2 th:if="${now == 1001}">BEST 많은 사람들에게 사랑받고 있는 상품들~</h2>
                     </div>
-                    <ul class="menuCategory">
-                        <span class="s_title selected"><a href="#">ALL</a></span>
-                        <li><a href="#">가디건</a></li>
-                        <li><a href="#">자켓/코트</a></li>
-                        <li><a href="#">패딩/점퍼</a></li>
-                        <li><a href="#">집업/조끼</a></li>
-                    </ul>
-                    <div class="item-info">
+                    <section class="menuCategory" th:if="${now < 1000}">
+                        <span th:class="${now}%100 == 0 ? 's_title selected' : 's_title'">
+                        <th:block th:if="${sort == null}">
+                        	<a th:href="@{/shop/list(cate=${now/100}*100)}">ALL</a>
+                        </th:block>
+                        <th:block th:unless="${sort == null}">
+                        	<a th:href="@{/shop/list(cate=${now/100}*100, sort=${sort})}">ALL</a>
+                        </th:block>
+                        </span>
+                        <th:block th:each="cate : ${cate}">
+                        	<span th:class="${now} == ${cate.cate} ? 's_title selected' : 's_title'"><a th:href="@{/shop/list(cate=${cate.cate})}" th:text="${cate.c2Name}"></a></span>
+                        </th:block>
+                    </section>
+                    <div class="item-info" th:if="${now < 1000}">
                         <div class="item-total">
-                            Total <b>100</b> items
+                            Total <b>[[${count}]]</b> items
                         </div>
-                        <ul class="item-order">
-                            <li><a href="#">신상품</a></li>
-                            <li><a href="#">낮은가격</a></li>
-                            <li><a href="#">높은가격</a></li>
-                            <li><a href="#">인기순</a></li>
-                            <li><a href="#">많이 본 순</a></li>
+                        <ul class="item-order" th:if="${now < 1000}">
+                            <li th:class="${sort} == null ? 'selected' : ''"><a th:href="@{/shop/list(cate=${now})}">신상품</a></li>
+                            <li th:class="${sort} == 'lowprice' ? 'selected' : ''"><a th:href="@{/shop/list(cate=${now},sort='lowprice')}">낮은가격</a></li>
+                            <li th:class="${sort} == 'highprice' ? 'selected' : ''"><a th:href="@{/shop/list(cate=${now},sort='highprice')}">높은가격</a></li>
+                            <li th:class="${sort} == 'score' ? 'selected' : ''"><a th:href="@{/shop/list(cate=${now},sort='score')}">인기순</a></li>
+                            <li th:class="${sort} == 'hit' ? 'selected' : ''"><a th:href="@{/shop/list(cate=${now},sort='hit')}">많이 본 순</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div>
-				    <div th:each="product:${products}" class="product">
-				        <a href="#"><img th:src="@{/image/}+${product.thumb1}" alt="상품"></a>
-				        <div class="colorCodeBox">-
-				            <span class="colorCode" style="background: #fac8c8;"></span>
-				            <span class="colorCode" style="background: #fffdf0;"></span>
-				            <span class="colorCode" style="background: #fff5a0;"></span>
-				            <span class="colorCode" style="background: #3a55ed;"></span>
-				            <span class="colorCode" style="background: #dcbce3;"></span>
-				        </div>
-				        <a href="#"><span class="name" th:text="${product.prodName}"></span></a>
-				        <span class="oriPrice" th:text="${product.price}"></span>
-				        <span class="price" th:text="${product.disPrice}"><span class="discount" th:text="${product.discount}"></span></span>
-				        <span class="descript" th:text="${product.descript}"></span>
-				    </div>
+				    <div class="product" th:each="list : ${lists}">
+                        <a th:href="@{/shop/view}"><img th:src="@{/image/} + ${list.thumb1}" alt="상품"></a>
+                        <div class="colorCodeBox">
+                        <th:block th:each="code : ${list.colorArr}">
+                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+                        </th:block>
+                        </div>
+                        <a th:href="@{/shop/view}"><span class="name">[[${list.prodName}]]</span></a>
+                       	<th:block th:if="${list.discount == 0}">
+                      		<span class="price">[[${#numbers.formatInteger(list.price, 3, 'COMMA') + '원'}]]</span>
+                       	</th:block>
+                       	<th:block th:unless="${list.discount == 0}">
+	                        <span class="oriPrice" th:text="${#numbers.formatInteger(list.price, 3, 'COMMA') + '원'}"></span>
+	                        <span class="price">[[${#numbers.formatInteger(list.price-list.disPrice, 3, 'COMMA') + '원'}]]<span class="discount">[[${list.discount}]]%</span></span>
+                        </th:block>
+                        <span class="descript" th:text="${list.descript}">상품설명</span>
+                    </div>
 				</div>
                    
-                    <div class="center">
+                    <div class="center" th:if="${now < 1000}">
                         <div class="pagination">
 	                        <a href="#">&laquo;</a>
 	                        <a href="#">&lsaquo;</a>

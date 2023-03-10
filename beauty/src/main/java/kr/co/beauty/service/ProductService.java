@@ -5,11 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.beauty.dao.Product1DAO;
 import kr.co.beauty.dao.ProductDAO;
-import kr.co.beauty.vo.ProdCate1VO;
 import kr.co.beauty.vo.ProdCate2VO;
-import kr.co.beauty.vo.Product1VO;
 import kr.co.beauty.vo.ProductVO;
 
 @Service
@@ -18,18 +15,24 @@ public class ProductService {
 	@Autowired
 	private ProductDAO dao;
 	
-	public List<ProductVO> selectProductByParam(String param) {
-		return dao.selectProductByParam(param);
+	public List<ProductVO> selectProductNew(){
+		return dao.selectProductNew();
 	}
-	public List<ProductVO> selectProducts(String arg0, String arg1, String arg2,int arg3) {
-		return dao.selectProducts(arg0,arg1,arg2,arg3);
+	public List<ProductVO> selectProductBest(){
+		return dao.selectProductBest();
 	}
-	public int selectCountTotal(String arg0, String arg1){
-        return dao.selectCountTotal(arg0,arg1);
-    }
-		
-
-	
+	public List<ProductVO> selectProduct1(int cate, String sort){
+		return dao.selectProduct1(cate, sort);
+	}
+	public List<ProductVO> selectProduct2(int cate, String sort){
+		return dao.selectProduct2(cate, sort);
+	}
+	public int selectProduct1Count(int cate){return dao.selectProduct1Count(cate);}
+	public int selectProduct2Count(int cate){return dao.selectProduct2Count(cate);}
+	public List<ProdCate2VO> selectCate(int cate){
+		cate = (cate/100) * 100;
+		return dao.selectCate(cate);
+	}
 	
 	// list 페이징 처리
 	// 현재 페이지 번호

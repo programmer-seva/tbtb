@@ -15,10 +15,26 @@ public class MainService {
 	private MainDAO dao;
 	
 	public List<ProductVO> selectNewItem(){
-		return dao.selectNewItem();
+		List<ProductVO> vo = dao.selectNewItem();
+		for(ProductVO i : vo) {
+			String color = i.getColor();
+			if(color != null) {
+				String[] arr = color.split(",");
+				i.setColorArr(arr);
+			}
+		}
+		return vo;
 	}
 	public List<ProductVO> selectBestItem(String cate){
-		return dao.selectBestItem(cate);
+		List<ProductVO> vo = dao.selectBestItem(cate);
+		for(ProductVO i : vo) {
+			String color = i.getColor();
+			if(color != null) {
+				String[] arr = color.split(",");
+				i.setColorArr(arr);
+			}
+		}
+		return vo;
 	}
 	
 }
