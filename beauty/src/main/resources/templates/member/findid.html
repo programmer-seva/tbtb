@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Beauty</title>
+<!-- 제이쿼리 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- swiper -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<!-- font -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/css/headfoot.css}">
+<link rel="stylesheet" th:href="@{/css/index.css}">
+<link rel="stylesheet" th:href="@{/css/member/findid.css}">
+<script th:src="@{/js/main.js}"></script>
+<th:block th:replace="~{/_header :: headerFragment}"></th:block>
+</head>
+<script>
+$(document).ready(function(){
+	
+	$('input[name=name]').focusout(function(){
+		
+		alert("이름을 입력해 주세요.")
+		let name = $(this).val();
+		
+		
+		
+	});
+});
+	
+</script>
+
+<body>
+	<div id="wrap">
+		<main>
+			<div class="fd">
+				<h2>FIND ID</h2>
+				<form action="#" method="POST">
+					<div class="findid">
+						<fieldset>
+							<p>
+								<strong>이름</strong> <input type="text" class="fd-input"
+									name="name" placeholder="이름">
+							</p>
+							<p>
+								<strong>휴대폰 번호</strong> <input type="text" class="fd-input"
+									name="phone" placeholder="휴대폰 번호">
+							</p>
+							<div>
+								<button type="button">확인</button>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
+		</main>
+		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+	</div>
+</body>
+</html>
