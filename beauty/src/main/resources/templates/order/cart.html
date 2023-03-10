@@ -21,8 +21,8 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <link rel="stylesheet" type="text/css" href="https://vendor-cdn.imweb.me/fonts/im-icon/style.css?1671430692">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <!-- css -->
@@ -35,7 +35,7 @@
         <title>Cart</title>
         <script>
             $(function(){
-                $('[data-toggle="popover"]').popover(); 
+                $('[data-bs-toggle="popover"]').popover(); 
             });
         </script>
     </head>
@@ -88,7 +88,12 @@
                                                 <td>
                                                     <strong><a th:href="@{/product/view(prodNo=${cart.prodNo})}" th:text="${cart.prodName}"></a></strong><br>
                                                     <span>[옵션: <span th:text="${cart.prodName}"></span>]<br></span>
-                                                    <span><a class="btn" href="#">옵션변경</a></span>
+                                                    <span>
+	                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#changeOptionModal">
+														옵션변경
+														</button>
+													</span>
+                                                    
                                                 </td>
                                                 <td>
                                                 	<!-- 할인 상품 구분 -->
@@ -115,8 +120,8 @@
                                                 	<!-- 배송비 체크 -->
                                                     <span th:if="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">무료</span>
                                                     <span th:unless="${#aggregates.sum(cartList.![getTotalPrice]) >= 50000}">2500원</span>
-                                                    <label data-toggle="popover" title="조건부 무료배송" data-placement="top" data-html="true"
-                                                        data-content="기본 배송비 2,500원 <br/> 50,000원 이상 구매 시 무료배송"> 
+                                                    <label data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-trigger="focus" tabindex="0" 
+                                                        data-bs-content="기본 배송비 2,500원 <br/> 50,000원 이상 구매 시 무료배송"> 
                                                         <span id="deliIcon" class="material-symbols-outlined">help</span> 
                                                     </label>
                                                 </td>
@@ -250,6 +255,26 @@
                         </section>
                     </div>
                 </div>
+                <!-- 모달 옵션 변경 -->
+                <!-- Modal -->
+				<div class="modal fade " id="changeOptionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        <p>hi</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary">저장</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- Modal-End -->
             </main>
 
             <!-- 푸터 -->

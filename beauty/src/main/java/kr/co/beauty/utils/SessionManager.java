@@ -32,12 +32,12 @@ public class SessionManager {
 		//세션 ID생성후, 값을 세션에 저장
 		String sessionId = UUID.randomUUID().toString();
 		sessionStore.put(sessionId, value);
-		//쿠키 생성 30분 유지 -> 업로드시 웹주소로 바꿀 것
+		//쿠키 생성 2일 유지 -> 업로드시 웹주소로 바꿀 것
 		Cookie noMemberCookie = new Cookie(NO_MEMBER_COOKIE, sessionId);
 		noMemberCookie.setHttpOnly(true);
 		noMemberCookie.setDomain("localhost");
 		noMemberCookie.setPath("/Beauty");
-		noMemberCookie.setMaxAge(60*30);
+		noMemberCookie.setMaxAge(60*60*24*2);
 		response.addCookie(noMemberCookie);
 	}
 	
