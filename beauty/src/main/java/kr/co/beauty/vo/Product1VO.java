@@ -65,9 +65,4 @@ public class Product1VO {
 	private MultipartFile file8;
 	private MultipartFile file9;
 	
-	private String keyword;
-	private Integer count;
-	
-	
-	private String  total;
 }

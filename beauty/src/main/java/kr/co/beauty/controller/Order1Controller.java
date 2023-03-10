@@ -22,6 +22,7 @@ import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.Order1Service;
 import kr.co.beauty.utils.SessionManager;
 import kr.co.beauty.vo.CartVO;
+import kr.co.beauty.vo.Member1VO;
 import kr.co.beauty.vo.WishVO;
 
 @Controller
@@ -37,31 +38,34 @@ public class Order1Controller {
 	/* 비회원 테스트 */
 	@GetMapping("order/test")
 	public String test(Model model, HttpServletResponse response, HttpServletRequest req) {
-		sessionManager.createSession("check", response);
-		System.out.println((String)sessionManager.getSession(req));
 		
+		if(sessionManager.getSession(req) == null) {
+			sessionManager.createSession("check", response);
+		}
 		return "redirect:/order/cart";
 	}
 	
 	/* 카트 페이지 */
 	@GetMapping("order/cart")
-	public String cart(Principal principal, Model model) {
-		//회원 비회원 체크할 것.
-		/*
-		  	if(principal != null){
-		 		Member1VO member = service.selectMember("gpaj123ehdm@gmail.com");
-		 		model.addAttribute("member", member);
-		  	}else {
-		  		//to do...
-		  	}
-		*/
-		
-		//카트리스트 가져오기
-		List<CartVO> cartList = service.selectCartList("gpaj123ehdm@gmail.com");
-		model.addAttribute("cartList", cartList);
-		//위시리스트 가져오기
-		List<WishVO> wishList = serviceMy.selectWishlist("gpaj123ehdm@gmail.com");
-		model.addAttribute("wishList", wishList);
+	public String cart(Principal principal, Model model, HttpServletRequest req, HttpServletResponse response) {
+		if(principal != null){
+	 		Member1VO member = service.selectMember(principal.getName());
+	 		model.addAttribute("member", member);
+	 		//카트리스트 가져오기
+			List<CartVO> cartList = service.selectCartList(principal.getName());
+			model.addAttribute("cartList", cartList);
+			//위시리스트 가져오기
+			List<WishVO> wishList = serviceMy.selectWishlist(principal.getName());
+			model.addAttribute("wishList", wishList);
+	  	}else {
+	  		//쿠키 할당
+	  		if(sessionManager.getSession(req) == null) {
+				sessionManager.createSession("check", response);
+			}
+	  		//카트리스트 가져오기
+			List<CartVO> cartList = service.selectCartList(sessionManager.getNoMemberId(req));
+			model.addAttribute("cartList", cartList);
+	  	}
 		return "order/cart";
 	}
 	
@@ -69,8 +73,14 @@ public class Order1Controller {
 	@ResponseBody
 	@PostMapping("order/deleteAllCart")
 	public int deleteAllCart(Principal principal) {
-		//service.deleteAllCart(principal.getName());
-		service.deleteAllCart("gpaj123ehdm@gmail.com");
+		service.deleteAllCart(principal.getName());
+		return 1;
+	}
+	//카트 - cartBtns(테이블아래버튼) - No-member 비우기
+	@ResponseBody
+	@PostMapping("order/deleteAllCartNon")
+	public int deleteAllCartNon(HttpServletRequest req) {
+		service.deleteAllCart(sessionManager.getNoMemberId(req));
 		return 1;
 	}
 	
@@ -85,12 +95,13 @@ public class Order1Controller {
 	}
 	
 	
+	
+	
 	//카트 - tableBtns(테이블내부) - 관심상품등록
 	@ResponseBody
 	@PostMapping("order/addWishFromCart")
 	public int addWishFromCart(Principal principal, WishVO vo) {
-		//vo.setEmail(principal.getName());
-		vo.setEmail("gpaj123ehdm@gmail.com");
+		vo.setUid(principal.getName());
 		serviceMy.addWish(vo);
 		return 1;
 	}

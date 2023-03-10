@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class MemberVO {
-	private String email;
+	private String uid;
 	private String pass1;
 	private String pass2;
 	private String pass;

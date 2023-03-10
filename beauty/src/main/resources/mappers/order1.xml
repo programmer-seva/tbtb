@@ -7,14 +7,14 @@
 	
 	<!-- 카트 -->
 	<select id="selectCartList" resultType="CartVO">
-		SELECT * FROM `cart` WHERE `email`=#{email};
+		SELECT * FROM `cart` WHERE `uid`=#{uid};
 	</select>
 	
 	<delete id="deleteSelectedCart">
 		DELETE FROM `cart` WHERE `cartNo`=#{cartNo};
 	</delete>
 	<delete id="deleteAllCart">
-		DELETE FROM `cart` WHERE `email`=#{email};
+		DELETE FROM `cart` WHERE `uid`=#{uid};
 	</delete>
 	
 	<select id="checkCountForUpdate" resultType="int">

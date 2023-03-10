@@ -201,30 +201,31 @@
                 </div>
 
                 <div>
-                    <div th:each="product : ${products}" class="product">
-                        <a href="#"><img th:src="@{/image/}+${product.thumb1}" alt="상품"></a>
-                        <div class="colorCodeBox">
-                            <span class="colorCode" style="background: #fac8c8;"></span>
-                            <span class="colorCode" style="background: #fffdf0;"></span>
-                            <span class="colorCode" style="background: #fff5a0;"></span>
-                            <span class="colorCode" style="background: #3a55ed;"></span>
-                            <span class="colorCode" style="background: #dcbce3;"></span>
-                        </div>
-                        <a href="#"><span class="name">[[${product.prodName}]]</span></a>
-                        <span class="oriPrice">[[${product.price}]]</span>
-                        <span class="price">[[${product.disPrice}]]<span class="discount">[[${product.discount}]]%</span></span>
-                        <span class="descript">[[${product.descript}]]</span>
-                    </div>
+				    <div th:each="product:${products}" class="product">
+				        <a href="#"><img th:src="@{/image/}+${product.thumb1}" alt="상품"></a>
+				        <div class="colorCodeBox">-
+				            <span class="colorCode" style="background: #fac8c8;"></span>
+				            <span class="colorCode" style="background: #fffdf0;"></span>
+				            <span class="colorCode" style="background: #fff5a0;"></span>
+				            <span class="colorCode" style="background: #3a55ed;"></span>
+				            <span class="colorCode" style="background: #dcbce3;"></span>
+				        </div>
+				        <a href="#"><span class="name" th:text="${product.prodName}"></span></a>
+				        <span class="oriPrice" th:text="${product.price}"></span>
+				        <span class="price" th:text="${product.disPrice}"><span class="discount" th:text="${product.discount}"></span></span>
+				        <span class="descript" th:text="${product.descript}"></span>
+				    </div>
+				</div>
                    
                     <div class="center">
                         <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a href="#">&lsaquo;</a>
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">&rsaquo;</a>
-                        <a href="#">&raquo;</a>
+	                        <a href="#">&laquo;</a>
+	                        <a href="#">&lsaquo;</a>
+	                        <a href="#" class="active">1</a>
+	                        <a href="#">2</a>
+	                        <a href="#">3</a>
+	                        <a href="#">&rsaquo;</a>
+	                        <a href="#">&raquo;</a>
                         </div>
                     </div>
                     

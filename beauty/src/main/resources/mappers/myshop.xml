@@ -9,7 +9,7 @@
 	<insert id="addWish">
 		INSERT INTO `wish` 
 		SET `prodNo`=#{prodNo},
-			`email` =#{email},
+			`uid` =#{uid},
 			`rdate` = NOW();
 	</insert>
 	
@@ -17,7 +17,7 @@
 		SELECT A.*, B.prodName, B.price, B.disPrice, B.thumb1 
 		FROM `wish` as A JOIN `product` as B 
 		ON A.prodNo = B.prodNo 
-		WHERE A.email = #{email}
+		WHERE A.uid = #{uid}
 		ORDER BY `wishNo` DESC;
 	</select>
 
@@ -25,7 +25,7 @@
 		DELETE FROM `wish` WHERE `wishNo`=#{wishNo};
 	</delete>
 	<delete id="deleteAllWish">
-		DELETE FROM `wish` WHERE `email`=#{email};
+		DELETE FROM `wish` WHERE `uid`=#{uid};
 	</delete>
 
 </mapper>

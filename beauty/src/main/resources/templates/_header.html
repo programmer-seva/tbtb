@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="modileFragment">
 	<div id="modile">
         <span>아직 모바일 환경은 지원하지 않아요.</span><br/>
@@ -71,14 +72,29 @@
 	        <input type="text" name="item"><span class="material-icons">search</span></input>
 	    </div>
 	    <div class="navigation">
-	        <div><a th:href="@{/member/login}">LOGIN</a></div>
-	        <div><a th:href="@{/member/register}">JOIN</a></div>
-	        <div><a th:href="@{/order/cart}">CART</a></div>
-	        <div><a th:href="@{/myshop/index}">MYPAGE</a></div>
-	        <div><a th:href="@{/board/notice}">NOTICE</a></div>
-	        <div><a th:href="@{/board/qna}">Q&A</a></div>
-	        <div><a th:href="@{/board/review}">REVIEW</a></div>
-	        <div><a th:href="@{/board/event}">EVENT</a></div>
+	    	<!-- 강중현 -->
+	    	<!-- 비로그인 사용자가 보이는 블럭 -->
+	    	<p sec:authorize="isAnonymous()">
+		        <a th:href="@{/member/login}">LOGIN</a>
+		        <a th:href="@{/member/register}">JOIN</a>
+		        <a th:href="@{/order/cart}">CART</a>
+		        <a th:href="@{/myshop/index}">MYPAGE</a>
+		        <a th:href="@{/board/notice}">NOTICE</a>
+		        <a th:href="@{/board/qna}">Q&A</a>
+		        <a th:href="@{/board/review}">REVIEW</a>
+		        <a th:href="@{/board/event}">EVENT</a>
+	        </p>
+	        <!-- 권한이 1인(일반회원) 사용자가 보이는 블럭 -->
+           	<p sec:authorize="hasRole('1')">
+           		<a><span class="head_name" sec:authentication="principal.member.name"></span></a>
+           		<a th:href="@{/member/logout}">LOGOUT</a>
+	        	<a th:href="@{/order/cart}">CART</a>
+		        <a th:href="@{/myshop/index}">MYPAGE</a>
+		        <a th:href="@{/board/notice}">NOTICE</a>
+		        <a th:href="@{/board/qna}">Q&A</a>
+		        <a th:href="@{/board/review}">REVIEW</a>
+		        <a th:href="@{/board/event}">EVENT</a>
+	        </p>
 	    </div>
 	</header>
 </th:block>

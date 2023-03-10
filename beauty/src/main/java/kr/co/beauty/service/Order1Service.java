@@ -20,20 +20,20 @@ public class Order1Service {
 	private Order1DAO daoOrd;
 	
 	//public
-	public Member1VO selectMember(String email) {
-		return daoMem.selectMember(email);
+	public Member1VO selectMember(String uid) {
+		return daoMem.selectMember(uid);
 	}
 	
 	
 	//cart
-	public List<CartVO> selectCartList(String email) {
-		return daoOrd.selectCartList(email);
+	public List<CartVO> selectCartList(String uid) {
+		return daoOrd.selectCartList(uid);
 	}
 	public void deleteSelectedCart(int cartNo) {
 		daoOrd.deleteSelectedCart(cartNo);
 	}
-	public void deleteAllCart(String email) {
-		daoOrd.deleteAllCart(email);
+	public void deleteAllCart(String uid) {
+		daoOrd.deleteAllCart(uid);
 	}
 	
 	public int cartIncrease(int cartNo) {

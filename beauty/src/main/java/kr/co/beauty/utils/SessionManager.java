@@ -32,8 +32,12 @@ public class SessionManager {
 		//세션 ID생성후, 값을 세션에 저장
 		String sessionId = UUID.randomUUID().toString();
 		sessionStore.put(sessionId, value);
-		//쿠키 생성
+		//쿠키 생성 30분 유지 -> 업로드시 웹주소로 바꿀 것
 		Cookie noMemberCookie = new Cookie(NO_MEMBER_COOKIE, sessionId);
+		noMemberCookie.setHttpOnly(true);
+		noMemberCookie.setDomain("localhost");
+		noMemberCookie.setPath("/Beauty");
+		noMemberCookie.setMaxAge(60*30);
 		response.addCookie(noMemberCookie);
 	}
 	
@@ -46,6 +50,12 @@ public class SessionManager {
 		return sessionStore.get(noMemberCookie.getValue());
 	}
 	
+	//세션아이디 조회
+	public String getNoMemberId(HttpServletRequest request) {
+		return findCookie(request, NO_MEMBER_COOKIE).getValue();
+	}
+	
+	
 	//세션 만료
 	public void expire(HttpServletRequest request) {
 		Cookie noMemberCookie = findCookie(request, NO_MEMBER_COOKIE);
@@ -57,9 +67,9 @@ public class SessionManager {
 	
 	//쿠키 찾는 로직
 	public Cookie findCookie(HttpServletRequest request, String cookieName) {
-		if(request.getCookies() == null) {
-			return null;
-		}
+		if (request.getCookies() == null) {
+            return null;
+        }
 		//쿠키 이름으로 찾아서 반환
 		return Arrays.stream(request.getCookies())
 				.filter(cookie -> cookie.getName().equals(cookieName))

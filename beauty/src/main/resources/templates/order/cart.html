@@ -31,6 +31,7 @@
         <link rel="stylesheet" th:href="@{/css/order/cart.css}">
         <!-- js -->
         <script th:src="@{/js/order/cart.js}"></script>
+        <script th:src="@{/js/order/non-cart.js}"></script>
         
         <title>Cart</title>
         <script>
@@ -121,10 +122,18 @@
                                                         <span id="deliIcon" class="material-symbols-outlined">help</span> 
                                                     </label>
                                                 </td>
+                                                
                                                 <td>
-                                                    <a class="btn btnTableOrder" href="#">주문하기</a>
-                                                    <a class="btn btnTableAddWish" href="#">관심상품등록</a>
-                                                    <a class="btn btnTableDelete" href="#">삭제</a>
+													<!-- 회원,비회원 -->
+													<th:block sec:authorize="isAuthenticated()">
+	                                                    <a class="btn btnTableOrder" href="#">주문하기</a>
+	                                                    <a class="btn btnTableAddWish" href="#">관심상품등록</a>
+	                                                </th:block>
+	                                                <th:block sec:authorize="isAnonymous()">
+	                                                    <a class="btn btnTableOrderNon" href="#">주문하기</a>
+	                                                    <a class="btn btnTableAddWishNon" href="#">관심상품등록</a>
+	                                                </th:block>
+	                                                <a class="btn btnTableDelete" href="#">삭제</a>
                                                 	<input type="hidden" name="prodNo" th:value="${cart.prodNo}">
                                                 </td>
                                             </tr>
@@ -136,7 +145,9 @@
                                     <!-- 삭제 버튼 -->
                                     <div class="cartBtns">
                                         <a id="btnDeleteSelectedCart" class="btn" href="#">선택상품 삭제</a>
-                                        <a id="btnDeleteAllCart" class="btn" href="#">비우기</a>
+                                        <!-- 회원,비회원 -->
+                                        <a id="btnDeleteAllCart" class="btn" href="#" sec:authorize="isAuthenticated()">비우기</a>
+                                        <a id="btnDeleteAllCartNon" class="btn non" href="#" sec:authorize= "isAnonymous()">비우기</a>
                                     </div>
                                 </article>
                                 <!-- Total 테이블-->
@@ -199,6 +210,8 @@
                                     <a class="keepShopping" href="#">계속 쇼핑하기</a>
                                 </div>
                                 <!-- 카트테이블 위시리스트-->
+                                <!-- 회원,비회원 -->
+                               	<th:block sec:authorize="isAuthenticated()">
                                 <div class="wishListFrame">
                                     <div class="wishListHead">
                                         위시리스트
@@ -227,6 +240,7 @@
 	                                    <!-- 아이템 반복 종료 -->
                                     </article>
                                 </div>
+                                </th:block>
                             </div>
                         </section>
                     </div>

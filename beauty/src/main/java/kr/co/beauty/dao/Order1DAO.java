@@ -18,9 +18,9 @@ import kr.co.beauty.vo.CartVO;
 public interface Order1DAO {
 	
 	//cart
-	public List<CartVO> selectCartList(@Param("email") String email);
+	public List<CartVO> selectCartList(@Param("uid") String uid);
 	public void deleteSelectedCart(@Param("cartNo") int cartNo);
-	public void deleteAllCart(@Param("email") String email);
+	public void deleteAllCart(@Param("uid") String uid);
 	
 	//cart - change count
 	public int checkCountForUpdate(@Param("cartNo") int cartNo);

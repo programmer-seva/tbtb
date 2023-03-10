@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace = mapper파일의 아이디 값 -->
+<mapper namespace="kr.co.beauty.dao.MainDAO">
+	<select id="selectNewItem" resultType="productVO">
+		SELECT * FROM `product` order by `prodNo` DESC LIMIT 32;
+	</select>
+	<select id="selectBestItem" resultType="productVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{cate} order by `score`,`sold`,`review`,`hit` DESC LIMIT 5;
+	</select>
+</mapper>
