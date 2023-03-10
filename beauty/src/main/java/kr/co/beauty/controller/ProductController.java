@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.beauty.service.ProductService;
+import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
 
 @Controller
