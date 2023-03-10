@@ -9,45 +9,50 @@ a {text-decoration: none; color: black;}
 #modile {display: none;}
 /*헤더*/
 header {
-    width: 100%;
-    height: 100px; 
+	width: 100%;
+    height: 200px; 
     box-sizing: border-box;
     background: #fff;
     top: 0;
     z-index: 3;
 }
 .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 101;
+	width: 100%;
+	height: 150px;
+	text-align: left;
+	padding: 0 100px;
+	box-sizing: border-box;
 }
 .logo > a {
+	display: inline-block;
     font-weight: bold;
-    line-height: 100px;
-    margin-left: 50px;
-    font-size: 20px;
+    font-size: 32px;
     color: #212121;
+    line-height: 150px;
 }
 .moveNavi {
     width: 100%;
     height: 50px;
     position: absolute;
+    top: 79px;
     margin-top: 70px;
-    z-index: 100;
     background: #fff;
     border-bottom: 1px solid #e5e5e5;
+    z-index: 3;
 }
 .category {
-    width: 800px;
+    width: 100%;
     height: 100%;
     margin: 0 auto;
     margin-top: 15px;
 }
+.category > ul {
+	text-align: center;
+}
 .category > ul > li {
-    width: 14%;
+    width: 104px;
     height: 45px;
-    float: left;
+    display: inline-block;
     text-align: center;
     position: relative;
 }
@@ -75,7 +80,7 @@ header {
 }
 .dep > li:first-child {margin-top: 0px;}
 .dep > li > a {font-size: 14px;}
-.dep > li > a:hover {color: #c59e51;}
+.dep > li > a:hover {color: #555;}
 .category > table tr > td {width: 16.6%; text-align: center;}
 .category > table tr > td > a {
     display: inline-block;
@@ -88,17 +93,18 @@ header {
     background: gray;
 }
 .navigation {
+	width: 600px;
+    height: 50px;
+    text-align: right;
+    box-sizing: border-box;
     position: absolute;
-    top: 10px;
-    right: 20px;
-    width: 445px;
-    height: 25px;
-    z-index: 3;
-    float: left; 
-    margin-right: 20px;
+    top: 35px;
+    right: 100px;
 }
-
-.navigation > p > a {font-size: 12px; color: #212121;}
+.navigation > p {display: inline-block;}
+.navigation > p > a {
+	display: inline-block;
+	font-size: 14px; color: #555; margin-left: 20px; height:50px;}
 .navigation > p > a:hover {color: #999;}
 .navigation > p > a > .head_name{
 	font-size: 14px;
@@ -106,9 +112,9 @@ header {
 }
 .search {
     position: absolute;
-    top: 65px;
-    right: 40px;
-    z-index: 101;
+    top: 108px;
+    right: 185px;
+    z-index: 4;
 }
 .search input {
     width: 150px;
@@ -130,7 +136,7 @@ header {
 /*푸터*/
 footer {
     width: 100%;
-    height: 500px;
+    height: 430px;
     border-top: 1px solid #e5e5e5;
     background: #f9f9f9;
     overflow: hidden;
@@ -157,7 +163,7 @@ footer > div > ul > li > a {
 footer > div > ul > li > a:hover {color: #212121;} 
 footer > div > section {
     float: left;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-right: 150px;
     line-height: 30px;
     color: #555;
@@ -196,3 +202,13 @@ footer > .up > span {
     margin-top: 6px;
     font-size: 36px;
 }
+.info {
+	z-index: 4;
+}
+.my {
+	left: 420px;
+}
+.cs {
+	left: 505px;
+}
+.info > li > a:hover {color: #999;}

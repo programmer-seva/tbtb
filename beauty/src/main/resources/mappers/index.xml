@@ -5,17 +5,30 @@
 <!-- namespace = mapper파일의 아이디 값 -->
 <mapper namespace="kr.co.beauty.dao.MainDAO">
 	<select id="selectNewItem" resultType="productVO">
-		SELECT * FROM `product` order by `prodNo` DESC LIMIT 32;
+		SELECT a.*,
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		FROM `product` AS a
+		LEFT JOIN `product_option` AS b
+		ON a.`prodNo`=b.`prodNo`
+		GROUP BY `prodNo` ORDER BY `prodNo` DESC LIMIT 16;
 	</select>
 	<select id="selectBestItem" resultType="productVO">
-		SELECT * FROM `product` WHERE `prodCate1`=#{cate} order by `score`,`sold`,`review`,`hit` DESC LIMIT 5;
+		SELECT a.*,
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		FROM `product` AS a
+		LEFT JOIN `product_option` AS b
+		ON a.`prodNo`=b.`prodNo`
+		WHERE `prodCate1`=#{cate} GROUP BY `prodNo`	 order by `score`,`sold`,`review`,`hit` DESC LIMIT 8;
 	</select>
 	<!-- 
 		SELECT a.*,
-	    GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
-	    GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
 		FROM `product` AS a
-		JOIN `product_option` AS b
+		LEFT JOIN `product_option` AS b
 		ON a.`prodNo`=b.`prodNo`
+		GROUP BY `prodNo`;
 	 -->
 </mapper>

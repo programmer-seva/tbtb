@@ -8,7 +8,7 @@ main {
 
 .swiper-pagination-bullet-active {background: #fff;}
 main > section {
-    width: 1400px;
+    width: 1520px;
     min-height: 1000px;
     margin: 0px auto;
     overflow: hidden;
@@ -118,10 +118,11 @@ main > section > div > .product {
     min-height: 500px;
     margin: 10px;
     margin-left: 27px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     box-sizing: border-box;
     vertical-align: top;
     overflow: hidden;
+    text-align: left;
 }
 main > section > div > .product:nth-child(4n+1){
 	clear: both;
@@ -137,19 +138,20 @@ main > section > span {
     width: 100%;
     height: 400px;
     object-fit: cover;
+    border-radius: 10px;
 }
 .product > span {
     display: inline-block; 
-    width: 100%;
-    text-align: left;
 }
-.colorCodeBox {text-align: left;}
+.colorCodeBox {
+	text-align: left;
+	margin-top: 10px;
+}
 .colorCode {
     display: inline-block;
     width: 10px;
     height: 10px;
-    border: 1px solid #efefef;
-    border-radius: 20px;
+    border: 1px solid #d3d3d3;
 
 }
 .name {
@@ -164,26 +166,28 @@ main > section > span {
     border-bottom: 1px solid #e5e5e5;
 }
 .oriPrice {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #999; 
     text-decoration: line-through;
 }
 .price {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
     color: #555;
 }
 .discount {
-    font-size: 20px;
+    float: right;
+    font-size: 16px;
     font-weight: bold;
-    color: pink;
+    color: crimson;
     margin-left: 10px; 
 }
 .descript {
     font-size: 12px;
     color: #999;
     margin-top: 6px;
+    white-space: pre-wrap;
 }
 
 .title2 {
@@ -234,7 +238,7 @@ main > section > span {
 }
 
 .item-info {
-    width: 1350px;
+    width: 1450px;
     height: 30px;
     margin-bottom: 40px;
     margin-top: 10px;
@@ -286,6 +290,7 @@ border-bottom: 2px solid #e0d8d0;;
 .pagination {
 	display: inline-block;
 	font-size: 15px;
+	margin-top: 100px;
 }
 
 .pagination a {
