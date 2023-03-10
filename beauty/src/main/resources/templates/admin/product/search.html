@@ -48,6 +48,7 @@
     	    	CheckBoxList();
     	    });
     		
+    		
     	});
     </script>
 </head>
@@ -145,7 +146,7 @@
                         <th>관리</th>
                     </tr>
                     <tr th:each="prod:${products}">
-                        <td><input type="checkbox" name="선택체크" class="rowCheck" th:value="${prod.prodNo}"></td>
+                        <td><input type="checkbox" name="선택체크" class="rowCheck"></td>
                         <td><img th:src="@{#}"></td>
                         <td>[[${prod.prodNo}]]</td>
                         <td>[[${prod.prodCate1}]]</td>

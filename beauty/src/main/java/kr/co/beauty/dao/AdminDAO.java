@@ -12,4 +12,6 @@ public interface AdminDAO {
 	public List<Product1VO> selectProducts(String param1);
 	public List<Product1VO> selectProductByCate1(String param1,String arg1);
 	public List<Product1VO> selectProductByCheckBox(List<String> checkBoxArr);
+	public int deleteProduct(String prodNo);
+	public List<Product1VO> searchProduct(String param1,String arg1,String param2,String arg2);
 }

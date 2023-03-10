@@ -19,23 +19,23 @@ public class AdminService {
 	@Autowired
 	private AdminDAO dao;
 	
-	//ìƒí’ˆë“±ë¡
+	//»óÇ°µî·Ï
 	public int insertProduct(Product1VO vo) {
-		//íŒŒì¼ ì—…ë¡œë“œ
+		//»óÇ°µî·ÏÇÒ ¶§ ÀÌ¹ÌÁö ÆÄÀÏ ¾÷·Îµå
 		fileUpload(vo);
 		
-		//í• ì¸ëœ íŒë§¤ê°€ê²© ë“±ë¡
+		//ÇÒÀÎµÈ ÆÇ¸Å°¡°İ µî·Ï
 		int price = vo.getPrice();
 		int discount = vo.getDiscount();
 		int disPrice = price * (100-discount)/100;
 		vo.setDisPrice(disPrice);
 		
-		//ìƒí’ˆë“±ë¡
+		//»óÇ°µî·Ï
 		int result = dao.insertProduct(vo);
 		return result;
 	}
 	
-	//ê´€ë¦¬ìí˜ì´ì§€ì—ì„œ ìƒí’ˆëª©ë¡ ë¶ˆëŸ¬ì˜¤ê¸°
+	//°ü¸®ÀÚÆäÀÌÁö¿¡¼­ »óÇ°¸ñ·Ï ºÒ·¯¿À±â
 	public List<Product1VO> selectProducts(String param1){
 		return dao.selectProducts(param1);
 	}
@@ -47,7 +47,17 @@ public class AdminService {
 		return dao.selectProductByCheckBox(checkBoxArr);
 	}
 	
-	//íŒŒì¼ ì—…ë¡œë“œ
+	//»óÇ° »èÁ¦ÇÏ±â
+	public int deleteProduct(String prodNo) {
+		return dao.deleteProduct(prodNo);
+	}
+	
+	//»óÇ° °Ë»öÇÏ±â
+	public List<Product1VO> searchProduct(String param1,String arg1,String param2,String arg2){
+		return dao.searchProduct(param1, arg1, param2, arg2);
+	}
+	
+	//ÆÄÀÏ ¾÷·Îµå
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;
 	
@@ -63,17 +73,17 @@ public class AdminService {
 		MultipartFile file9 = vo.getFile9();
 		
 		if(!file1.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file1.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb1(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file1.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -83,17 +93,17 @@ public class AdminService {
 			}
 		}
 		if(!file2.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file2.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb2(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file2.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -103,17 +113,17 @@ public class AdminService {
 			}
 		}
 		if(!file3.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file3.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb3(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file3.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -123,17 +133,17 @@ public class AdminService {
 			}
 		}
 		if(!file4.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file4.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb4(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file4.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -143,17 +153,17 @@ public class AdminService {
 			}
 		}
 		if(!file5.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file5.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb5(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file5.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -163,17 +173,17 @@ public class AdminService {
 			}
 		}
 		if(!file6.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file6.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb6(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file6.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -183,17 +193,17 @@ public class AdminService {
 			}
 		}
 		if(!file7.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file7.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setDetail1(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file7.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -203,17 +213,17 @@ public class AdminService {
 			}
 		}
 		if(!file8.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file8.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setDetail2(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file8.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -223,17 +233,17 @@ public class AdminService {
 			}
 		}
 		if(!file9.isEmpty()) {
-			//ì‹œìŠ¤í…œ ê²½ë¡œ
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ìƒˆ íŒŒì¼ëª… ìƒì„±
+			//»õ ÆÄÀÏ¸í »ı¼º
 			String oriName = file9.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setDetail3(newName);
 			
-			//íŒŒì¼ ì €ì¥
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file9.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
