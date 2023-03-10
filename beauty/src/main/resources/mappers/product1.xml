@@ -5,30 +5,54 @@
 <!-- 김동근 -->
 <mapper namespace="kr.co.beauty.dao.ProductDAO">
 	<select id="selectProductNew" resultType="ProductVO">
-		SELECT * FROM `product` ORDER BY `prodNo` DESC LIMIT 16;
+		SELECT a.*,
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		FROM `product` AS a
+		LEFT JOIN `product_option` AS b
+		ON a.`prodNo`=b.`prodNo`
+		GROUP BY `prodNo` ORDER BY `prodNo` DESC LIMIT 16;
 	</select>
 	<select id="selectProductBest" resultType="ProductVO">
-		SELECT * FROM `product` ORDER BY `score`,`sold`,`review`,`hit` DESC LIMIT 16;
+		SELECT a.*,
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		FROM `product` AS a
+		LEFT JOIN `product_option` AS b
+		ON a.`prodNo`=b.`prodNo`
+		GROUP BY `prodNo` ORDER BY `score`,`sold`,`review`,`hit` DESC LIMIT 16;
 	</select>
 	<select id="selectProduct1" resultType="ProductVO">
-		SELECT * FROM `product` WHERE `prodCate1`=#{arg0} 
+		SELECT a.*,
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		FROM `product` AS a
+		LEFT JOIN `product_option` AS b
+		ON a.`prodNo`=b.`prodNo`
+		WHERE `prodCate1`=#{arg0} GROUP BY `prodNo` 
 		ORDER BY <choose>
 			<when test="arg1 == 'lowprice'">`price` ASC</when>
 			<when test="arg1 == 'highprice'">`price` DESC</when>
 			<when test="arg1 == 'score'">`score` DESC</when>
 			<when test="arg1 == 'hit'">`hit` DESC</when>
 			<otherwise>`prodNo` DESC</otherwise> 				
-		</choose> LIMIT 16;
+		</choose> LIMIT #{arg2},20;
 	</select>
 	<select id="selectProduct2" resultType="ProductVO">
-		SELECT * FROM `product` WHERE `prodCate2`=#{arg0}
+		SELECT a.*,
+		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,
+		GROUP_CONCAT(DISTINCT b.`size`  ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `size`
+		FROM `product` AS a
+		LEFT JOIN `product_option` AS b
+		ON a.`prodNo`=b.`prodNo`
+		WHERE `prodCate2`=#{arg0} GROUP BY `prodNo` 
 		ORDER BY <choose>
 			<when test="arg1 == 'lowprice'">`price` ASC</when>
 			<when test="arg1 == 'highprice'">`price` DESC</when>
 			<when test="arg1 == 'score'">`score` DESC</when>
 			<when test="arg1 == 'hit'">`hit` DESC</when>
 			<otherwise>`prodNo` DESC</otherwise>					
-		</choose> LIMIT 16;
+		</choose> LIMIT #{arg2},20;
 	</select>
 	<select id="selectProduct1Count" resultType="int">
 		SELECT COUNT(`prodNo`) FROM `product` WHERE `prodCate1`=#{cate};

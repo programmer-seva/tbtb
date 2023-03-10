@@ -9,7 +9,41 @@
 </th:block>
 <th:block th:fragment="headerFragment">
 	<header>
-	    <div class="logo"><a th:href="@{/index}">Beauty Shop</a></div>
+		<div class="navigation">
+	    	<!-- 강중현 -->
+	    	<!-- 비로그인 사용자가 보이는 블럭 -->
+	    	<p sec:authorize="isAnonymous()">
+		        <a th:href="@{/member/login}">로그인</a>
+		        <a th:href="@{/member/register}">회원가입</a>
+	        </p>
+	        <!-- 권한이 1인(일반회원) 사용자가 보이는 블럭 -->
+           	<p sec:authorize="hasRole('1')">
+           		<a><span class="head_name" sec:authentication="principal.member.name"></span></a>
+           		<a th:href="@{/member/logout}">로그아웃</a>
+	        </p>
+	        <p>
+	        	<a th:href="@{/order/cart}">장바구니(0)</a>
+		        <a id="my" th:href="@{/myshop/index}">마이페이지</a>
+		        <a id="cs" href="#">고객센터</a>
+	        </p>
+	        <ul class="dep my info">
+	            <li><a th:href="@{/myshop/orderDetail}">주문/배송</a></li>
+	            <li><a th:href="@{/myshop/coupon}">쿠폰</a></li>
+	            <li><a th:href="@{/myshop/point}">적립금</a></li>
+	            <li><a th:href="@{/myshop/wishlist}">위시리스트</a></li>
+	            <li><a th:href="@{/myshop/qna}">1:1 문의</a></li>
+	            <li><a th:href="@{/myshop/profile}">나의 프로필</a></li>
+	        </ul>
+	        <ul class="dep cs info">
+	            <li><a th:href="@{/board/notice}">공지사항</a></li>
+	            <li><a th:href="@{/board/qna}">Q&A</a></li>
+	            <li><a th:href="@{/board/review}">리뷰</a></li>
+	            <li><a th:href="@{/board/event}">이벤트</a></li>
+	        </ul>
+	    </div>
+	    <div class="logo">
+	    	<a th:href="@{/index}">Beauty Shop</a>
+	    </div>
 	    <section class="moveNavi">
 	        <div class="category">
 	            <ul>
@@ -68,34 +102,11 @@
 	            </ul>
 	        </div>
 	    </section>
+	    <!--
 	    <div class="search">
 	        <input type="text" name="item"><span class="material-icons">search</span></input>
 	    </div>
-	    <div class="navigation">
-	    	<!-- 강중현 -->
-	    	<!-- 비로그인 사용자가 보이는 블럭 -->
-	    	<p sec:authorize="isAnonymous()">
-		        <a th:href="@{/member/login}">LOGIN</a>
-		        <a th:href="@{/member/register}">JOIN</a>
-		        <a th:href="@{/order/cart}">CART</a>
-		        <a th:href="@{/myshop/index}">MYPAGE</a>
-		        <a th:href="@{/board/notice}">NOTICE</a>
-		        <a th:href="@{/board/qna}">Q&A</a>
-		        <a th:href="@{/board/review}">REVIEW</a>
-		        <a th:href="@{/board/event}">EVENT</a>
-	        </p>
-	        <!-- 권한이 1인(일반회원) 사용자가 보이는 블럭 -->
-           	<p sec:authorize="hasRole('1')">
-           		<a><span class="head_name" sec:authentication="principal.member.name"></span></a>
-           		<a th:href="@{/member/logout}">LOGOUT</a>
-	        	<a th:href="@{/order/cart}">CART</a>
-		        <a th:href="@{/myshop/index}">MYPAGE</a>
-		        <a th:href="@{/board/notice}">NOTICE</a>
-		        <a th:href="@{/board/qna}">Q&A</a>
-		        <a th:href="@{/board/review}">REVIEW</a>
-		        <a th:href="@{/board/event}">EVENT</a>
-	        </p>
-	    </div>
+	    -->
 	</header>
 </th:block>
 </html>

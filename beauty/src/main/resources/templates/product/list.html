@@ -3,9 +3,46 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Beauty::list</title>
 	<th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/product/list.css}">
+    <link rel="stylesheet" th:href="@{/css/color.css}">
+    <script th:inline="javascript">
+		$(function(){
+			let val1 = [[${page[0]}]];
+			let val2 = [[${page[1]}]];
+			let val3 = [[${page[2]}]];
+			let val4 = [[${page[3]}]];
+			//firstPage
+			$('.firstPage').click(function(){
+				if(val1 == val4){
+					alert('첫 페이지입니다.');
+					return false;
+				}
+			});
+			//prevPage
+			$('.prevPage').click(function(){
+				if(val1 == val4){
+					alert('첫 페이지입니다.');
+					return false;
+				}
+			});
+			//nextPage
+			$('.nextPage').click(function(e){
+				if(val2 == val4){
+					alert('마지막 페이지입니다.');
+					return false;
+				}
+			});
+			//lastPage
+			$('.lastPage').click(function(){
+				if(val3 == val4){
+					alert('마지막 페이지입니다.');
+					return false;
+				}
+			});
+			
+		});  
+    </script>
 </head>
 <body>
 	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
@@ -184,7 +221,7 @@
                         <h2 th:if="${now/100 == 4}">DRESS</h2>
                         <h2 th:if="${now/100 == 5}">ETC</h2>
                         <h2 th:if="${now == 1000}">NEW 새로 나온 신상품 !!!</h2>
-                        <h2 th:if="${now == 1001}">BEST 많은 사람들에게 사랑받고 있는 상품들~</h2>
+                        <h2 th:if="${now == 1001}">많은 사람들에게 사랑받고 있는 베스트 상품들~</h2>
                     </div>
                     <section class="menuCategory" th:if="${now < 1000}">
                         <span th:class="${now}%100 == 0 ? 's_title selected' : 's_title'">
@@ -192,7 +229,7 @@
                         	<a th:href="@{/shop/list(cate=${now/100}*100)}">ALL</a>
                         </th:block>
                         <th:block th:unless="${sort == null}">
-                        	<a th:href="@{/shop/list(cate=${now/100}*100, sort=${sort})}">ALL</a>
+                        	<a th:href="@{/shop/list(cate=${now/100}*100)}">ALL</a>
                         </th:block>
                         </span>
                         <th:block th:each="cate : ${cate}">
@@ -215,11 +252,11 @@
 
                 <div>
 				    <div class="product" th:each="list : ${lists}">
-                        <a th:href="@{/shop/view}"><img th:src="@{/image/} + ${list.thumb1}" alt="상품"></a>
+                        <a th:href="@{/shop/view(pno=${list.prodNo})}"><img th:src="@{/image/} + ${list.thumb1}" alt="상품"></a>
                         <div class="colorCodeBox">
-                        <th:block th:each="code : ${list.colorArr}">
-                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
-                        </th:block>
+	                        <th:block th:each="code : ${list.colorArr}">
+	                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+	                        </th:block>
                         </div>
                         <a th:href="@{/shop/view}"><span class="name">[[${list.prodName}]]</span></a>
                        	<th:block th:if="${list.discount == 0}">
@@ -227,21 +264,21 @@
                        	</th:block>
                        	<th:block th:unless="${list.discount == 0}">
 	                        <span class="oriPrice" th:text="${#numbers.formatInteger(list.price, 3, 'COMMA') + '원'}"></span>
-	                        <span class="price">[[${#numbers.formatInteger(list.price-list.disPrice, 3, 'COMMA') + '원'}]]<span class="discount">[[${list.discount}]]%</span></span>
+	                        <span class="price">[[${#numbers.formatInteger(list.price-list.disPrice, 3, 'COMMA') + '원'}]]</span>
+	                        <span class="discount">[[${list.discount}]]%</span>
                         </th:block>
-                        <span class="descript" th:text="${list.descript}">상품설명</span>
                     </div>
 				</div>
                    
                     <div class="center" th:if="${now < 1000}">
                         <div class="pagination">
-	                        <a href="#">&laquo;</a>
-	                        <a href="#">&lsaquo;</a>
-	                        <a href="#" class="active">1</a>
-	                        <a href="#">2</a>
-	                        <a href="#">3</a>
-	                        <a href="#">&rsaquo;</a>
-	                        <a href="#">&raquo;</a>
+	                        <a class="firstPage" th:href="@{/shop/list(cate=${now},sort=${sort},pg=${page[0]})}">&laquo;</a>
+	                        <a class="prevPage" th:href="@{/shop/list(cate=${now},sort=${sort},pg=${page[3]-1})}">&lsaquo;</a>
+	                       	<th:block th:each="cnt : ${#numbers.sequence(page[0],page[1])}">
+	                        	<a th:href="@{/shop/list(cate=${now},sort=${sort},pg=${cnt})}" th:class="${cnt} == ${page[3]} ? 'active' : 'off'">[[${cnt}]]</a>
+	                        </th:block>
+	                        <a class="nextPage" th:href="@{/shop/list(cate=${now},sort=${sort},pg=${page[3]+1})}">&rsaquo;</a>
+	                        <a class="lastPage" th:href="@{/shop/list(cate=${now},sort=${sort},pg=${page[2]})}">&raquo;</a>
                         </div>
                     </div>
                     

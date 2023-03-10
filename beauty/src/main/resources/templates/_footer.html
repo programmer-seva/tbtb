@@ -5,11 +5,11 @@
 	    <div class="up"><span class="material-icons">expand_less</span></div>
 	    <div>
 	        <ul>
-	            <li><a href="#">홈</a></li>
-	            <li><a href="#">회사소개</a></li>
-	            <li><a href="#">이용약관</a></li>
-	            <li><a href="#">개인정보취급방침</a></li>
-	            <li><a href="#">이용안내</a></li>
+	            <li><a th:href="@{/index}">홈</a></li>
+	            <li><a th:href="@{/introduce}">회사소개</a></li>
+	            <li><a th:href="@{/terms/service}">이용약관</a></li>
+	            <li><a th:href="@{/terms/privacy}">개인정보취급방침</a></li>
+	            <li><a th:href="@{/terms/information}">이용안내</a></li>
 	        </ul>
 	        <section>
 	            <strong>CUSTOMER CENTER</strong><br/>
@@ -39,20 +39,20 @@
 	        <section>
 	            <strong>MEMBER</strong>
 	            <ul>
-	                <li><a href="#">장바구니</a></li>
-	                <li><a href="#">마이페이지</a></li>
-	                <li><a href="#">주문조회</a></li>
-	                <li><a href="#">회원정보수정</a></li>
-	                <li><a href="#">관심상품</a></li>
+	                <li><a th:href="@{/order/cart}">장바구니</a></li>
+	                <li><a th:href="@{/myshop/index}">마이페이지</a></li>
+	                <li><a th:href="@{/myshop/orderDetail}">주문/배송</a></li>
+	                <li><a th:href="@{/myshop/profile}">회원정보수정</a></li>
+	                <li><a th:href="@{/myshop/wishlist}">위시리스트</a></li>
 	            </ul>
 	        </section>
 	        <section>
 	            <strong>COMMUNITY</strong>
 	            <ul>
-	                <li><a href="#">NOTICE</a></li>
-	                <li><a href="#">Q&A</a></li>
-	                <li><a href="#">REVIEW</a></li>
-	                <li><a href="#">EVENT</a></li>
+	                <li><a th:href="@{/board/notice}">공지사항</a></li>
+	                <li><a th:href="@{/board/qna}">Q&A</a></li>
+	                <li><a th:href="@{/board/review}">리뷰</a></li>
+	                <li><a th:href="@{/board/event}">이벤트</a></li>
 	            </ul>
 	        </section>
 	        <section class="footerinfo">

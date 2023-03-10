@@ -26,7 +26,7 @@ public class MainController {
 		List<ProductVO> top = service.selectBestItem("200");
 		List<ProductVO> bottom = service.selectBestItem("300");
 		List<ProductVO> dress = service.selectBestItem("400");
-		List<ProductVO> acc = service.selectBestItem("500");
+		List<ProductVO> etc = service.selectBestItem("500");
 
 		
 		model.addAttribute("lists", vo);
@@ -34,7 +34,7 @@ public class MainController {
 		model.addAttribute("top", top);
 		model.addAttribute("bottom", bottom);
 		model.addAttribute("dress", dress);
-		model.addAttribute("acc", acc);
+		model.addAttribute("etc", etc);
 		
 		return "index";
 	}
