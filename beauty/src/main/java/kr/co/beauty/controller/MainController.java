@@ -22,11 +22,12 @@ public class MainController {
 	public String index(Model model) {
 		
 		List<ProductVO> vo = service.selectNewItem();
-		List<ProductVO> outer = service.selectBestItem("OUTER");
-		List<ProductVO> top = service.selectBestItem("TOP");
-		List<ProductVO> bottom = service.selectBestItem("BOTTOM");
-		List<ProductVO> dress = service.selectBestItem("DRESS");
-		List<ProductVO> acc = service.selectBestItem("ACC");
+		List<ProductVO> outer = service.selectBestItem("100");
+		List<ProductVO> top = service.selectBestItem("200");
+		List<ProductVO> bottom = service.selectBestItem("300");
+		List<ProductVO> dress = service.selectBestItem("400");
+		List<ProductVO> acc = service.selectBestItem("500");
+
 		
 		model.addAttribute("lists", vo);
 		model.addAttribute("outer", outer);

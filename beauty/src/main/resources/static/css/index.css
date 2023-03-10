@@ -99,12 +99,12 @@ main > article > div.swiper .swiper-slide > ul > li > .bestItem > .bestDescript 
     padding: 20px;
     box-sizing: border-box;
 }
-main > article > div.swiper .swiper-slide > ul > li > .bestItem > .bestDescript > span:nth-of-type(1) {
+main > article > div.swiper .swiper-slide > ul > li > .bestItem > .bestDescript > span.bestName {
     font-size: 14px;
     font-weight: bold;
     color: #212121;
 }
-main > article > div.swiper .swiper-slide > ul > li > .bestItem > .bestDescript > span:nth-of-type(2) {
+main > article > div.swiper .swiper-slide > ul > li > .bestItem > .bestDescript > span.bestPrice {
     font-size: 14px;
     color: #555;
 }
@@ -151,10 +151,10 @@ main > section > span {
 .colorCodeBox {text-align: left;}
 .colorCode {
     display: inline-block;
-    width: 7px;
-    height: 7px;
+    width: 15px;
+    height: 5px;
     border: 1px solid #d3d3d3;
-    border-radius: 20px;
+    border-radius: 4px;
 
 }
 .name {

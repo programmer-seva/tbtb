@@ -6,6 +6,7 @@
     <title>Beauty</title>
     <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/color.css}">
 </head>
 <body>
 	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
@@ -57,16 +58,14 @@
                             <ul>
                                 <li>
                                     <div class="bestItem" th:each="vo : ${outer}" >
-                                        <a th:href="@{/shop/list}"><img src="./img/sample9.jpg" alt="상품"></a>
+                                        <a th:href="@{/shop/list}"><img th:src="@{/image/} + ${vo.thumb1}" alt="상품"></a>
                                         <div class="bestDescript">
-                                            <div class="colorCodeBox">
-                                                <span class="colorCode" style="background: #fac8c8;"></span>
-                                                <span class="colorCode" style="background: #fffdf0;"></span>
-                                                <span class="colorCode" style="background: #fff5a0;"></span>
-                                                <span class="colorCode" style="background: #3a55ed;"></span>
-                                            </div>
-                                            <span th:text="${vo.prodName}"></span><br/>
-                                            <span th:text="${#numbers.formatInteger(vo.price, 3, 'COMMA') + '원'}"></span>
+                                            <th:block th:each="code : ${vo.colorArr}">
+					                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+					                        </th:block>
+					                        <br/>
+                                            <span th:text="${vo.prodName}" class="bestName"></span><br/>
+                                            <span th:text="${#numbers.formatInteger(vo.price, 3, 'COMMA') + '원'}" class="bestPrice"></span>
                                         </div>
                                     </div>
                                 </li>
@@ -76,14 +75,12 @@
                             <ul>
                                 <li>
                                     <div class="bestItem" th:each="vo : ${top}" >
-                                        <a th:href="@{/shop/list}"><img src="./img/sample9.jpg" alt="상품"></a>
+                                        <a th:href="@{/shop/list}"><img th:src="@{/image/} + ${vo.thumb1}" alt="상품"></a>
                                         <div class="bestDescript">
-                                            <div class="colorCodeBox">
-                                                <span class="colorCode" style="background: #fac8c8;"></span>
-                                                <span class="colorCode" style="background: #fffdf0;"></span>
-                                                <span class="colorCode" style="background: #fff5a0;"></span>
-                                                <span class="colorCode" style="background: #3a55ed;"></span>
-                                            </div>
+                                            <th:block th:each="code : ${vo.colorArr}">
+					                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+					                        </th:block>
+					                        <br/>
                                             <span th:text="${vo.prodName}"></span><br/>
                                             <span th:text="${#numbers.formatInteger(vo.price, 3, 'COMMA') + '원'}"></span>
                                         </div>
@@ -95,14 +92,12 @@
                             <ul>
                                 <li>
                                     <div class="bestItem" th:each="vo : ${bottom}" >
-                                        <a th:href="@{/shop/list}"><img src="./img/sample9.jpg" alt="상품"></a>
+                                        <a th:href="@{/shop/list}"><img th:src="@{/image/} + ${vo.thumb1}" alt="상품"></a>
                                         <div class="bestDescript">
-                                            <div class="colorCodeBox">
-                                                <span class="colorCode" style="background: #fac8c8;"></span>
-                                                <span class="colorCode" style="background: #fffdf0;"></span>
-                                                <span class="colorCode" style="background: #fff5a0;"></span>
-                                                <span class="colorCode" style="background: #3a55ed;"></span>
-                                            </div>
+                                            <th:block th:each="code : ${vo.colorArr}">
+					                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+					                        </th:block>
+					                        <br/>
                                             <span th:text="${vo.prodName}"></span><br/>
                                             <span th:text="${#numbers.formatInteger(vo.price, 3, 'COMMA') + '원'}"></span>
                                         </div>
@@ -114,14 +109,12 @@
                             <ul>
                                 <li>
                                     <div class="bestItem" th:each="vo : ${dress}" >
-                                        <a th:href="@{/shop/list}"><img src="./img/sample9.jpg" alt="상품"></a>
+                                        <a th:href="@{/shop/list}"><img th:src="@{/image/} + ${vo.thumb1}" alt="상품"></a>
                                         <div class="bestDescript">
-                                            <div class="colorCodeBox">
-                                                <span class="colorCode" style="background: #fac8c8;"></span>
-                                                <span class="colorCode" style="background: #fffdf0;"></span>
-                                                <span class="colorCode" style="background: #fff5a0;"></span>
-                                                <span class="colorCode" style="background: #3a55ed;"></span>
-                                            </div>
+                                            <th:block th:each="code : ${vo.colorArr}">
+					                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+					                        </th:block>
+					                        <br/>
                                             <span th:text="${vo.prodName}"></span><br/>
                                             <span th:text="${#numbers.formatInteger(vo.price, 3, 'COMMA') + '원'}"></span>
                                         </div>
@@ -133,14 +126,12 @@
                             <ul>
                                 <li>
                                     <div class="bestItem" th:each="vo : ${acc}" >
-                                        <a th:href="@{/shop/list}"><img src="./img/sample9.jpg" alt="상품"></a>
+                                        <a th:href="@{/shop/list}"><img th:src="@{/image/} + ${vo.thumb1}" alt="상품"></a>
                                         <div class="bestDescript">
-                                            <div class="colorCodeBox">
-                                                <span class="colorCode" style="background: #fac8c8;"></span>
-                                                <span class="colorCode" style="background: #fffdf0;"></span>
-                                                <span class="colorCode" style="background: #fff5a0;"></span>
-                                                <span class="colorCode" style="background: #3a55ed;"></span>
-                                            </div>
+                                            <th:block th:each="code : ${vo.colorArr}">
+					                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+					                        </th:block>
+					                        <br/>
                                             <span th:text="${vo.prodName}"></span><br/>
                                             <span th:text="${#numbers.formatInteger(vo.price, 3, 'COMMA') + '원'}"></span>
                                         </div>
@@ -158,6 +149,7 @@
                 let bullet = ["OUTER", "TOP", "BOTTOM", "DRESS", "ACC"];
                 const swiper2 = new Swiper('.swiperItem', {
                     // Optional parameters
+                    effect : 'fade',
                     slidesPerView: 1,
                     loop: true,
     
@@ -181,8 +173,8 @@
                     },
     
                     autoplay: {     //자동슬라이드 (false-비활성화)
-                    delay: 5000, // 시간 설정
-                    disableOnInteraction: false, // false-스와이프 후 자동 재생
+	                    delay: 8000, // 시간 설정
+	                    disableOnInteraction: false, // false-스와이프 후 자동 재생
                     },
                 });
             </script>
@@ -190,13 +182,11 @@
                 <span>NEW</span>
                 <div>
                     <div class="product" th:each="list : ${lists}">
-                        <a th:href="@{/shop/view}"><img src="./img/sample5.jpg" alt="상품"></a>
+                        <a th:href="@{/shop/view}"><img th:src="@{/image/} + ${list.thumb1}" alt="상품"></a>
                         <div class="colorCodeBox">
-                            <span class="colorCode" style="background: #fac8c8;"></span>
-                            <span class="colorCode" style="background: #fffdf0;"></span>
-                            <span class="colorCode" style="background: #fff5a0;"></span>
-                            <span class="colorCode" style="background: #3a55ed;"></span>
-                            <span class="colorCode" style="background: #dcbce3;"></span>
+                        <th:block th:each="code : ${list.colorArr}">
+                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
+                        </th:block>
                         </div>
                         <a th:href="@{/shop/view}"><span class="name">[[${list.prodName}]]</span></a>
                        	<th:block th:if="${list.discount == 0}">

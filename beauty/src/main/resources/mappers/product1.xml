@@ -3,6 +3,45 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 김동근 -->
-<mapper namespace="kr.co.beauty.dao.Product1DAO">
+<mapper namespace="kr.co.beauty.dao.ProductDAO">
+	<select id="selectProductNew" resultType="ProductVO">
+		SELECT * FROM `product` ORDER BY `prodNo` DESC LIMIT 16;
+	</select>
+	<select id="selectProductBest" resultType="ProductVO">
+		SELECT * FROM `product` ORDER BY `score`,`sold`,`review`,`hit` DESC LIMIT 16;
+	</select>
+	<select id="selectProduct1" resultType="ProductVO">
+		SELECT * FROM `product` WHERE `prodCate1`=#{arg0} 
+		ORDER BY <choose>
+			<when test="arg1 == 'lowprice'">`price` ASC</when>
+			<when test="arg1 == 'highprice'">`price` DESC</when>
+			<when test="arg1 == 'score'">`score` DESC</when>
+			<when test="arg1 == 'hit'">`hit` DESC</when>
+			<otherwise>`prodNo` DESC</otherwise> 				
+		</choose> LIMIT 16;
+	</select>
+	<select id="selectProduct2" resultType="ProductVO">
+		SELECT * FROM `product` WHERE `prodCate2`=#{arg0}
+		ORDER BY <choose>
+			<when test="arg1 == 'lowprice'">`price` ASC</when>
+			<when test="arg1 == 'highprice'">`price` DESC</when>
+			<when test="arg1 == 'score'">`score` DESC</when>
+			<when test="arg1 == 'hit'">`hit` DESC</when>
+			<otherwise>`prodNo` DESC</otherwise>					
+		</choose> LIMIT 16;
+	</select>
+	<select id="selectProduct1Count" resultType="int">
+		SELECT COUNT(`prodNo`) FROM `product` WHERE `prodCate1`=#{cate};
+	</select>
+	<select id="selectProduct2Count" resultType="int">
+		SELECT COUNT(`prodNo`) FROM `product` WHERE `prodCate2`=#{cate};
+	</select>
+	<select id="selectCate" resultType="ProdCate2VO">
+		SELECT b.cate,b.c1Name,b.c2Name FROM `cate1` AS a JOIN `cate2` AS b
+		ON a.c1Name=b.c1Name WHERE <choose>
+			<when test="cate%100 == 0">a.`cate` = #{cate}</when>
+			<otherwise>b.`cate` = #{cate}</otherwise>
+			</choose>	
+	</select>
 	
 </mapper>
