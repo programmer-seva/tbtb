@@ -5,7 +5,16 @@
 <!-- 김동근 -->
 <mapper namespace="kr.co.beauty.dao.OrderDAO">
 	
-	<!-- 카트 -->
+	<!-- 카트 
+	<insert id="insertCart">
+		
+	</insert>
+	
+	<select id="checkCart">
+		SELECT COUNT(cartNo) FROM cart
+		WHERE `uid`=#{uid} AND `prodNo`=#{prodNo} AND `color`=#{color} AND `size`=#{size};
+	</select>
+	-->
 	<select id="selectCartList" resultType="CartVO">
 		SELECT * FROM `cart` WHERE `uid`=#{uid};
 	</select>
@@ -13,6 +22,7 @@
 	<delete id="deleteSelectedCart">
 		DELETE FROM `cart` WHERE `cartNo`=#{cartNo};
 	</delete>
+	
 	<delete id="deleteAllCart">
 		DELETE FROM `cart` WHERE `uid`=#{uid};
 	</delete>
@@ -21,11 +31,13 @@
 		SELECT `count` FROM `cart`
 		WHERE `cartNo` = #{cartNo};
 	</select>
+	
 	<update id="cartIncrease">
 		UPDATE `cart` SET
 		count = count + 1
 		WHERE `cartNo` = #{cartNo};
 	</update>
+	
 	<update id="cartDecrease">
 		UPDATE `cart` SET
 		count = count - 1
