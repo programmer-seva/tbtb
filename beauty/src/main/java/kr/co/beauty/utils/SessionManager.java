@@ -46,8 +46,9 @@ public class SessionManager {
 		Cookie noMemberCookie = findCookie(request, NO_MEMBER_COOKIE);
 		if(noMemberCookie == null) {
 			return null;
+		}else {
+			return sessionStore.get(noMemberCookie.getValue());
 		}
-		return sessionStore.get(noMemberCookie.getValue());
 	}
 	
 	//세션아이디 조회

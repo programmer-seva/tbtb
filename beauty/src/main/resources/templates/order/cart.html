@@ -31,7 +31,6 @@
         <link rel="stylesheet" th:href="@{/css/order/cart.css}">
         <!-- js -->
         <script th:src="@{/js/order/cart.js}"></script>
-        <script th:src="@{/js/order/non-cart.js}"></script>
         
         <title>Cart</title>
         <script>
@@ -53,7 +52,6 @@
                         <section class="myContent">
                             
                             <!-- 각 페이지 내용 -->
-                            <a class="btn" th:href="@{/order/test}">테스트</a>
                             <div class="cartFrame">
                                 <section class="nav">
                                     <p class="current"><span>1</span>장바구니</p> 
@@ -205,9 +203,16 @@
                                 </div>
                                 <!-- 주문 버튼 -->
                                 <div class="cartBtns">
-                                    <a class="btnOrder select" href="#">선택상품주문</a>
-                                    <a class="btnOrder all" href="#">전체상품주문</a>
-                                    <a class="keepShopping" href="#">계속 쇼핑하기</a>
+                                	<!-- 회원,비회원 -->
+	                                <th:block sec:authorize="isAuthenticated()">
+	                                    <a id="btnOrderSelect" class="btnOrder select" href="#">선택상품주문</a>
+	                                    <a id="btnOrderAll" class="btnOrder all" href="#">전체상품주문</a>
+                                    </th:block>
+                                    <th:block sec:authorize="isAnonymous()">
+	                                    <a id="btnOrderSelectNon" class="btnOrder select" href="#">선택상품주문</a>
+	                                    <a id="btnOrderAllNon" class="btnOrder all" href="#">전체상품주문</a>
+                                    </th:block>
+	                                    <a class="keepShopping" th:href="@{/product/list}">계속 쇼핑하기</a>
                                 </div>
                                 <!-- 카트테이블 위시리스트-->
                                 <!-- 회원,비회원 -->

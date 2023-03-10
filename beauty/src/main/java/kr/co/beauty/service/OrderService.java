@@ -6,34 +6,68 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import kr.co.beauty.dao.Order2DAO;
+import kr.co.beauty.dao.Member1DAO;
+import kr.co.beauty.dao.OrderDAO;
 import kr.co.beauty.vo.CartVO;
+import kr.co.beauty.vo.Member1VO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
 import kr.co.beauty.vo.TermsVO;
 
 @Service
-public class Order2Service {
+public class OrderService {
 
 	@Autowired
-	private Order2DAO dao;
+	private Member1DAO daoMem;
+	@Autowired
+	private OrderDAO daoOrd;
 	
+	/* 김동근 */
+	//public
+	public Member1VO selectMember(String uid) {
+		return daoMem.selectMember(uid);
+	}
+	
+	//cart
+	public List<CartVO> selectCartList(String uid) {
+		return daoOrd.selectCartList(uid);
+	}
+	public void deleteSelectedCart(int cartNo) {
+		daoOrd.deleteSelectedCart(cartNo);
+	}
+	public void deleteAllCart(String uid) {
+		daoOrd.deleteAllCart(uid);
+	}
+	
+	public int cartIncrease(int cartNo) {
+		return daoOrd.cartIncrease(cartNo);
+	}
+	public int cartDecrease(int cartNo) {
+		if(daoOrd.checkCountForUpdate(cartNo) < 2) {
+			return 0;
+		}else {
+			return daoOrd.cartDecrease(cartNo);
+		}
+	}
+	
+	
+	/* 박진휘 */
 	//주문완료
 	public OrdercompleteVO selectOrdercomplete(int ordNo) {
-		return dao.selectOrdercomplete(ordNo);
+		return daoOrd.selectOrdercomplete(ordNo);
 	}
 	public List<OrderVO> selectOrder(int ordNo){
-		return dao.selectOrder(ordNo);
+		return daoOrd.selectOrder(ordNo);
 	}
 	
 	//주문결제 페이지
 	public CartVO selectCart(int cartNo) {
-		return dao.selectCart(cartNo);
+		return daoOrd.selectCart(cartNo);
 	}
 	
 	//구매약관
 	public TermsVO orderTerms() {
-		return dao.orderTerms();
+		return daoOrd.orderTerms();
 	}
 	
 	@Transactional
@@ -62,18 +96,19 @@ public class Order2Service {
 		result.setDisPrice(vo.getDisPrice());
 		result.setPoint(vo.getPoint());
 		result.setTotal(vo.getTotalPrice());
-		dao.insertOrder(result);
+		daoOrd.insertOrder(result);
 	}
 	//주문완료전 장바구니삭제
 	public void deleteCart(int cartNo) {
-		dao.deleteCart(cartNo);
+		daoOrd.deleteCart(cartNo);
 	}
 	//주문(회원)
 	public void completeInsert(OrdercompleteVO vo) {
-		dao.completeInsert(vo);
+		daoOrd.completeInsert(vo);
 	}
 	//주문(비회원)
 	public int non_completeInsert(OrdercompleteVO vo) {
-		return dao.non_completeInsert(vo);
+		return daoOrd.non_completeInsert(vo);
 	}
+	
 }
