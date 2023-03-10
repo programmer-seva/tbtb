@@ -54,4 +54,10 @@ public class MemberController {
 
         return map;
     }
+	
+	@GetMapping("member/findid")
+	public String findid() {
+		return "member/findid";
+	}
+	
 }
