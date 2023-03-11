@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/modal.js"></script>
     <link rel="stylesheet" href="./css/modal.css">
     <title>Document</title>
 </head>
@@ -26,52 +28,35 @@
                         <span>[봄한정특가7%] #SLOWMADE. 투데이 와이드 중청데님팬츠 (+롱ver) - 4 size</span>
                     </div>
                     <table border="0" id="optionTable">
-                        <tbody class="xans-element- xans-product xans-product-option xans-record-">
+                        <tbody>
                             <tr>
                                 <th scope="row">COLOR</th>
                                 <td>
-                                    <ul option_product_no="6218" option_select_element="ec-option-select-finder" option_sort_no="1" option_type="T" item_listing_type="S" option_title="COLOR" product_type="product_option" product_option_area="product_option_6218_0" option_style="button" ec-dev-id="product_option_id1" ec-dev-name="option1" ec-dev-class="ProductOption0" class="ec-product-button" required="true">
-                                        <li class="ec-product-selected" option_value="빈티지중청" link_image="" title="빈티지중청"><a href="#none"><span>빈티지중청</span></a></li>
-                                    </ul>
-                                    <p class="value">[필수] <span class="ec-shop-front-product-option-desc-trigger ec-product-value" data-option_msg="옵션을 선택해 주세요">빈티지중청</span></p>
-                                    <select required="true" product_option_area_select="product_option_6218_0" id="product_option_id1" name="option1" option_title="COLOR" option_type="T" item_listing_type="S" class="ProductOption0 displaynone">
-                                        <option value="*">empty</option><option value="빈티지중청">빈티지중청</option>
-                                    </select>
+                                    <div class="color">
+                                        <input type="radio" name="chkColor" id="color1" value="베이지">
+                                        <label for="color1">베이지</label>
+
+                                        <input type="radio" name="chkColor" id="color2" value="검정">
+                                        <label for="color2">검정</label>
+                                    </div>
                                 </td>               
                             </tr>
                         </tbody>
-                        <tbody class="xans-element- xans-product xans-product-option xans-record-">
-                            <tr>
-                                <th scope="row">SIZE</th>
-                                <td>
-                                    <ul option_product_no="6218" option_select_element="ec-option-select-finder" option_sort_no="2" option_type="T" item_listing_type="S" option_title="SIZE" product_type="product_option" product_option_area="product_option_6218_0" option_style="button" ec-dev-id="product_option_id2" ec-dev-name="option2" ec-dev-class="ProductOption0" class="ec-product-button" required="true">
-                                        <li class="" option_value="XS" link_image="" title="XS"><a href="#none"><span>XS</span></a></li>
-                                        <li class="" option_value="S" link_image="" title="S"><a href="#none"><span>S</span></a></li>
-                                        <li class="" option_value="M" link_image="" title="M"><a href="#none"><span>M</span></a></li>
-                                        <li class="" option_value="L" link_image="" title="L"><a href="#none"><span>L</span></a></li>
-                                        <li class="" option_value="롱XS" link_image="" title="롱XS"><a href="#none"><span>롱XS</span></a></li>
-                                        <li class="" option_value="롱S" link_image="" title="롱S"><a href="#none"><span>롱S</span></a></li>
-                                        <li class="" option_value="롱M" link_image="" title="롱M"><a href="#none"><span>롱M</span></a></li>
-                                        <li class="" option_value="롱L" link_image="" title="롱L"><a href="#none"><span>롱L</span></a></li>
-                                    </ul>
-                                    <p class="value">[필수] <span class="ec-shop-front-product-option-desc-trigger" data-option_msg="옵션을 선택해 주세요">옵션을 선택해 주세요</span></p>
-                                    <select required="true" product_option_area_select="product_option_6218_0" id="product_option_id2" name="option2" option_title="SIZE" option_type="T" item_listing_type="S" class="ProductOption0 displaynone">
-                                        <option value="*">empty</option>
-                                        <option value="XS">XS</option>
-                                        <option value="S">S</option>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="롱XS">롱XS</option>
-                                        <option value="롱S">롱S</option>
-                                        <option value="롱M">롱M</option>
-                                        <option value="롱L">롱L</option>
-                                    </select>
-                                </td>              
-                            </tr>
-                        </tbody>
                         <tbody>
-                            <tr class="displaynone" id="">
-                                <td colspan="2" class="selectButton"><a href="#none" class="btnBasic sizeS" onclick="">옵션선택</a></td>
+                            <tr>
+                                <th>SIZE</th>
+                                <td>
+                                    <div class="size">
+                                        <input type="radio" name="chkSize" id="size1" value="S" disabled>
+                                        <label for="size1">S</label>
+
+                                        <input type="radio" name="chkSize" id="size2" value="M" disabled>
+                                        <label for="size2">M</label>
+
+                                        <input type="radio" name="chkSize" id="size3" value="L" disabled>
+                                        <label for="size3">L</label>
+                                    </div>
+                                </td>              
                             </tr>
                         </tbody>
                     </table>
