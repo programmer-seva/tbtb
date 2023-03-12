@@ -17,5 +17,9 @@ public interface MemberDAO {
 	public void updateMember(MemberVO vo);
 	public void deleteMember(String uid);
 	public MemberVO selectTerms();
+
+	
+	public MemberVO findId(String name, String phone);
+	
 	
 }

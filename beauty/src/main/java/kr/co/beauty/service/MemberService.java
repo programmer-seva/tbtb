@@ -38,6 +38,8 @@ public class MemberService {
 		return repo.countByUid(uid);
 	}
 	
-	
+	public MemberVO findId(String name, String phone) {
+		return dao.findId(name, phone);
+	}
 	
 }

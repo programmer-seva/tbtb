@@ -22,4 +22,9 @@
 			`height`=#{height},
 			`weight`=#{weight};
 	</insert>
+	
+	<select id="findId" resultType="MemberVO">
+		select * from `member` where `name`=#{name} and `phone`=#{phone};
+	</select>
+	
 </mapper>
