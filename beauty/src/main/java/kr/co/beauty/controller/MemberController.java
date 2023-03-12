@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 import kr.co.beauty.service.MemberService;
@@ -55,9 +57,31 @@ public class MemberController {
         return map;
     }
 	
-	@GetMapping("member/findid")
-	public String findid() {
-		return "member/findid";
+	@GetMapping("member/findId")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	// 아이디 찾기
+	@ResponseBody
+	@PostMapping("member/findId")
+	public Map<String, MemberVO> findId(Model model, @RequestParam("name") String name, @RequestParam("phone") String phone, HttpSession sess) throws Exception {
+		MemberVO vo = service.findId(name, phone);
+		Map<String, MemberVO> map = new HashMap<>();
+		map.put("vo", vo);
+		if(vo != null) {
+			sess.setAttribute("member", vo);
+		}
+		return map;
+	}
+	
+	// 아이디 찾기
+	@GetMapping("member/findIdResult")
+	public String findIdResult(Model model, HttpSession sess) {
+		MemberVO member = (MemberVO) sess.getAttribute("member");
+		//System.out.println("memberuid :" + member.getUid());
+		model.addAttribute("member", member);
+		return "member/findIdResult";
 	}
 	
 }

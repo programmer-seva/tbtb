@@ -19,7 +19,7 @@ main>.fd>h2 {
     margin: 25px 250px;
 }
 
-main>.fd>form>.findid {
+main>.fd>form>.findId {
     height: 250px;
     width: 375px;
     border: 1px solid #dddddd;
@@ -27,7 +27,7 @@ main>.fd>form>.findid {
     padding: 50px 50px 50px 50px;
 }
 
-main>.fd>form>.findid>fieldset {
+main>.fd>form>.findId>fieldset {
     height: 250px;
     width: 375px;
     min-width: min-content;
@@ -35,14 +35,14 @@ main>.fd>form>.findid>fieldset {
     border: 0px none;
 }
 
-main>.fd>form>.findid>fieldset>p {
+main>.fd>form>.findId>fieldset>p {
     height: 34px;
     width: 375px;
     margin: 7px 0 0 0;
     display: block;
 }
 
-main>.fd>form>.findid>fieldset>p>strong {
+main>.fd>form>.findId>fieldset>p>strong {
     height: 16px;
     width: 125px;
     margin: 0 0 5px 0;
@@ -50,7 +50,7 @@ main>.fd>form>.findid>fieldset>p>strong {
     display: inline-block;
 }
 
-main>.fd>form>.findid>fieldset>p>.fd-input {
+main>.fd>form>.findId>fieldset>p>.fd-input {
     height: 28px;
     width: 226px;
     border: 1px solid #d5d5d5;
@@ -60,14 +60,26 @@ main>.fd>form>.findid>fieldset>p>.fd-input {
     display: inline-block;
 }
 
-main>.fd>form>.findid>fieldset>div {
+main>.fd>form>.findId>fieldset>div {
     height: 40px;
     width: 375px;
     padding: 40px 0 10px 0;
     display: flex;
 }
 
-main>.fd>form>.findid>fieldset>div>button {
+main>.fd>form>.findId>fieldset>div>.btnNext {
+    height: 40px;
+    width: 371px;
+    border: 1px solid #ffffff;
+    margin: 0 2px 0 2px;
+    padding: 10px 8px 10px 8px;
+    background-color: #444444;
+    color: #ffffff;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: middle;
+}
+main>.fd>form>.findId>fieldset>div>.btnCancel {
     height: 40px;
     width: 371px;
     border: 1px solid #ffffff;
