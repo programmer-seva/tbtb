@@ -39,6 +39,17 @@
     				data: {'collection':collection},
     				success:function(data){
     					alert("1");
+    					console.log(collection);
+    					var stateObj = { url: "/Beauty/admin/product/list?collection="+collection };
+    					history.pushState(stateObj, "", "/Beauty/admin/product/list?collection="+collection);
+
+    					// 주소창 URL이 변경된 후에 실행될 함수
+    					$(window).on("popstate", function() {
+    					  var state = history.state;
+    					  // state.url에 저장된 URL로 페이지 이동
+    					  
+    					});
+    					
     				}
     			});
     			
@@ -131,7 +142,7 @@
                     <a th:classappend="${param1}=='stock'?'on'" th:href="@{/admin/product/list(param1=stock)}">재고순 </a>|
                     <a th:classappend="${param1}=='hit'?'on'" th:href="@{/admin/product/list(param1=hit)}">조회순</a>
                 </div>
-                <table id="productTable">
+                <table>
                     <tr>
                         <th><input type="checkbox" name="전체체크" id="checkAll"></th>
                         <th>사진</th>
@@ -144,7 +155,7 @@
                         <th>조회</th>
                         <th>관리</th>
                     </tr>
-                    <tr th:each="prod:${products}">
+                    <tr th:each="prod:${products}" class="productRow">
                         <td><input type="checkbox" name="선택체크" class="rowCheck" th:value="${prod.prodNo}"></td>
                         <td><img th:src="@{#}"></td>
                         <td>[[${prod.prodNo}]]</td>

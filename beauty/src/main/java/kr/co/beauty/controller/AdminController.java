@@ -41,7 +41,7 @@ public class AdminController {
 			@RequestParam(required=false) String param1, 
 			@RequestParam(required=false) String arg1, 
 			@RequestParam(required=false) String pg,
-			@ModelAttribute("collection") List<String> collection) {
+			@RequestParam(value="collection", required=false) List<String> collection) {
 
 		//상품목록 페이징 처리 -2023/03/13
 		int currentPage = service.getCurrentPage(pg);
