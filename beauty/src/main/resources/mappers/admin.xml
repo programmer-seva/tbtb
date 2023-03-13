@@ -38,12 +38,14 @@
 	
 	<!-- 관리자 페이지에서 상품 목록 불러오기 -->
 	<select id="selectProducts" resultType="kr.co.beauty.vo.Product1VO">
-		select * from `product` order by ${param1} desc;
+		select * from `product` 
+		<!-- 관리자 페이지에서 대분류로 나뉜 상품 목록 불러오기 -->
+		<if test="arg1 != null">
+		 where `prodCate1`=#{arg1} 
+		</if>
+		order by ${param1} desc limit #{param3}, 10;
 	</select>
-	<!-- 관리자 페이지에서 대분류로 나뉜 상품 목록 불러오기 -->
-	<select id="selectProductByCate1" resultType="kr.co.beauty.vo.Product1VO">
-		select * from `product` where `prodCate1`=#{arg1} order by ${param1} desc;
-	</select>
+
 	<!-- 관리자 페이지에서 체크된 소분류 상품 목록 불러오기 -->
 	<select id="selectProductByCheckBox" resultType="Product1VO">
 		select * from `product`
@@ -53,7 +55,7 @@
 			<foreach item="checkBox" collection="collection" open="(" separator="," close=")">#{checkBox}</foreach>
 			</if>
 		</where>
-		 ;
+		;
 	</select>
 	<!-- 관리자 페이지에서 체크박스를 이용해 상품 삭제하기 -->
 	<delete id="deleteProduct">
@@ -81,5 +83,9 @@
 				 </if>
 			</otherwise>
 		</choose>
+	</select>
+	<!-- 상품목록 페이지 처리를 위해 상품 개수 세기 -->
+	<select id="selectCountTotal" resultType="int">
+		select count(`prodNo`) from `product`;
 	</select>
 </mapper>

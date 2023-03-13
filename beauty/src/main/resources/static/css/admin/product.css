@@ -141,7 +141,7 @@ main > section{
     border-radius: 4px;
     width: 100px;
 }
-#admin-product-list > div:last-child{
+#admin-product-list > .page{
     position: absolute;
     left: 500px;
     bottom: -30px;
