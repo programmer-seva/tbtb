@@ -36,15 +36,12 @@ public class AdminService {
 	}
 	
 	//관리자페이지에서 상품목록 불러오기
-	public List<Product1VO> selectProducts(String param1){
-		return dao.selectProducts(param1);
-	}
-	public List<Product1VO> selectProductByCate1(String param1,String arg1){
-		return dao.selectProductByCate1(param1,arg1);
+	public List<Product1VO> selectProducts(String param1,String arg1, int param3){
+		return dao.selectProducts(param1,arg1, param3);
 	}
 	
-	public List<Product1VO> selectProductByCheckBox(List<String> checkBoxArr){
-		return dao.selectProductByCheckBox(checkBoxArr);
+	public List<Product1VO> selectProductByCheckBox(List<String> collection){
+		return dao.selectProductByCheckBox(collection);
 	}
 	
 	//상품 삭제하기
@@ -57,7 +54,63 @@ public class AdminService {
 		return dao.searchProduct(param1, arg1, param2, arg2);
 	}
 	
-	//파일 업로드
+	/* 상품목록 페이징 처리 */
+	//상품 개수 세기
+	public int selectCountTotal() {
+		return dao.selectCountTotal();
+	}
+	
+	//현재 페이지 번호
+	public int getCurrentPage(String pg) {
+		int currentPage = 1;
+		
+		if(pg != null) {
+			currentPage = Integer.parseInt(pg);
+		}
+
+		 return currentPage;
+	}
+	
+	//페이지 시작값
+	public int getLimitStart(int currentPage) {
+		return (currentPage -1)* 10;
+	}
+	
+	//마지막 페이지 번호
+	public int getLastPageNum(int total) {
+		int lastPageNum = 0;
+		
+		if(total % 10 == 0) {
+			lastPageNum = total / 10;
+		}else {
+			lastPageNum = total / 10 + 1;
+		}
+		
+		return lastPageNum;
+	}
+	
+	//페이지 시작번호
+	public int getPageStartNum(int total, int param3) {
+		return total - param3;
+	}
+	
+	//페이지 그룹
+	public int[] getPageGroup(int currentPage, int lastPageNum) {
+		int groupCurrent = (int) Math.ceil(currentPage/10.0);
+		int groupStart = (groupCurrent - 1)*10+1;
+		int groupEnd = groupCurrent * 10;
+		
+		if(groupEnd > lastPageNum) {
+			groupEnd = lastPageNum;
+		}
+
+		int[] groups = {groupStart, groupEnd};
+		
+		return groups;
+	}
+	
+	
+	//상품등록할 때 파일 업로드
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;
 	
