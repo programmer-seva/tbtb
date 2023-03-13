@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Member1VO {
-	private String email;
+	private String uid;
 	private String password;
 	private String name;
 	private String level;
