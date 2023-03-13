@@ -1,7 +1,7 @@
 /**
  * 날짜 : 2023/03/07
  * 이름 : 강중현 
- * 내용 : Beauty member findId css
+ * 내용 : Beauty member findIdResult
  */
 main>.findId {
 	height: 500px;
@@ -35,14 +35,8 @@ main>.findId>form>.findId>fieldset {
 	border: 0px none;
 }
 
-main>.findId>form>.findId>fieldset>.btn-find {
-
-}
-
-main>.findId>form>.findId>fieldset>.btn-find>a {
-	width: 100%;
-	text-align: center;
-	font-size: 15px;
+main>.findId>form>.findId>fieldset>table>tbody>tr>td{
+	font-size: 20px;
 }
 
 main>.findId>form>.findId>fieldset>p {

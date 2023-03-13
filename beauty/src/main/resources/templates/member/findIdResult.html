@@ -17,26 +17,21 @@
 
 <link rel="stylesheet" th:href="@{/css/headfoot.css}">
 <link rel="stylesheet" th:href="@{/css/index.css}">
-<link rel="stylesheet" th:href="@{/css/member/findid.css}">
+<link rel="stylesheet" th:href="@{/css/member/findIdResult.css}">
 <script th:src="@{/js/main.js}"></script>
 <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
 <body>
 	<main>
-		<div class="fd">
+		<div class="findId">
 			<h2>아이디 찾기 결과</h2>
 
 			<form action="#" method="POST">
-				<div class="findid">
+				<div class="findId">
 					<fieldset>
 						<table border="0">
 							<tr>
-								<td>이름</td>
-								<td th:if="${member} ne null">[[${member.name}]]</td>
-							</tr>
-							<tr>
-								<td>이메일</td>
-								<td th:if="${member} ne null">[[${member.email}]]</td>
+								<td>고객님의 아이디는 [[${uid}]] 입니다.</td>
 							</tr>
 						</table>
 						<div class="btn">

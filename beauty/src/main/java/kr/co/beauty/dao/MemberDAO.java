@@ -18,8 +18,11 @@ public interface MemberDAO {
 	public void deleteMember(String uid);
 	public MemberVO selectTerms();
 
+	// 아이디 찾기
+	public String findId(String arg0, String arg1);
 	
-	public MemberVO findId(String name, String phone);
-	
+	// 비밀번호 찾기
+	public String findPw(String arg0, String arg1, String arg2);
+	public int findPwChange(String uid, String pass);
 	
 }

@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,24 +14,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
-import org.springframework.ui.Model;
 import kr.co.beauty.service.MemberService;
 import kr.co.beauty.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService service;
 	
 	
+
 	@GetMapping("member/login")
 	public String login() {
 		return "member/login";
 	}
-	
+
 	@GetMapping("member/register")
 	public String register(Model model) {
 		MemberVO vo = service.selectTerms();
@@ -37,51 +39,91 @@ public class MemberController {
 		model.addAttribute("memberVO", vo);
 		return "member/register";
 	}
-	
+
 	@PostMapping("member/register")
 	public String register(MemberVO vo, HttpServletRequest req) {
 		String regip = req.getRemoteAddr();
 		vo.setRegip(regip);
 		int result = service.insertMember(vo);
-		return "redirect:/member/login?seccess="+result;
+		return "redirect:/member/login?seccess=" + result;
 	}
-	
-	//아이디 중복체크
-	@ResponseBody
-    @GetMapping("member/checkUid")
-    public Map<String, Integer> checkUid(String uid) {
-        int result = service.countMember(uid);
-        Map<String, Integer> map = new HashMap<>();
-        map.put("result", result);
 
-        return map;
-    }
-	
+	// 아이디 중복체크
+	@ResponseBody
+	@GetMapping("member/checkUid")
+	public Map<String, Integer> checkUid(String uid) {
+		int result = service.countMember(uid);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+
+		return map;
+	}
+
+	// 아이디 찾기
 	@GetMapping("member/findId")
 	public String findId() {
 		return "member/findId";
 	}
-	
+
 	// 아이디 찾기
 	@ResponseBody
 	@PostMapping("member/findId")
-	public Map<String, MemberVO> findId(Model model, @RequestParam("name") String name, @RequestParam("phone") String phone, HttpSession sess) throws Exception {
-		MemberVO vo = service.findId(name, phone);
-		Map<String, MemberVO> map = new HashMap<>();
-		map.put("vo", vo);
-		if(vo != null) {
-			sess.setAttribute("member", vo);
-		}
-		return map;
+	public Map<String, String> findId(Model model, String name, String phone, HttpSession session) {
+		String rs = service.findId(name, phone);
+		session.setAttribute("rs", rs);
+		Map<String, String> result = new HashMap<>();
+		result.put("result", rs);
+		return result;
 	}
-	
+
 	// 아이디 찾기
 	@GetMapping("member/findIdResult")
-	public String findIdResult(Model model, HttpSession sess) {
-		MemberVO member = (MemberVO) sess.getAttribute("member");
-		//System.out.println("memberuid :" + member.getUid());
-		model.addAttribute("member", member);
+	public String findIdResult(Model model, HttpSession session) {
+		String uid = (String) session.getAttribute("rs");
+		model.addAttribute("uid", uid);
+
+		// MemberVO vo = service.selectUid(uid);
+		// model.addAttribute("vo", vo);
 		return "member/findIdResult";
 	}
+
+	// 비밀번호 찾기
+	@GetMapping("member/findPw")
+	public String findPw(HttpSession sess) {
+		sess.removeAttribute("member");
+		return "member/findPw";
+	}
 	
+	@ResponseBody
+	@PostMapping("member/findPw")
+	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
+				
+		//System.out.println("name : " + name);
+		String rs = service.findPw(name, uid, phone);
+		session.setAttribute("rs", rs);
+		Map<String, Integer> result = new HashMap<>();
+		result.put("result", 1);
+		
+		return result;
+	}
+	
+	@GetMapping("member/findPwChange")
+	public String findPwChange(Model model, String uid) {
+		model.addAttribute("uid",uid);
+		return "member/findPwChange";
+	}
+	
+	
+//	@ResponseBody
+//	@PostMapping("member/findPwChange")
+//	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
+//		pass = PasswordEncoder.encode(pass);
+//		int result = service.findPwChange(uid, pass);
+//		Map<String, Integer> map = new HashMap<>();
+//		map.put("result", result);
+//		return map;
+//	}
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 }
