@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+	<th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/product/view.css}">
+    <link rel="stylesheet" th:href="@{/css/color.css}">
+
+</head>
+<body>
+    <th:block th:replace="~{/_header :: modileFragment}"></th:block>
+    <div id="wrap">
+       	<th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <main>
+            <div id="cnt">
+                <div class="cntbody">
+                    <div id="detail">
+                        <div class="wrap_prd">
+                            <div class="prdimg">
+                                <div id="mimg_div" class="img">
+                                    <img id="main-img" th:src="@{/image/}+${prod.thumb1}" alt="대표이미지">
+                                    <div id="goods_video"></div>
+                                    <div id="changeimg">
+                                        <img th:src="@{/img/ａ_01.png}" onclick="imgChange(-1)" style="width: 30px;height: 40px; position: absolute; left: 10px; top: 50%; transform:translateY(-50%); cursor: pointer;">
+                                        <img th:src="@{/img/ａ_03.png}" onclick="imgChange(+1)" style="width: 30px;height: 40px; left:auto; right:10px !important; position: absolute; top: 50%; transform:translateY(-50%); cursor: pointer;">
+                                    </div>
+                                </div>
+                                <div class="addimg">
+                                    <!-- 반복문시작 -->
+                                    <div class="box_add_slide" >
+                                        <div class="add_slide slick-initialized slick-slider">
+                                            
+                                            <div aria-live="polite" class="slick-list draggable">
+                                                <div class="slick-track" style="opacity: 1; width: 1350px; transform: translate3d(0px, 0px, 0px);" role="listbox">
+                                                    <div class="slick-slide on slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide00">
+                                                        <img th:src="@{/image/}+${prod.thumb1}">
+                                                    </div>
+                                                    <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide01">
+                                                        <img th:src="@{/image/}+${prod.thumb2}">
+                                                    </div>
+                                                    <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide02">
+                                                        <img th:src="@{/image/}+${prod.thumb3}">
+                                                    </div>
+                                                    <div class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide02">
+                                                        <img th:src="@{/image/}+${prod.thumb4}">
+                                                    </div>
+                                                    <div class="blur slick-slide" data-slick-index="3" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide03">
+                                                        <img th:src="@{/image/}+${prod.thumb5}">
+                                                    </div>
+                                                    <div class="blur slick-slide" data-slick-index="4" aria-hidden="false" tabindex="-1" role="option" aria-describedby="slick-slide03">
+                                                        <img th:src="@{/image/}+${prod.thumb6}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                    $('.add_slide img').click(function(){
+                                        $(this).closest('.slick-slide').addClass("on").siblings().removeClass("on");
+                        
+                                        $('#goods_video').empty();
+                        
+                                        if( !$(this).data('video') ){
+                        
+                                            imgChange(0);
+                                        }else{
+                                            $('#goods_video').append( $(this).data('video') );
+                                        }
+                                    });
+                        
+                                    $('.add_slide').slick({
+                                        // lazyLoad: 'ondemand',
+                                        slidesToShow: 5,
+                                        slidesToScroll: 5,
+                                        arrows: true,
+                                        dots: false,
+                                        swipe: false,
+                                        infinite: false
+                                    });
+                        
+                                    function imgChange(num){
+                                        var obj = $('.add_slide .slick-slide.on');
+                                        var eq = $('.add_slide .slick-slide.on').index();
+                                        var maxLength = $('.add_slide .slick-slide').length-1;
+
+                                        eq += num;
+                                        if(eq < 0 ){
+                                            eq = maxLength;
+                                        }else if( eq > maxLength ){
+                                            eq = 0;
+                                        }
+                                        if($('.add_slide .slick-slide').eq(eq).hasClass('blur')){
+                                            $('#mimg_div').addClass('blur');
+                                        }else{
+                                            $('#mimg_div').removeClass('blur');
+                                        }
+
+                                        $('.add_slide .slick-slide').eq(eq).addClass('on').siblings().removeClass('on');
+                                        var src = $('.add_slide .slick-slide').eq(eq).find('img').attr('src');
+                                        $('#main-img').attr('src', src);
+                                        $('.add_slide').slick('slickGoTo',eq);
+                                    }
+                                    </script>
+                                    <!-- 반복문끝 -->
+                                </div>
+                            </div>
+                            <div class="info">
+                                <h3>[[${prod.prodName}]]</h3>
+                                <p th:text="${prod.descript}"></p>
+                                <div class="price">
+                                    <div class="price-box">
+                                        <div>
+   										<span class="sell" th:text="${#numbers.formatInteger(prod.price, 3, 'COMMA') + '원'}"></span>
+									</div>
+									<div th:if="${prod.discount} != '0'">
+									    <span class="p2" th:text="${#numbers.formatInteger(prod.price - prod.disPrice, 3, 'COMMA') + '원'}"></span>
+									    <span class="p1" th:text="${prod.discount + '%'}"></span>
+									</div>
+                                </div>
+                                <table>
+                                	<tr>
+                                		<td>적립금</td>
+                                		<td></td>
+                                	</tr>
+                                	<tr>
+                                		<td>무이자 할부</td>
+                                		<td></td>
+                                	</tr>
+                                	<tr>
+                                		<td>멤버쉽 혜택</td>
+                                		<td></td>
+                                	</tr>
+                                	<tr>
+                                		<td>배송구분</td>
+                                		<td></td>
+                                	</tr>
+                                	<tr>
+                                		<td>배송예상</td>
+                                		<td></td>
+                                	</tr>
+                                	<tr>
+                                		<td>색상</td>
+                                		<td class="selector">
+                                		<select name="color">
+                               			<option value="0">--옵션 선택--</option>
+                                		<th:block th:each="color : ${prod.colorArr}">
+                                			<option th:value="${color}">[[${color}]]</option>
+                                		</th:block>
+                                		</select>
+                                		</td>
+                                	</tr>
+                                	<tr>
+                                		<td>사이즈</td>
+                                		<td class="selector">
+                                		<select name="size">
+                               			<option value="0">--옵션 선택--</option>
+                                		<th:block th:each="color : ${prod.colorArr}">
+                                			<option th:value="${color}">[[${color}]]</option>
+                                		</th:block>
+                                		</select>
+                                		</td>
+                                	</tr>
+                                </table>
+                                <section>
+	                                <a href="#" class="wish"><span class="material-icons">favorite_border</span></a>
+	                                <a href="#" class="cart">장바구니</a>
+	                                <a href="#" class="order">바로구매</a>
+                                </section>
+                            </div>
+                       	</div>
+                    </div>
+                </div>
+				</div>
+            </div>
+        </main>
+		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+    </div>
+</body>
+</html>

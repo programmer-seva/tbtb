@@ -39,6 +39,17 @@
     				data: {'collection':collection},
     				success:function(data){
     					alert("1");
+    					console.log(collection);
+    					var stateObj = { url: "/Beauty/admin/product/list?collection="+collection };
+    					history.pushState(stateObj, "", "/Beauty/admin/product/list?collection="+collection);
+
+    					// 주소창 URL이 변경된 후에 실행될 함수
+    					$(window).on("popstate", function() {
+    					  var state = history.state;
+    					  // state.url에 저장된 URL로 페이지 이동
+    					  
+    					});
+    					
     				}
     			});
     			
@@ -144,7 +155,7 @@
                         <th>조회</th>
                         <th>관리</th>
                     </tr>
-                    <tr th:each="prod:${products}">
+                    <tr th:each="prod:${products}" class="productRow">
                         <td><input type="checkbox" name="선택체크" class="rowCheck" th:value="${prod.prodNo}"></td>
                         <td><img th:src="@{#}"></td>
                         <td>[[${prod.prodNo}]]</td>
@@ -166,22 +177,24 @@
                 </table>
                 <input type="button" value="선택삭제" class="delete">
                 <input type="button" value="상품등록" class="register">
-                <div>
-                    <span><a href="#">이전</a></span>
-                    <span>
-                        <a href="#" class="current">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">7</a>
-                        <a href="#">8</a>
-                        <a href="#">9</a>
-                        <a href="#">10</a>
+                <!-- <div class="page">
+                	<th:block th:if="${arg1} != null">
+                    <span th:if="${groups[0]>1}"><a th:href="@{list(param1=${param1},pg=${groups[0]-1},arg1=${arg1})}">이전</a></span>
+                    <span th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+                        <a th:href="@{list(param1=${param1},pg=${num},arg1=${arg1})}" th:class="${num == currentPage? 'current':'num'}">[[${num}]]</a>
                     </span>
-                    <span><a href="#">다음</a></span>
+                    <span th:if="${groups[1]<lastPageNum}"><a th:href="@{admin/product/list(param1=${param1},pg=${groups[1]+1},arg1=${arg1})}">다음</a></span>
+                	</th:block>
                 </div>
+                <div class="page">
+                	<th:block th:unless="${arg1} != null">
+                    <span th:if="${groups[0]>1}"><a th:href="@{list(param1=${param1},pg=${groups[0]-1})}">이전</a></span>
+                    <span th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+                        <a th:href="@{list(param1=${param1},pg=${num})}" th:class="${num == currentPage? 'current':'num'}">[[${num}]]</a>
+                    </span>
+                    <span th:if="${groups[1]<lastPageNum}"><a th:href="@{list(param1=${param1},pg=${groups[1]+1})}">다음</a></span>
+                	</th:block>
+                </div> -->
             </section>
         </main>
     </div>

@@ -25,6 +25,19 @@ public class Myshop1Controller {
 	@Autowired
 	private MyshopService service;
 	
+	
+	/* 내 정보 */
+	@GetMapping("myshop/profile")
+	public String profile(Principal principal, Model model) {
+		//유저 정보 받기
+		Member1VO member = service.selectMember(principal.getName());
+		model.addAttribute("member", member);
+		return "myshop/profile";
+	}
+	
+	
+	
+	
 	/* 위시 페이지 */
 	@GetMapping("myshop/wishlist")
 	public String wishlist(Principal principal, Model model) {

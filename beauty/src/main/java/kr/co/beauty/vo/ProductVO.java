@@ -53,7 +53,9 @@ public class ProductVO {
 	private String color;
 	private String[] colorArr;
 	private String size;
+	private String[] sizeArr;
 	private String rdate;
+	private String colorName;
 	
 	//상품등록 추가
 	private MultipartFile file1;
