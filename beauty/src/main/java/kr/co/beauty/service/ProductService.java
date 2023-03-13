@@ -1,5 +1,6 @@
 package kr.co.beauty.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,9 +84,16 @@ public class ProductService {
 		return result;
 	}
 	
-	//»óÇ° view 
+	//ï¿½ï¿½Ç° view 
 	public ProductVO selectProduct(String prodNo) {
-		return dao.selectProduct(prodNo);
+		ProductVO vo = dao.selectProduct(prodNo);
+		String color = vo.getColorName();
+		if(color != null) {
+			String[] arr = color.split(",");
+			Arrays.sort(arr);
+			vo.setColorArr(arr);
+		}
+		return vo;
 	}
 	
 }
