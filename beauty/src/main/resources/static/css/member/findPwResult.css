@@ -1,16 +1,16 @@
 /**
  * 날짜 : 2023/03/07
  * 이름 : 강중현 
- * 내용 : Beauty member findId css
+ * 내용 : Beauty member findPwResult
  */
-main>.findId {
+main>.findPw {
 	height: 500px;
 	width: 900px;
 	margin: 50px 288px 50px 288px;
 	font-size: 12px;
 }
 
-main>.findId>h2 {
+main>.findPw>h2 {
 	height: 22px;
 	width: 1328px;
 	font-size: 18px;
@@ -19,7 +19,7 @@ main>.findId>h2 {
 	margin: 25px 250px;
 }
 
-main>.findId>form>.findId {
+main>.findPw>form>.findPw {
 	height: 250px;
 	width: 375px;
 	border: 1px solid #dddddd;
@@ -27,7 +27,7 @@ main>.findId>form>.findId {
 	padding: 50px 50px 50px 50px;
 }
 
-main>.findId>form>.findId>fieldset {
+main>.findPw>form>.findPw>fieldset {
 	height: 250px;
 	width: 375px;
 	min-width: min-content;
@@ -35,24 +35,18 @@ main>.findId>form>.findId>fieldset {
 	border: 0px none;
 }
 
-main>.findId>form>.findId>fieldset>.btn-find {
-
+main>.findPw>form>.findPw>fieldset>table>tbody>tr>td{
+	font-size: 20px;
 }
 
-main>.findId>form>.findId>fieldset>.btn-find>a {
-	width: 100%;
-	text-align: center;
-	font-size: 15px;
-}
-
-main>.findId>form>.findId>fieldset>p {
+main>.findPw>form>.findPw>fieldset>p {
 	height: 34px;
 	width: 375px;
 	margin: 7px 0 0 0;
 	display: block;
 }
 
-main>.findId>form>.findId>fieldset>p>strong {
+main>.findPw>form>.findPw>fieldset>p>strong {
 	height: 16px;
 	width: 125px;
 	margin: 0 0 5px 0;
@@ -60,7 +54,7 @@ main>.findId>form>.findId>fieldset>p>strong {
 	display: inline-block;
 }
 
-main>.findId>form>.findId>fieldset>p>.findId-input {
+main>.findPw>form>.findPw>fieldset>p>.findPw-input {
 	height: 28px;
 	width: 226px;
 	border: 1px solid #d5d5d5;
@@ -70,14 +64,14 @@ main>.findId>form>.findId>fieldset>p>.findId-input {
 	display: inline-block;
 }
 
-main>.findId>form>.findId>fieldset>div {
+main>.findPw>form>.findPw>fieldset>div {
 	height: 40px;
 	width: 375px;
 	padding: 40px 0 10px 0;
 	display: flex;
 }
 
-main>.findId>form>.findId>fieldset>div>.btnNext {
+main>.findPw>form>.findPw>fieldset>div>.btnNext {
 	height: 40px;
 	width: 371px;
 	border: 1px solid #ffffff;
@@ -90,7 +84,7 @@ main>.findId>form>.findId>fieldset>div>.btnNext {
 	vertical-align: middle;
 }
 
-main>.findId>form>.findId>fieldset>div>.btnCancel {
+main>.findPw>form>.findPw>fieldset>div>.btnCancel {
 	height: 40px;
 	width: 371px;
 	border: 1px solid #ffffff;

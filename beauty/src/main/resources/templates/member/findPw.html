@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" th:href="@{/css/headfoot.css}">
 <link rel="stylesheet" th:href="@{/css/index.css}">
-<link rel="stylesheet" th:href="@{/css/member/findId.css}">
+<link rel="stylesheet" th:href="@{/css/member/findPw.css}">
 <script th:src="@{/js/main.js}"></script>
 <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
@@ -28,32 +28,32 @@
 			console.log('here1');
 
 			let name = $('input[name=name]').val();
+			let uid = $('input[name=uid]').val();
 			let phone = $('input[name=phone]').val();
 
 			let jsonData = {
 				"name" : name,
+				"uid" : uid,
 				"phone" : phone
 			};
 			console.log(jsonData);
 			console.log('here2');
 			$.ajax({
-				url : '/Beauty/member/findId',
+				url : '/Beauty/member/findPw',
 				type : 'post',
 				data : jsonData,
 				dataType : 'json',
 				success : function(data) {
 					console.log('here3');
-					if (data.result != null) {
-						let uid = data.result;
-						location.href = "/Beauty/member/findIdResult";
+					if (data.result == 1) {
+						console.log(data);
+						location.href="/Beauty/member/findPwChange?uid="+uid;
 					} else {
-						console.log('here4');
-						alert('해당하는 사용자가 존재하지 않습니다.\n이름과 이메일을 다시 확인하십시오.');
+						alert('해당하는 사용자가 존재하지 않습니다.\n아이디와 이메일을 다시 확인하십시오.');
 					}
 				}
 			});
-
-			return false;
+		return false;
 		});
 	});
 </script>
@@ -61,26 +61,26 @@
 <body>
 	<div id="wrap">
 		<main>
-			<div class="findId">
-				<h2>아이디/비밀번호 찾기</h2>
+			<div class="findPw">
+				<h2>FIND PW</h2>
 				<form action="#" method="POST">
-					<div class="findId">
+					<div class="findPw">
 						<fieldset>
-							<div class="btn-find">
-								<a>아이디 찾기</a> | 
-								<a>비밀번호 찾기</a>
-							</div>
 							<p>
-								<strong>이름</strong> <input type="text" class="fd-input"
+								<strong>이름</strong> <input type="text" class="pw-input"
 									name="name" placeholder="이름">
 							</p>
 							<p>
-								<strong>휴대폰 번호</strong> <input type="text" class="fd-input"
+								<strong>이메일</strong> <input type="email" class="pw-input"
+									name="uid" placeholder="이메일">
+							</p>
+							<p>
+								<strong>휴대폰 번호</strong> <input type="text" class="pw-input"
 									name="phone" placeholder="휴대폰 번호">
 							</p>
 							<div>
-								<a th:href="@{/member/findIdResult}" class="btnNext">확인</a>
-								<a th:href="@{/member/login}" class="btnCancel">취소</a>
+								<a th:href="@{/member/findPwChange}" class="btnNext">확인</a> <a
+									th:href="@{/member/login}" class="btnCancel">취소</a>
 							</div>
 						</fieldset>
 					</div>

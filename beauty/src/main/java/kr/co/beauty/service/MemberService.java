@@ -38,8 +38,19 @@ public class MemberService {
 		return repo.countByUid(uid);
 	}
 	
-	public MemberVO findId(String name, String phone) {
+	// 아이디 찾기
+	public String findId(String name, String phone) {
 		return dao.findId(name, phone);
 	}
 	
+	// 비밀번호 찾기
+	public String findPw(String name, String uid, String phone) {
+		return dao.findPw(name, uid, phone);
+	}
+	
+	
+	// 자동로그인
+	public int countByNameAndUid(String name, String uid) {
+		return repo.countByNameAndUid(name, uid);
+	}
 }

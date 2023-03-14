@@ -1,0 +1,93 @@
+/**
+ * 날짜 : 2023/03/07
+ * 이름 : 강중현 
+ * 내용 : Beauty member findPw css
+ */
+main>.findPw {
+    height: 500px;
+    width: 900px;
+    margin: 50px 288px 50px 288px;
+    font-size: 12px;
+}
+
+main>.findPw>h2 {
+    height: 22px;
+    width: 1328px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+    margin: 25px 250px;
+}
+
+main>.findPw>form>.findPw {
+    height: 250px;
+    width: 375px;
+    border: 1px solid #dddddd;
+    margin: 0 426px 0 426px;
+    padding: 50px 50px 50px 50px;
+}
+
+main>.findPw>form>.findPw>fieldset {
+    height: 250px;
+    width: 375px;
+    min-width: min-content;
+    vertical-align: top;
+    border: 0px none;
+}
+
+main>.findPw>form>.findPw>fieldset>p {
+    height: 34px;
+    width: 375px;
+    margin: 7px 0 0 0;
+    display: block;
+}
+
+main>.findPw>form>.findPw>fieldset>p>strong {
+    height: 16px;
+    width: 125px;
+    margin: 0 0 5px 0;
+    padding: 0 4px 0 4px;
+    display: inline-block;
+}
+
+main>.findPw>form>.findPw>fieldset>p>.findPw-input {
+    height: 28px;
+    width: 226px;
+    border: 1px solid #d5d5d5;
+    padding: 2px 4px 2px 4px;
+    line-height: 28px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+main>.findPw>form>.findPw>fieldset>div {
+    height: 40px;
+    width: 375px;
+    padding: 40px 0 10px 0;
+    display: flex;
+}
+
+main>.findPw>form>.findPw>fieldset>div>.btnNext {
+    height: 40px;
+    width: 371px;
+    border: 1px solid #ffffff;
+    margin: 0 2px 0 2px;
+    padding: 10px 8px 10px 8px;
+    background-color: #444444;
+    color: #ffffff;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: middle;
+}
+main>.findPw>form>.findPw>fieldset>div>.btnCancel {
+    height: 40px;
+    width: 371px;
+    border: 1px solid #ffffff;
+    margin: 0 2px 0 2px;
+    padding: 10px 8px 10px 8px;
+    background-color: #444444;
+    color: #ffffff;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: middle;
+}
