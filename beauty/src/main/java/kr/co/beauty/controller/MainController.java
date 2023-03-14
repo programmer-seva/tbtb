@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.beauty.service.MainService;
+import kr.co.beauty.utils.SessionManager;
 import kr.co.beauty.vo.ProductVO;
 
 @Controller
@@ -17,6 +22,8 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
+	
+	SessionManager sessionManager = new SessionManager();
 	
 	@GetMapping(value = {"/", "index"})
 	public String index(Model model) {
@@ -37,5 +44,12 @@ public class MainController {
 		model.addAttribute("etc", etc);
 		
 		return "index";
+	}
+	
+	@ResponseBody
+	@PostMapping("setCookie")
+	public int setCookie(HttpServletRequest request, HttpServletResponse response) {
+		sessionManager.createSession("check", request,response);
+		return 1;
 	}
 }

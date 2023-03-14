@@ -50,7 +50,7 @@ public class OrderController {
 	/* 김동근 */
 	/* 카트 페이지 */
 	@GetMapping("order/cart")
-	public String cart(Principal principal, Model model, HttpServletRequest req, HttpServletResponse response) {
+	public String cart(Principal principal, Model model, HttpServletRequest request, HttpServletResponse response) {
 		if(principal != null){
 	 		Member1VO member = service.selectMember(principal.getName());
 	 		model.addAttribute("member", member);
@@ -62,13 +62,12 @@ public class OrderController {
 			model.addAttribute("wishList", wishList);
 	  	}else {
 	  		//세션체크
-	  		if(sessionManager.getSession(req) == null) {
-	  			//쿠키 할당
-				sessionManager.createSession("check", response);
-				return "redirect:/order/cart";
+	  		if(sessionManager.getSession(request) == null) {
+	  			//에러 페이지 이동
+				return "error/errorCart";
 	  		}else {
 	  			//카트리스트 가져오기
-				List<CartVO> cartList = service.selectCartList(sessionManager.getNoMemberId(req));
+				List<CartVO> cartList = service.selectCartList(sessionManager.getNoMemberId(request));
 				model.addAttribute("cartList", cartList);
 	  		}
 	  	}

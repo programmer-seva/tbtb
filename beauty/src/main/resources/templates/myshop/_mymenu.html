@@ -4,13 +4,12 @@
 	<!-- 마이페이지 메뉴 -->
     <aside class="myMenu">
         <ul>
-            <li class="on"><a th:href="@{#}">주문 조회</a></li>
-            <li><a th:href="@{/myshop/wishlist}">위시 리스트</a></li>
-            <li><a th:href="@{#}">취소/교환/반품</a></li>
-            <li><a th:href="@{#}">1:1문의</a></li>
-            <li><a th:href="@{/myshop/profile}">정보 수정</a></li>
-            <li><a th:href="@{#}">회원탈퇴</a></li>
-            <li th:text="2"></li>
+            <li th:classappend="${option == 'myorder'} ? 'on' : ''"><a th:href="@{/myshop/myorder}">주문/배송</a></li>
+            <li th:classappend="${option == 'coupon'} ? 'on' : ''"><a th:href="@{/myshop/coupon}">쿠폰</a></li>
+            <li th:classappend="${option == 'point'} ? 'on' : ''"><a th:href="@{/myshop/point}">적립금</a></li>
+            <li th:classappend="${option == 'wishlist'} ? 'on' : ''"><a th:href="@{/myshop/wishlist}">위시 리스트</a></li>
+            <li th:classappend="${option == 'myqna'} ? 'on' : ''"><a th:href="@{/myshop/myqna}">1:1문의</a></li>
+            <li th:classappend="${option == 'profile'} ? 'on' : ''"><a th:href="@{/myshop/profile}">나의 프로필</a></li>
         </ul>
     </aside>
 </th:block>

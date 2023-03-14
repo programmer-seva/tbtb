@@ -1,0 +1,54 @@
+/* myorder */
+.myContent > div.myorderFrame {
+    width: 1000px;
+}
+
+/* myorder - orderList */
+div.myorderFrame > ul.deliInfo {
+    line-height: 1.5;
+    font-size: 14px;
+}
+div.myorderFrame > ul.deliInfo > li {
+    color: #777777;
+    padding-left: 8px;
+    position: relative;
+    line-height: 1.5;
+    font-weight: bold;
+}
+div.myorderFrame > ul.deliInfo > li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 3px;
+    height: 3px;
+    background: #777777;
+    border-radius: 100%;
+}
+
+div.myorderFrame > div.date {
+    margin: 30px 0;
+}
+
+div.myorderFrame > div.orderList > table {
+    width: 1000px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+div.myorderFrame > div.orderList > table th {
+    height: 50px;
+    border: 1px solid #e5e7eb;
+    border-left: 0;
+    border-right: 0;
+}
+
+div.myorderFrame > div.orderList > table td {
+    height: 70px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+}

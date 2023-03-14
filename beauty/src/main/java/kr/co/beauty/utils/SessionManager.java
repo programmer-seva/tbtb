@@ -6,9 +6,7 @@
 package kr.co.beauty.utils;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Component;
 
@@ -23,15 +21,11 @@ public class SessionManager {
 	//관리 및 에러방지를 위해 상수로 선언
 	public static final String NO_MEMBER_COOKIE = "mySessionId";
 	
-	//세션 저장소
-	//동시 요청에 안전한 ConcurrentHashMap를 사용
-	private Map<String, Object> sessionStore = new ConcurrentHashMap<>();
-	
 	//세션 생성
-	public void createSession(Object value, HttpServletResponse response) {
+	public void createSession(Object value, HttpServletRequest request, HttpServletResponse response) {
 		//세션 ID생성후, 값을 세션에 저장
 		String sessionId = UUID.randomUUID().toString();
-		sessionStore.put(sessionId, value);
+		request.getSession().setAttribute(sessionId, value);
 		//쿠키 생성 2일 유지 -> 업로드시 웹주소로 바꿀 것
 		Cookie noMemberCookie = new Cookie(NO_MEMBER_COOKIE, sessionId);
 		noMemberCookie.setHttpOnly(true);
@@ -47,7 +41,7 @@ public class SessionManager {
 		if(noMemberCookie == null) {
 			return null;
 		}else {
-			return sessionStore.get(noMemberCookie.getValue());
+			return  request.getSession().getAttribute(noMemberCookie.getValue());
 		}
 	}
 	
@@ -61,7 +55,7 @@ public class SessionManager {
 	public void expire(HttpServletRequest request) {
 		Cookie noMemberCookie = findCookie(request, NO_MEMBER_COOKIE);
 		if(noMemberCookie != null) {
-			sessionStore.remove(noMemberCookie.getValue());
+			request.getSession().removeAttribute(noMemberCookie.getValue());
 		}
 	}
 	

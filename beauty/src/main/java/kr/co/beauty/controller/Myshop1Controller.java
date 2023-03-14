@@ -25,20 +25,67 @@ public class Myshop1Controller {
 	@Autowired
 	private MyshopService service;
 	
-	
-	/* 내 정보 */
-	@GetMapping("myshop/profile")
-	public String profile(Principal principal, Model model) {
+	/* 쿠폰 */
+	@GetMapping("myshop/myorder")
+	public String myorder(Principal principal, Model model) {
 		//유저 정보 받기
 		Member1VO member = service.selectMember(principal.getName());
 		model.addAttribute("member", member);
-		return "myshop/profile";
+		//내 주문내역 가져오기
+		
+		//카테고리
+		model.addAttribute("option", "myorder");
+		return "myshop/myorder";
 	}
 	
 	
 	
+	/* 쿠폰 */
+	@GetMapping("myshop/coupon")
+	public String coupon(Principal principal, Model model) {
+		//유저 정보 받기
+		Member1VO member = service.selectMember(principal.getName());
+		model.addAttribute("member", member);
+		//내 쿠폰목록 가져오기
+		
+		//카테고리
+		model.addAttribute("option", "coupon");
+		return "myshop/coupon";
+	}
 	
-	/* 위시 페이지 */
+	
+	
+	/* 적립금 */
+	@GetMapping("myshop/point")
+	public String point(Principal principal, Model model) {
+		//유저 정보 받기
+		Member1VO member = service.selectMember(principal.getName());
+		model.addAttribute("member", member);
+		//내 적립내역 가져오기
+		
+		//카테고리
+		model.addAttribute("option", "point");
+		return "myshop/point";
+	}
+	
+	
+	
+	/* 1:1문의 */
+	@GetMapping("myshop/myqna")
+	public String myqna(Principal principal, Model model) {
+		//유저 정보 받기
+		Member1VO member = service.selectMember(principal.getName());
+		model.addAttribute("member", member);
+		//내 문의내역 가져오기
+		
+		//카테고리
+		model.addAttribute("option", "myqna");
+		return "myshop/myqna";
+	}
+	
+	
+	
+	/* 위시 리스트 */
 	@GetMapping("myshop/wishlist")
 	public String wishlist(Principal principal, Model model) {
 		//유저 정보 받기
@@ -47,7 +94,8 @@ public class Myshop1Controller {
 		//위시리스트 가져오기
 		List<WishVO> wishList = service.selectWishlist(principal.getName());
 		model.addAttribute("wishList", wishList);
-		
+		//카테고리
+		model.addAttribute("option", "wishlist");
 		return "myshop/wishlist";
 	}
 	
@@ -64,5 +112,19 @@ public class Myshop1Controller {
 	public String deleteSelectedWish(int wishNo) {
 		service.deleteSelectedWish(wishNo);
 		return "redirect:/myshop/wishlist";
-	}	
+	}
+	
+	
+	
+	/* 나의 프로필 */
+	@GetMapping("myshop/profile")
+	public String profile(Principal principal, Model model) {
+		//유저 정보 받기
+		Member1VO member = service.selectMember(principal.getName());
+		model.addAttribute("member", member);
+		//카테고리
+		model.addAttribute("option", "profile");
+		return "myshop/profile";
+	}
+	
 }
