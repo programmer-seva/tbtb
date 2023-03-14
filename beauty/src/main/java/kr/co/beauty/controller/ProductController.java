@@ -1,14 +1,18 @@
 package kr.co.beauty.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.beauty.service.ProductService;
 import kr.co.beauty.vo.ProdCate2VO;
@@ -59,12 +63,17 @@ public class ProductController {
 	
 	@GetMapping("shop/view")
 	public String productView(Model model,@RequestParam("pno") String prodNo) {
-		
-		//상품출력
 		ProductVO prod = service.selectProduct(prodNo);
 		model.addAttribute("prod", prod);
-		
-		
 		return "product/view";
+	}
+	
+	@PostMapping("color")
+	@ResponseBody
+	public Map<String, List<String>> color(ProductVO vo) {
+		Map<String, List<String>> result = new HashMap<>();
+		List<String> arr = service.findSize(vo);
+		result.put("result", arr);
+		return result;
 	}
 }

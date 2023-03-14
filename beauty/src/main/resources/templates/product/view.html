@@ -6,7 +6,37 @@
 	<th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/product/view.css}">
     <link rel="stylesheet" th:href="@{/css/color.css}">
-
+	<script th:inline="javascript">
+		$(function(){
+			$('select[name=color]').change(function(){
+				let color = $(this).val();
+				let prodNo = [[${prod.prodNo}]];
+				let jsonData = {
+					'prodNo' : prodNo,
+					'color' : color
+				}
+				console.log(jsonData);
+				if(color != 0){
+					$.ajax({
+						url : '/Beauty/color',
+						method : 'POST',
+						data : jsonData,
+						dataType :'JSON',
+						success : function(data){
+						}
+					});
+				}
+			});
+			
+			//상위 선택자
+			$('select[name=size]').change(function(){
+				if($('select[name=color]:selected')){
+					alert('선택');
+				}
+			});
+			
+		});
+	</script>
 </head>
 <body>
     <th:block th:replace="~{/_header :: modileFragment}"></th:block>
@@ -106,7 +136,7 @@
                                     <!-- 반복문끝 -->
                                 </div>
                             </div>
-                            <div class="info">
+                            <div class="view_info">
                                 <h3>[[${prod.prodName}]]</h3>
                                 <p th:text="${prod.descript}"></p>
                                 <div class="price">
@@ -122,7 +152,7 @@
                                 <table>
                                 	<tr>
                                 		<td>적립금</td>
-                                		<td></td>
+                                		<td>1%</td>
                                 	</tr>
                                 	<tr>
                                 		<td>무이자 할부</td>
@@ -134,35 +164,88 @@
                                 	</tr>
                                 	<tr>
                                 		<td>배송구분</td>
-                                		<td></td>
+                                		<td>택배배송</td>
                                 	</tr>
                                 	<tr>
                                 		<td>배송예상</td>
-                                		<td></td>
+                                		<td>18시 이전주문 시 <span>오늘출고예정</span></td>
                                 	</tr>
                                 	<tr>
                                 		<td>색상</td>
-                                		<td class="selector">
-                                		<select name="color">
-                               			<option value="0">--옵션 선택--</option>
+                                		<td class="selector c">
                                 		<th:block th:each="color : ${prod.colorArr}">
-                                			<option th:value="${color}">[[${color}]]</option>
-                                		</th:block>
-                                		</select>
+                                			<p class="selectColor">[[${color}]]</p>
+                               			</th:block>
+                               			<span>[필수]<strong>옵션을 선택해주세요.</strong></span>
                                 		</td>
                                 	</tr>
                                 	<tr>
                                 		<td>사이즈</td>
-                                		<td class="selector">
-                                		<select name="size">
-                               			<option value="0">--옵션 선택--</option>
-                                		<th:block th:each="color : ${prod.colorArr}">
-                                			<option th:value="${color}">[[${color}]]</option>
-                                		</th:block>
-                                		</select>
+                                		<td class="selector s">
+                                		<th:block th:each="size : ${prod.sizeArr}">
+                                			<p class="selectSize">[[${size}]]</p>
+                               			</th:block>
+                               			<span>[필수]<strong>옵션을 선택해주세요.</strong></span>
                                 		</td>
                                 	</tr>
                                 </table>
+                                <article class="orderItems">
+                                	<span class="colorsize"></span>
+                                	<div>
+                                		<button type="button" id="remove"><span class="material-icons">remove</span></button>
+		                               	<span class="count">1</span>
+		                               	<button type="button" id="add"><span class="material-icons">add</span></button>
+                                	</div>
+                                	<span class="total"></span>
+                                	<span class="material-icons" id="close">close</span>
+                                </article>
+                                <script>
+                                	$(function(){
+                                		$('.selectColor').click(function(){
+                                			$('.selectColor').removeClass('select');
+                                			$(this).addClass('select on');
+                                			$(this).siblings('span').children().text($(this).text());
+                                		});
+                                		$('.selectSize').click(function(){
+                                			if($('.selector').find('.on').val() != ""){
+                                				alert('색상부터 선택해주세요.');
+                                				return false;
+                                			}
+                                			$('.selectSize').removeClass('select');
+                                			$(this).addClass('select');
+                                			$(this).siblings('span').children().text($(this).text());
+                                			let c = $('.c').children('.select').text();
+                                			let s = $('.s').children('.select').text();
+                                			$('.colorsize').text(c+"/"+s);
+                                			total(1);
+                                		});
+                                		$('#remove').click(function(){
+                                			let cnt = $('.count').text();
+                                			if(cnt == 1){
+                                				alert('최소 1개이상 주문가능합니다.');
+                                				return false;
+                                			}
+                                			total(cnt);
+                                			$('.count').text(Number(cnt)-1);
+                                		});
+                                		$('#add').click(function(){
+                                			let cnt = $('.count').text();
+                                			if(cnt == 20){
+                                				alert('최대 20개까지 주문가능합니다.');
+                                				return false;
+                                			}
+                                			total(cnt);
+                                			$('.count').text(Number(cnt)+1);
+                                		});
+                                		function total(cnt){
+                                			let p = $('.p2').text();
+                                			a = p.lastIndexOf('원');
+                                			p = p.substring(0,a);
+                                			p = p.replace(/,/g, "");
+                                			$('.total').text(p * cnt + "원");
+                                		}
+                                	});
+                                </script>
                                 <section>
 	                                <a href="#" class="wish"><span class="material-icons">favorite_border</span></a>
 	                                <a href="#" class="cart">장바구니</a>
