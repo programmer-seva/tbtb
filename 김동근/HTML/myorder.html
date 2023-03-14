@@ -154,8 +154,21 @@
                                     <li>출고 완료 직후 교환 / 환불 요청을 하더라도 상품을 수령하신 후 택배 업체를 통해 보내주셔야 처리 가능합니다.</li>
                                 </ul>
                                 <!-- 기간 선택 -->
-                                <div class="date">
-                                    날 짜 선 택
+                                <div class="byDate">
+                                    <div class="dateBtns">
+                                        <input type="radio" id="1week" name="chkDate" value="1week" checked="checked">
+                                        <label for="1week">1주일</label>
+                                        <input type="radio" id="1month" name="chkDate" value="1month">
+                                        <label for="1month">1개월</label>
+                                        <input type="radio" id="3month" name="chkDate" value="3month">
+                                        <label for="3month">3개월</label>
+                                    </div>
+                                    <div class="datePeriod">
+                                        <input type="date">
+                                        ~
+                                        <input type="date">
+                                        <button type="button" class="btn">조회</button>
+                                    </div>
                                 </div>
 
                                 <!-- 주문 내역 -->
@@ -167,7 +180,7 @@
                                                 <th>주문일자</th>
                                                 <th>주문번호</th>
                                                 <th>주문금액(수량)</th>
-                                                <th colspan="2">주문 상태</th>
+                                                <th>주문 상태</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -176,16 +189,16 @@
                                             <td>
                                                 <div>
                                                     <a href="#">
-                                                        <img src="./images/default_profile.png" alt="" width="100px" height="100px"/>
+                                                        <img src="./images/default_profile.png" alt=""/>
                                                     </a>
                                                     <ul class="info">
-                                                        <li class="seller">
+                                                        <li id="seller">
                                                             <a href="https://www.musinsa.com/brands/beslow">비슬로우</a>
                                                         </li>
-                                                        <li class="name">
+                                                        <li id="prodName">
                                                             <a href="/app/goods/1245684/0">19FW PURPLE LOGO SWEAT WHITE</a>
                                                         </li>
-                                                        <li class="option">옵션 : white M</li>
+                                                        <li id="option">옵션 : white M</li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -194,23 +207,51 @@
                                                 <a href="#">202012281222560001</a>
                                             </td>
                                             <td>
-                                                <span>20,650원</span> <br/>
-                                                <span>1개</span>
+                                                <span id="disPrice">20,650원</span> <br/>
+                                                <span id="count">1개</span>
                                             </td>
                                             <td>
                                                 <div class="btn-set tooltip">
-                                                    <button type="button">배송 조회</button> <br/>
-                                                    <button type="button">리뷰 쓰기</button><br/>
-                                                    <button type="button">반품/교환</button>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    결제 완료
+                                                    <button type="button" class="btn">배송 조회</button> <br/>
+                                                    <button type="button" class="btn">리뷰 쓰기</button><br/>
+                                                    <button type="button" class="btn">반품/교환</button>
                                                 </div>
                                             </td>
                                         </tr>
                                         <!-- 아이템 반복 종료 -->
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <a href="#">
+                                                        <img src="./images/default_profile.png" alt=""/>
+                                                    </a>
+                                                    <ul class="info">
+                                                        <li id="seller">
+                                                            <a href="https://www.musinsa.com/brands/beslow">비슬로우</a>
+                                                        </li>
+                                                        <li id="prodName">
+                                                            <a href="/app/goods/1245684/0">19FW PURPLE LOGO SWEAT WHITE</a>
+                                                        </li>
+                                                        <li id="option">옵션 : white M</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td>2023-03-14</td>
+                                            <td>
+                                                <a href="#">202012281222560001</a>
+                                            </td>
+                                            <td>
+                                                <span id="disPrice">20,650원</span> <br/>
+                                                <span id="count">1개</span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-set tooltip">
+                                                    <button type="button" class="btn">배송 조회</button> <br/>
+                                                    <button type="button" class="btn">리뷰 쓰기</button><br/>
+                                                    <button type="button" class="btn">반품/교환</button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
