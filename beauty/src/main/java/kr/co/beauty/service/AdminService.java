@@ -36,10 +36,6 @@ public class AdminService {
 	}
 	
 	//관리자페이지에서 상품목록 불러오기
-	public List<Product1VO> selectProducts(String param1,String arg1, int param3){
-		return dao.selectProducts(param1,arg1, param3);
-	}
-	
 	public List<Product1VO> selectProductByCheckBox(List<String> collection){
 		return dao.selectProductByCheckBox(collection);
 	}
