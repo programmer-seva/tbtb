@@ -8,56 +8,73 @@
     <script th:src="@{/js/admin.js}"></script>
     <script type="text/javascript" th:inline="javascript">
     	$(document).ready(function(){
-    		var arg1 = [[${arg1}]];
-    		//대분류에 따른 소분류 메뉴 보이기
-    		if(arg1 == 'OUTER'){
-    			$("a:contains('OUTER')").siblings('ul').show();
-    		}else if(arg1 == 'TOP'){
-   				$("a:contains('TOP')").siblings('ul').show();
-    		}else if(arg1 == 'BOTTOM'){
-    			$("a:contains('BOTTOM')").siblings('ul').show();
-    		}else if(arg1 == 'DRESS'){
-    			$("a:contains('DRESS')").siblings('ul').show();
-    		}else if(arg1 == 'ETC'){
-    			$("a:contains('ETC')").siblings('ul').show();
-    		}
-    		
-            
-          //체크된 메뉴 상품목록 불러오기
+    		//페이지가 로드되면 처음 실행
+    		CheckBoxList();
+    	  	//체크된 메뉴 상품목록 불러오기
     		function CheckBoxList(){
-    			//체크박스 값 배열에 담기
     			var collection = new Array();
-
-    			$('input[name=category2]:checked').each(function(){
-    				collection.push($(this).val());
-    			});
-    			console.log(collection);
+    		  	if($('input:checkbox[name=category2]:checked').length == 0){
+    		  		//전체 값 배열에 담기
+    				$('input[name=category2]').each(function(){
+    					collection.push($(this).val());
+    				});	
+    		  	}else{
+    		  		//체크박스 값 배열에 담기
+    				$('input[name=category2]:checked').each(function(){
+    					collection.push($(this).val());
+    				});	
+    		  	}
+    		  	
+    		  	console.log(collection);
     			//AJAX 요청 보내기
-    			$.ajax({
+    		  	$.ajax({
     				type:"post",
     				url:"/Beauty/admin/product/list",
     				data: {'collection':collection},
+    				dataType: 'json',
     				success:function(data){
-    					alert("1");
-    					console.log(collection);
-    					var stateObj = { url: "/Beauty/admin/product/list?collection="+collection };
-    					history.pushState(stateObj, "", "/Beauty/admin/product/list?collection="+collection);
-
-    					// 주소창 URL이 변경된 후에 실행될 함수
-    					$(window).on("popstate", function() {
-    					  var state = history.state;
-    					  // state.url에 저장된 URL로 페이지 이동
-    					  
-    					});
+    					console.log(data);
+    					$('.productRow').remove();
+    					//최신순 정렬
+    					const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
+    					
+    					let tag = "";
+    					
+    					for(let i=0; i<sortedResult.length; i++){
+    							tag += "<tr class='productRow'>";
+    							tag += "<td><input type='checkbox' name='선택체크' class='rowCheck' value='"+sortedResult[i].prodNo+"'></td>";
+    							tag += "<td><img src='#'></td>";
+    							tag += "<td>"+sortedResult[i].prodNo+"</td>";
+    							tag += "<td>"+sortedResult[i].prodCate1+"</td>";
+    							tag += "<td>"+sortedResult[i].prodCate2+"</td>";
+    							tag += "<td>"+sortedResult[i].prodName+"</td>";
+    							tag += "<td>"+sortedResult[i].disPrice+"</td>";
+    							tag += "<td>"+sortedResult[i].stock+"</td>";
+    							tag += "<td>"+sortedResult[i].hit+"</td>";
+    							tag += "<td>";
+    							tag += "<form action='list/delete'>";
+    							tag += "<input type='hidden' name='prodNo' value='"+sortedResult[i].prodNo+"'/>";
+    							tag += "<input type='hidden' name='param1' value='"+sortedResult[i].prodNo+"'/>";
+    							tag += "<input type='hidden' name='arg1' value='"+sortedResult[i].prodCate1+"'/>";
+    							tag += "<input type='submit' value='삭제' id='deleteButton'/>";
+    							tag += "</form>";
+    							tag += "</td>";
+    							tag += "</tr>"
+    					}
+    					$('#tableList').append(tag);
     					
     				}
     			});
     			
     		}
-        	
-    		$("ul:visible").find("input[name=category2]").on("change",function(){
+    		
+    	  	//메뉴 체크박스가 변화할 때마다 상품목록 불러오기
+    		$("ul").find("input[type=checkbox]").on("change",function(){
     	    	CheckBoxList();
     	    });
+
+    		
+    		
     		
     	});
     </script>
@@ -72,7 +89,7 @@
 			            <a th:href="@{/admin/product/list(param1=prodNo)}">ALL</a>
 			        </li>
 			        <li>
-			            <a th:href="@{#}">OUTER</a>
+			            <a href="#" class="cate1">OUTER</a>
 			            <ul>
 			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
 			                <li><label><input type="checkbox" name="category2" value="가디건">가디건</input></label></li>
@@ -82,7 +99,7 @@
 			            </ul>
 			        </li>
 			        <li>
-			            <a th:href="@{#}">TOP</a>
+			            <a th:href="@{#}" class="cate1">TOP</a>
 			            <ul>
 			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
 			                <li><label><input type="checkbox" name="category2" value="티셔츠">티셔츠</label></li>
@@ -92,7 +109,7 @@
 			            </ul>
 			        </li>
 			        <li>
-			            <a th:href="@{#}">BOTTOM</a>
+			            <a th:href="@{#}" class="cate1">BOTTOM</a>
 			            <ul>
 			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
 			                <li><label><input type="checkbox" name="category2" value="스커트">스커트</label></li>
@@ -103,7 +120,7 @@
 			            </ul>
 			        </li>
 			        <li>
-			            <a th:href="@{#}">DRESS</a>
+			            <a th:href="@{#}" class="cate1">DRESS</a>
 			            <ul>
 			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
 			                <li><label><input type="checkbox" name="category2" value="원피스">원피스</label></li>
@@ -112,7 +129,7 @@
 			            </ul>
 			        </li>
 			        <li>
-			            <a th:href="@{#}">ETC</a>
+			            <a th:href="@{#}" class="cate1">ETC</a>
 			            <ul>
 			                <li><label><input type="checkbox" class="allCheck">전체</input></label></li>
 			                <li><label><input type="checkbox" name="category2" value="신발">신발</label></li>
@@ -142,7 +159,7 @@
                     <a th:classappend="${param1}=='stock'?'on'" th:href="@{/admin/product/list(param1=stock)}">재고순 </a>|
                     <a th:classappend="${param1}=='hit'?'on'" th:href="@{/admin/product/list(param1=hit)}">조회순</a>
                 </div>
-                <table>
+                <table id="tableList">
                     <tr>
                         <th><input type="checkbox" name="전체체크" id="checkAll"></th>
                         <th>사진</th>
@@ -155,25 +172,7 @@
                         <th>조회</th>
                         <th>관리</th>
                     </tr>
-                    <tr th:each="prod:${products}" class="productRow">
-                        <td><input type="checkbox" name="선택체크" class="rowCheck" th:value="${prod.prodNo}"></td>
-                        <td><img th:src="@{#}"></td>
-                        <td>[[${prod.prodNo}]]</td>
-                        <td>[[${prod.prodCate1}]]</td>
-                        <td>[[${prod.prodCate2}]]</td>
-                        <td>[[${prod.prodName}]]</td>
-                        <td>[[${prod.disPrice}]]</td>
-                        <td>[[${prod.stock}]]</td>
-                        <td>[[${prod.hit}]]</td>
-                        <td>
-                       		<form th:action="@{/admin/product/list/delete}" method="get">
-	                           	<input type="hidden" name="prodNo" th:value="${prod.prodNo}">
-	                           	<input type="hidden" name="param1" th:value="${param1}">
-	                           	<input type="hidden" name="arg1" th:value="${arg1}">
-	                           	<input type="submit" value="삭제" id="deleteButton">
-                           </form>
-                       </td>
-                    </tr>
+                    
                 </table>
                 <input type="button" value="선택삭제" class="delete">
                 <input type="button" value="상품등록" class="register">

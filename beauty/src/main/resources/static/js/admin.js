@@ -1,43 +1,28 @@
 /* admin-prodcut-list */
 $(document).ready(function(){
-	/* 메뉴 제어 */
+	//기본 시작 전체 체크 해제
 	$(".allCheck").attr("checked", false);
-	//메뉴 클릭했을 때 대분류별 페이지 이동
-    $('aside > ul > li > a').click(function(){
-		var arg1 = $(this).text();
-		
-		location.href="/Beauty/admin/product/list?param1=prodNo&arg1="+arg1;
-	});
 	
-	//기본적으로 메뉴가 전체체크 되어있게
-	$("ul:visible").find(".allCheck").attr("checked", true);
-	
-	if($("ul:visible").find('.allCheck').prop("checked")== true){
-		$("ul:visible").find('input[name=category2]').attr("checked", true);
-	}
-	
-	//메뉴 클릭하면 전체체크
-	$("aside> ul > li > a").on("click", function(){
-		$('ul:visible').find("input[type=checkbox]").attr("checked", true);
-	});
-	
-	//전체체크박스 클릭
-	$("ul:visible").find('.allCheck').on("click", function(){    
+	//전체 체크 클릭했을 때 하위카테고리 체크
+    $('.allCheck').click(function(){
 		if($(this).prop("checked")){
-			$("ul:visible").find("input[name=category2]").prop("checked", true);	
+			$(".allCheck:checked").closest("ul").children().children().children("input[name=category2]").prop("checked", true);
 		}else{
-			$("ul:visible").find("input[name=category2]").prop("checked", false);	
+			$(this).closest("ul").children().children().children("input[name=category2]").prop("checked", false);	
 		}
+	
 	});
 	
     //체크박스 개별선택
-    $("ul:visible").find("input[name=category2]").on("click",function(){
+    $("input[name=category2]").on("click",function(){
     	if($(this).prop("checked") == false){
-    		$("ul:visible").find(".allCheck").prop("checked", false);
-    	}else if($(this).closest("ul").find(":checked").length == $(this).closest("ul").find("input[name=category2]").length){
-    		$("ul:visible").find(".allCheck").prop("checked", true);
+    		$(this).closest("ul").children().children().children(".allCheck").prop("checked", false);
+    	}else if($(this).closest("ul").children().children().children(":checked").length == $(this).closest("ul").children().children().children("input[name=category2]").length){
+    		$(this).closest("ul").children().children().children(".allCheck").prop("checked", true);
     	}
     });
+    
+	
 
 	/* 상품목록 체크박스 제어 */
 	//상품목록 전체체크박스 클릭
