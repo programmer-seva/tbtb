@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/headfoot.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/member/login.css}">
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/member/login.js}"></script>
+    
+    <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+</head>
+<script>
+$(function() {
+	
+	// 아이디 찾기
+	$('.btnId').click(function() {
+
+		console.log('here1');
+
+		let name = $('input[name=name]').val();
+		let phone = $('input[name=phone]').val();
+
+		let jsonData = {
+			"name" : name,
+			"phone" : phone
+		};
+		console.log(jsonData);
+		console.log('here2');
+		$.ajax({
+			url : '/Beauty/member/find1',
+			type : 'post',
+			data : jsonData,
+			dataType : 'json',
+			success : function(data) {
+				console.log('here3');
+				if (data.result != null) {
+					let uid = data.result;
+					location.href = "/Beauty/member/findIdResult";
+				} else {
+					console.log('here4');
+					alert('해당하는 사용자가 존재하지 않습니다.\n이름과 휴대폰 번호를 다시 확인하십시오.');
+				}
+			}
+		});
+
+		return false;
+	});
+	
+	
+	/* $('.btnPw').click(function() {
+
+		console.log('here1');
+
+		let uid = $('input[name=uid]').val();
+		
+
+		let jsonData = {
+			"uid" : uid
+		};
+		console.log(jsonData);
+		console.log('here2');
+		$.ajax({
+			url : '/Beauty/member/find2',
+			type : 'post',
+			data : jsonData,
+			dataType : 'json',
+			success : function(data) {
+				console.log('here3');
+				if (data.result != null) {
+					let pass = data.result;
+					location.href = "/Beauty/member/findPwResult";
+				} else {
+					console.log('here4');
+					alert('해당하는 사용자가 존재하지 않습니다.\n이름과 휴대폰 번호를 다시 확인하십시오.');
+				}
+			}
+		});
+
+		return false;
+	}); */
+	
+	// 비밀번호 변경
+	$('.btnPw').click(function() {
+
+		console.log('here1');
+
+		let name = $('input[name=name]').val();
+		let uid = $('input[name=uid]').val();
+		let phone = $('input[name=phone]').val();
+
+		let jsonData = {
+			"name" : name,
+			"uid" : uid,
+			"phone" : phone
+		};
+		console.log(jsonData);
+		console.log('here2');
+		$.ajax({
+			url : '/Beauty/member/find2',
+			type : 'post',
+			data : jsonData,
+			dataType : 'json',
+			success : function(data) {
+				console.log('here3');
+				if (data.result == 1) {
+					console.log(data);
+					location.href="/Beauty/member/findPwResult";
+				} else {
+					alert('해당하는 사용자가 존재하지 않습니다.\n아이디와 이메일을 다시 확인하십시오.');
+				}
+			}
+		});
+	return false;
+	});
+
+});
+</script>
+
+
+<body>
+    <div id="wrap">
+        <main>
+            <div class="lg">
+                <section>
+                    <h2>아이디/비밀번호 찾기</h2>
+                    <table>
+                        <tr>
+                            <td class="findId current">아이디 찾기</td>
+                            <td class="findPw">비밀번호 찾기</td>
+                        </tr>
+                    </table>
+                    <article id="member" class="m1">
+                        <div class="login">
+                            <form action="#" method="post">
+                                <input type="text" name="name" placeholder="이름">
+                                <span class="material-icons close">close</span>
+                                <input type="text" name="phone" placeholder="휴대폰 번호" style="margin-top: 10px;">
+                                <button type="submit" class="btnId">확인</button>
+                            </form>
+                            <div class="reg">
+                                <p class="resultPhone"></p>
+                            </div>
+                        </div>
+                        <div class="other">
+                            <p>
+                                <span class="material-icons">call</span>&nbsp;&nbsp;
+                                0000-0000&nbsp;&nbsp; 평일(월~금) 11:00~19:00 (주말 및 공휴일 휴무)
+                            </p>
+                        </div>
+                    </article>
+                    <article id="member" class="m2">
+                        <div class="login">
+                            <form action="#" method="post">
+                                <input type="email" name="uid" placeholder="이메일">
+                                <span class="material-icons close">close</span>
+                                
+                                <input type="text" id="login-email-input" placeholder="인증번호 6자리를 입력하세요" style="margin-top: 10px;">
+                                <span class="material-icons close">close</span>
+                                <!-- <button type="submit" class="aa">인증번호 발송</button> -->
+                                <button type="submit" class="btnPw">확인</button>
+                            </form>
+                        </div>
+                        <div class="other">
+                            <p>
+                                <span class="material-icons">call</span>&nbsp;&nbsp;
+                                0000-0000&nbsp;&nbsp; 평일(월~금) 11:00~19:00 (주말 및 공휴일 휴무)
+                            </p>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </main>
+        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+    </div>
+</body>
+
+</html>

@@ -22,6 +22,7 @@
 
 <body>
     <div id="wrap">
+        
         <main>
             <div class="lg">
                 <section>
@@ -37,7 +38,7 @@
                             <form action="#" method="post">
                                 <input type="text" name="uid" placeholder="아이디">
                                 <span class="material-icons close">close</span>
-                                <input type="password" name="password" placeholder="비밀번호">
+                                <input type="password" name="password" placeholder="비밀번호" style="margin-top: 10px;">
                                 <span class="material-icons eye">visibility_off</span>
                                 </input>
                                 <button type="submit">로그인</button>
@@ -47,8 +48,8 @@
                             </div>
                         </div>
                         <div class="other">
-                            <a th:href="@{/member/findId}">아이디 찾기</a>
-                            <a th:href="@{/member/findPw}">비밀번호 찾기</a>
+                            <a th:href="@{/member/find}">아이디 찾기</a>
+                            <a th:href="@{/member/find}">비밀번호 찾기</a>
                             <a th:href="@{/member/register}">회원가입</a>
                         </div>
                     </article>
@@ -56,8 +57,9 @@
                         <div class="login">
                             <form action="#" method="post">
                                 <input type="text" name="uid" placeholder="이름">
-                                <input type="text" name="uid" placeholder="휴대폰 번호('-'없이 입력)">
-                                <input type="text" name="uid" placeholder="주문번호">
+                                <span class="material-icons close">close</span>
+                                <input type="text" name="uid" placeholder="휴대폰 번호('-'없이 입력)" style="margin-top: 10px;">
+                                <input type="text" name="uid" placeholder="주문번호" style="margin-top: 10px;">
                                 <button type="submit">주문/배송조회</button>
                             </form>
                         </div>

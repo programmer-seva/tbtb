@@ -31,11 +31,6 @@
 	<select id="findPw" resultType="String">
 		select `pass` from `member` where `name`=#{arg0} and `uid`=#{arg1} and `phone`=#{arg2};
 	</select>
-
-	<update id="findPwChange">
-		update `member` set `pass`=#{pass} where `uid`=#{uid};
-	</update>
-	
 	
 	<!--  -->
 	<select id="selectMember" resultType="Member1VO">

@@ -47,8 +47,10 @@ public class MemberService {
 	public String findPw(String name, String uid, String phone) {
 		return dao.findPw(name, uid, phone);
 	}
-	public int findPwChange(String uid, String pass) {
-		return dao.findPwChange(uid, pass);
-	}
 	
+	
+	// 자동로그인
+	public int countByNameAndUid(String name, String uid) {
+		return repo.countByNameAndUid(name, uid);
+	}
 }

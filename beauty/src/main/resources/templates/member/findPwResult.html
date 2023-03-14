@@ -22,7 +22,7 @@
 <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
 <script>
-let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
 	$(function(){
 		$('.btnNext').click(function(e){
@@ -53,7 +53,7 @@ let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 			console.log("hr4");
 			
 			$.ajax({
-				url: '/Beauty/member/findPwChange',
+				url: '/Beauty/member/findPwResult',
 				type: 'post',
 				data: jsonData,
 				dataType: 'json',
@@ -73,7 +73,7 @@ let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 <body>
 	<main>
 		<div class="findPw">
-			<h2>아이디 찾기 결과</h2>
+			<h2>비밀번호 찾기 결과</h2>
 
 			<form action="#" method="POST">
 				<div class="findPw">
@@ -93,7 +93,7 @@ let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 						</table>
 						<div class="btn">
 							<a th:href="@{/member/login}" class="btnCancel">로그인</a>
-							<a th:href="@{/member/findId}" class="btnNext">아이디 찾기</a>
+							<a th:href="@{/member/find}" class="btnNext">아이디 찾기</a>
 						</div>	
 					</fieldset>
 				</div>
