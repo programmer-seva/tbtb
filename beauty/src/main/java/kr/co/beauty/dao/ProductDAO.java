@@ -23,5 +23,6 @@ public interface ProductDAO {
 	
 	//view
 	public ProductVO selectProduct(String prodNo);
+	public String findSize(ProductVO vo);
 
 }

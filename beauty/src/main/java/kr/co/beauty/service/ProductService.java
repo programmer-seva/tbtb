@@ -1,5 +1,6 @@
 package kr.co.beauty.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -88,12 +89,26 @@ public class ProductService {
 	public ProductVO selectProduct(String prodNo) {
 		ProductVO vo = dao.selectProduct(prodNo);
 		String color = vo.getColorName();
+		String size = vo.getSize();
 		if(color != null) {
 			String[] arr = color.split(",");
 			Arrays.sort(arr);
 			vo.setColorArr(arr);
 		}
+		if(size != null) {
+			String[] arr = size.split(",");
+			vo.setSizeArr(arr);
+		}
 		return vo;
+	}
+	public List<String> findSize(ProductVO vo) {
+		String item = dao.findSize(vo);
+		String[] arr = item.split(",");
+		List<String> list = new ArrayList<>();
+		for(String i : arr) {
+			list.add(i);
+		}
+		return list;
 	}
 	
 }
