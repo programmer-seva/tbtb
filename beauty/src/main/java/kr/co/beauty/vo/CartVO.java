@@ -4,16 +4,12 @@
  */
 package kr.co.beauty.vo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class CartVO {
 	private int cartNo;
-	private String email;
+	private String uid;
 	private int prodNo;
 	private String prodName;
 	private int price;
