@@ -1,5 +1,6 @@
 package kr.co.beauty.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
 import kr.co.beauty.service.ProductService;
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
+import kr.co.beauty.vo.WishVO;
 
 @Controller
 @MapperScan("kr.co.beauty.vo")
@@ -62,13 +65,33 @@ public class ProductController {
 	}
 	
 	@GetMapping("shop/view")
-	public String productView(Model model,@RequestParam("pno") String prodNo) {
+	public String productView(Model model,@RequestParam("pno") String prodNo, Principal principal) {
 		ProductVO prod = service.selectProduct(prodNo);
+		String uid = null;
+		if(principal != null) {
+			uid = principal.getName();
+		}
 		model.addAttribute("prod", prod);
+		model.addAttribute("uid", uid);
 		return "product/view";
 	}
 	
-	@PostMapping("color")
+	@PostMapping("addWish")
+	@ResponseBody
+	public Map<String, Integer> wish(WishVO vo) {
+		Map<String, Integer> result = new HashMap<>();
+		int rs = service.addWish(vo);
+		result.put("result", rs);
+		return result;
+	}
+	@PostMapping("addCart")
+	@ResponseBody
+	public void cart(HttpServletRequest req) {
+		String[] jsonArray = req.getParameterValues("jsonArray");
+		System.out.println(jsonArray.length);
+	}
+	
+	@PostMapping("colorsize")
 	@ResponseBody
 	public Map<String, List<String>> color(ProductVO vo) {
 		Map<String, List<String>> result = new HashMap<>();
