@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.beauty.dao.ProductDAO;
+import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
 import kr.co.beauty.vo.WishVO;
@@ -104,6 +105,9 @@ public class ProductService {
 	}
 	public int addWish(WishVO vo) {
 		return dao.addWish(vo);
+	}
+	public int addCart(CartVO vo) {
+		return dao.addCart(vo);
 	}
 	
 	public List<String> findSize(ProductVO vo) {
