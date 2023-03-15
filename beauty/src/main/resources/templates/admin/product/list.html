@@ -8,22 +8,25 @@
     <script th:src="@{/js/admin.js}"></script>
     <script type="text/javascript" th:inline="javascript">
     	$(document).ready(function(){
-    		//페이지가 로드되면 처음 실행
-    		CheckBoxList();
+		  	//페이지가 로드되면 처음 실행
+		  	CheckBoxList();
+		  	page();
     	  	//체크된 메뉴 상품목록 불러오기
     		function CheckBoxList(){
-    			var collection = new Array();
+    			//체크박스 값 배열에 담기
+        		var collection = new Array();
     		  	if($('input:checkbox[name=category2]:checked').length == 0){
-    		  		//전체 값 배열에 담기
+    		  		//전체 값
     				$('input[name=category2]').each(function(){
     					collection.push($(this).val());
     				});	
     		  	}else{
-    		  		//체크박스 값 배열에 담기
+    		  		//선택된 값
     				$('input[name=category2]:checked').each(function(){
     					collection.push($(this).val());
     				});	
     		  	}
+    		  	start=0;
     		  	
     		  	console.log(collection);
     			//AJAX 요청 보내기
@@ -33,48 +36,87 @@
     				data: {'collection':collection},
     				dataType: 'json',
     				success:function(data){
-    					console.log(data);
+    					//console.log(data);
     					$('.productRow').remove();
     					//최신순 정렬
     					const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
-    					
+    					//상품목록 불러오기
     					let tag = "";
     					
-    					for(let i=0; i<sortedResult.length; i++){
+    					const sliceArr = sortedResult.slice(start,start+21);
+    					
+    					for(let i=0; i<sliceArr.length; i++){
     							tag += "<tr class='productRow'>";
     							tag += "<td><input type='checkbox' name='선택체크' class='rowCheck' value='"+sortedResult[i].prodNo+"'></td>";
     							tag += "<td><img src='#'></td>";
-    							tag += "<td>"+sortedResult[i].prodNo+"</td>";
-    							tag += "<td>"+sortedResult[i].prodCate1+"</td>";
-    							tag += "<td>"+sortedResult[i].prodCate2+"</td>";
-    							tag += "<td>"+sortedResult[i].prodName+"</td>";
-    							tag += "<td>"+sortedResult[i].disPrice+"</td>";
-    							tag += "<td>"+sortedResult[i].stock+"</td>";
-    							tag += "<td>"+sortedResult[i].hit+"</td>";
+    							tag += "<td>"+sliceArr[i].prodNo+"</td>";
+    							tag += "<td>"+sliceArr[i].prodCate1+"</td>";
+    							tag += "<td>"+sliceArr[i].prodCate2+"</td>";
+    							tag += "<td>"+sliceArr[i].prodName+"</td>";
+    							tag += "<td>"+sliceArr[i].disPrice+"</td>";
+    							tag += "<td>"+sliceArr[i].stock+"</td>";
+    							tag += "<td>"+sliceArr[i].hit+"</td>";
     							tag += "<td>";
     							tag += "<form action='list/delete'>";
-    							tag += "<input type='hidden' name='prodNo' value='"+sortedResult[i].prodNo+"'/>";
-    							tag += "<input type='hidden' name='param1' value='"+sortedResult[i].prodNo+"'/>";
-    							tag += "<input type='hidden' name='arg1' value='"+sortedResult[i].prodCate1+"'/>";
+    							tag += "<input type='hidden' name='prodNo' value='"+sliceArr[i].prodNo+"'/>";
+    							tag += "<input type='hidden' name='param1' value='"+sliceArr[i].prodNo+"'/>";
+    							tag += "<input type='hidden' name='arg1' value='"+sliceArr[i].prodCate1+"'/>";
     							tag += "<input type='submit' value='삭제' id='deleteButton'/>";
     							tag += "</form>";
     							tag += "</td>";
     							tag += "</tr>"
     					}
     					$('#tableList').append(tag);
-    					
     				}
     			});
+    	  	}
+    		
+    		//페이징 처리
+			function page(){
+				//체크박스 값 배열에 담기
+        		var collection = new Array();
+    		  	if($('input:checkbox[name=category2]:checked').length == 0){
+    		  		//전체 값
+    				$('input[name=category2]').each(function(){
+    					collection.push($(this).val());
+    				});	
+    		  	}else{
+    		  		//선택된 값
+    				$('input[name=category2]:checked').each(function(){
+    					collection.push($(this).val());
+    				});	
+    		  	}
     			
+    		  	$.ajax({
+    				type:"post",
+    				url:"/Beauty/admin/product/listCount",
+    				data: {'collection':collection},
+    				dataType: 'json',
+    				success:function(data){
+    					let totalPage=1;
+    					
+    					if(data.result % 10 == 0){
+    						totalPage=data.result/10;
+    					}else{
+    						totalPage=Math.ceil(data.result/10);
+    					}
+    					console.log("page??",totalPage);
+    					
+    					let tag = "<span class='prev'>이전</span>";
+    					for(i=1; i<=totalPage; i++){
+    						let num= start==i?'current':'num';
+    						tag += "<span class='"+num+"' data-value='"+i+"'>"+i+"</span>";
+    					}
+    					tag += "<span class='next'>다음</span>";
+    					$(".page").append(tag);
+    				}
+    		  	});
     		}
     		
     	  	//메뉴 체크박스가 변화할 때마다 상품목록 불러오기
     		$("ul").find("input[type=checkbox]").on("change",function(){
     	    	CheckBoxList();
     	    });
-
-    		
-    		
     		
     	});
     </script>
@@ -86,7 +128,7 @@
             <aside>
 			    <ul>
 			        <li>
-			            <a th:href="@{/admin/product/list(param1=prodNo)}">ALL</a>
+			            <a th:href="@{/admin/product/list}">ALL</a>
 			        </li>
 			        <li>
 			            <a href="#" class="cate1">OUTER</a>
@@ -176,24 +218,11 @@
                 </table>
                 <input type="button" value="선택삭제" class="delete">
                 <input type="button" value="상품등록" class="register">
-                <!-- <div class="page">
-                	<th:block th:if="${arg1} != null">
-                    <span th:if="${groups[0]>1}"><a th:href="@{list(param1=${param1},pg=${groups[0]-1},arg1=${arg1})}">이전</a></span>
-                    <span th:each="num:${#numbers.sequence(groups[0],groups[1])}">
-                        <a th:href="@{list(param1=${param1},pg=${num},arg1=${arg1})}" th:class="${num == currentPage? 'current':'num'}">[[${num}]]</a>
-                    </span>
-                    <span th:if="${groups[1]<lastPageNum}"><a th:href="@{admin/product/list(param1=${param1},pg=${groups[1]+1},arg1=${arg1})}">다음</a></span>
-                	</th:block>
-                </div>
                 <div class="page">
-                	<th:block th:unless="${arg1} != null">
-                    <span th:if="${groups[0]>1}"><a th:href="@{list(param1=${param1},pg=${groups[0]-1})}">이전</a></span>
-                    <span th:each="num:${#numbers.sequence(groups[0],groups[1])}">
-                        <a th:href="@{list(param1=${param1},pg=${num})}" th:class="${num == currentPage? 'current':'num'}">[[${num}]]</a>
-                    </span>
-                    <span th:if="${groups[1]<lastPageNum}"><a th:href="@{list(param1=${param1},pg=${groups[1]+1})}">다음</a></span>
-                	</th:block>
-                </div> -->
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </section>
         </main>
     </div>
