@@ -36,8 +36,8 @@ public class AdminService {
 	}
 	
 	//관리자페이지에서 상품목록 불러오기
-	public List<Product1VO> selectProductByCheckBox(List<String> collection){
-		return dao.selectProductByCheckBox(collection);
+	public List<Product1VO> selectProducts(List<String> collection){
+		return dao.selectProducts(collection);
 	}
 	
 	//상품 삭제하기
@@ -46,14 +46,14 @@ public class AdminService {
 	}
 	
 	//상품 검색하기
-	public List<Product1VO> searchProduct(String param1,String arg1,String param2,String arg2){
-		return dao.searchProduct(param1, arg1, param2, arg2);
+	public List<Product1VO> searchProduct(String arg1,String param2,String arg2){
+		return dao.searchProduct(arg1, param2, arg2);
 	}
 	
 	/* 상품목록 페이징 처리 */
 	//상품 개수 세기
-	public int selectCountTotal() {
-		return dao.selectCountTotal();
+	public int selectCountProducts(List<String> collection) {
+		return dao.selectCountProducts(collection);
 	}
 	
 	//현재 페이지 번호

@@ -45,7 +45,7 @@ public class AdminController {
 			@RequestParam(required=false) String arg1, 
 			@RequestParam(required=false) String pg) {
 
-		//상품목록 페이징 처리 -2023/03/13
+		/*상품목록 페이징 처리 -2023/03/13
 		int currentPage = service.getCurrentPage(pg);
 		int param3 = service.getLimitStart(currentPage);
 		
@@ -53,18 +53,12 @@ public class AdminController {
 		int lastPageNum = service.getLastPageNum(total);
 		int pageStartNum = service.getPageStartNum(total, param3);
 		int groups[] = service.getPageGroup(currentPage, lastPageNum);
+		*/
 		
-		//최신순 출력
-		if(param1 == null) {
-			param1="prodNo";
-		}
+		
 		
 		model.addAttribute("param1",  param1);
 		model.addAttribute("arg1",  arg1);
-		model.addAttribute("groups",  groups);
-		model.addAttribute("currentPage",  currentPage);
-		model.addAttribute("lastPageNum",  lastPageNum);
-		model.addAttribute("pageStartNum",  pageStartNum);
 
 		return "admin/product/list";
 	}
@@ -74,12 +68,27 @@ public class AdminController {
 	@PostMapping("admin/product/list")
 	public Map<String, List<Product1VO>> list(@RequestParam(value="collection[]") List<String> collection) {		
 		
-		List<Product1VO> products = service.selectProductByCheckBox(collection);
-		//System.out.println(products);
+		List<Product1VO> products = service.selectProducts(collection);
 		Map<String, List<Product1VO>> result = new HashMap<>();
+		
+		
 		result.put("result", products);
 		//System.out.println(result);
 		return result;
+	}
+	//상품 개수 세기 - 2023/03/15 윤사랑
+	@ResponseBody
+	@PostMapping("admin/product/listCount")
+	public Map<String, Integer> count(@RequestParam(value="collection[]") List<String> collection) {		
+		
+		int result = service.selectCountProducts(collection);
+		
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		//System.out.println(result);
+		//System.out.println(map);
+		
+		return map;
 	}
 	
 	//삭제버튼을 이용한 상품 삭제 - 2023/03/09 윤사랑
@@ -110,7 +119,7 @@ public class AdminController {
 	//상품목록에서 상품 검색 - 2023/03/09 윤사랑
 	@GetMapping("admin/product/search")
 	public String search(Model model, String arg1, String arg2, String param2, String param1) {
-		List<Product1VO> products = service.searchProduct(param1, arg1, param2, arg2);
+		List<Product1VO> products = service.searchProduct(arg1, param2, arg2);
 		
 		model.addAttribute("products",  products);
 		model.addAttribute("param1",  param1);

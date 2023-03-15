@@ -147,9 +147,6 @@ main > section{
     bottom: -30px;
 }
 #admin-product-list > div > span{
-    
-}
-#admin-product-list > div > span > a{
     padding: 2px;
 }
 #admin-product-list > div > span > .current{
