@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/member/login.css}">
     <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/member/login.js}"></script>
+    <script th:src="@{/js/member/find.js}"></script>
     
     <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
@@ -121,6 +121,49 @@ $(function() {
 		});
 	return false;
 	});
+	
+	
+	
+	// 인증번호 타이머
+	/* function $ComTimer(){
+	    //prototype extend
+	}
+
+	$ComTimer.prototype = {
+	    comSecond : ""
+	    , fnCallback : function(){}
+	    , timer : ""
+	    , domId : ""
+	    , fnTimer : function(){
+	        var m = Math.floor(this.comSecond / 60) + "분 " + (this.comSecond % 60) + "초";	// 남은 시간 계산
+	        this.comSecond--;					// 1초씩 감소
+	        console.log(m);
+	        this.domId.innerText = m;
+	        if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+	            clearInterval(this.timer);		// 타이머 해제
+	            alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+	            window.close();
+	            window.opener.location = "/index.do"
+	        }
+	    }
+	    ,fnStop : function(){
+	        clearInterval(this.timer);
+	    }
+	}
+
+	var AuthTimer = new $ComTimer()
+
+	AuthTimer.comSecond = 180; // 제한 시간
+
+	AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.")}; // 제한 시간 만료 메세지
+
+	AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000); 
+
+	AuthTimer.domId = document.getElementById("timer");  */
+	
+	
+	
+	
 
 });
 </script>
@@ -160,12 +203,14 @@ $(function() {
                     <article id="member" class="m2">
                         <div class="login">
                             <form action="#" method="post">
-                                <input type="email" name="uid" placeholder="이메일">
+                                <input type="email" name="uid" class="sendMail" placeholder="이메일" style="margin-right: 10px;">
                                 <span class="material-icons close">close</span>
+                                <button type="submit" class="sendCode">인증번호 발송</button>
+                                <span class="emailResult"></span>
                                 
-                                <input type="text" id="login-email-input" placeholder="인증번호 6자리를 입력하세요" style="margin-top: 10px;">
+                                <input type="text" class="insertCode" name="insertCode" placeholder="인증번호 6자리를 입력하세요" style="margin-top: 10px;">
                                 <span class="material-icons close">close</span>
-                                <!-- <button type="submit" class="aa">인증번호 발송</button> -->
+                                <span id="timer"></span>
                                 <button type="submit" class="btnPw">확인</button>
                             </form>
                         </div>
