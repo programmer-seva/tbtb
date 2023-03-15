@@ -5,23 +5,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import kr.co.beauty.service.ProductService;
+import kr.co.beauty.utils.SessionManager;
+import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
 import kr.co.beauty.vo.WishVO;
@@ -32,6 +35,7 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService service;
+	private SessionManager manager;
 	
 	@GetMapping("shop/list")
 	public String productList(Model model, int cate,
@@ -89,16 +93,34 @@ public class ProductController {
 		result.put("result", rs);
 		return result;
 	}
+	
 	@PostMapping("addCart")
 	@ResponseBody
-	public void cart(@RequestParam String data) {
-		JSONArray jsonArr = new JSONArray();
-		jsonArr.put(data);
-		for(int i=0; i<jsonArr.length(); i++) {
-			JSONObject obj = new JSONObject();
-			obj = (JSONObject)jsonArr.get(i);
-			System.out.println(obj.get("prodNo"));
+	public void cart(
+			@RequestParam Map data, 
+			Principal principal, 
+			@CookieValue(required = false) String nomember,
+			HttpServletResponse resp) throws Exception {
+		System.out.println(nomember);
+		if(principal != null) {
+			//회원ㅇ 로그인 상태
+			System.out.println(principal.getName());
+		}else if(nomember == null) {
+			//쿠키가 없을 때
+			String sessionId = UUID.randomUUID().toString();
+			Cookie cookie = new Cookie("nomember", sessionId);
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24*2);
+			resp.addCookie(cookie);
+			System.out.println(sessionId);
+		}else {
+			//쿠키가 있을 때
+			System.out.println(nomember);
 		}
+		String json = data.get("jsonArray").toString();
+		ObjectMapper mapper = new ObjectMapper();
+		List<CartVO> vo = mapper.readValue(json, new TypeReference<ArrayList<CartVO>>() {});
+		System.out.println(vo.get(0).getProdNo());
 	}
 	
 	@PostMapping("colorsize")
