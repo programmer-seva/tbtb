@@ -56,17 +56,6 @@ $(function() {
 	});
 	
 	
-	//휴대폰 유효성 검사
-	$('input[name=phone]').focusout(function() {
-		let phone = $(this).val();
-
-		if (!phone.match(regPhone)) {
-			checkPhone = false;
-			$('.resultPhone').css('color', 'red').text('휴대폰 번호 형식이 맞지 않습니다.');
-		} else {
-			checkPhone = true;
-			$('.resultPhone').css('color', 'green').text('유효한 휴대폰 입니다.');
-		}
-	});
+	
 	
 });

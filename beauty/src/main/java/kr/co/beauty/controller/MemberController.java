@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import kr.co.beauty.service.EmailService;
 import kr.co.beauty.service.MemberService;
 import kr.co.beauty.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -158,6 +160,19 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+    private EmailService emailService;
 
+	//이메일
+    @ResponseBody
+    @PostMapping("member/emailAuth")
+    public Map<String, Integer> checkEmail(@RequestParam("email") String email) throws Exception {
+        Map<String, Integer> data = new HashMap<>();
+        int code = emailService.sendSimpleMessage(email);
+        log.info("인증코드 : " + code);
+        data.put("status", 1);
+        data.put("code", code);
+        return data;
+    }
 	
 }
