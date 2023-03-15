@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
+import kr.co.beauty.vo.WishVO;
 
 @Mapper
 @Repository
@@ -23,6 +24,7 @@ public interface ProductDAO {
 	
 	//view
 	public ProductVO selectProduct(String prodNo);
+	public int addWish(WishVO vo);
 	public String findSize(ProductVO vo);
 
 }

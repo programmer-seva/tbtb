@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.beauty.dao.ProductDAO;
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
+import kr.co.beauty.vo.WishVO;
 
 @Service
 public class ProductService {
@@ -101,6 +102,10 @@ public class ProductService {
 		}
 		return vo;
 	}
+	public int addWish(WishVO vo) {
+		return dao.addWish(vo);
+	}
+	
 	public List<String> findSize(ProductVO vo) {
 		String item = dao.findSize(vo);
 		String[] arr = item.split(",");
