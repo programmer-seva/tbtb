@@ -209,7 +209,7 @@ img {
 /* �긽�뭹 �젙蹂� */
 .view_info {
     width: 500px;
-    height: 900px;
+    min-height: 900px;
     float: left;
     margin-left: 60px;
 }
@@ -352,17 +352,26 @@ img {
 	overflow: hidden;
 	padding: 10px ;
 	box-sizing: border-box;
+	
 }
 .orderItems > span {
 	float: left;
+	font-size: 14px;
 }
 .orderItems > .material-icons {
 	line-height: 50px;
 	cursor: pointer;
 }
 .orderItems > .colorsize {
-	margin-left: 10px;
-	width:250px;
+	margin-right: 10px;
+	width: 250px;
+}
+.orderItems > .colorsize > p {display: inline-block;}
+.cc::before {
+	content: "색상 : ";
+}
+.ss::before {
+	content: "사이즈 : ";
 }
 .orderItems > div {
 	float: left;
@@ -393,4 +402,13 @@ img {
 	margin-right: 5px;
 	font-weight: bold;
 	width: 70px;
+}
+.orderItems > .total::after{
+	content: "원";
+}
+.result {
+	text-align: right;
+	font-size: 24px;
+	margin-top: 30px;
+	display: none;
 }

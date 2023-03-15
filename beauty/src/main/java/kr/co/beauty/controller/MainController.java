@@ -52,4 +52,5 @@ public class MainController {
 		sessionManager.createSession("check", request,response);
 		return 1;
 	}
+	
 }
