@@ -143,9 +143,7 @@
 			$.ajax({
 				url : '/Beauty/addCart',
 				method : 'POST',
-				traditional: true,
-				data : {data : JSON.stringify(jsonArray)},
-				dataType : "JSON"
+				data : {jsonArray : JSON.stringify(jsonArray)},
 			});
 		});
 		//바로구매
@@ -176,7 +174,6 @@
 				let size = $(item).children('input[name=size]').val();
 				let count = $(item).children('div').children('span.count').text();
 				let jsonData = {
-					'uid' : uid,
 					'prodNo' : prodNo,
 					'count' : count,
 					'color' : color,
