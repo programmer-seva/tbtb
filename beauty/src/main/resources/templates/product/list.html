@@ -258,7 +258,7 @@
 	                            <span th:title="${code}" class="colorCode" th:class="${code} + ' colorCode'"></span>
 	                        </th:block>
                         </div>
-                        <a th:href="@{/shop/view}"><span class="name">[[${list.prodName}]]</span></a>
+                        <a th:href="@{/shop/view(pno=${list.prodNo})}"><span class="name">[[${list.prodName}]]</span></a>
                        	<th:block th:if="${list.discount == 0}">
                       		<span class="price">[[${#numbers.formatInteger(list.price, 3, 'COMMA') + '원'}]]</span>
                        	</th:block>

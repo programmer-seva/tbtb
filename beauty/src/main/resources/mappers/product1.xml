@@ -79,7 +79,12 @@
 		ON a.`prodNo`=b.`prodNo` WHERE a.`prodNo`=#{prodNo};
 	</select>
 	<insert id="addWish">
-		INSERT INTO `wish` (`prodNo`, `uid`, `rdate) VALUES #{prodNo}, #{uid}, NOW();
+		INSERT INTO `wish` (`prodNo`, `uid`, `rdate) 
+		VALUES #{prodNo}, #{uid}, NOW();
+	</insert>
+	<insert id="addCart">
+		INSERT INTO `cart` (`uid`, `prodNo`, `count`, `color`, `size`, `rdate) 
+		VALUES #{uid}, #{prodNo}, #{count}, #{color}, #{size}, NOW();
 	</insert>
 	
 	

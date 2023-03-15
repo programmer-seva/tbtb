@@ -138,26 +138,21 @@
 		//장바구니
 		$('.cart').click(function(){
 			check();
-			function addCart(){
-				$.ajax({
-					url : '/Beauty/addCart',
-					method : 'POST',
-					data : jsonData,
-					dataType : "JSON",
-					success : function(data){
-						if(data.result > 0){
-							alert('위시리스트에 등록되었습니다.');
-						}else{
-							alert('죄송합니다. 잠시후에 다시 시도해주십시요.');
-						}
-					}
-				});
-			}
+			let jsonArray = resultArray();
+			console.log(jsonArray);
+			$.ajax({
+				url : '/Beauty/addCart',
+				method : 'POST',
+				traditional: true,
+				data : {data : JSON.stringify(jsonArray)},
+				dataType : "JSON"
+			});
 		});
 		//바로구매
 		$('.order').click(function(){
 			check();
 			let jsonArray = resultArray();
+			console.log(jsonArray);
 			$.ajax({
 				url : '/Beauty/addCart',
 				method : 'POST',

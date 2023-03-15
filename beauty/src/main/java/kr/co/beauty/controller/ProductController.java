@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.co.beauty.service.ProductService;
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
@@ -86,9 +91,14 @@ public class ProductController {
 	}
 	@PostMapping("addCart")
 	@ResponseBody
-	public void cart(HttpServletRequest req) {
-		String[] jsonArray = req.getParameterValues("jsonArray");
-		System.out.println(jsonArray.length);
+	public void cart(@RequestParam String data) {
+		JSONArray jsonArr = new JSONArray();
+		jsonArr.put(data);
+		for(int i=0; i<jsonArr.length(); i++) {
+			JSONObject obj = new JSONObject();
+			obj = (JSONObject)jsonArr.get(i);
+			System.out.println(obj.get("prodNo"));
+		}
 	}
 	
 	@PostMapping("colorsize")
