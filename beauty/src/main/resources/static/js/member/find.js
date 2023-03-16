@@ -2,8 +2,8 @@
 let regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
 let regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-let checkEmail  = false;
-let checkPhone  = false;
+let checkEmail = false;
+let checkPhone = false;
 
 $(function() {
 	$('.member').click(function() {
@@ -58,8 +58,10 @@ $(function() {
 			$('input[name=password]').attr('type', 'password');
 		}
 	});
-	
-	
+
+	///////////////////
+	///// 아이디 찾기 ////
+	///////////////////
 	//휴대폰 유효성 검사
 	$('input[name=phone]').focusout(function() {
 		let phone = $(this).val();
@@ -72,72 +74,170 @@ $(function() {
 			$('.resultPhone').css('color', 'green').text('유효한 휴대폰 입니다.');
 		}
 	});
-	
-	
+
+	// 아이디 찾기
+	$('.btnId').click(function() {
+
+		console.log('here1');
+
+		let name = $('input[name=name]').val();
+		let phone = $('input[name=phone]').val();
+
+		let jsonData = {
+			"name": name,
+			"phone": phone
+		};
+		console.log(jsonData);
+		console.log('here2');
+		$.ajax({
+			url: '/Beauty/member/find1',
+			type: 'post',
+			data: jsonData,
+			dataType: 'json',
+			success: function(data) {
+				console.log('here3');
+				if (data.result != null) {
+					let uid = data.result;
+					location.href = "/Beauty/member/findIdResult";
+				} else {
+					console.log('here4');
+					alert('해당하는 사용자가 존재하지 않습니다.\n이름과 휴대폰 번호를 다시 확인하십시오.');
+				}
+			}
+		});
+
+		return false;
+	});
+
+	///////////////////
+	////// 비번 찾기 /////
+	///////////////////
+
 	//email
-	$('.sendCode').click(function(e){
+	var code = null;
+	$('.sendCode').click(function(e) {
 		e.preventDefault();
 		let email = $('input[name=uid]').val();
-		if(email == ''){
+		if (email == '') {
 			alert('이메일을 입력해주세요');
 			return;
-		}else{
+		} else {
 			alert('인증번호가 발송되었습니다.');
 		}
 		$.ajax({
 			url: '/Beauty/member/emailAuth',
 			method: 'post',
-			data: {"email": email},
+			data: { "email": email },
 			dataType: 'json',
-			success: function(data){
-				if(data.status > 0){
+			success: function(data) {
+				if (data.status > 0) {
 					//메일전송 성공
 					$('.auth').show();
-					receivedCode = data.code;
-				}else{
+					code = data.code;
+				} else {
 					//메일전송 실패
 					alert('메일 전송에 실패했습니다. 다시 시도해주세요');
 				}
 			}
 		});
 	});
-	
-	//email code check
-	$('.btnPw').click(function(){
-		let insertCode = $('input[name=insertCode]').val();
-		if(insertCode == ''){
-			alert('이메일 확인 후 코드를 입력해주세요.');
-			return;
-		}
 
-		if(code == receivedCode){
-			$('.auth').hide();
-			$('input[name=email]').attr('readonly', true);
-			$('.emailResult').css('color','green').text('인증완료 되었습니다.');
-			checkEmail = true;
-		}
-	});
-	
-	
-	
-	$('.lg > section').submit(function(){
-		////////////////////////////////////
-		// 폼 데이터 유효성 검증(Validation)
-		////////////////////////////////////
-	
-		//이메일 검증
-		if(!checkEmail){
-			alert('이메일을 확인 하십시오.');
+	//email code check
+	$('.btnPw').click(function() {
+		let insertCode = $('input[name=insertCode]').val();
+		let receivedCode = $('input[name=insertCode]').val();
+		//그냥 확인
+		if (insertCode == '') {
+			alert('인증번호를 입력해주세요.');
 			return false;
 		}
-		//휴대폰 검증
-		if(!checkPhone){
-			alert('휴대폰을 확인 하십시오.');
+		//인증번호만 적고 확인
+		if (code == null) {
+			alert('인증번호를 발송해주세요');
 			return false;
 		}
-		//최종 전송
-		return true;
+		//인증번호 대조
+		if (code == receivedCode) {
+			//인증ㅇ
+			alert('인증완료 되었습니다.');
+			location.href = "/Beauty/member/findPwResult";
+		} else {
+			//인증x
+			alert('번호가 틀립 되었습니다.');
+			return false;
+		}
 	});
-	
-	
+
+	// 비밀번호 변경
+	/* $('.btnPw').click(function() {
+
+		console.log('here1');
+
+		let name = $('input[name=name]').val();
+		let uid = $('input[name=uid]').val();
+		let phone = $('input[name=phone]').val();
+
+		let jsonData = {
+			"name" : name,
+			"uid" : uid,
+			"phone" : phone
+		};
+		console.log(jsonData);
+		console.log('here2');
+		$.ajax({
+			url : '/Beauty/member/find2',
+			type : 'post',
+			data : jsonData,
+			dataType : 'json',
+			success : function(data) {
+				console.log('here3');
+				if (data.result == 1) {
+					console.log(data);
+					location.href="/Beauty/member/findPwResult";
+				} else {
+					alert('해당하는 사용자가 존재하지 않습니다.\n아이디와 이메일을 다시 확인하십시오.');
+				}
+			}
+		});
+	return false;
+	}); */
+
+
+	// 인증번호 타이머
+	/* function $ComTimer(){
+		//prototype extend
+	}
+
+	$ComTimer.prototype = {
+		comSecond : ""
+		, fnCallback : function(){}
+		, timer : ""
+		, domId : ""
+		, fnTimer : function(){
+			var m = Math.floor(this.comSecond / 60) + "분 " + (this.comSecond % 60) + "초";	// 남은 시간 계산
+			this.comSecond--;					// 1초씩 감소
+			console.log(m);
+			this.domId.innerText = m;
+			if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+				clearInterval(this.timer);		// 타이머 해제
+				alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+				window.close();
+				window.opener.location = "/index.do"
+			}
+		}
+		,fnStop : function(){
+			clearInterval(this.timer);
+		}
+	}
+
+	var AuthTimer = new $ComTimer()
+
+	AuthTimer.comSecond = 180; // 제한 시간
+
+	AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.")}; // 제한 시간 만료 메세지
+
+	AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000); 
+
+	AuthTimer.domId = document.getElementById("timer");  */
+
 });
