@@ -8,115 +8,8 @@
     <script th:src="@{/js/admin.js}"></script>
     <script type="text/javascript" th:inline="javascript">
     	$(document).ready(function(){
-		  	//페이지가 로드되면 처음 실행
-		  	CheckBoxList();
-		  	page();
-    	  	//체크된 메뉴 상품목록 불러오기
-    		function CheckBoxList(){
-    			//체크박스 값 배열에 담기
-        		var collection = new Array();
-    		  	if($('input:checkbox[name=category2]:checked').length == 0){
-    		  		//전체 값
-    				$('input[name=category2]').each(function(){
-    					collection.push($(this).val());
-    				});	
-    		  	}else{
-    		  		//선택된 값
-    				$('input[name=category2]:checked').each(function(){
-    					collection.push($(this).val());
-    				});	
-    		  	}
-    		  	start=0;
-    		  	
-    		  	console.log(collection);
-    			//AJAX 요청 보내기
-    		  	$.ajax({
-    				type:"post",
-    				url:"/Beauty/admin/product/list",
-    				data: {'collection':collection},
-    				dataType: 'json',
-    				success:function(data){
-    					//console.log(data);
-    					$('.productRow').remove();
-    					//최신순 정렬
-    					const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
-    					//상품목록 불러오기
-    					let tag = "";
-    					
-    					const sliceArr = sortedResult.slice(start,start+21);
-    					
-    					for(let i=0; i<sliceArr.length; i++){
-    							tag += "<tr class='productRow'>";
-    							tag += "<td><input type='checkbox' name='선택체크' class='rowCheck' value='"+sortedResult[i].prodNo+"'></td>";
-    							tag += "<td><img src='#'></td>";
-    							tag += "<td>"+sliceArr[i].prodNo+"</td>";
-    							tag += "<td>"+sliceArr[i].prodCate1+"</td>";
-    							tag += "<td>"+sliceArr[i].prodCate2+"</td>";
-    							tag += "<td>"+sliceArr[i].prodName+"</td>";
-    							tag += "<td>"+sliceArr[i].disPrice+"</td>";
-    							tag += "<td>"+sliceArr[i].stock+"</td>";
-    							tag += "<td>"+sliceArr[i].hit+"</td>";
-    							tag += "<td>";
-    							tag += "<form action='list/delete'>";
-    							tag += "<input type='hidden' name='prodNo' value='"+sliceArr[i].prodNo+"'/>";
-    							tag += "<input type='hidden' name='param1' value='"+sliceArr[i].prodNo+"'/>";
-    							tag += "<input type='hidden' name='arg1' value='"+sliceArr[i].prodCate1+"'/>";
-    							tag += "<input type='submit' value='삭제' id='deleteButton'/>";
-    							tag += "</form>";
-    							tag += "</td>";
-    							tag += "</tr>"
-    					}
-    					$('#tableList').append(tag);
-    				}
-    			});
-    	  	}
-    		
-    		//페이징 처리
-			function page(){
-				//체크박스 값 배열에 담기
-        		var collection = new Array();
-    		  	if($('input:checkbox[name=category2]:checked').length == 0){
-    		  		//전체 값
-    				$('input[name=category2]').each(function(){
-    					collection.push($(this).val());
-    				});	
-    		  	}else{
-    		  		//선택된 값
-    				$('input[name=category2]:checked').each(function(){
-    					collection.push($(this).val());
-    				});	
-    		  	}
     			
-    		  	$.ajax({
-    				type:"post",
-    				url:"/Beauty/admin/product/listCount",
-    				data: {'collection':collection},
-    				dataType: 'json',
-    				success:function(data){
-    					let totalPage=1;
-    					
-    					if(data.result % 10 == 0){
-    						totalPage=data.result/10;
-    					}else{
-    						totalPage=Math.ceil(data.result/10);
-    					}
-    					console.log("page??",totalPage);
-    					
-    					let tag = "<span class='prev'>이전</span>";
-    					for(i=1; i<=totalPage; i++){
-    						let num= start==i?'current':'num';
-    						tag += "<span class='"+num+"' data-value='"+i+"'>"+i+"</span>";
-    					}
-    					tag += "<span class='next'>다음</span>";
-    					$(".page").append(tag);
-    				}
-    		  	});
-    		}
-    		
-    	  	//메뉴 체크박스가 변화할 때마다 상품목록 불러오기
-    		$("ul").find("input[type=checkbox]").on("change",function(){
-    	    	CheckBoxList();
-    	    });
+    			
     		
     	});
     </script>
@@ -185,11 +78,10 @@
             <section id="admin-product-list">
                 <div>
                     <form th:action="@{/admin/product/search}" method="get">
-                    	<input type="hidden" name="arg1" th:value="${arg1}">
-                    	<input type="hidden" name="param1" th:value="${param1}">
+                    	<input type="hidden" name="arg0" id="cate2">
                         <select name="param2" id="search">
-                            <option value="prodName" name="prodName">상품명</option>
-                            <option value="prodNo" name="prodNo">상품번호</option>
+                            <option value="prodName">상품명</option>
+                            <option value="prodNo">상품번호</option>
                         </select>
                         <input type="text" name="arg2">
                         <button class="searchClick">검색</button>
@@ -214,15 +106,24 @@
                         <th>조회</th>
                         <th>관리</th>
                     </tr>
-                    
+                    <tr class="productRow" th:each="prod:${products}">
+                    	<td><input type='checkbox' name='선택체크' class='rowCheck' th:value="${prod.prodNo}"></td>
+                    	<td><img src='#'></td>
+                    	<td>[[${prod.prodNo}]]</td>
+                    	<td>[[${prod.prodCate1}]]</td>
+                    	<td>[[${prod.prodCate2}]]</td>
+                    	<td>[[${prod.prodName}]]</td>
+                    	<td>[[${prod.disPrice}]]</td>
+                    	<td>[[${prod.stock}]]</td>
+                    	<td>[[${prod.hit}]]</td>
+                    	<td>
+                    		<button class='deleteButton' th:value="${prod.prodNo}">삭제</button>
+                    	</td>
+                    </tr>
                 </table>
                 <input type="button" value="선택삭제" class="delete">
                 <input type="button" value="상품등록" class="register">
-                <div class="page">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <div class="page"></div>
             </section>
         </main>
     </div>

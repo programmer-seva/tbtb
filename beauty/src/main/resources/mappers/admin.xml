@@ -52,25 +52,18 @@
 	</delete>
 	<!-- 관리자 페이지에서 상품 검색하기 -->
 	<select id="searchProduct" resultType="Product1VO">
+		select * from `product`
 		<choose>
-			<when test="arg1 != null">
-				select * from `product` where `prodCate1`=#{arg1} and 
-				 <if test="param2 == 'prodName'">
-				    `prodName` like concat('%', #{arg2}, '%');
-				 </if>
-				 <if test="param2 == 'prodNo'">
-				    `prodNo` like concat('%', #{arg2}, '%');
-				 </if>
-			</when>
-			<otherwise>
-				select * from `product` where 
-				 <if test="param2 == 'prodName'">
-				    `prodName` like concat('%', #{arg2}, '%');
-				 </if>
-				 <if test="param2 == 'prodNo'">
-				    `prodNo` like concat('%', #{arg2}, '%');
-				 </if>
-			</otherwise>
+		<when test="arg0 != null and arg0.length > 0">
+			where `prodCate2` in
+			<foreach collection="arg0" item="cate2" open="(" close=")" separator=",">
+				#{cate2}
+			</foreach>
+			and ${param2} like concat('%', #{arg2}, '%');
+		</when>
+		<otherwise>
+		 	where ${param2} like concat('%', #{arg2}, '%');
+		 </otherwise>
 		</choose>
 	</select>
 	<!-- 상품목록 페이지 처리를 위해 상품 개수 세기 -->
