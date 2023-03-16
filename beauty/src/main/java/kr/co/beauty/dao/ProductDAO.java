@@ -26,9 +26,8 @@ public interface ProductDAO {
 	//view
 	public ProductVO selectProduct(String prodNo);
 	public int addWish(WishVO vo);
+	public int checkCart(CartVO vo);
+	public int updateCart(CartVO vo);
 	public int addCart(CartVO vo);
 	
-	
-	public String findSize(ProductVO vo);
-
 }

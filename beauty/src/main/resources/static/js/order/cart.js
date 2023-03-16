@@ -94,7 +94,7 @@ $(function(){
 		e.preventDefault();
 		let chkList = [];
 		chkList.push(parseInt($(this).parent().parent().children('td:first-child').children('input').val()));
-		redirectGet('/Beauty/order/orderform/type1', chkList);
+		redirectGet('/Beauty/order/orderform', chkList);
 	});
 
 	
@@ -218,7 +218,7 @@ $(function(){
 				chkList.push(parseInt($(this).val()));
 			}
 		});
-		redirectGet('/Beauty/order/orderform/type1', chkList);
+		redirectGet('/Beauty/order/orderform', chkList);
 	});
 	/* 전체주문하기 */
 	$('#btnOrderAll').click(function(e){
@@ -227,7 +227,7 @@ $(function(){
 		$('input[name=chkCart]').each(function(){
 			chkList.push(parseInt($(this).val()));
 		});
-		redirectGet('/Beauty/order/orderform/type1', chkList);
+		redirectGet('/Beauty/order/orderform', chkList);
 	});
 	
 	
@@ -242,7 +242,7 @@ $(function(){
 		e.preventDefault();
 		let chkList = [];
 		chkList.push(parseInt($(this).parent().parent().children('td:first-child').children('input').val()));
-		redirectGet('/Beauty/order/orderform/type2', chkList);
+		redirectGet('/Beauty/order/orderform', chkList);
 	});
 	
 	/* No-member 관심상품등록 */
@@ -290,7 +290,7 @@ $(function(){
 				chkList.push(parseInt($(this).val()));
 			}
 		});
-		redirectGet('/Beauty/order/orderform/type1', chkList);
+		redirectGet('/Beauty/order/orderform', chkList);
 	});
 	/* No-member 전체주문하기 */
 	$('#btnOrderAllNon').click(function(e){
@@ -299,7 +299,7 @@ $(function(){
 		$('input[name=chkCart]').each(function(){
 			chkList.push(parseInt($(this).val()));
 		});
-		redirectGet('/Beauty/order/orderform/type1', chkList);
+		redirectGet('/Beauty/order/orderform', chkList);
 	});
 	
 	

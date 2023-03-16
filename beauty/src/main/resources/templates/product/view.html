@@ -41,7 +41,6 @@
 				}
 			}
 			
-			
 			let tag = "<article class='orderItems'>";
 			tag += "<input type='hidden' name='prodNo' value='"+[[${prod.prodNo}]]+"'>"
 			tag += "<input type='hidden' name='color' value='"+c+"'>"
@@ -144,6 +143,12 @@
 				url : '/Beauty/addCart',
 				method : 'POST',
 				data : {jsonArray : JSON.stringify(jsonArray)},
+				dataType : 'JSON',
+				success : function(data){
+					if(data.result > 0){
+						$('.goCart').css('display','block');
+					}
+				}
 			});
 		});
 		//바로구매
@@ -184,6 +189,10 @@
 			return array;
 		}
 
+		$('.continue').click(function(e){
+			e.preventDefault;
+			$('.goCart').css('display','none');
+		});
 	});
 	</script>
 </head>
@@ -343,9 +352,9 @@
                                 	<p>TOTAL : <strong class="resultprice"></strong>원</p>
                                 </div>
                                 <section>
-	                                <a href="#" class="wish"><span class="material-icons">favorite_border</span></a>
-	                                <a href="#" class="cart">장바구니</a>
-	                                <a href="#" class="order">바로구매</a>
+	                                <button type="button" class="wish"><span class="material-icons">favorite_border</span></button>
+	                                <button type="button" class="cart">장바구니</button>
+	                                <button type="button" class="order">바로구매</button>
                                 </section>
                             </div>
                        	</div>
@@ -353,6 +362,7 @@
                 </div>
 				</div>
             </div>
+            <th:block th:replace="~{/_config :: goCart}"></th:block>
         </main>
 		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
     </div>

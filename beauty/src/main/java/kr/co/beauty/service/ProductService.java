@@ -1,6 +1,5 @@
 package kr.co.beauty.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -106,18 +105,14 @@ public class ProductService {
 	public int addWish(WishVO vo) {
 		return dao.addWish(vo);
 	}
+	public int checkCart(CartVO vo) {
+		return dao.checkCart(vo);
+	}
+	public int updateCart(CartVO vo) {
+		return dao.updateCart(vo);
+	}
 	public int addCart(CartVO vo) {
 		return dao.addCart(vo);
-	}
-	
-	public List<String> findSize(ProductVO vo) {
-		String item = dao.findSize(vo);
-		String[] arr = item.split(",");
-		List<String> list = new ArrayList<>();
-		for(String i : arr) {
-			list.add(i);
-		}
-		return list;
 	}
 	
 }
