@@ -319,7 +319,7 @@ img {
 	overflow: hidden;
 	margin-top: 30px;
 }
-.view_info > .price a {
+.view_info > .price > section > button {
 	float: left;
 	height: 75px;
 	border: 1px solid #484848;
@@ -327,15 +327,17 @@ img {
 	margin: 0 4px;
 	line-height: 75px;
 	text-align: center;
+	background: #fff;
+	cursor: pointer;
 }
-.view_info a.wish {
+.view_info button.wish {
 	width: 75px;
 }
-.view_info a.wish > span {line-height: 75px;}
-.view_info a.cart {
+.view_info button.wish > span {line-height: 75px;}
+.view_info button.cart {
 	width: 200px;
 }
-.view_info a.order {
+.view_info > .price > section > button.order {
 	width: 200px;
 	background: #484848;
 	color: white;
@@ -411,4 +413,50 @@ img {
 	font-size: 24px;
 	margin-top: 30px;
 	display: none;
+}
+.goCart {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+    width: 500px;
+    height: 300px;
+    border: 1px solid #555;
+    text-align: center;
+    padding: 50px;
+    box-sizing: border-box;
+    background: #fff;
+}
+.goCart > span {
+    display: inline-block;
+    width: 100%;
+    font-size: 25px;
+    margin-top: 20px;
+}
+.goCart > a {
+    display: inline-block;
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 12px;
+    margin: 100px 10px 0 10px;
+    border-radius: 10px;
+	color: white;
+    background: #6d6bff;
+    border: none;
+}
+.goCart > button {
+	display: inline-block;
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid black;
+    font-size: 12px;
+    margin: 100px 10px 0 10px;
+    border-radius: 10px;
+    color: #6d6bff;
+    background: #fff;
+    border: 1px solid #6d6bff;	
+    cursor: pointer;
 }

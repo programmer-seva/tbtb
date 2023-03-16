@@ -29,8 +29,8 @@ public class OrderService {
 	}
 	
 	//cart
-	public List<CartVO> selectCartList(String uid) {
-		return daoOrd.selectCartList(uid);
+	public List<CartVO> selectCartList(String uid, String nomember) {
+		return daoOrd.selectCartList(uid, nomember);
 	}
 	public void deleteSelectedCart(int cartNo) {
 		daoOrd.deleteSelectedCart(cartNo);

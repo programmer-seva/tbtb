@@ -82,19 +82,15 @@
 		INSERT INTO `wish` (`prodNo`, `uid`, `rdate) 
 		VALUES #{prodNo}, #{uid}, NOW();
 	</insert>
-	<insert id="addCart">
-		INSERT INTO `cart` (`uid`, `prodNo`, `count`, `color`, `size`, `rdate) 
-		VALUES #{uid}, #{prodNo}, #{count}, #{color}, #{size}, NOW();
-	</insert>
-	
-	
-	
-	<select id="findSize" resultType="String">
-		SELECT 
-	    GROUP_CONCAT(DISTINCT b.`size`  ORDER BY FIELD (size, 'XS', 'S', 'M', 'L', 'XL', 'FREE') ASC SEPARATOR ',')  AS `size`
-	    FROM `product` AS a
-		JOIN `product_option` AS b
-		ON a.`prodNo`=b.`prodNo` WHERE a.`prodNo`=#{prodNo} and b.`colorName`=#{color};
+	<select id="checkCart" resultType="int">
+		SELECT COUNT(`prodNo`) FROM `cart` WHERE `prodNo`=#{prodNo} AND `color`=#{color} AND `size`=#{size};
 	</select>
+	<update id="updateCart">
+		UPDATE `cart` SET `count`=`count`+#{count} WHERE `prodNo`=#{prodNo} AND `color`=#{color} AND `size`=#{size};
+	</update>
+	<insert id="addCart">
+		INSERT INTO `cart` (`uid`, `prodNo`, `count`, `color`, `size`, `rdate`) 
+		VALUES (#{uid}, #{prodNo}, #{count}, #{color}, #{size}, NOW());
+	</insert>
 	
 </mapper>

@@ -16,7 +16,20 @@
 	</select>
 	-->
 	<select id="selectCartList" resultType="CartVO">
-		SELECT * FROM `cart` WHERE `uid`=#{uid};
+		SELECT a.`cartNo`, a.`prodNo`, a.`count`, b.`prodName`, b.`price`, b.`discount`, b.`disPrice`, b.`point`, a.`color`, a.`size`, b.`thumb1`
+		FROM `cart` AS a
+		JOIN `product` AS b 
+		ON a.`prodNo` = b.`prodNo`
+		<if test="arg0 != null and arg1 == null">
+    		WHERE `uid` = #{arg0}
+    	</if>
+		<if test="arg1 == null and arg1 != null">
+    		WHERE `uid` = #{arg1}
+    	</if>
+		<if test="arg1 != null and arg1 != null">
+    		WHERE `uid` = #{arg0} OR `uid`= #{arg1}
+    	</if>
+    	ORDER BY a.`cartNo` DESC;
 	</select>
 	
 	<delete id="deleteSelectedCart">
@@ -52,7 +65,11 @@
 		SELECT a.*,b.prodName,b.thumb1 FROM `order` AS a JOIN `product` AS b ON a.prodNo=b.prodNo  WHERE `ordNo`=#{ordNo}; 
 	</select>
 	<select id="selectCart" resultType="CartVO">
-		SELECT * FROM `cart` WHERE `cartNo`=#{cartNo};
+		SELECT  a.`cartNo`, a.`prodNo`, a.`count`, b.`prodName`, b.`price`, b.`discount`, b.`disPrice`, b.`point`, a.`color`, a.`size`, b.`thumb1`
+		FROM `cart` AS a
+		JOIN `product` AS b 
+		ON a.`prodNo` = b.`prodNo`
+		WHERE a.`cartNo`=#{cartNo};
 	</select>
 	<insert id="insertOrder">
 		INSERT INTO `order` (`ordNo`,`prodNo`,`count`,`price`,`discount`,`disPrice`,`point`,`total`,`rdate`) 

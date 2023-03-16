@@ -21,7 +21,7 @@ import kr.co.beauty.vo.TermsVO;
 public interface OrderDAO {
 	/* 김동근 */
 	//cart
-	public List<CartVO> selectCartList(@Param("uid") String uid);
+	public List<CartVO> selectCartList(String arg0, String arg1);
 	public void deleteSelectedCart(@Param("cartNo") int cartNo);
 	public void deleteAllCart(@Param("uid") String uid);
 	

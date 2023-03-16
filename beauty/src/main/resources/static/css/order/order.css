@@ -1,5 +1,6 @@
 main div.mainBackgorund {
-    
+    width: 100%;
+    min-height: 800px;
 }
 main div.mainContent {
     width: 100%;
