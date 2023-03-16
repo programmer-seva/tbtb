@@ -132,14 +132,40 @@
                             </aside>
                             <!-- 회원 정보 -->
                             <nav class="head">
-                                <div class="userThumb" >
-                                    <a href="#">
-                                        <img src="./images/default_profile.png" alt="">
-                                    </a>
+                                <div class="user">
+                                    <div class="userThumb disnone" >
+                                        <a href="#">
+                                            <img src="./images/default_profile.png" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="userInfo">
+                                        <div><span id="userNick">김동근</span>님의 회원 정보입니다.</div>
+                                        <div>Lv.<span id="level">1</span> <span id="levelName">실버</span></div>
+                                        <div>
+                                            <div class="boughtPrice">
+                                                <span>누적 구매 금액</span>
+                                                <span id="boughtPrice">250,000</span>
+                                            </div>
+                                            <div class="point">
+                                                <span>현재 포인트</span>
+                                                <span id="point">5,000</span>
+                                            </div>
+                                            <div class="coupon">
+                                                <span>보유 쿠폰</span>
+                                                <span id="countCoupon">3</span>
+                                            </div>
+                                            <div class="levelPoint">
+                                                <span>등급 점수</span>
+                                                <span id="levelPoint">2,500</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="userInfo">
-                                    <div><span id="userNick">김동근</span>님 안녕하세요.</div>
-                                    <div>누적 구매금액: <span id="boughtPrice">70,000</span>원</div>
+                                <div class="level">
+                                    <ul class="levelInfo">
+                                        <li>누적 구매금액은 실시간 반영이 아닌 출고요청 상태 주문건을 기준으로 매주 월요일 새벽에 집계됩니다.</li>
+                                        <li>누적 구매금액은 최근 5년 치가 반영됩니다.</li>
+                                    </ul>
                                 </div>
                             </nav>
 
