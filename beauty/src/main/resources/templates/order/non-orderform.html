@@ -110,7 +110,7 @@
 								</td>
 								<td>
 									<span id="prodName" th:text="${item.prodName}"></span>
-									<span id="prodOption" th:text="${item.color}"></span>
+									<span id="prodOption" th:text="|${item.color}, ${item.size}|"></span>
 									<span id="prodPrice" th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}"></span>
 								</td>
 								<td>

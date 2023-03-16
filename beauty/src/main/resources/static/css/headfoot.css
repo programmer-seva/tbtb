@@ -212,3 +212,17 @@ footer > .up > span {
 	left: 505px;
 }
 .info > li > a:hover {color: #999;}
+.ct {
+    width: 18px;
+    display: inline-block;
+    height: 18px;
+    border-radius: 30px;
+    text-align: center;
+    margin-left: 3px;
+    background: black;
+    color: #fff;
+    line-height: 18px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 12px;
+}

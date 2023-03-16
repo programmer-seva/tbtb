@@ -42,6 +42,7 @@ public interface OrderDAO {
 	public void deleteCart(int CartNo);
 	
 	//주문결제 페이지
+	public CartVO selectProdut(int prodNo);
 	public CartVO selectCart(int cartNo);
 	
 	//구매약관

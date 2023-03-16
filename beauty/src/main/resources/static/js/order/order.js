@@ -173,7 +173,7 @@ $(function(){
 			return false;
 		}
 		
-		let uid = $('input[name=orderEmail]').val();
+		let uid = $('input[name=uid]').val();
 		let ordCount = $('input[name=ordCount]').val();
 		let ordPrice = $('input[name=ordPrice]').val();
 		let ordDisprice = $('input[name=ordDisprice]').val();
@@ -196,7 +196,7 @@ $(function(){
 		let payment = $('input[name=payment]:checked').val();
 		
 		let jsonData = {
-			'uid' : '유저아이디',
+			'uid' : uid,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,
 			'ordDisprice' : ordDisprice,

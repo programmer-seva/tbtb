@@ -61,6 +61,9 @@ public class OrderService {
 	}
 	
 	//주문결제 페이지
+	public CartVO selectProdut(int prodNo) {
+		return daoOrd.selectProdut(prodNo);
+	}
 	public CartVO selectCart(int cartNo) {
 		return daoOrd.selectCart(cartNo);
 	}
