@@ -138,7 +138,6 @@
 		$('.cart').click(function(){
 			check();
 			let jsonArray = resultArray();
-			console.log(jsonArray);
 			$.ajax({
 				url : '/Beauty/addCart',
 				method : 'POST',
@@ -157,11 +156,15 @@
 			let jsonArray = resultArray();
 			console.log(jsonArray);
 			$.ajax({
-				url : '/Beauty/addCart',
+				url : '/Beauty/addOrder',
 				method : 'POST',
-				traditional: true,
-				data : {'jsonArray' : jsonArray},
-				dataType : "JSON"
+				data : {jsonArray : JSON.stringify(jsonArray)},
+				dataType : 'JSON',
+				success : function(data){
+					if(data.result > 0){
+						location.href = "/Beauty/order/orderform";
+					}
+				}
 			});
 		});
 		

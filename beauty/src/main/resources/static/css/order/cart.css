@@ -1,6 +1,7 @@
 /* 카트는 나중에 myContent div바꿔야 함 */
 main div.mainContent > .myContent {
     width: 1200px;
+    min-height: 800px;
 }
 
 /* 현재페이지 */
@@ -134,6 +135,7 @@ main div.cartFrame > .cartList > table td:nth-child(3) {
 }
 main div.cartFrame > .cartList > table td:nth-child(3) span {
     font-size: 12px;
+    font-weight: bold;
     color: #666666;
 }
 main div.cartFrame > .cartList > table td:nth-child(3) .btn {

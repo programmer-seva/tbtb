@@ -37,4 +37,8 @@ public class MainService {
 		return vo;
 	}
 	
+	public int countCart(String arg0, String arg1) {
+		return dao.countCart(arg0, arg1);
+	}
+	
 }

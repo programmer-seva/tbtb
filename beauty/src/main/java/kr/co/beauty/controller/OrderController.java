@@ -26,9 +26,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.OrderService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.SessionManager;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.Member1VO;
+import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
 import kr.co.beauty.vo.TermsVO;
@@ -44,6 +46,8 @@ public class OrderController {
 	private OrderService service;
 	@Autowired
 	private MyshopService serviceMy;
+	@Autowired
+	private UtilService util;
 	
 	SessionManager sessionManager = new SessionManager();
 	
@@ -53,7 +57,8 @@ public class OrderController {
 	@GetMapping("order/cart")
 	public String cart(Principal principal, 
 			@CookieValue(required = false) String nomember,
-			Model model, HttpServletRequest request, HttpServletResponse response) {
+			Model model, HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) {
 		Member1VO member = new Member1VO();
 		List<CartVO> cartList = new ArrayList<>();
 		List<WishVO> wishList = new ArrayList<>();
@@ -76,14 +81,24 @@ public class OrderController {
  		model.addAttribute("member", member);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("wishList", wishList);
+
+		int ct = util.header(principal, nomember);
+		model.addAttribute("ct", ct);
+		
 		return "order/cart";
 	}
 	
 	//카트 - cartBtns(테이블아래버튼) - 비우기
 	@ResponseBody
 	@PostMapping("order/deleteAllCart")
-	public int deleteAllCart(Principal principal) {
-		service.deleteAllCart(principal.getName());
+	public int deleteAllCart(Principal principal,
+			@CookieValue(required = false) String nomember) {
+		if(principal != null) {
+			service.deleteAllCart(principal.getName());
+		}
+		if(nomember != null) {
+			service.deleteAllCart(nomember);
+		}
 		return 1;
 	}
 	//카트 - cartBtns(테이블아래버튼) - No-member 비우기
@@ -149,14 +164,32 @@ public class OrderController {
 	//상세보기 > 주문결제 (회원)
 	@GetMapping("order/orderform")
 	public String order2type1(Model model, HttpSession session, 
-			Principal principal,
-			@RequestParam("cartNo") int[] cartList) {
+			Principal principal, @CookieValue(required = false) String nomember,
+			@RequestParam(required = false, value = "cartNo") int[] cartList) {
 		List<CartVO> list = new ArrayList<>();
 		int count = 0;
-		for(int cartNo : cartList) {
-			CartVO vo = service.selectCart(cartNo);
-			list.add(vo);
-			count++;
+
+		int ct = util.header(principal, nomember);
+		model.addAttribute("ct", ct);
+		
+		@SuppressWarnings("unchecked")
+		List<CartVO> comeCart = (List<CartVO>) session.getAttribute("comeCart");
+		if(cartList != null && cartList.length > 0) {
+			for(int cartNo : cartList) {
+				CartVO vo = service.selectCart(cartNo);
+				list.add(vo);
+				count++;
+			}
+		}else {
+			for(int i=0; i<comeCart.size(); i++) {
+				CartVO vo = service.selectProdut(comeCart.get(i).getProdNo());
+				vo.setCartNo(0);
+				vo.setCount(comeCart.get(i).getCount());
+				vo.setColor(comeCart.get(i).getColor());
+				vo.setSize(comeCart.get(i).getSize());
+				list.add(vo);
+				count++;
+			}
 		}
 		session.setAttribute("orderItem", list);
 		model.addAttribute("list",list);
@@ -169,6 +202,9 @@ public class OrderController {
 			return "order/non-orderform";
 		}else {
 			//로그인ㅇ
+			String uid = principal.getName();
+			Member1VO vo = service.selectMember(uid);
+			model.addAttribute("member",vo);
 			return "order/orderform";
 		}
 	}
@@ -207,11 +243,15 @@ public class OrderController {
 	
 	//주문완료
 	@GetMapping("order/ordercomplete")
-	public String ordercomplete2(Model model, int ordNo) {
+	public String ordercomplete2(Model model, int ordNo,
+			Principal principal, @CookieValue(required = false) String nomember) {
 		OrdercompleteVO vo = service.selectOrdercomplete(ordNo);
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("orders", orders);
+		
+		int ct = util.header(principal, nomember);
+		model.addAttribute("ct", ct);
 		
 		return "order/ordercomplete";
 	}

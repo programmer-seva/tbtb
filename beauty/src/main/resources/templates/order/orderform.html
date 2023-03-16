@@ -145,6 +145,7 @@
 						<p>
 							주문자 정보
 						</p>
+						<input type="hidden" name="uid" th:value="${member.uid}">
 						<div class="orderBox">
 							<table border="0" class="infoTable">
 							<tbody>
@@ -153,7 +154,7 @@
 									고객명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
 								</th>
 								<td>
-									<input id="bName" name="orderer" placeholder="" size="10" type="text">
+									<input id="bName" name="orderer" placeholder="" size="10" type="text" th:value="${member.name}">
 								</td>
 							</tr>
 							<tr>

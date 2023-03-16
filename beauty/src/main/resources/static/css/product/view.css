@@ -427,6 +427,7 @@ img {
     padding: 50px;
     box-sizing: border-box;
     background: #fff;
+    z-index: 100;
 }
 .goCart > span {
     display: inline-block;

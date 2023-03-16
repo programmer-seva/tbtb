@@ -242,7 +242,7 @@ $(function(){
 		let payment = $('input[name=payment]:checked').val();
 		
 		let jsonData = {
-			'uid' : 'notMember',
+			'uid' : document.cookie = "name=nomember; path=/;",
 			'password' : password,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,

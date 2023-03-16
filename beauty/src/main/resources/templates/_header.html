@@ -22,7 +22,7 @@
            		<a th:href="@{/member/logout}">로그아웃</a>
 	        </p>
 	        <p>
-	        	<a th:href="@{/order/cart}">장바구니(0)</a>
+	        	<a th:href="@{/order/cart}">장바구니<span class="ct">[[${ct}]]</span></a>
 		        <a id="my" th:href="@{/myshop/index}">마이페이지</a>
 		        <a id="cs" href="#">고객센터</a>
 	        </p>

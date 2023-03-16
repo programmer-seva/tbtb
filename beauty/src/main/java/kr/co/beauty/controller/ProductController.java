@@ -22,7 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.ProductService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.SessionManager;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.ProdCate2VO;
@@ -35,10 +37,13 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService service;
-	private SessionManager manager;
+	@Autowired
+	private UtilService util;
 	
 	@GetMapping("shop/list")
 	public String productList(Model model, int cate,
+			Principal principal, 
+			@CookieValue(required = false) String nomember,
 			@RequestParam(required=false) String sort,
 			@RequestParam(required=false) Integer pg) {
 		
@@ -70,11 +75,18 @@ public class ProductController {
 		model.addAttribute("now",cate);
 		model.addAttribute("sort",sort);
 		model.addAttribute("page", pageArr);
+		
+		int ct = util.header(principal, nomember);
+		model.addAttribute("ct", ct);
+		
 		return "product/list";
 	}
 	
 	@GetMapping("shop/view")
-	public String productView(Model model,@RequestParam("pno") String prodNo, Principal principal) {
+	public String productView(Model model,
+			@RequestParam("pno") String prodNo, 
+			Principal principal,
+			@CookieValue(required = false) String nomember) {
 		ProductVO prod = service.selectProduct(prodNo);
 		String uid = null;
 		if(principal != null) {
@@ -82,6 +94,10 @@ public class ProductController {
 		}
 		model.addAttribute("prod", prod);
 		model.addAttribute("uid", uid);
+		
+		int ct = util.header(principal, nomember);
+		model.addAttribute("ct", ct);
+		
 		return "product/view";
 	}
 	
@@ -134,6 +150,47 @@ public class ProductController {
 				rs = service.addCart(vo.get(i));
 			}
 		}
+		
+		Map<String, Integer> result = new HashMap<>();
+		result.put("result", rs);
+		return result;
+	}
+	
+	@PostMapping("addOrder")
+	@ResponseBody
+	public Map<String, Integer> order(
+			@RequestParam Map data, 
+			Principal principal, 
+			@CookieValue(required = false) String nomember,
+			HttpSession session,
+			HttpServletResponse resp) throws Exception {
+		String uid = null;
+		if(principal != null) {
+			//회원ㅇ 로그인 상태
+			uid = principal.getName();
+		}else if(nomember == null) {
+			//쿠키가 없을 때
+			String sessionId = UUID.randomUUID().toString();
+			Cookie cookie = new Cookie("nomember", sessionId);
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24*2);
+			resp.addCookie(cookie);
+			uid = sessionId;
+		}else {
+			//쿠키가 있을 때
+			uid = nomember;
+		}
+		String json = data.get("jsonArray").toString();
+		ObjectMapper mapper = new ObjectMapper();
+		List<CartVO> vo = mapper.readValue(json, new TypeReference<ArrayList<CartVO>>() {});
+		
+		//구매하기로
+		int rs = 0;
+		for(int i=0; i<vo.size(); i++) {
+			vo.get(i).setUid(uid);
+			rs = 1;
+		}
+		session.setAttribute("comeCart", vo);
 		
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", rs);

@@ -1,11 +1,13 @@
 package kr.co.beauty.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.beauty.service.MainService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.SessionManager;
 import kr.co.beauty.vo.ProductVO;
 
@@ -22,11 +25,13 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
+	@Autowired
+	private UtilService util;
 	
 	SessionManager sessionManager = new SessionManager();
 	
 	@GetMapping(value = {"/", "index"})
-	public String index(Model model) {
+	public String index(Model model, Principal principal, @CookieValue(required = false) String nomember) {
 		
 		List<ProductVO> vo = service.selectNewItem();
 		List<ProductVO> outer = service.selectBestItem("100");
@@ -34,7 +39,6 @@ public class MainController {
 		List<ProductVO> bottom = service.selectBestItem("300");
 		List<ProductVO> dress = service.selectBestItem("400");
 		List<ProductVO> etc = service.selectBestItem("500");
-
 		
 		model.addAttribute("lists", vo);
 		model.addAttribute("outer", outer);
@@ -42,6 +46,9 @@ public class MainController {
 		model.addAttribute("bottom", bottom);
 		model.addAttribute("dress", dress);
 		model.addAttribute("etc", etc);
+		
+		int ct = util.header(principal, nomember);
+		model.addAttribute("ct", ct);
 		
 		return "index";
 	}

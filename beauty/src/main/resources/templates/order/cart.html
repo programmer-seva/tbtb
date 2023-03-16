@@ -89,7 +89,7 @@
                                                 <td> <a th:href="@{/product/view(pno=${cart.prodNo})}"> <img th:src="@{/image/}+${cart.thumb1}" alt=""> </a> </td>
                                                 <td>
                                                     <strong><a th:href="@{/product/view(pno=${cart.prodNo})}" th:text="${cart.prodName}"></a></strong><br>
-                                                    <span>[옵션: <span th:text="${cart.prodName}"></span>]<br></span>
+                                                    <span>[옵션: <span th:text="|${cart.color}, ${cart.size}|"></span>]<br></span>
                                                     <span>
 	                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#changeOptionModal">
 														옵션변경
@@ -219,7 +219,7 @@
 	                                    <a id="btnOrderSelectNon" class="btnOrder select" href="#">선택상품주문</a>
 	                                    <a id="btnOrderAllNon" class="btnOrder all" href="#">전체상품주문</a>
                                     </th:block>
-	                                    <a class="keepShopping" th:href="@{/product/list}">계속 쇼핑하기</a>
+	                                    <a class="keepShopping" th:href="@{/index}">계속 쇼핑하기</a>
                                 </div>
                                 <!-- 카트테이블 위시리스트-->
                                 <!-- 회원,비회원 -->

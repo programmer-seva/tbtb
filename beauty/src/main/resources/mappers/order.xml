@@ -64,6 +64,9 @@
 	<select id="selectOrder" resultType="OrderVO">
 		SELECT a.*,b.prodName,b.thumb1 FROM `order` AS a JOIN `product` AS b ON a.prodNo=b.prodNo  WHERE `ordNo`=#{ordNo}; 
 	</select>
+	<select id="selectProdut" resultType="CartVO">
+		SELECT * FROM `product` WHERE `prodNo`=#{prodNo};
+	</select>
 	<select id="selectCart" resultType="CartVO">
 		SELECT  a.`cartNo`, a.`prodNo`, a.`count`, b.`prodName`, b.`price`, b.`discount`, b.`disPrice`, b.`point`, a.`color`, a.`size`, b.`thumb1`
 		FROM `cart` AS a
