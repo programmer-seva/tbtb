@@ -25,6 +25,18 @@ public class Myshop1Controller {
 	@Autowired
 	private MyshopService service;
 	
+	/* 인덱스 */
+	@GetMapping(value = {"myshop/", "myshop/index"})
+	public String myhome(Principal principal, Model model) {
+		//유저 정보 받기
+		Member1VO member = service.selectMember(principal.getName());
+		model.addAttribute("member", member);
+		
+		return "myshop/myhome";
+	}
+	
+	
+	
 	/* 쿠폰 */
 	@GetMapping("myshop/myorder")
 	public String myorder(Principal principal, Model model) {
