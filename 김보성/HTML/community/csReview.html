@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Popup</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        body #content {
+            margin: 0 auto;
+            font-size: 12px;
+        }
+        .media_popup {
+            height: 100vh;
+            min-height: 720px;
+            font-size: 0;
+            background-color: rgba(1,1,1, 0.6);
+        }
+        .media_popup_content {
+            height: 100%;
+        }
+        .media_popup_lcontent {
+            position: relative;
+            display: inline-block;
+            width: calc(100% - 376px);
+            height: 100%;
+            min-width: 518px;
+        }
+        .media_popup_media_button_container {
+            position: relative;
+            display: inline-block;
+            width: 96px;
+            font-size: 14px;
+            height: 100%;
+        }
+        .media_popup_media_prev_button {
+            position: absolute;
+            stroke: #bcc2cc;
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            margin-left: 32px;
+        }
+        .media_popup_media_content {
+            position: relative;
+            display: inline-block;
+            width: calc(100% - (96px * 2));
+            height: 100%;
+            vertical-align: top;
+        }
+        .media_popup_media_media_content {
+            position: relative;
+            margin-top: 88px;
+            margin-bottom: 88px;
+            height: calc(100% - (88px * 2));
+            width: 100%;
+            overflow: hidden;
+        }
+        .media_popup_media_medium_container {
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            width: 100%;
+            text-align: center;
+        }
+        .media_popup_media_next_button {
+            position: absolute;
+            stroke: #bcc2cc;
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            margin-left: 32px;
+        }
+        .media_popup_rcontent {
+            display: inline-block;
+            width: 376px;
+            height: 100%;
+            vertical-align: top;
+            background-color: #ffffff;
+        }
+        .media_popup_product_header {
+            position: relative;
+            height: 77px;
+        }
+        .product_info_bar_product {
+            position: absolute;
+            top: 0;
+            background-color: white;
+            z-index: 1;
+            width: calc(100% - 30px);
+        }
+        .media_popup__product_header .product_info_bar__product {
+            width: 100%;
+            z-index: 0;
+        }
+        .product_info_bar_product_container {
+            position: relative;
+            padding: 16px 0 16px 24px;
+            font-size: 0;
+            border-bottom: solid 1px #ebeff5;
+        }
+        .product_info_bar_product_image_container {
+            display: inline-block;
+        }
+        .product_info_bar_product_image {
+            box-sizing: border-box;
+            border-radius: 20px;
+            border: solid 1px #d8dde5;
+            width: 40px;
+            height: 40px;
+        }
+        .product_info_bar_product_info_container {
+            display: inline-block;
+            margin-left: 8px;
+            vertical-align: top;
+        }
+        .product_info_bar_product_name {
+            width: 236px;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 18px;
+            color: #14161a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .product_info_bar_product_score {
+            font-size: 12px;
+            line-height: 18px;
+            display: inline-block;
+            height: 18px;
+            font-weight: bold;
+            color: #707680;
+            vertical-align: top;
+            margin-right: 4px;
+        }
+        .product_info_bar_product_score:hover {color: #bcc2cc;}
+        .product_info_bar__reviews_count {
+            font-size: 12px;
+            line-height: 18px;
+            display: inline-block;
+            height: 18px;
+            color: #707680;
+        }
+        .btnClose {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 22px;
+            width: 72px;
+            height: 72px;
+            stroke: #14161a;
+            cursor: pointer;
+            background: white;
+            font-size: 25px;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div class="media_popup">
+            <div class="media_popup_content">
+                <div class="media_popup_lcontent">
+                    <a href="#">
+                        <div class="media_popup_media_button_container">
+                            <img class="media_popup_media_prev_button" src="../img/btn_slide_prev02.png" alt="">
+                        </div>
+                    </a>
+                    <div class="media_popup_media_content">
+                        <div class="media_popup_media_media_content">
+                            <div class="media_popup_media_medium_container">
+                                <img src="../img/sample1.jpg" style="height: 761px; width: auto; cursor: zoom-in;">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="media_popup_media_button_container">
+                            <img class="media_popup_media_next_button" src="../img/btn_slide_next02.png" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="media_popup_rcontent">
+                    <div class="media_popup_product_header">
+                        <div class="product_info_bar_product">
+                            <a href="#">
+                                <div class="product_info_bar_product_container">
+                                    <div class="product_info_bar_product_image_container">
+                                        <img class="product_info_bar_product_image" src="../img/sample1.jpg" alt="">
+                                    </div>
+                                    <div class="product_info_bar_product_info_container">
+                                        <div class="product_info_bar_product_name">상품이름</div>
+                                        <div class="product_info_bar_product_reviews_info">
+                                            <span class="product_info_bar_product_score">4.9</span>
+                                            <div class="product_info_bar__reviews_count">리뷰 100</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </a>
+                            <button class="btnClose">X</button>
+                        </div>
+                    </div>
+
+                    <div class="media_popup_review_body"></div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
