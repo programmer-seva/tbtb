@@ -149,7 +149,7 @@ main > section{
 #admin-product-list > div > span{
     padding: 2px;
 }
-#admin-product-list > div > span > .current{
+#admin-product-list .current{
     border-bottom: 1px solid #b1acb0;
 }
 

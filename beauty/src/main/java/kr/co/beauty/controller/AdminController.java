@@ -91,16 +91,14 @@ public class AdminController {
 		return map;
 	}
 	
-	//삭제버튼을 이용한 상품 삭제 - 2023/03/09 윤사랑
+	//삭제버튼을 이용한 상품 삭제 - 2023/03/17 윤사랑
 	@GetMapping("admin/product/list/delete")
-	public String delete(String prodNo, String param1, String arg1) {
+	@ResponseBody
+	public String delete(String prodNo) {
+		//System.out.println(prodNo);
 		int result =service.deleteProduct(prodNo);
 		
-		if(arg1 != null && !arg1.isEmpty()) {
-			return "redirect:/admin/product/list?param1="+param1+"&arg1="+arg1;
-		}else {
-			return "redirect:/admin/product/list?param1="+param1;
-		}
+		return result+"";
 	}
 	
 	//체크박스를 이용한 상품 삭제 - 2023/03/09 윤사랑
@@ -113,17 +111,18 @@ public class AdminController {
 		for(int i = 0; i < checkBoxArr.size(); i++) {
 			result =service.deleteProduct(checkBoxArr.get(i));
 		}	
-		System.out.println(checkBoxArr);
+		//System.out.println(checkBoxArr);
 		return result + "";
 	}
-	//상품목록에서 상품 검색 - 2023/03/09 윤사랑
+	//상품목록에서 상품 검색 - 2023/03/17 윤사랑
 	@GetMapping("admin/product/search")
-	public String search(Model model, String arg1, String arg2, String param2, String param1) {
-		List<Product1VO> products = service.searchProduct(arg1, param2, arg2);
-		
+	public String search(Model model, @RequestParam(required=false) String[] arg0, String arg2, String param2) {
+		List<Product1VO> products = service.searchProduct(arg0, param2, arg2);
+		//System.out.println(arg0);
+		//System.out.println(arg2);
+		//System.out.println(param2);
+		//System.out.println(products);
 		model.addAttribute("products",  products);
-		model.addAttribute("param1",  param1);
-		model.addAttribute("arg1",  arg1);
 		
 		return "admin/product/search";
 	}
