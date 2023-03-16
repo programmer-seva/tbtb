@@ -20,8 +20,10 @@
 <link rel="stylesheet" th:href="@{/css/headfoot.css}">
 <link rel="stylesheet" th:href="@{/css/index.css}">
 <link rel="stylesheet" th:href="@{/css/member/register.css}">
+
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/member/register.js}"></script>
+<script th:src="@{/js/postcode.js}"></script>
 <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
 
@@ -59,57 +61,56 @@
 						</tr>
 						<tr>
 							<th><span class="essential">*</span>이름</th>
-							<td><input type="name" class="mb-input" name="name"
-								placeholder="" required> <span class="resultName">한글 2자 이상 이어야 합니다.</span>
+							<td>
+								<input type="name" class="mb-input" name="name" placeholder="" required>
+								<span class="resultName">한글 2자 이상 이어야 합니다.</span>
 							</td>
 						</tr>
 						<tr>
 							<th><span class="essential">*</span>주소</th>
 							<td>
 								<div>
-									<input type="text" class="zip" name="zip" placeholder=""
-										required readonly> <span></span>
+									<input type="text" class="zip" id="orderZip" name="zip" placeholder="우편번호" required readonly>
 									<button type="button" onclick="orderPost()">우편번호</button>
-									<div class="invalid-feedback">주소를 입력하세요</div>
 								</div>
 								<div>
-									<input type="text" class="addr" name="addr1" placeholder=""
-										readonly required> <span>기본주소</span>
+									<input type="text" class="addr" id="orderAddr1" name="addr1" placeholder="기본주소" readonly required>
 								</div>
 								<div>
-									<input type="text" class="addr" name="addr2" placeholder="">
-									<span>나머지주소</span>
+									<input type="text" class="addr" id="orderAddr2" name="addr2" placeholder="나머지주소">
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th><span class="essential">*</span>휴대전화</th>
-							<td><input type="text" class="mb-input" name="phone"
-								placeholder="" required> <span class="resultPhone">010-1234-5678</span></td>
+							<td>
+								<input type="text" class="mb-input" name="phone" placeholder="" required>
+								<span class="resultPhone">010-1234-5678</span>
+							</td>
 						</tr>
 					</table>
 					<h4>추가정보</h4>
 					<table border="1">
 						<tr>
 							<th>생년월일</th>
-							<td><input type="text" class="birth_year">년 <input
-								type="text" class="birth_month">월 <input type="text"
-								class="birth_day">일 <label><input type="radio"
-									id="calender" value="1">양력</label> <label><input
-									type="radio" id="calender" value="2">음력</label></td>
+							<td>
+								<input type="text" class="birth_year">년 <input type="text" class="birth_month">월 <input type="text" class="birth_day">일
+								<label><input type="radio" id="calender" value="1">양력</label>
+								<label><input type="radio" id="calender" value="2">음력</label>
+							</td>
 						</tr>
 						<tr>
 							<th>키/몸무게</th>
-							<td><input type="text" class="mb-input" name="height">cm
-								<input type="text" class="mb-input" name="weight">kg</td>
+							<td>
+								<input type="text" class="mb-input" name="height">cm
+								<input type="text" class="mb-input" name="weight">kg
+							</td>
 						</tr>
 					</table>
 					<table>
 						<h4>약관</h4>
 						<div>
-							<label> <input type="checkbox" class="terms-checkbox"
-								required> [전체선택] 개인정보 수집 및 이용약관에 동의합니다
-							</label>
+							<label><input type="checkbox" id="checkAll" class="terms-checkbox" required> [전체선택] 개인정보 수집 및 이용약관에 동의합니다</label>
 						</div>
 						<section>
 							<div class="base-box">
@@ -118,9 +119,7 @@
 								</h3>
 								<textarea class="" readonly>[[${memberVO.terms}]]</textarea>
 								<div>
-									<label> 이용약관에 동의하십니까?<input type="checkbox"
-										class="agree-checkbox" name="agree">
-									</label>
+									<label> 이용약관에 동의하십니까?<input type="checkbox" class="agree-checkbox" name="agree"></label>
 								</div>
 							</div>
 							<div class="base-box">

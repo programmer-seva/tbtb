@@ -25,14 +25,22 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
-	
-	
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private EmailService emailService;
 
 	@GetMapping("member/login")
 	public String login() {
 		return "member/login";
 	}
-
+	
+	/*@RequestParam(value = "error", required = false) String error, @RequestParam(value = "exception", required = false) String exception, Model model*/
+	/*model.addAttribute("error", error);
+	model.addAttribute("exception", exception);*/
+	
 	@GetMapping("member/register")
 	public String register(Model model) {
 		MemberVO vo = service.selectTerms();
@@ -59,34 +67,64 @@ public class MemberController {
 
 		return map;
 	}
-	
+
 	// 아이디 찾기
 	@GetMapping("member/find")
 	public String find() {
 		return "member/find";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("member/find1")
-	public Map<String, String> find(Model model, String name, String phone, HttpSession session){
+	public Map<String, String> find(Model model, String name, String phone, HttpSession session) {
 		String rs = service.findId(name, phone);
 		session.setAttribute("rs", rs);
 		Map<String, String> result = new HashMap<>();
 		result.put("result", rs);
 		return result;
 	}
-	
+
 	@ResponseBody
 	@PostMapping("member/find2")
 	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
-				
-		//System.out.println("name : " + name);
+
+		// System.out.println("name : " + name);
 		String rs = service.findPw(name, uid, phone);
 		session.setAttribute("rs", rs);
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", 1);
-		
+
 		return result;
+	}
+
+	// 아이디 찾기
+	@GetMapping("member/findIdResult")
+	public String findIdResult(Model model, HttpSession session) {
+		String uid = (String) session.getAttribute("rs");
+		model.addAttribute("uid", uid);
+
+		// MemberVO vo = service.selectUid(uid);
+		// model.addAttribute("vo", vo);
+		return "member/findIdResult";
+	}
+
+	@GetMapping("member/findPwResult")
+	public String findPwResult(Model model, HttpSession session) {
+		String uid = (String) session.getAttribute("rs");
+		model.addAttribute("uid", uid);
+		return "member/findPwResult";
+	}
+
+	// 이메일
+	@ResponseBody
+	@PostMapping("member/emailAuth")
+	public Map<String, Integer> checkEmail(@RequestParam("email") String email) throws Exception {
+		Map<String, Integer> data = new HashMap<>();
+		int code = emailService.sendSimpleMessage(email);
+		log.info("인증코드 : " + code);
+		data.put("status", 1);
+		data.put("code", code);
+		return data;
 	}
 
 	// 아이디 찾기
@@ -106,31 +144,13 @@ public class MemberController {
 //		return result;
 //	}
 
-	// 아이디 찾기
-	@GetMapping("member/findIdResult")
-	public String findIdResult(Model model, HttpSession session) {
-		String uid = (String) session.getAttribute("rs");
-		model.addAttribute("uid", uid);
-
-		// MemberVO vo = service.selectUid(uid);
-		// model.addAttribute("vo", vo);
-		return "member/findIdResult";
-	}
-	
-	@GetMapping("member/findPwResult")
-	public String findPwChange(Model model, HttpSession session) {
-		String uid = (String) session.getAttribute("rs");
-		model.addAttribute("uid",uid);
-		return "member/findPwResult";
-	}
-
 	// 비밀번호 찾기
 //	@GetMapping("member/findPw")
 //	public String findPw(HttpSession sess) {
 //		sess.removeAttribute("member");
 //		return "member/findPw";
 //	}
-	
+
 //	@ResponseBody
 //	@PostMapping("member/findPw")
 //	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
@@ -143,11 +163,8 @@ public class MemberController {
 //		
 //		return result;
 //	}
-	
-	
-	
-	
-//	@ResponseBody
+
+	// @ResponseBody
 //	@PostMapping("member/findPwChange")
 //	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
 //		pass = PasswordEncoder.encode(pass);
@@ -156,23 +173,5 @@ public class MemberController {
 //		map.put("result", result);
 //		return map;
 //	}
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-    private EmailService emailService;
 
-	//이메일
-    @ResponseBody
-    @PostMapping("member/emailAuth")
-    public Map<String, Integer> checkEmail(@RequestParam("email") String email) throws Exception {
-        Map<String, Integer> data = new HashMap<>();
-        int code = emailService.sendSimpleMessage(email);
-        log.info("인증코드 : " + code);
-        data.put("status", 1);
-        data.put("code", code);
-        return data;
-    }
-	
 }

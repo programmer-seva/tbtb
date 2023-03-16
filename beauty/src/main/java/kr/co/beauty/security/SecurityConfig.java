@@ -35,6 +35,9 @@ public class SecurityConfig {
 	AccessDeniedHandlerImpl accessDeniedHandler;
 	@Autowired
 	AuthenticationEntryPointImpl authenticationEntryPoint;
+//	@Autowired
+//	AuthFailureHandler authFailureHandler;
+	
 	
 	// 자동로그인
 	private final DataSource dataSource;
@@ -71,6 +74,7 @@ public class SecurityConfig {
 			.failureUrl("/member/login?success=101")
 			.usernameParameter("uid")
 			.passwordParameter("pass");
+			/*.failureHandler(authFailureHandler)*/
 				
 		//로그아웃 설정
 		http.logout()
