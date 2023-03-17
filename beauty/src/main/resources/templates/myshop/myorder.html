@@ -86,30 +86,31 @@
                                         </thead>
                                         <tbody>
                                         <!-- 아이템 반복 -->
+                                        <th:block th:each="order:${orderList}">
                                         <tr>
                                             <td>
                                                 <div>
                                                     <a href="#">
-                                                        <img th:src="@{/image/default_profile.png}" alt=""/>
+                                                        <img th:src="@{/image/}+${order.thumb1}" alt=""/>
                                                     </a>
                                                     <ul class="info">
                                                         <li id="seller">
-                                                            <a href="https://www.musinsa.com/brands/beslow">비슬로우</a>
+                                                            <a href="#">나중에 다른거 넣기</a>
                                                         </li>
                                                         <li id="prodName">
-                                                            <a href="/app/goods/1245684/0">19FW PURPLE LOGO SWEAT WHITE</a>
+                                                            <a th:href="@{/product/view(pno=${order.prodNo})}" th:text="${order.prodName}"></a>
                                                         </li>
-                                                        <li id="option">옵션 : white M</li>
+                                                        <li id="option" th:text="|[옵션 : ${order.color}, ${order.size}]|"></li>
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td>2023-03-14</td>
+                                            <td th:text="${order.rdate}"></td>
                                             <td>
-                                                <a href="#">202012281222560001</a>
+                                                <a href="#" th:text="${order.ordNo}"></a>
                                             </td>
                                             <td>
-                                                <span id="disPrice">20,650원</span> <br/>
-                                                <span id="count">1개</span>
+                                                <span id="disPrice" th:text="${#numbers.formatInteger(order.getTotalPrice, 0, 'COMMA')}+'원'"></span> <br/>
+                                                <span id="count" th:text="${#numbers.formatInteger(order.count, 0, 'COMMA')}+'개'"></span>
                                             </td>
                                             <td>
                                                 <div class="btn-set tooltip">
@@ -119,40 +120,8 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        </th:block>
                                         <!-- 아이템 반복 종료 -->
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <a href="#">
-                                                        <img th:src="@{/image/default_profile.png}" alt=""/>
-                                                    </a>
-                                                    <ul class="info">
-                                                        <li id="seller">
-                                                            <a href="https://www.musinsa.com/brands/beslow">비슬로우</a>
-                                                        </li>
-                                                        <li id="prodName">
-                                                            <a href="/app/goods/1245684/0">19FW PURPLE LOGO SWEAT WHITE</a>
-                                                        </li>
-                                                        <li id="option">옵션 : white M</li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                            <td>2023-03-14</td>
-                                            <td>
-                                                <a href="#">202012281222560001</a>
-                                            </td>
-                                            <td>
-                                                <span id="disPrice">20,650원</span> <br/>
-                                                <span id="count">1개</span>
-                                            </td>
-                                            <td>
-                                                <div class="btn-set tooltip">
-                                                    <button type="button" class="btn">배송 조회</button> <br/>
-                                                    <button type="button" class="btn">리뷰 쓰기</button><br/>
-                                                    <button type="button" class="btn">반품/교환</button>
-                                                </div>
-                                            </td>
-                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>

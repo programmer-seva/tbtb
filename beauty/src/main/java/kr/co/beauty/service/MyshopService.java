@@ -3,11 +3,13 @@ package kr.co.beauty.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.co.beauty.dao.Member1DAO;
 import kr.co.beauty.dao.MyshopDAO;
-import kr.co.beauty.vo.Member1VO;
+import kr.co.beauty.vo.MemberVO;
+import kr.co.beauty.vo.MyorderVO;
 import kr.co.beauty.vo.WishVO;
 
 @Service
@@ -20,9 +22,19 @@ public class MyshopService {
 	private MyshopDAO daoMy;
 	
 	//public
-	public Member1VO selectMember(String uid) {
+	public MemberVO selectMember(String uid) {
 		return daoMem.selectMember(uid);
 	}
+	
+	
+	//myorder
+	public List<MyorderVO> selectOrderList(String uid) {
+		return daoMy.selectOrderList(uid);
+	}
+	
+	
+	
+	
 	
 	//wishlist
 	public int addWish(WishVO vo) {
@@ -45,6 +57,22 @@ public class MyshopService {
 	
 	public void deleteAllWish(String uid) {
 		daoMy.deleteAllWish(uid);
+	}
+	
+	//profile
+	public int checkPW(String uid, String pass) {
+		MemberVO vo = daoMem.selectMember(uid);
+		if (new BCryptPasswordEncoder().matches(pass, vo.getPass())) {
+			return 1;
+		}else {return 0;}
+	}
+	
+	public int updateMember(MemberVO vo) {
+		return daoMem.updateMember(vo);
+	}
+	
+	public int deleteMember(String uid) {
+		return daoMem.deleteMember(uid);
 	}
 	
 	

@@ -5,10 +5,26 @@
 <!-- 김동근 -->
 <mapper namespace="kr.co.beauty.dao.Member1DAO">
 	
-	<select id="selectMember" resultType="Member1VO">
+	<select id="selectMember" resultType="MemberVO">
 		SELECT * FROM `member`
-		WHERE `uid` = #{uid}
+		WHERE `uid` = #{uid};
 	</select>
 	
+	<!-- 내 프로필 -->
+	<update id="updateMember">
+		UPDATE `member`
+		SET `phone` = #{phone},
+			`zip` 	= #{zip},
+			`addr1` = #{addr1},
+			`addr2` = #{addr2},
+			`height`= #{height},
+			`weight`= #{weight}
+		WHERE `uid` = #{uid};
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM `member`
+		WHERE `uid` = #{uid};
+	</delete>
 	
 </mapper>

@@ -1,36 +1,36 @@
-/* 
- * 김동근
- * MyShopDAO
- */
 package kr.co.beauty.vo;
 
+import groovy.transform.ToString;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
-public class CartVO {
-	private int cartNo;
-	private String uid;
+public class MyorderVO {
+	private int ordNo;
 	private int prodNo;
 	private String prodName;
+	private String thumb1;
 	private int price;
-	private int discount;
 	private int disPrice;
-	private int point;
 	private int count;
 	private String color;
 	private String size;
-	private String thumb1;
 	private String rdate;
 	
+	
+	public String getRdate() {
+		return rdate.substring(2,10);
+	}
 	//add
 	public int getSalePrice() {
 		return (price-disPrice);
 	}
-	
 	public int getTotalPrice() {
 		return (getSalePrice()*count);
 	}

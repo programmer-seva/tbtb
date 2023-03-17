@@ -91,6 +91,6 @@ div.profileFrame > .profileInfo > div.profileBtns > a {
     line-height: 40px;
     background-color: #4f4f4f;
 }
-div.profileFrame > .profileInfo > div.profileBtns > a.cancel {
-    background-color: #c9c9c9;
+div.profileFrame > .profileInfo > div.profileBtns > a.deleteAcc {
+    background-color: #d9534f;
 }

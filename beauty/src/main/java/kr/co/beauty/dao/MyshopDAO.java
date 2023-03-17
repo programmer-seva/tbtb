@@ -11,11 +11,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import kr.co.beauty.vo.MyorderVO;
 import kr.co.beauty.vo.WishVO;
 
 @Mapper
 @Repository
 public interface MyshopDAO {
+	
+	//myorder
+	public List<MyorderVO> selectOrderList(@Param("uid") String uid);
+	
 	//wishlist
 	public void addWish(WishVO vo);
 	public int checkWish(WishVO vo);
