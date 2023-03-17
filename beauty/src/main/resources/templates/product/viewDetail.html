@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="detailFragment">
+    <div class="detail">
+        <ul>
+            <li><a href="#" class="current" id="itemInfo">상품정보</a></li>
+            <li><a href="#" class="off" id="shopGuide">상품가이드</a></li>
+            <li><a href="#" class="off" id="itemReview">상품리뷰</a></li>
+            <li><a href="#" class="off" id="itemQna">상품문의</a></li>
+        </ul>
+    </div>
+    <div class="detailInfo">
+        <div class="itemInfo">
+            <article>
+            	<img alt="상품디테일" th:src="@{/image/}+${prod.detail1}">
+            </article>
+            <article>
+            	<img alt="상품디테일" th:src="@{/image/}+${prod.detail2}">
+            </article>
+            <article>
+            	<img alt="상품디테일" th:src="@{/image/}+${prod.detail3}">
+            </article>
+            <table>
+            	<tr>
+            		<td>제조사</td>
+            		<td th:text="${prod.company}"></td>
+           		</tr>
+            	<tr>
+            		<td>혼용율</td>
+            		<td th:text="${prod.status}"></td>
+           		</tr>
+            	<tr>
+            		<td>원산지</td>
+            		<td th:text="${prod.origin}"></td>
+           		</tr>
+            	<tr>
+            		<td>두께</td>
+            		<td><p th:class="${prod.thick == '2' ? 'check active' : 'check'}"></p>두꺼움</td>
+            		<td><p th:class="${prod.thick == '1' ? 'check active' : 'check'}"></p>보통</td>
+	           		<td><p th:class="${prod.thick == '0' ? 'check active' : 'check'}"></p>얇음</td>
+           		</tr>
+            	<tr>
+            		<td>신축성</td>
+            		<td><p th:class="${prod.flex == '2' ? 'check active' : 'check'}"></p>높음</td>
+            		<td><p th:class="${prod.flex == '1' ? 'check active' : 'check'}"></p>중간</td>
+	           		<td><p th:class="${prod.flex == '0' ? 'check active' : 'check'}"></p>없음</td>
+           		</tr>
+            	<tr>
+            		<td>비침</td>
+            		<td><p th:class="${prod.through == '2' ? 'check active' : 'check'}"></p>있음</td>
+            		<td><p th:class="${prod.through == '1' ? 'check active' : 'check'}"></p>약간있음</td>
+	           		<td><p th:class="${prod.through == '0' ? 'check active' : 'check'}"></p>없음</td>
+           		</tr>
+            	<tr>
+            		<td>안감</td>
+            		<td><p th:class="${prod.lining == '2' ? 'check active' : 'check'}"></p>있음</td>
+            		<td><p th:class="${prod.lining == '1' ? 'check active' : 'check'}"></p>없음</td>
+	           		<td><p th:class="${prod.lining == '0' ? 'check active' : 'check'}"></p>부분안감</td>
+           		</tr>
+            </table>
+        </div>
+        <div class="shopGuide">
+        </div>
+        <div class="itemReview">
+        </div>
+        <div class="itemQna">
+        </div>
+    </div>
+</th:block>
+</html>

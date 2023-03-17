@@ -50,6 +50,4 @@ public interface OrderDAO {
 	
 	//주문(회원)
 	public void completeInsert(OrdercompleteVO vo);
-	//주문(비회원)
-	public int non_completeInsert(OrdercompleteVO vo);
 }

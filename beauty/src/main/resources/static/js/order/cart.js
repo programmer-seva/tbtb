@@ -97,25 +97,6 @@ $(function(){
 		redirectGet('/Beauty/order/orderform', chkList);
 	});
 
-	
-	/* 관심상품등록 */
-	$('div.cartFrame > article.cartList > table > tbody td > a.btnTableAddWish').click(function(e){
-		e.preventDefault();
-		let prodNo = parseInt($(this).parent().children('input').val());
-		$.ajax({
-			url:'/Beauty/order/addWishFromCart',
-			type:'POST',
-			data:{'prodNo': prodNo},
-			dataType:'json',
-			success:function(data){
-				if(data == 1){
-					alert('등록되었습니다.');
-				}else{
-					alert('이미 등록된 상품입니다.');
-				}
-			}
-		});
-	});
 	/* 삭제 */
 	$('div.cartFrame > article.cartList > table > tbody td > a.btnTableDelete').click(function(e){
 		e.preventDefault();
@@ -229,84 +210,6 @@ $(function(){
 		});
 		redirectGet('/Beauty/order/orderform', chkList);
 	});
-	
-	
-	
-	
-	
-	
-		/* No-member  */
-	/* tableBtns */
-	/* No-member 주문하기 */
-	$('div.cartFrame > article.cartList > table > tbody td > a.btnTableOrderNon').click(function(e){
-		e.preventDefault();
-		let chkList = [];
-		chkList.push(parseInt($(this).parent().parent().children('td:first-child').children('input').val()));
-		redirectGet('/Beauty/order/orderform', chkList);
-	});
-	
-	/* No-member 관심상품등록 */
-	$('div.cartFrame > article.cartList > table > tbody td > a.btnTableAddWishNon').click(function(e){
-		e.preventDefault();
-		alert('로그인이 필요합니다');
-		//로그인창이동 or 그대로
-		
-	});
-
-	/* cartBtns */
-	/* No-member 카트비우기 */
-	$('#btnDeleteAllCartNon').click(function(e){
-		e.preventDefault();
-		if(confirm('장바구니를 비우시겠습니까?')){
-			$.ajax({
-				url:'/Beauty/order/deleteAllCartNon',
-				type:'POST',
-				data:{},
-				dataType:'json',
-				success:function(data){
-					if(data == 1){
-						emptyTable();
-					}else{
-					}
-				}
-			});
-		}else{
-			return;
-		}
-	});
-	
-	/* cartBtns Order */
-	/* No-member 선택주문하기 */
-	$('#btnOrderSelectNon').click(function(e){
-		e.preventDefault();
-		if ($("input:checkbox[name='chkCart']").is(":checked")==false) {
-			/* 선택 안 한 경우 */
-			alert('주문하실 상품을 선택해주세요.');
-			return;
-		}
-		let chkList = [];
-		$('input[name=chkCart]').each(function(){
-			if($(this).is(":checked")){
-				chkList.push(parseInt($(this).val()));
-			}
-		});
-		redirectGet('/Beauty/order/orderform', chkList);
-	});
-	/* No-member 전체주문하기 */
-	$('#btnOrderAllNon').click(function(e){
-		e.preventDefault();
-		let chkList = [];
-		$('input[name=chkCart]').each(function(){
-			chkList.push(parseInt($(this).val()));
-		});
-		redirectGet('/Beauty/order/orderform', chkList);
-	});
-	
-	
-	
-	
-	
-	
 	
 	/* 빈 카트 */
 	function emptyTable(){

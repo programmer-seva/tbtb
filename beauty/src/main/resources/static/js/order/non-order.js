@@ -224,8 +224,6 @@ $(function(){
 		let ordPrice = $('input[name=ordPrice]').val();
 		let ordDisprice = $('input[name=ordDisprice]').val();
 		let ordDelivery = $('input[name=ordDelivery]').val();
-		let savePoint = $('input[name=savePoint]').val();
-		let usedPoint = $('input[name=usedPoint]').val();
 		let total = $('input[name=total]').val();
 		let orderer = $('input[name=orderer]').val();
 		let orderHp = $('input[name=orderHp]').val();
@@ -242,14 +240,12 @@ $(function(){
 		let payment = $('input[name=payment]:checked').val();
 		
 		let jsonData = {
-			'uid' : document.cookie = "name=nomember; path=/;",
+			'uid' : getCookie("nomember"),
 			'password' : password,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,
 			'ordDisprice' : ordDisprice,
 			'ordDelivery' : ordDelivery,
-			'savePoint' : savePoint,
-			'usedPoint' : usedPoint,
 			'total' : total,
 			'orderer' : orderer,
 			'orderHp' : orderHp,
@@ -275,4 +271,19 @@ $(function(){
 			}
 		});
 	});
+	
+	function getCookie(c_name)
+	{
+		var i,x,y,ARRcookies=document.cookie.split(";");
+		for (i=0;i<ARRcookies.length;i++)
+		{
+		  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+		  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+		  x=x.replace(/^\s+|\s+$/g,"");
+		  if (x==c_name)
+			{
+			return unescape(y);
+			}
+		  }
+	}
 });
