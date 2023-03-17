@@ -13,8 +13,10 @@ div.myhomeFrame > div.benefit{
     margin: 0 auto;
 }
 div.myhomeFrame > div.benefit > h3 {
-    font-family: 'Nanum Gothic', sans-serif;
     display: inline-block;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
 }
 #levelPop {
     text-align: center;

@@ -29,7 +29,7 @@ import kr.co.beauty.service.OrderService;
 import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.SessionManager;
 import kr.co.beauty.vo.CartVO;
-import kr.co.beauty.vo.Member1VO;
+import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
@@ -59,7 +59,7 @@ public class OrderController {
 			@CookieValue(required = false) String nomember,
 			Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) {
-		Member1VO member = new Member1VO();
+		MemberVO member = new MemberVO();
 		List<CartVO> cartList = new ArrayList<>();
 		List<WishVO> wishList = new ArrayList<>();
 		String uid = null;
@@ -203,7 +203,7 @@ public class OrderController {
 		}else {
 			//로그인ㅇ
 			String uid = principal.getName();
-			Member1VO vo = service.selectMember(uid);
+			MemberVO vo = service.selectMember(uid);
 			model.addAttribute("member",vo);
 			return "order/orderform";
 		}

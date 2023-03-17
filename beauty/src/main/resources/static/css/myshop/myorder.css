@@ -101,7 +101,7 @@ div.myorderFrame > div.orderList > table td {
     box-sizing: border-box;
 }
 
-div.myorderFrame > div.orderList > table td:nth-child(n+2) {
+div.myorderFrame > div.orderList > table td:nth-child(4) {
     width: 12.5%;
     font-weight: bold;
 }
@@ -142,7 +142,9 @@ div.myorderFrame > div.orderList > table td:first-child > div > ul > li#prodName
     text-overflow: ellipsis;
 }
 div.myorderFrame > div.orderList > table td:first-child > div > ul > li#option {
-    color: #999;
+    font-size: 13px;
+    font-weight: bold;
+    color: #666666;
 }
 div.myorderFrame > div.orderList > table td #count {
     color: #999;

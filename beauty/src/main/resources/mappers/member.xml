@@ -33,7 +33,7 @@
 	</select>
 	
 	<!--  -->
-	<select id="selectMember" resultType="Member1VO">
+	<select id="selectMember" resultType="MemberVO">
 		SELECT * FROM `member`
 		WHERE `uid` = #{uid}
 	</select>

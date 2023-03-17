@@ -8,10 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import kr.co.beauty.vo.Member1VO;
+import kr.co.beauty.vo.MemberVO;
 
 @Mapper
 @Repository
 public interface Member1DAO {
-	public Member1VO selectMember(@Param("uid") String uid);
+	public MemberVO selectMember(@Param("uid") String uid);
+	//내 프로필
+	public int updateMember(MemberVO vo);
+	public int deleteMember(@Param("uid") String uid);
 }

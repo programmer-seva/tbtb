@@ -15,16 +15,31 @@
 </th:block>
 <th:block th:fragment="myheadFragment">
 	<!-- 회원 정보 -->
+	<th:block sec:authorize="isAuthenticated()">
 	<nav class="head">
 	    <div class="user">
-	        <div class="userThumb disnone" >
+	        <div class="userThumb" >
 	            <a href="#">
 	                <img th:src="@{/image/default_profile.png}" alt="">
 	            </a>
 	        </div>
-	        <div class="userInfo">
-	            <div><span id="userNick">김동근</span></div>
-	            <div>Lv.<span id="level">1</span> <span id="levelName">실버</span></div>
+	        <div class="userInfo" th:with="levelPoint=${2500}">
+	            <div><span id="userNick" th:text="${member.name}"></span>님</div>
+	            
+	            <!-- 등급 -->
+	            <th:block th:if="${levelPoint < 1000}">
+		            <div>Lv.<span id="level">0</span> <span id="levelName">브론즈</span></div>
+	            </th:block>
+	            <th:block th:if="${levelPoint < 3000 && 1000 < levelPoint}">
+		            <div>Lv.<span id="level">1</span> <span id="levelName">실버</span></div>
+	            </th:block>
+	            <th:block th:if="${levelPoint < 10000 && 3000 < levelPoint}">
+		            <div>Lv.<span id="level">2</span> <span id="levelName">골드</span></div>
+	            </th:block>
+	            <th:block th:if="${10000 < levelPoint}">
+		            <div>Lv.<span id="level">3</span> <span id="levelName">다이아몬드</span></div>
+	            </th:block>
+	            
 	            <div>
 	                <div class="boughtPrice">
 	                    <span>누적 구매 금액</span>
@@ -32,7 +47,7 @@
 	                </div>
 	                <div class="point">
 	                    <span>현재 포인트</span>
-	                    <span id="point">5,000</span>
+	                    <span id="point" th:text="${#numbers.formatInteger(member.point, 0, 'COMMA')}"></span>
 	                </div>
 	                <div class="coupon">
 	                    <span>보유 쿠폰</span>
@@ -40,7 +55,7 @@
 	                </div>
 	                <div class="levelPoint">
 	                    <span>등급 점수</span>
-	                    <span id="levelPoint">2,500</span>
+	                    <span id="levelPoint" th:text="${#numbers.formatInteger(levelPoint, 0, 'COMMA')}"></span>
 	                </div>
 	            </div>
 	        </div>
@@ -52,5 +67,6 @@
 	        </ul>
 	    </div>
 	</nav>
+	</th:block>
 </th:block>
 </html>

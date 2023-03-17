@@ -9,7 +9,7 @@ import jakarta.transaction.Transactional;
 import kr.co.beauty.dao.Member1DAO;
 import kr.co.beauty.dao.OrderDAO;
 import kr.co.beauty.vo.CartVO;
-import kr.co.beauty.vo.Member1VO;
+import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
 import kr.co.beauty.vo.TermsVO;
@@ -24,7 +24,7 @@ public class OrderService {
 	
 	/* 김동근 */
 	//public
-	public Member1VO selectMember(String uid) {
+	public MemberVO selectMember(String uid) {
 		return daoMem.selectMember(uid);
 	}
 	

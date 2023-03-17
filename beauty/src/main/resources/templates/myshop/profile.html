@@ -48,19 +48,19 @@
 							
                             <!-- 내 정보 -->
                             <div class="profileFrame">
-                                <div class="checkPassword disnone">
+                                <div class="checkPassword">
                                     <table border="0">
                                         <caption>비밀번호를 다시 입력해주세요.</caption>
                                         <tbody>
                                             <tr>
                                                 <th>비밀번호</th>
-                                                <td><input type="password" size="15" id="pw"></td>
+                                                <td><input type="password" size="15" id="pass"></td>
                                                 <td><a href="#" class="btn" id="btnCheckPW">확인</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="profileInfo">
+                                <div class="profileInfo disnone">
                                     <table border="0">
                                         <caption>기본정보</caption>
                                         <tbody>
@@ -111,7 +111,7 @@
                                                     <input id="zip" type="text" size="10" th:value="${member.zip}" readonly>
                                                     <span class="btn">검색</span>
                                                     <br>
-                                                    <input id="addr1" type="text" th:value="${member.addr1}">
+                                                    <input id="addr1" type="text" th:value="${member.addr1}" readonly>
                                                     <br>
                                                     <input id="addr2" type="text" th:value="${member.addr2}">
                                                 </td>
@@ -120,7 +120,7 @@
                                     </table>
                                     <div class="profileBtns">
                                         <a class="apply" href="#">정보수정</a>
-                                        <a class="cancel" href="#">취소</a>
+                                        <a class="deleteAcc" href="#">회원탈퇴</a>
                                     </div>
                                 </div>
                             </div>
