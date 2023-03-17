@@ -78,6 +78,7 @@ public class OrderController {
 			wishList = serviceMy.selectWishlist(uid);
 		}
 
+		model.addAttribute("uid", uid);
  		model.addAttribute("member", member);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("wishList", wishList);
@@ -99,13 +100,6 @@ public class OrderController {
 		if(nomember != null) {
 			service.deleteAllCart(nomember);
 		}
-		return 1;
-	}
-	//카트 - cartBtns(테이블아래버튼) - No-member 비우기
-	@ResponseBody
-	@PostMapping("order/deleteAllCartNon")
-	public int deleteAllCartNon(HttpServletRequest req) {
-		service.deleteAllCart(sessionManager.getNoMemberId(req));
 		return 1;
 	}
 	
@@ -163,9 +157,12 @@ public class OrderController {
 	/* 박진휘 */
 	//상세보기 > 주문결제 (회원)
 	@GetMapping("order/orderform")
-	public String order2type1(Model model, HttpSession session, 
-			Principal principal, @CookieValue(required = false) String nomember,
+	public String order2type1(Model model, 
+			HttpSession session, 
+			Principal principal, 
+			@CookieValue(required = false) String nomember,
 			@RequestParam(required = false, value = "cartNo") int[] cartList) {
+		
 		List<CartVO> list = new ArrayList<>();
 		int count = 0;
 
@@ -212,11 +209,7 @@ public class OrderController {
 	@PostMapping("order/orderform/type1")
 	public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session) {
 		log.debug("실행확인");
-		List<?> list = (List<?>) session.getAttribute("orderItem");
-		List<CartVO> item = new ArrayList<>();
-		for (Object object : list) {
-			item.add((CartVO)object);
-		}
+		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
 		service.complete(vo, item);
 		session.removeAttribute("orderItem");
 		
@@ -228,11 +221,7 @@ public class OrderController {
 	@PostMapping("order/orderform/type2")
 	public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session) {
 		log.debug("실행확인");
-		List<?> list = (List<?>) session.getAttribute("orderItem");
-		List<CartVO> item = new ArrayList<>();
-		for (Object object : list) {
-			item.add((CartVO)object);
-		}
+		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
 		service.complete(vo, item);
 		session.removeAttribute("orderItem");
 		

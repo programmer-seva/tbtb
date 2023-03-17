@@ -75,8 +75,8 @@
 		WHERE a.`cartNo`=#{cartNo};
 	</select>
 	<insert id="insertOrder">
-		INSERT INTO `order` (`ordNo`,`prodNo`,`count`,`price`,`discount`,`disPrice`,`point`,`total`,`rdate`) 
-		VALUES (#{ordNo},#{prodNo},#{count},#{price},#{discount},#{disPrice},#{point},#{total},NOW());
+		INSERT INTO `order` (`ordNo`,`prodNo`,`count`,`price`,`discount`,`disPrice`,`point`,`color`,`size`,`total`,`rdate`) 
+		VALUES (#{ordNo},#{prodNo},#{count},#{price},#{discount},#{disPrice},#{point},#{color},#{size},#{total},NOW());
 	</insert>
 	<select id="deleteCart">
 		DELETE FROM `cart` WHERE `cartNo`=#{cartNo};
@@ -87,19 +87,10 @@
 	
 	<insert id="completeInsert" parameterType="OrdercompleteVO" useGeneratedKeys="true" keyProperty="ordNo">
 		INSERT INTO `ordercomplete` 
-		(`uid`,`ordCount`,`ordPrice`,`ordDisprice`,`ordDelivery`,`savePoint`,`usedPoint`,`total`,
+		(`uid`,`password`,`ordCount`,`ordPrice`,`ordDisprice`,`ordDelivery`,`savePoint`,`usedPoint`,`total`,
 		`orderer`,`orderHp`,`orderZip`,`orderAddr1`,`orderAddr2`,`orderEmail`,
 		`recipName`,`recipHp`,`recipZip`,`recipAddr1`,`recipAddr2`,`message`,`payment`,`ordDate`) VALUES 
-		(#{uid},#{ordCount},#{ordPrice},#{ordDisprice},#{ordDelivery},#{savePoint},#{usedPoint},#{total},
-		#{orderer},#{orderHp},#{orderZip},#{orderAddr1},#{orderAddr2},#{orderEmail},
-		#{recipName},#{recipHp},#{recipZip},#{recipAddr1},#{recipAddr2},#{message},#{payment},NOW());
-	</insert>
-	<insert id="non_completeInsert" parameterType="OrdercompleteVO" useGeneratedKeys="true" keyProperty="ordNo">
-		INSERT INTO `ordercomplete` 
-		(`password`,`ordCount`,`ordPrice`,`ordDisprice`,`ordDelivery`,`savePoint`,`usedPoint`,`total`,
-		`orderer`,`orderHp`,`orderZip`,`orderAddr1`,`orderAddr2`,`orderEmail`,
-		`recipName`,`recipHp`,`recipZip`,`recipAddr1`,`recipAddr2`,`message`,`payment`,`ordDate`) VALUES 
-		(#{password},#{ordCount},#{ordPrice},#{ordDisprice},#{ordDelivery},#{savePoint},#{usedPoint},#{total},
+		(#{uid},#{password},#{ordCount},#{ordPrice},#{ordDisprice},#{ordDelivery},#{savePoint},#{usedPoint},#{total},
 		#{orderer},#{orderHp},#{orderZip},#{orderAddr1},#{orderAddr2},#{orderEmail},
 		#{recipName},#{recipHp},#{recipZip},#{recipAddr1},#{recipAddr2},#{message},#{payment},NOW());
 	</insert>

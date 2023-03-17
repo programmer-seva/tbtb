@@ -75,12 +75,7 @@ public class OrderService {
 	
 	@Transactional
 	public void complete(OrdercompleteVO vo, List<CartVO> item) {
-		
-		if(vo.getUid().equals("notMember")) {
-			non_completeInsert(vo);
-		}else {
-			completeInsert(vo);
-		}
+		daoOrd.completeInsert(vo);
 		
 		for(int i=0; i<item.size(); i++) {
 			insertOrder(vo.getOrdNo(), item.get(i));
@@ -98,6 +93,8 @@ public class OrderService {
 		result.setDiscount(vo.getDiscount());
 		result.setDisPrice(vo.getDisPrice());
 		result.setPoint(vo.getPoint());
+		result.setColor(vo.getColor());
+		result.setSize(vo.getSize());
 		result.setTotal(vo.getTotalPrice());
 		daoOrd.insertOrder(result);
 	}
@@ -108,10 +105,6 @@ public class OrderService {
 	//주문(회원)
 	public void completeInsert(OrdercompleteVO vo) {
 		daoOrd.completeInsert(vo);
-	}
-	//주문(비회원)
-	public int non_completeInsert(OrdercompleteVO vo) {
-		return daoOrd.non_completeInsert(vo);
 	}
 	
 }

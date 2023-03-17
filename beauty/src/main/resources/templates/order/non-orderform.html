@@ -95,9 +95,6 @@
 									수량
 								</th>
 								<th>
-									적립
-								</th>
-								<th>
 									합계
 								</th>
 							</tr>
@@ -115,9 +112,6 @@
 								</td>
 								<td>
 									<span id="prodCount" th:text="${item.count}"></span>개
-								</td>
-								<td>
-									<span id="prodSavePoint" th:text="${#numbers.formatInteger(item.point, 0, 'COMMA')}"></span>점
 								</td>
 								<td>
 									<span id="prodTotal" th:text="${#numbers.formatInteger((item.price-item.disPrice)*item.count, 0, 'COMMA')}"></span>원
@@ -307,12 +301,6 @@
 								<p>
 									배송비
 								</p>
-								<p>
-									사용적립금
-								</p>
-								<p>
-									적립금
-								</p>
 							</div>
 							<div class="totalRight">
 								<p>
@@ -323,12 +311,6 @@
 								</p>
 								<p>
 									<input type="number" name="ordDelivery" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="usedPoint" value="0" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="savePoint" readonly></input>원
 								</p>
 							</div>
 							<div class="totalBottom">
