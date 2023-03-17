@@ -196,6 +196,39 @@
 			e.preventDefault;
 			$('.goCart').css('display','none');
 		});
+		
+		$('#itemInfo').click(function(){
+			$('.detail').children().children().children().attr('class','off');
+			$(this).addClass('current');
+			$('#d1').css('display','block');
+			$('#d2').css('display','none');
+			$('#d3').css('display','none');
+			$('#d4').css('display','none');
+		});
+		$('#shopGuide').click(function(){
+			$('.detail').children().children().children().attr('class','off');
+			$(this).addClass('current');
+			$('#d1').css('display','none');
+			$('#d2').css('display','block');
+			$('#d3').css('display','none');
+			$('#d4').css('display','none');
+		});
+		$('#itemReview').click(function(){
+			$('.detail').children().children().children().attr('class','off');
+			$(this).addClass('current');
+			$('#d1').css('display','none');
+			$('#d2').css('display','none');
+			$('#d3').css('display','block');
+			$('#d4').css('display','none');
+		});
+		$('#itemQna').click(function(){
+			$('.detail').children().children().children().attr('class','off');
+			$(this).addClass('current');
+			$('#d1').css('display','none');
+			$('#d2').css('display','none');
+			$('#d3').css('display','none');
+			$('#d4').css('display','block');
+		});
 	});
 	</script>
 </head>

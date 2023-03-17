@@ -498,20 +498,19 @@ img {
     border-radius: 10px;
 }
 .detailInfo {
-    width: 1200px;
+    width: 1600px;
     height: auto;
     margin: 0 auto;
     box-sizing: border-box;
 }
 .detailInfo > div {
-    width: 1000px;
-    height: 1000px;
+    width: 100%;
+    height: auto;
     margin: 100px auto;
     box-sizing: border-box;
     text-align:center;
 }
 .detailInfo > .itemInfo > article {
-	width: 1000px;
 	margin-bottom: 100px;
 	text-align: center;
 }
@@ -519,11 +518,12 @@ img {
 	height: 100%;
 }
 .detailInfo > .itemInfo > table {
-	width: 100%;
+	width: 1000px;
 	border-collapse: collapse;
 	border-top: 2px solid black;
 	border-bottom: 2px solid black;
     font-size: 14px;
+    margin: 0 auto;
 }
 .detailInfo > .itemInfo > table tr {
 	height: 50px;
@@ -556,9 +556,72 @@ img {
 	background: crimson;
 }
 
-.detailInfo > .shopGuide {
+.detailInfo > #d2 {
+	display : none;
 }
-.detailInfo > .itemReview {
+.detailInfo > #d2 > table tr > td {
+	padding: 40px;
 }
-.detailInfo > .itemQna {
+.detailInfo > #d3 {
+	display : none;
+}
+.detailInfo > #d4 {
+	display : none;
+}
+#d4 section > span {
+    font-size: 20px; 
+    color: #555;
+    font-weight: bold;
+}
+#d4 section > p {
+	font-size: 12px;
+}
+#d4 table {
+    width: 1000px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 10px auto;
+}
+#d4 table tr:first-child {
+    background: #fbfafa;
+}
+#d4 table th {
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    color: #777;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 10px 0;
+}
+#d4 table td {
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+    padding: 15px 6px;
+    border-bottom: 1px solid #ebebeb;
+}
+#d4 table td > a {display: inline-block; width: 100%; color: #555;}
+#d4 table td.prod > a > img{width: 50px; height: 50px;}
+#d4 table td.title {text-align: left; padding-left: 8px;}
+#d4 #boardSearch {
+	text-align: right;
+    width: 1000px;
+    margin: 0 auto;
+}
+#d4 .goList {
+	background: #fff;
+	border: 1px solid #555;
+	color: #555;
+}
+#d4 .goWrite {
+	background: #555;
+	color: white;
+    border: none;
+}
+#d4 #boardSearch > button {
+    font-size: 12px;
+    width: 70px;
+    height: 30px;
+    margin-top: 15px;
+    cursor: pointer;
 }
