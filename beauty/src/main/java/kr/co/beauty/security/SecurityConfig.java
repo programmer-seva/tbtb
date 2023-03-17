@@ -73,7 +73,7 @@ public class SecurityConfig {
 			.defaultSuccessUrl("/")
 			.failureUrl("/member/login?success=101")
 			.usernameParameter("uid")
-			.passwordParameter("pass");
+			.passwordParameter("password");
 			/*.failureHandler(authFailureHandler)*/
 				
 		//로그아웃 설정
