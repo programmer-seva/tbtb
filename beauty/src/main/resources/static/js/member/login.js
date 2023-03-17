@@ -54,13 +54,40 @@ $(function() {
 			$('input[name=password]').attr('type', 'password');
 		}
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+	// 로그인
+	$('button[name=login]').click(function() {
+		//console.log('here1');
+		let login = $(this).val();
+		let uid = $('input[name=uid]').val().trim();
+		let pass = $('input[name=password]').val().trim();
+		if (uid == '') {
+			alert('아이디를 입력해주세요');
+			return false;
+		}
+		if (pass == '') {
+			alert('비밀번호를 입력해주세요');
+			return false;
+		}
+	});
+	//로그인 성공
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+			.exec(location.search);
+		return results == null ? "" : decodeURIComponent(results[1]
+			.replace(/\+/g, " "));
+	}
+	var patId = getParameterByName('success');
+	console.log(patId);
+	if (patId == '101') {
+		let tag = "<span class='error'>아이디와 비밀번호가 틀렸습니다. 다시 한번 확인해주세요.</span>";
+		$('#l1').after(tag);
+	}
+
+
+
+
+
 });

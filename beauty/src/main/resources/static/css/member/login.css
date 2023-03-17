@@ -174,4 +174,12 @@ main>.lg {
 	right: 158px;
 	cursor: pointer;
 }
+.error {
+    color: red;
+    font-size: 12px;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+    margin-left: 150px;
+}
 
