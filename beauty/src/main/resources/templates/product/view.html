@@ -57,7 +57,7 @@
 			tag += "<span class='total'></span>";
 			tag += "<span class='material-icons' id='close'>close</span>";
 			tag += "</article>";
-			$('table').after(tag);
+			$('.t1').after(tag);
 			
 			$('.result').css('display','block');
 			let tot =$('input[name=total]').val();
@@ -174,10 +174,10 @@
 				return false;
 			}
 		}
-		
 		function resultArray(){
+			console.log($('article.orderItems').length);
 			let array = [];
-			$(".orderItems").each(function(index, item){
+			$("article.orderItems").each(function(index, item){
 				let color = $(item).children('input[name=color]').val();
 				let size = $(item).children('input[name=size]').val();
 				let count = $(item).children('div').children('span.count').text();
@@ -343,7 +343,7 @@
 									    <span class="p1" th:text="${prod.discount + '%'}"></span>
 									</div>
                                 </div>
-                                <table>
+                                <table class="t1">
                                 	<tr>
                                 		<td>적립금</td>
                                 		<td>1%</td>

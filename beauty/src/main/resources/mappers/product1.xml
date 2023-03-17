@@ -80,7 +80,7 @@
 	</select>
 	<insert id="addWish">
 		INSERT INTO `wish` (`prodNo`, `uid`, `rdate`) 
-		VALUES ()#{prodNo}, #{uid}, NOW());
+		VALUES (#{prodNo}, #{uid}, NOW());
 	</insert>
 	<select id="checkCart" resultType="int">
 		SELECT COUNT(`prodNo`) FROM `cart` WHERE `prodNo`=#{prodNo} AND `color`=#{color} AND `size`=#{size};
