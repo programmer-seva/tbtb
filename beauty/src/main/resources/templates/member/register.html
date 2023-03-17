@@ -42,7 +42,12 @@
 							<td>
 								<input type="email" class="mb-input" name="uid" placeholder="" required>
 								<span class="resultUid">이메일을 입력해주세요.</span>
-								<p>(아이디 찾기에 사용 문구 넣기)</p>
+								<button type="submit" class="sendCode">인증번호 발송</button>
+								<div>
+									<input type="text" class="insertCode" name="insertCode" placeholder="" style="margin-top: 10px;">
+	                                <span>인증번호 6자리를 입력하세요</span>
+                                </div>
+                                <span id="timer"></span>
 							</td>
 						</tr>
 						<tr>

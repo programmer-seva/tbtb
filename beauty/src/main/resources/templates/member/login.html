@@ -19,9 +19,6 @@
     <script th:src="@{/js/member/login.js}"></script>
     <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
-<script>
-	
-</script>
 <body>
     <div id="wrap">
         
@@ -36,14 +33,14 @@
                         </tr>
                     </table>
                     <article id="member" class="m1">
-                        <div class="login">
+                        <div class="login" id="l1">
                             <form action="#" method="post">
                                 <input type="text" name="uid" placeholder="아이디">
-                                <span class="material-icons close">close</span>
-                                <input type="password" name="password" placeholder="비밀번호" style="margin-top: 10px;">
-                                <span class="material-icons eye">visibility_off</span>
+	                                <span class="material-icons close">close</span>
+	                                <input type="password" name="password" placeholder="비밀번호" style="margin-top: 10px;">
+	                                <span class="material-icons eye">visibility_off</span>
                                 </input>
-                                <button type="submit">로그인</button>
+                                <button type="submit" name="login">로그인</button>
                             </form>
                             <div class="loginlabel">
                                 <label><input type="checkbox" name="autoLogin">아이디 저장</label>

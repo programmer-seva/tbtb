@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -35,15 +36,15 @@ public class SecurityConfig {
 	AccessDeniedHandlerImpl accessDeniedHandler;
 	@Autowired
 	AuthenticationEntryPointImpl authenticationEntryPoint;
-//	@Autowired
-//	AuthFailureHandler authFailureHandler;
-	
 	
 	// 자동로그인
 	private final DataSource dataSource;
 	// 자동로그인
 	@Autowired
 	private SecurityUserService userService;
+	
+	// 로그인 alert
+//	private final AuthenticationFailureHandler customFailureHandler;
 	
 	@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -73,8 +74,8 @@ public class SecurityConfig {
 			.defaultSuccessUrl("/")
 			.failureUrl("/member/login?success=101")
 			.usernameParameter("uid")
-			.passwordParameter("password");
-			/*.failureHandler(authFailureHandler)*/
+			.passwordParameter("password");	
+			
 				
 		//로그아웃 설정
 		http.logout()

@@ -25,7 +25,7 @@
 	let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
 	$(function(){
-		$('.btnNext').click(function(e){
+		$('.changePw').click(function(e){
 			e.preventDefault();
 			
 			let uid = $('.uid').text();
@@ -90,15 +90,20 @@
 								<td>새 비밀번호 확인</td>
 								<td><input type="password" id="pass2" name="pass2" placeholder="새 비밀번호 입력" required="required"/></td>
 							</tr>
+							<tr>
+								
+							</tr>
 						</table>
 						<div class="btn">
-							<a th:href="@{/member/login}" class="btnCancel">로그인</a>
-							<a th:href="@{/member/find}" class="btnNext">아이디 찾기</a>
+							<a th:href="@{/member/find}" class="changePw">비밀번호 변경</a>
+							<a th:href="@{/member/login}" class="btnLogin">로그인</a>
+							<a th:href="@{/member/find}" class="findId">아이디 찾기</a>
 						</div>	
 					</fieldset>
 				</div>
 			</form>
 		</div>
 	</main>
+	<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
 </body>
 </html>

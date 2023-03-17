@@ -125,4 +125,78 @@ $(function() {
 	});
 
 
+	///////////////////
+	////// 이메일 인증 /////
+	///////////////////
+	
+	//email
+	var code = null;
+	$('.sendCode').click(function(e) {
+		e.preventDefault();
+		let email = $('input[name=uid]').val();
+		if (email == '') {
+			alert('이메일을 입력해주세요');
+			return;
+		} else {
+			alert('인증번호가 발송되었습니다.');
+		}
+		$.ajax({
+			url: '/Beauty/member/emailAuth',
+			method: 'post',
+			data: { "email": email },
+			dataType: 'json',
+			success: function(data) {
+				if (data.status > 0) {
+					//메일전송 성공
+					$('.auth').show();
+					code = data.code;
+				} else {
+					//메일전송 실패
+					alert('메일 전송에 실패했습니다. 다시 시도해주세요');
+				}
+			}
+		});
+	});
+
+	//email code check
+	$('.btn-terms').click(function() {
+		let insertCode = $('input[name=insertCode]').val();
+		let receivedCode = $('input[name=insertCode]').val();
+		//그냥 확인
+		if (insertCode == '') {
+			alert('인증번호를 입력해주세요.');
+			return false;
+		}
+		//인증번호만 적고 확인
+		if (code == null) {
+			alert('인증번호를 발송해주세요');
+			return false;
+		}
+		//인증번호 대조
+		if (code == receivedCode) {
+			//인증ㅇ
+			alert('인증완료 되었습니다.');
+			alert('가입이 완료되었습니다.');
+			location.href = "/Beauty/login/";
+		} else {
+			//인증x
+			alert('잘못된 인증번호입니다.');
+			return false;
+		}
+	});
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
