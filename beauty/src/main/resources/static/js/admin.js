@@ -69,7 +69,7 @@ $(document).ready(function(){
 						tag += "<td>"+sliceArr[i].prodNo+"</td>";
 						tag += "<td>"+sliceArr[i].prodCate1+"</td>";
 						tag += "<td>"+sliceArr[i].prodCate2+"</td>";
-						tag += "<td>"+sliceArr[i].prodName+"</td>";
+						tag += "<td><a href='#'>"+sliceArr[i].prodName+"</a></td>";
 						tag += "<td>"+sliceArr[i].disPrice+"</td>";
 						tag += "<td>"+sliceArr[i].stock+"</td>";
 						tag += "<td>"+sliceArr[i].hit+"</td>";
@@ -134,13 +134,13 @@ $(document).ready(function(){
   		//console.log("totalPage",totalPage);
   		$(".page").empty();
 		//페이지 만들기
-  		let tag = "<span class='prev'>이전</span>";
+  		let tag = "<span><a class='prev' href='#'>이전</a></span>";
 		
   		for(i=startPg; i<=endPg; i++){
 			let num= pg==i?'current':'num';
-			tag += "<span class='"+num+"' data-value='"+i+"'>"+i+"</span>";
+			tag += "<span><a class='"+num+"' data-value='"+i+"' href='#'>"+i+"</a></span>";
 		}
-			tag += "<span class='next'>다음</span>";
+			tag += "<span><a class='next' href='#'>다음</a></span>";
 		
 		$(".page").append(tag);
   	}
@@ -289,26 +289,38 @@ function cateChange(){
     		let dress = ["원피스","투피스","점프수트"];
     		let etc = ["신발","가방","모자","쥬얼리"];
     		
+    		let outerV=[101,102,103,104];
+    		let topV=[201,202,203,204,205];
+    		let bottomV=[301,302,303,304,305];
+    		let dressV=[401,402,403];
+    		let etcV=[501,502,503,504];
+    		
     		let target = $("#cate1").val();
     		let opt;
-    		console.log(target);
-    		if(target == '1'){
+    		let optV;
+    		//console.log(target);
+    		if(target == '100'){
     			opt = outer;
-    		}else if(target == '2'){
+    			optV= outerV;
+    		}else if(target == '200'){
     			opt = top;
-    		}else if(target == '3'){
+    			optV= topV;
+    		}else if(target == '300'){
     			opt = bottom;
-    		}else if(target == '4'){
+    			optV= bottomV;
+    		}else if(target == '400'){
     			opt = dress;
-    		}else if(target == '5'){
+    			optV= dressV;
+    		}else if(target == '500'){
     			opt = etc;
+    			optV= etcV;
     		}
     		
     		$("#cate2").empty();
     		$("#cate2").append('<option>소분류</option>');
     		
     		for(var i = 0; i < opt.length; i++){
-    			$("#cate2").append('<option>'+opt[i]+'</option>');
+    			$("#cate2").append('<option value="'+optV[i]+'">'+opt[i]+'</option>');
     		}
     		
     	}

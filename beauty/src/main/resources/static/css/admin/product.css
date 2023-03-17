@@ -146,8 +146,8 @@ main > section{
     left: 500px;
     bottom: -30px;
 }
-#admin-product-list > div > span{
-    padding: 2px;
+#admin-product-list > div > span > a{
+    padding: 4px;
 }
 #admin-product-list .current{
     border-bottom: 1px solid #b1acb0;
@@ -191,6 +191,7 @@ main > section{
 }
 #admin-product-register article > table tr > td > label > input{
     margin-right: 5px;
+    margin-bottom: 8px;
 }
 #admin-product-register article:nth-child(3) > table tr > td{}
 #admin-product-register article:nth-child(3) > table tr > td > label{}
@@ -202,31 +203,31 @@ main > section{
     margin-right: 5px;
 }
 #admin-product-register article:nth-child(3) > table tr > td > label:last-child > span{border: 1px solid #000000;}
-#admin-product-register article:nth-child(3) > .image{    
+#admin-product-register article > .image{    
     position: relative;
 }
-#admin-product-register article:nth-child(3) > .image > table:nth-child(1){}
-#admin-product-register article:nth-child(3) > .image > table:nth-child(2){
+#admin-product-register article > .image > table:nth-child(1){}
+#admin-product-register article > .image > table:nth-child(2){
     position: absolute;
     top: 0;
     left: 368px;
 }
-#admin-product-register article:nth-child(3) > .image > table:nth-child(3){
+#admin-product-register article > .image > table:nth-child(3){
     position: absolute;
     top: 0;
     right: 200px;
 }
-#admin-product-register article:nth-child(3) > section > table{
+#admin-product-register article > section > table{
     border-collapse: separate;
     border-spacing: 17px;
 }
-#admin-product-register article:nth-child(3) > .image > table tr{}
-#admin-product-register article:nth-child(3) > .image > table tr > th{
+#admin-product-register article > .image > table tr{}
+#admin-product-register article > .image > table tr > th{
     border-bottom: 2px solid #111;
     padding: 10px;
 }
-#admin-product-register article:nth-child(3) > .image > table tr > td{}
-#admin-product-register article:nth-child(3) > section > table tr > td > input{
+#admin-product-register article > .image > table tr > td{}
+#admin-product-register article > section > table tr > td > input{
     margin: 5px;
 }
 #admin-product-list .on{
