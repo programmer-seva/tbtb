@@ -33,7 +33,7 @@ public class MemberController {
 	private EmailService emailService;
 
 	@GetMapping("member/login")
-	public String login() {
+	public String login(Model model) {
 		return "member/login";
 	}
 	

@@ -52,10 +52,10 @@ $(function() {
 		let t = $(this).text();
 		if (t == "visibility_off") {
 			$(this).text("visibility");
-			$('input[name=password]').attr('type', 'text');
+			$('input[name=pass]').attr('type', 'text');
 		} else {
 			$(this).text("visibility_off");
-			$('input[name=password]').attr('type', 'password');
+			$('input[name=pass]').attr('type', 'pass');
 		}
 	});
 
