@@ -9,7 +9,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="../css/headfoot.css">
-    <link rel="stylesheet" href="../css/community.css">
+    <link rel="stylesheet" href="../css/community_board.css">
     <script src="../js/main.js"></script>
     <script src="../js/cs.js"></script>
  
@@ -98,12 +98,12 @@
                 <div class="path">
                     <ol>
                         <li><a href="#">HOME</a></li>
-                        <li><a href="#">Q&A</a></li>
+                        <li><a href="#">REVIEW</a></li>
                     </ol>
                 </div>
                 <section>
-                    <span>Q&A</span>
-                    <p>상품Q&A 입니다.</p>
+                    <span>REVIEW</span>
+                    <p>상품Review 글쓰기 입니다.</p>
                 </section>
                 <table border="1">
                     <colgroup>
@@ -114,10 +114,7 @@
                         <th>제목</th>
                         <td>
                             <select name="board_category" id="board_category">
-                                <option value="1">상품문의</option>
-                                <option value="1">배송문의</option>
-                                <option value="1">교환/반품/취소문의</option>
-                                <option value="1">기타문의</option>
+                                <option value="1">상품Review</option>
                             </select>
                             <input type="text">
                         </td>
@@ -131,9 +128,28 @@
                         <td><input type="email"></td>
                     </tr>
                     <tr>
+                        <th>평점</th>
+                        <td>
+                            <input type="radio" id="point0" name="point" value="5">
+                            <label for="point0"><span class="point5">★★★★★</span></label>
+                            <input type="radio" id="point1" name="point" value="4">
+                            <label for="point1"><span class="point4">★★★★</span></label>
+                            <input type="radio" id="point2" name="point" value="3">
+                            <label for="point2"><span class="point3">★★★</span></label>
+                            <input type="radio" id="point3" name="point" value="2">
+                            <label for="point3"><span class="point2">★★</span></label>
+                            <input type="radio" id="point4" name="point" value="1">
+                            <label for="point4"><span class="point1">★</span></label>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             <textarea name="" id="" cols="100" rows="10"></textarea>
                         </td>
+                    </tr>
+                    <tr>
+                        <th>첨부파일</th>
+                        <td><input type="file" name="filereview"></td>
                     </tr>
                     <tr>
                         <th>비밀글 설정</th>

@@ -201,4 +201,10 @@ input[type=radio] {
     width: 20px;
     height: 13px;
     border: 0;
+    
+}
+
+input[type=file] {
+    height: 20px;
+    border: 0;
 }
