@@ -83,10 +83,11 @@ public class SecurityConfig {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 			.logoutSuccessUrl("/member/login?success=200");
 		
-		// 자동로그인 설정
-				http.rememberMe()
-					.userDetailsService(userService)
-					.tokenRepository(tokenRepository());
+		// 자동로그인 설정(수정된부분)
+		http.rememberMe()
+			.rememberMeParameter("autoLogin")
+			.tokenValiditySeconds(60*60*24*3)
+			.userDetailsService(userService);
 		
 		
 		return http.build();

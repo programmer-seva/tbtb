@@ -452,12 +452,12 @@ img {
     width: 120px;
     height: 35px;
     line-height: 35px;
-    border: 1px solid black;
     font-size: 12px;
     margin: 100px 10px 0 10px;
     border-radius: 10px;
     color: #6d6bff;
     border: 1px solid #6d6bff;	
+    background: #fff;
     cursor: pointer;
 }
 .detail {
