@@ -20,44 +20,44 @@ public class AdminService {
 	@Autowired
 	private AdminDAO dao;
 	
-	//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
+	//»óÇ°µî·Ï
 	public int insertProduct(Product1VO vo) {
-		//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
+		//»óÇ°µî·ÏÇÒ ¶§ ÀÌ¹ÌÁö ÆÄÀÏ ¾÷·Îµå
 		fileUpload(vo);
 		
-		//ï¿½ï¿½ï¿½Îµï¿½ ï¿½Ç¸Å°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		//ÇÒÀÎµÈ ÆÇ¸Å°¡°Ý µî·Ï
 		int price = vo.getPrice();
 		int discount = vo.getDiscount();
 		int disPrice = price * (100-discount)/100;
 		vo.setDisPrice(disPrice);
 		
-		//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
+		//»óÇ°µî·Ï
 		int result = dao.insertProduct(vo);
 		return result;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
+	//°ü¸®ÀÚÆäÀÌÁö¿¡¼­ »óÇ°¸ñ·Ï ºÒ·¯¿À±â
 	public List<Product1VO> selectProducts(List<String> collection){
 		return dao.selectProducts(collection);
 	}
 	
-	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+	//»óÇ° »èÁ¦ÇÏ±â
 	public int deleteProduct(String prodNo) {
 		return dao.deleteProduct(prodNo);
 	}
 	
-	//ï¿½ï¿½Ç° ï¿½Ë»ï¿½ï¿½Ï±ï¿½
+	//»óÇ° °Ë»öÇÏ±â
 	public List<Product1VO> searchProduct(String[] arg0,String param2,String arg2){
 		return dao.searchProduct(arg0, param2, arg2);
 	}
 	
-	/* ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡ Ã³ï¿½ï¿½ */
-	//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	/* »óÇ°¸ñ·Ï ÆäÀÌÂ¡ Ã³¸® */
+	//»óÇ° °³¼ö ¼¼±â
 	public int selectCountProducts(List<String> collection) {
 		return dao.selectCountProducts(collection);
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	//ÇöÀç ÆäÀÌÁö ¹øÈ£
 	public int getCurrentPage(String pg) {
 		int currentPage = 1;
 		
@@ -68,12 +68,12 @@ public class AdminService {
 		 return currentPage;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û°ï¿½
+	//ÆäÀÌÁö ½ÃÀÛ°ª
 	public int getLimitStart(int currentPage) {
 		return (currentPage -1)* 10;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	//¸¶Áö¸· ÆäÀÌÁö ¹øÈ£
 	public int getLastPageNum(int total) {
 		int lastPageNum = 0;
 		
@@ -86,12 +86,12 @@ public class AdminService {
 		return lastPageNum;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¹ï¿½È£
+	//ÆäÀÌÁö ½ÃÀÛ¹øÈ£
 	public int getPageStartNum(int total, int param3) {
 		return total - param3;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½
+	//ÆäÀÌÁö ±×·ì
 	public int[] getPageGroup(int currentPage, int lastPageNum) {
 		int groupCurrent = (int) Math.ceil(currentPage/10.0);
 		int groupStart = (groupCurrent - 1)*10+1;
@@ -107,7 +107,7 @@ public class AdminService {
 	}
 	
 	
-	//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
+	//»óÇ°µî·ÏÇÒ ¶§ ÆÄÀÏ ¾÷·Îµå
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;
 	
@@ -123,17 +123,17 @@ public class AdminService {
 		MultipartFile file9 = vo.getFile9();
 		
 		if(!file1.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file1.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb1(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file1.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -143,17 +143,17 @@ public class AdminService {
 			}
 		}
 		if(!file2.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file2.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb2(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file2.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -163,17 +163,17 @@ public class AdminService {
 			}
 		}
 		if(!file3.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file3.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb3(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file3.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -183,17 +183,17 @@ public class AdminService {
 			}
 		}
 		if(!file4.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file4.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb4(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file4.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -203,17 +203,17 @@ public class AdminService {
 			}
 		}
 		if(!file5.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file5.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb5(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file5.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -223,17 +223,17 @@ public class AdminService {
 			}
 		}
 		if(!file6.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file6.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setThumb6(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file6.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -243,17 +243,17 @@ public class AdminService {
 			}
 		}
 		if(!file7.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file7.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setDetail1(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file7.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -263,17 +263,17 @@ public class AdminService {
 			}
 		}
 		if(!file8.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file8.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setDetail2(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file8.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {
@@ -283,17 +283,17 @@ public class AdminService {
 			}
 		}
 		if(!file9.isEmpty()) {
-			//ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			//½Ã½ºÅÛ °æ·Î
 			String path = new File(uploadPath).getAbsolutePath();
 			
-			//ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//»õ ÆÄÀÏ¸í »ý¼º
 			String oriName = file9.getOriginalFilename();
 			String ext = oriName.substring(oriName.lastIndexOf("."));
 			String newName = UUID.randomUUID().toString()+ext;
 			
 			vo.setDetail3(newName);
 			
-			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			//ÆÄÀÏ ÀúÀå
 			try {
 				file9.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {

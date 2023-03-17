@@ -32,8 +32,11 @@ public class AdminController {
 	}
 	
 	@PostMapping("admin/product/register")
-	public String register(Product1VO vo) {
+	public String register(Product1VO vo,@RequestParam(value= "colorArr[]") List<String> colorArr,@RequestParam(value= "sizeArr[]") List<String> sizeArr) {
+		System.out.println(colorArr);
+		System.out.println(sizeArr);
 		int result = service.insertProduct(vo);
+		
 		
 		return "admin/product/list";
 	}
