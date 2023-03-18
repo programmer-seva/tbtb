@@ -1,12 +1,5 @@
 $(function(){
 	totalPrice();
-    
-	/*
-	//테이블이 비었으면
-	if($('article.cartList > table > tbody').children().length == 0){
-		emptyTable();
-	}
-	*/
 	
     /* total Table에 쓰이는 변수 */
     let headCnt	= 0;
@@ -57,8 +50,12 @@ $(function(){
 		}
 		
 		let count = $(this).prev().val();
+		/* 
 		$(this).parent().parent().parent().children('td.tdTotal').children('input[name=count]').val(Number(count) + 1);
 		$(this).prev().val(Number(count) + 1);
+		*/
+		$('#count').val(Number(count) + 1);
+		$('#totalCount').val(Number(count) + 1);
 		totalPrice();
 		
 		let cartNo = $(this).parent().parent().parent().children('td:nth-child(1)').children('input[type=checkbox]').val();
@@ -80,8 +77,12 @@ $(function(){
 		}
 		
 		let count = $(this).prev().prev().val();
+		/* 
 		$(this).parent().parent().parent().children('td.tdTotal').children('input[name=count]').val(Number(count) - 1);
 		$(this).prev().prev().val(Number(count) - 1);
+		*/
+		$('#count').val(Number(count) - 1);
+		$('#totalCount').val(Number(count) - 1);
 		totalPrice();
 		
 		let cartNo = $(this).parent().parent().parent().children('td:nth-child(1)').children('input[type=checkbox]').val();
@@ -117,13 +118,13 @@ $(function(){
 			success:function(data){
 				console.log(data);
 				if(data == 1){
+					//장바구니 개수 변경, 가격 반영, 행 삭제
 					tr.remove();
-					totalPrice();
+					$('#headCount').text($('article.cartList > table > tbody').children().length);
+					$("input:checkbox[name='chkAll']").prop("checked", false);
 					//테이블이 비었으면
 					if($('article.cartList > table > tbody').children().length == 0){
-						let tag = "<tr><td colspan='8'>장바구니에 담긴 상품이 없습니다.</td></tr>";
-						$('.t1 > tbody').append(tag);
-						$('.totalTable').remove();
+						emptyTable();
 					}
 				}else{
 				}
@@ -147,10 +148,13 @@ $(function(){
 				dataType:'json',
 				success:function(data){
 					if(data == 1){
+						//장바구니 개수 변경
+						$('#headCount').text('0');
+						//가격 반영, 체크박스 해제(전체선택만), 자식비우기, 비움 알림
 						totalPrice();
-						let tag = "<tr><td colspan='8'>장바구니에 담긴 상품이 없습니다.</td></tr>";
-						$('.t1 > tbody').append(tag);
-						$('.totalTable').remove();
+						$("input:checkbox[name='chkAll']").prop("checked", false);
+						$('.t1 > tbody').empty();
+						emptyTable();
 					}else{
 					}
 				}
@@ -192,13 +196,13 @@ $(function(){
 							}
 						});
 					}
+					//장바구니 개수 변경, 가격 반영
+					$('#headCount').text($('article.cartList > table > tbody').children().length);
 					totalPrice();
-					//테이블이 비었으면
+					//테이블이 비었으면 전체선택 해제, 비움 알림
 					if($('article.cartList > table > tbody').children().length == 0){
-						totalPrice();
-						let tag = "<tr><td colspan='8'>장바구니에 담긴 상품이 없습니다.</td></tr>";
-						$('.t1 > tbody').append(tag);
-						$('.totalTable').remove();
+						$("input:checkbox[name='chkAll']").prop("checked", false);
+						emptyTable();
 					}
 				}else{
 					alert('1개보다 작게 설정할 수 없습니다.');
@@ -242,14 +246,20 @@ $(function(){
 		redirectGet('/Beauty/order/orderform', chkList);
 	});
 	
+	
+	
+	
+	
+	
+	
+	
 	/* 빈 카트 */
 	function emptyTable(){
 		//카트 비었으면
 		//테이블, 토탈테이블 삭제, div.emptyCart 삽입
-		$('div.cartFrame table').remove();
-		$('.cartBtns').remove();
-		$('#headCount').text("0");
-		$('div.cartFrame > article.cartList').append('<div class="emptyCart">장바구니가 비어 있습니다.</div>');
+		let tag = "<tr><td colspan='8'>장바구니에 담긴 상품이 없습니다.</td></tr>";
+		$('.t1 > tbody').append(tag);
+		$('.totalTable').remove();
 	}
 
 	/* 선택 구분 함수 */	

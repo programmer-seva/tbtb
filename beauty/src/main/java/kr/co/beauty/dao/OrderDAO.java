@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;
+import kr.co.beauty.vo.ProductOptionVO;
 import kr.co.beauty.vo.TermsVO;
 
 @Mapper
@@ -30,6 +31,11 @@ public interface OrderDAO {
 	public int cartIncrease(@Param("cartNo") int cartNo);
 	public int cartDecrease(@Param("cartNo") int cartNo);
 
+	//cart modal
+	public String openOption(@Param("cartNo") int cartNo);
+	public String selectOption(@Param("prodNo") int prodNo, @Param("color") String color);
+	public int saveOption(CartVO vo);
+	
 	
 	/* 박진휘 */
 	//주문완료

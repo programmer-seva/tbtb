@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -133,6 +134,28 @@ public class OrderController {
 	public String deleteSelectedWishFromCart(int wishNo) {
 		serviceMy.deleteSelectedWish(wishNo);
 		return "redirect:/order/cart";
+	}
+	
+	//카트 - 옵션변경 - 옵션 설정창 열기
+	@ResponseBody
+	@PostMapping("order/openOption")
+	public String openOption(@RequestParam("cartNo") int cartNo) {
+		//선택 가능 색상값 반환
+		return service.openOption(cartNo);
+	}
+	
+	//카트 - 옵션변경 - 색상 선택시 
+	@ResponseBody
+	@PostMapping("order/selectOption")
+	public String selectOption(@RequestParam("cartNo") int cartNo, @RequestParam("color") String color) {
+		return service.selectOption(cartNo, color);
+	}
+	
+	//카트 - 옵션변경 - 옵션 저장
+	@ResponseBody
+	@PostMapping("order/saveOption")
+	public int saveOption(@RequestBody CartVO vo) {
+		return service.saveOption(vo);
 	}
 	
 	

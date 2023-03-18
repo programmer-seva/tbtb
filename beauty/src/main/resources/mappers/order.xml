@@ -5,16 +5,8 @@
 <!-- 김동근 -->
 <mapper namespace="kr.co.beauty.dao.OrderDAO">
 	
-	<!-- 카트 
-	<insert id="insertCart">
-		
-	</insert>
-	
-	<select id="checkCart">
-		SELECT COUNT(cartNo) FROM cart
-		WHERE `uid`=#{uid} AND `prodNo`=#{prodNo} AND `color`=#{color} AND `size`=#{size};
-	</select>
-	-->
+	<!-- 김동근 -->
+	<!-- 카트 -->
 	<select id="selectCartList" resultType="CartVO">
 		SELECT a.`cartNo`, a.`prodNo`, a.`count`, b.`prodName`, b.`price`, b.`discount`, b.`disPrice`, b.`point`, a.`color`, a.`size`, b.`thumb1`
 		FROM `cart` AS a
@@ -56,6 +48,32 @@
 		count = count - 1
 		WHERE `cartNo` = #{cartNo};
 	</update>
+	<!-- 카트 모달 -->
+	<select id="openOption" resultType="String">
+		<!-- 서브쿼리 값을 하나의 행으로 병합 -->
+		SELECT GROUP_CONCAT(A.colorName) AS colorName
+		FROM (<!-- 중복제거 처리한 cartNo가 같은 colorName 행을 반환하는 서브쿼리 -->
+			SELECT DISTINCT po.prodNo,  po.colorName
+			FROM `cart` AS c JOIN `product_option` AS po
+			ON c.`prodNo` = po.`prodNo`
+			WHERE c.`cartNo` = '167'
+		) A
+		GROUP BY `prodNo`;
+	</select>
+	<select id="selectOption" resultType="String">
+		SELECT GROUP_CONCAT(size) AS sizes
+		FROM `product_option`
+		WHERE `prodNo`=#{prodNo} AND `colorName`=#{color} AND `sold` > 0 
+		GROUP BY `prodNo`;
+	</select>
+	<update id="saveOption">
+		UPDATE `cart` SET
+		`color`	=#{color},
+		`size`	=#{size}
+		WHERE `cartNo`=#{cartNo};
+	</update>
+	
+	
 
 	<!-- 박진휘 -->	
 	<select id="selectOrdercomplete" resultType="OrdercompleteVO">

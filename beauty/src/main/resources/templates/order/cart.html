@@ -118,10 +118,14 @@
                                                 	<a th:href="@{/shop/view(pno=${cart.prodNo})}"> <img th:src="@{/image/}+${cart.thumb1}" alt=""> </a>
                                                 </td>
                                                 <td>
-                                                	<strong><a th:href="@{/shop/view(pno=${cart.prodNo})}" th:text="${cart.prodName}"></a></strong><br>
-                                                    <span>[옵션: <span th:text="|${cart.color}, ${cart.size}|"></span>]<br></span>
+                                                	<strong><a th:href="@{/shop/view(pno=${cart.prodNo})}" th:text="${cart.prodName}"></a><br/></strong>
                                                     <span>
-	                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#changeOptionModal">
+														[옵션: <span class="color" th:text="${cart.color}"></span>,
+														<span class="size" th:text="${cart.size}"></span>]
+														<br/>
+                                                    </span>
+                                                    <span>
+	                                                    <button type="button" class="btn openOption" data-bs-toggle="modal" data-bs-target="#changeOptionModal">
 														옵션변경
 														</button>
 													</span>
@@ -136,7 +140,7 @@
                                                     	<span class="oriPrice" th:text="${#numbers.formatInteger(cart.price, 0, 'COMMA')}"></span>원 <br>
                                                     	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원 <span class="discount" th:text="${cart.discount}"></span>
                                                 	</th:block>
-                                                	<input type="hidden" name="count" th:value="${cart.count}" readonly="readonly">
+                                                	<input type="hidden" id="totalCount" name="count" th:value="${cart.count}" readonly="readonly">
                                                 </td>
                                                 <td class="tdCount">
                                                     <span class="countFrame">
@@ -220,10 +224,9 @@
                                 </div>
                                 <!-- 주문 버튼 -->
                                 <div class="cartBtns">
-                                	<!-- 회원,비회원 -->
-	                                    <a id="btnOrderSelect" class="btnOrder select" href="#">선택상품주문</a>
-	                                    <a id="btnOrderAll" class="btnOrder all" href="#">전체상품주문</a>
-	                                    <a class="keepShopping" th:href="@{/index}">계속 쇼핑하기</a>
+                                    <a id="btnOrderSelect" class="btnOrder select" href="#">선택상품주문</a>
+                                    <a id="btnOrderAll" class="btnOrder all" href="#">전체상품주문</a>
+                                    <a class="keepShopping" th:href="@{/index}">계속 쇼핑하기</a>
                                 </div>
                                 <!-- 회원전용 위시리스트 -->
                                	<th:block sec:authorize="isAuthenticated()">
@@ -281,6 +284,8 @@
 				                                    <input type="radio" name="chkColor" id="color2" value="검정">
 				                                    <label for="color2">검정</label>
 				                                </div>
+				                                <input type="hidden" id="modalProdNo" value=""/>
+				                                <input type="hidden" id="modalCartNo" value=""/>
 				                            </td>               
 				                        </tr>
 				                    </tbody>
@@ -289,14 +294,23 @@
 				                            <th>SIZE</th>
 				                            <td>
 				                                <div class="size">
-				                                    <input type="radio" name="chkSize" id="size1" value="S" disabled>
-				                                    <label for="size1">S</label>
+				                                    <input type="radio" name="chkSize" id="size1" value="XS" disabled>
+				                                    <label for="size1">XS</label>
 				
-				                                    <input type="radio" name="chkSize" id="size2" value="M" disabled>
-				                                    <label for="size2">M</label>
+				                                    <input type="radio" name="chkSize" id="size2" value="S" disabled>
+				                                    <label for="size2">S</label>
 				
-				                                    <input type="radio" name="chkSize" id="size3" value="L" disabled>
-				                                    <label for="size3">L</label>
+				                                    <input type="radio" name="chkSize" id="size3" value="M" disabled>
+				                                    <label for="size3">M</label>
+				                                    
+				                                    <input type="radio" name="chkSize" id="size4" value="L" disabled>
+				                                    <label for="size4">L</label>
+				                                    
+				                                    <input type="radio" name="chkSize" id="size5" value="XL" disabled>
+				                                    <label for="size5">XL</label>
+				                                    
+				                                    <input type="radio" name="chkSize" id="size6" value="FREE" disabled>
+				                                    <label for="size6">FREE</label>
 				                                </div>
 				                            </td>              
 				                        </tr>
@@ -305,7 +319,7 @@
 				            </div>
 				            <div class="com-footer">
 				                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				                <button type="button" class="btn btn-primary">저장</button>
+				                <button type="button" id="saveOption" class="btn btn-primary" data-bs-dismiss="modal">저장</button>
 				            </div>
 				        </div>
 				    </div>

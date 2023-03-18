@@ -11,18 +11,19 @@ public class CartVO {
 	private int cartNo;
 	private String uid;
 	private int prodNo;
+	private int count;
+	private String color;
+	private String size;
+	private String rdate;
+
+	//add
 	private String prodName;
 	private int price;
 	private int discount;
 	private int disPrice;
 	private int point;
-	private int count;
-	private String color;
-	private String size;
 	private String thumb1;
-	private String rdate;
 	
-	//add
 	public int getSalePrice() {
 		return (price-disPrice);
 	}
