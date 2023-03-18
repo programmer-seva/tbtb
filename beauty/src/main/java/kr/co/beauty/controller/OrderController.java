@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.OrderService;
 import kr.co.beauty.service.UtilService;
-import kr.co.beauty.utils.SessionManager;
+import kr.co.beauty.utils.CookieManager;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.MemberVO;
@@ -36,7 +36,10 @@ import kr.co.beauty.vo.OrdercompleteVO;
 import kr.co.beauty.vo.TermsVO;
 import kr.co.beauty.vo.WishVO;
 import lombok.extern.log4j.Log4j2;
-
+/*
+ * 작업자 : 박진휘, 김동근
+ * 내용 : 장바구니 > 주문 > 주문완료
+ */
 @Log4j2
 @MapperScan("kr.co.beauty.dao")
 @Controller
@@ -46,45 +49,33 @@ public class OrderController {
 	private OrderService service;
 	@Autowired
 	private MyshopService serviceMy;
-	@Autowired
-	private UtilService util;
-	
-	SessionManager sessionManager = new SessionManager();
-	
 	
 	/* 김동근 */
 	/* 카트 페이지 */
 	@GetMapping("order/cart")
-	public String cart(Principal principal, 
-			@CookieValue(required = false) String nomember,
-			Model model, HttpSession session,
-			HttpServletRequest request, HttpServletResponse response) {
+	public String cart(Model model, Principal principal, 
+			@CookieValue(required = false) String nomember) {
+		
 		MemberVO member = new MemberVO();
 		List<CartVO> cartList = new ArrayList<>();
 		List<WishVO> wishList = new ArrayList<>();
+
+		//로그인 체크 & 회원전용 위시리스트
 		String uid = null;
 		if(principal != null) {
 			uid = principal.getName();
+			wishList = serviceMy.selectWishlist(uid);
 		}
+		
+		//로그인 했거나 비회원쿠키가 있거나
 		if(uid != null || nomember != null){
 	 		//회원 + 비회원 장바구니
 			cartList = service.selectCartList(uid, nomember);
 	  	}
-		//회원전용
-		if(uid != null){
-			//회원 정보
-	 		member = service.selectMember(uid);
-			//회원 관심상품
-			wishList = serviceMy.selectWishlist(uid);
-		}
 
 		model.addAttribute("uid", uid);
- 		model.addAttribute("member", member);
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("wishList", wishList);
-
-		int ct = util.header(principal, nomember);
-		model.addAttribute("ct", ct);
 		
 		return "order/cart";
 	}
@@ -109,13 +100,9 @@ public class OrderController {
 	public int deleteSelectedCart(@RequestParam("chkList[]") int[] deleteList) {
 		for(int cartNo : deleteList) {
 			service.deleteSelectedCart(cartNo);
-			System.out.println(cartNo);
 		}
 		return 1;
 	}
-	
-	
-	
 	
 	//카트 - tableBtns(테이블내부) - 관심상품등록
 	@ResponseBody
@@ -166,11 +153,8 @@ public class OrderController {
 		List<CartVO> list = new ArrayList<>();
 		int count = 0;
 
-		int ct = util.header(principal, nomember);
-		model.addAttribute("ct", ct);
-		
 		@SuppressWarnings("unchecked")
-		List<CartVO> comeCart = (List<CartVO>) session.getAttribute("comeCart");
+		List<CartVO> viewOrder = (List<CartVO>) session.getAttribute("viewOrder");
 		if(cartList != null && cartList.length > 0) {
 			for(int cartNo : cartList) {
 				CartVO vo = service.selectCart(cartNo);
@@ -178,12 +162,12 @@ public class OrderController {
 				count++;
 			}
 		}else {
-			for(int i=0; i<comeCart.size(); i++) {
-				CartVO vo = service.selectProdut(comeCart.get(i).getProdNo());
+			for(int i=0; i<viewOrder.size(); i++) {
+				CartVO vo = service.selectProdut(viewOrder.get(i).getProdNo());
 				vo.setCartNo(0);
-				vo.setCount(comeCart.get(i).getCount());
-				vo.setColor(comeCart.get(i).getColor());
-				vo.setSize(comeCart.get(i).getSize());
+				vo.setCount(viewOrder.get(i).getCount());
+				vo.setColor(viewOrder.get(i).getColor());
+				vo.setSize(viewOrder.get(i).getSize());
 				list.add(vo);
 				count++;
 			}
@@ -238,9 +222,6 @@ public class OrderController {
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("orders", orders);
-		
-		int ct = util.header(principal, nomember);
-		model.addAttribute("ct", ct);
 		
 		return "order/ordercomplete";
 	}
