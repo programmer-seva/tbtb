@@ -1,5 +1,6 @@
 package kr.co.beauty.controller;
 
+import java.net.CookieManager;
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -9,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.beauty.service.MainService;
-import kr.co.beauty.utils.CookieManager;
 import kr.co.beauty.vo.ProductVO;
 /*
  * 작업자 : 박진휘

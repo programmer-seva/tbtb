@@ -1,7 +1,3 @@
-/* 
- * 김동근
- * MyShopDAO
- */
 package kr.co.beauty.vo;
 
 import lombok.Getter;

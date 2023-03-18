@@ -25,7 +25,19 @@ public class OrderService {
 	/* 김동근 */
 	//public
 	public MemberVO selectMember(String uid) {
-		return daoMem.selectMember(uid);
+		MemberVO vo = daoMem.selectMember(uid);
+		String phone = vo.getPhone();
+		String[] ph = phone.split("-");
+		vo.setPhone1(ph[0]);
+		vo.setPhone2(ph[1]);
+		vo.setPhone3(ph[2]);
+		
+		String email = vo.getUid();
+		String[] em = email.split("@");
+		vo.setEmail1(em[0]);
+		vo.setEmail2(em[1]);
+		
+		return vo;
 	}
 	
 	//cart
@@ -75,8 +87,13 @@ public class OrderService {
 	
 	@Transactional
 	public void complete(OrdercompleteVO vo, List<CartVO> item) {
+		//주문완료 테이블
 		daoOrd.completeInsert(vo);
 		
+		//유저 포인트 차감,적립
+		daoOrd.updateMemberPoint(vo);
+		
+		//상품판매기록 & 장바구니삭제
 		for(int i=0; i<item.size(); i++) {
 			insertOrder(vo.getOrdNo(), item.get(i));
 			deleteCart(item.get(i).getCartNo());

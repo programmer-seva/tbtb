@@ -50,4 +50,7 @@ public interface OrderDAO {
 	
 	//주문(회원)
 	public void completeInsert(OrdercompleteVO vo);
+	
+	//포인트 사용
+	public void updateMemberPoint(OrdercompleteVO vo);
 }

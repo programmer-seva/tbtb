@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -25,7 +26,6 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
-
 
 @Configuration
 @EnableWebSecurity
@@ -60,8 +60,8 @@ public class SecurityConfig {
 		
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
-			.requestMatchers("/**").permitAll()
-			.requestMatchers("/member/**").permitAll();
+			.requestMatchers("/member/**").permitAll()
+			.requestMatchers("/**").permitAll();
 				
 		//로그인 alert
 		http.exceptionHandling()

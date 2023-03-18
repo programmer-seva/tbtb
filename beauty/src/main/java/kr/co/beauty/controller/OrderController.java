@@ -21,15 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.OrderService;
-import kr.co.beauty.service.UtilService;
-import kr.co.beauty.utils.CookieManager;
 import kr.co.beauty.vo.CartVO;
-import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.OrderVO;
 import kr.co.beauty.vo.OrdercompleteVO;

@@ -94,5 +94,9 @@
 		#{orderer},#{orderHp},#{orderZip},#{orderAddr1},#{orderAddr2},#{orderEmail},
 		#{recipName},#{recipHp},#{recipZip},#{recipAddr1},#{recipAddr2},#{message},#{payment},NOW());
 	</insert>
+	
+	<update id="updateMemberPoint">
+		UPDATE `member` set `point` = `point` + #{savePoint} - #{usedPoint} WHERE `uid`=#{uid};
+	</update>
 
 </mapper>

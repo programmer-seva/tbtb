@@ -9,7 +9,7 @@ $(function(){
 	let regMail = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/
 	
 	//고객명 유효성검사
-	let ordererOk = false;
+	let ordererOk = true;
 	$('input[name=orderer]').focusout(function(){
 		let value = $(this).val();
 		if(value.match(regName)){
@@ -42,7 +42,8 @@ $(function(){
 	$('input[name=oHp3]').focusout(function(){
 		orderHp();
 	});
-	let orderHpOk = false;
+	let orderHpOk = true;
+	orderHp();
 	function orderHp(){
 		let hp1 = $('select[name=oHp1]').val();
 		let hp2 = $('input[name=oHp2]').val();
@@ -92,7 +93,8 @@ $(function(){
 		$('input[name=bEmail2]').val(value);
 		orderMail();
 	});
-	let orderEmailOk = false;
+	let orderEmailOk = true;
+	orderMail();
 	function orderMail(){
 		let mail1 = $('input[name=bEmail1]').val();
 		let mail2 = $('input[name=bEmail2]').val();

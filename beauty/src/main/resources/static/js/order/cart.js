@@ -135,6 +135,10 @@ $(function(){
 	/* 카트비우기 */
 	$('#btnDeleteAllCart').click(function(e){
 		e.preventDefault();
+		if ($("input[name='chkCart']").length == 0) {
+			alert('장바구니에 상품이 없습니다.');
+			return;
+		}
 		if(confirm('장바구니를 비우시겠습니까?')){
 			$.ajax({
 				url:'/Beauty/order/deleteAllCart',
@@ -158,6 +162,10 @@ $(function(){
 	/* 카트 선택 삭제 */
 	$('#btnDeleteSelectedCart').click(function(e){
 		e.preventDefault();
+		if ($("input[name='chkCart']").length == 0) {
+			alert('장바구니에 상품이 없습니다.');
+			return;
+		}
 		if ($("input:checkbox[name='chkCart']").is(":checked")==false) {
 			/* 선택 안 한 경우 */
 			alert('삭제하실 상품을 선택해주세요.');
@@ -203,6 +211,10 @@ $(function(){
 	/* 선택주문하기 */
 	$('#btnOrderSelect').click(function(e){
 		e.preventDefault();
+		if ($("input[name='chkCart']").length == 0) {
+			alert('장바구니에 상품이 없습니다.');
+			return;
+		}
 		if ($("input:checkbox[name='chkCart']").is(":checked")==false) {
 			/* 선택 안 한 경우 */
 			alert('주문하실 상품을 선택해주세요.');
@@ -219,6 +231,10 @@ $(function(){
 	/* 전체주문하기 */
 	$('#btnOrderAll').click(function(e){
 		e.preventDefault();
+		if ($("input[name='chkCart']").length == 0) {
+			alert('장바구니에 상품이 없습니다.');
+			return;
+		}
 		let chkList = [];
 		$('input[name=chkCart]').each(function(){
 			chkList.push(parseInt($(this).val()));

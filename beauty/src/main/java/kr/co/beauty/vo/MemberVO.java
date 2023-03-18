@@ -33,6 +33,11 @@ public class MemberVO {
 	private String height;
 	private String weight;
 	
+	private String phone1;
+	private String phone2;
+	private String phone3;
+	private String email1;
+	private String email2;
 	
 	// terms
 	private String terms;

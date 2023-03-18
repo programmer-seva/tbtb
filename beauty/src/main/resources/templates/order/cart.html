@@ -238,7 +238,7 @@
 	                                    <th:block  th:each="wish:${wishList}">
 	                                    <div class="item" th:if="${wishStat.index < 5}">
 	                                        <div class="itemThumb">
-	                                            <a th:href="@{/product/view(pno=${wish.prodNo})}">
+	                                            <a th:href="@{/shop/view(pno=${wish.prodNo})}">
 	                                                <img th:src="@{/image/}+${wish.thumb1}" alt="">
 	                                            </a>
 	                                            <a class="delete" th:href="@{/order/deleteSelectedWishFromCart(wishNo=${wish.wishNo})}">x</a>
