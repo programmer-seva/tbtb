@@ -9,6 +9,7 @@
 </th:block>
 <th:block th:fragment="headerFragment">
 	<header>
+		<div>
 		<div class="navigation">
 	    	<!-- 강중현 -->
 	    	<!-- 비로그인 사용자가 보이는 블럭 -->
@@ -22,24 +23,10 @@
            		<a th:href="@{/member/logout}">로그아웃</a>
 	        </p>
 	        <p>
-	        	<a th:href="@{/order/cart}">장바구니<span class="ct">[[${ct}]]</span></a>
+	        	<a th:href="@{/order/cart}">장바구니<span>([[${ct}]])</span></a>
 		        <a id="my" th:href="@{/myshop/index}">마이페이지</a>
-		        <a id="cs" href="#">고객센터</a>
+		        <a id="cs" th:href="@{/board/notice}">고객센터</a>
 	        </p>
-	        <ul class="dep my info">
-	            <li><a th:href="@{/myshop/myorder}">주문/배송</a></li>
-	            <li><a th:href="@{/myshop/coupon}">쿠폰</a></li>
-	            <li><a th:href="@{/myshop/point}">적립금</a></li>
-	            <li><a th:href="@{/myshop/wishlist}">위시리스트</a></li>
-	            <li><a th:href="@{/myshop/myqna}">1:1 문의</a></li>
-	            <li><a th:href="@{/myshop/profile}">나의 프로필</a></li>
-	        </ul>
-	        <ul class="dep cs info">
-	            <li><a th:href="@{/board/notice}">공지사항</a></li>
-	            <li><a th:href="@{/board/qna}">Q&A</a></li>
-	            <li><a th:href="@{/board/review}">리뷰</a></li>
-	            <li><a th:href="@{/board/event}">이벤트</a></li>
-	        </ul>
 	    </div>
 	    <div class="logo">
 	    	<a th:href="@{/index}">Beauty Shop</a>
@@ -107,6 +94,7 @@
 	        <input type="text" name="item"><span class="material-icons">search</span></input>
 	    </div>
 	    -->
+	    </div>
 	</header>
 </th:block>
 </html>

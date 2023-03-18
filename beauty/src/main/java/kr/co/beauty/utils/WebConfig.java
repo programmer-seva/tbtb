@@ -1,4 +1,4 @@
-package kr.co.beauty.config;
+package kr.co.beauty.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

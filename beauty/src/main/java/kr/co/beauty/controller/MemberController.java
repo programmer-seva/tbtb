@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.EmailService;
 import kr.co.beauty.service.MemberService;
-import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,24 +32,18 @@ public class MemberController {
 	@Autowired
 	private EmailService emailService;
 	
-	@Autowired
-	private UtilService util;
 
 	@GetMapping("member/login")
-	public String login(Model model, @CookieValue(required = false) String nomember) {
-		int ct = util.header(null, nomember);
-		model.addAttribute("ct", ct);
+	public String login() {
 		return "member/login";
 	}
 	
 	@GetMapping("member/register")
-	public String register(Model model, @CookieValue(required = false) String nomember) {
+	public String register(Model model) {
 		MemberVO vo = service.selectTerms();
 //		log.info("vo : " + vo);
 		model.addAttribute("memberVO", vo);
 		
-		int ct = util.header(null, nomember);
-		model.addAttribute("ct", ct);
 		return "member/register";
 	}
 
@@ -76,9 +68,7 @@ public class MemberController {
 
 	// 아이디 찾기
 	@GetMapping("member/find")
-	public String find(Model model, @CookieValue(required = false) String nomember) {
-		int ct = util.header(null, nomember);
-		model.addAttribute("ct", ct);
+	public String find() {
 		return "member/find";
 	}
 
@@ -107,23 +97,19 @@ public class MemberController {
 
 	// 아이디 찾기
 	@GetMapping("member/findIdResult")
-	public String findIdResult(Model model, HttpSession session, @CookieValue(required = false) String nomember) {
+	public String findIdResult(Model model, HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
 		model.addAttribute("uid", uid);
 
 		// MemberVO vo = service.selectUid(uid);
 		// model.addAttribute("vo", vo);
-		int ct = util.header(null, nomember);
-		model.addAttribute("ct", ct);
 		return "member/findIdResult";
 	}
 
 	@GetMapping("member/findPwResult")
-	public String findPwResult(Model model, HttpSession session, @CookieValue(required = false) String nomember) {
+	public String findPwResult(Model model, HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
 		model.addAttribute("uid", uid);
-		int ct = util.header(null, nomember);
-		model.addAttribute("ct", ct);
 		return "member/findPwResult";
 	}
 
