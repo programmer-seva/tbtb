@@ -114,6 +114,7 @@ main div.cartFrame > .cartList > table td:nth-child(-n+3){
 }
 main div.cartFrame > .cartList > table td:nth-child(1) {
     padding-left: 10px;
+    width: 110px;
 }
 main div.cartFrame > .cartList > table td:nth-child(2) {
     width: 130px;

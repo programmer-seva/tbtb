@@ -50,6 +50,17 @@ public class OrderService {
 		}
 	}
 	
+	//cart - modal
+	public String openOption(int cartNo) {
+		return daoOrd.openOption(cartNo);
+	}
+	public String selectOption(int prodNo, String color) {
+		return daoOrd.selectOption(prodNo, color);
+	}
+	public int saveOption(CartVO vo) {
+		return daoOrd.saveOption(vo);
+	}
+	
 	
 	/* 박진휘 */
 	//주문완료
