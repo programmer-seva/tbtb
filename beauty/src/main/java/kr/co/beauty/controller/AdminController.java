@@ -26,15 +26,25 @@ public class AdminController {
 	public String register() {
 		return "admin/product/register";
 	}
-	
+	@ResponseBody
 	@PostMapping("admin/product/register")
-	public String register(Product1VO vo,@RequestParam(value= "colorArr[]") List<String> colorArr,@RequestParam(value= "sizeArr[]") List<String> sizeArr) {
-		System.out.println(colorArr);
-		System.out.println(sizeArr);
-		int result = service.insertProduct(vo);
+	public String register(Product1VO vo,
+						@RequestParam(value= "colorArr[]") List<String> colorArr,
+						@RequestParam(value= "colorNameArr[]") List<String> colorNameArr,
+						@RequestParam(value= "sizeArr[]") List<String> sizeArr) {
+		//product 테이블 상품 등록
+		service.insertProduct(vo);
+		//등록 후 자동 생성된 상품번호 받기
+		int param1= vo.getProdNo();
 		
+		//System.out.println(vo.getProdNo()+"상품번호---------");
+		//System.out.println(colorArr);
+		//System.out.println(colorNameArr);
+		//System.out.println(sizeArr);
+		//product_option 테이블에 상품 옵션 등록
+		int result =service.insertOption(param1,colorArr, colorNameArr, sizeArr);
 		
-		return "admin/product/list";
+		return "";
 	}
 	
 	//상품목록 분류 - 2023/03/07 윤사랑

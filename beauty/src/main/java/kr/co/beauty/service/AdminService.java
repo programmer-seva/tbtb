@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.transaction.Transactional;
 import kr.co.beauty.dao.AdminDAO;
 import kr.co.beauty.vo.Product1VO;
 
@@ -29,11 +30,31 @@ public class AdminService {
 		int discount = vo.getDiscount();
 		int disPrice = price * (100-discount)/100;
 		vo.setDisPrice(disPrice);
+		vo.setPoint(disPrice*3/100);
 		
 		//��ǰ���
+		return dao.insertProduct(vo);
+	};
+	//상품 옵션 등록
+	public int insertOption(int param1,List<String> colorArr,List<String> colorNameArr,List<String> sizeArr) {
+		int result = 0;
+		
+		for(var i=0; i<colorArr.size(); i++) {
+			 String param2 = colorArr.get(i);
+		     String param3 = colorNameArr.get(i);
+			for(var j=0; j<sizeArr.size(); j++) {
+				 String param4 = sizeArr.get(j);
+				 dao.insertOption(param1,param2, param3, param4);
+			}
+		}
+		
+
+
+		//��ǰ���
 		int result = dao.insertProduct(vo);
+
 		return result;
-	}
+	};
 	
 	//���������������� ��ǰ��� �ҷ�����
 	public List<Product1VO> selectProducts(List<String> collection){
@@ -292,6 +313,8 @@ public class AdminService {
 			
 			vo.setDetail3(newName);
 			
+
+			//���� ����
 			//���� ����
 			try {
 				file9.transferTo(new File(path, newName));
