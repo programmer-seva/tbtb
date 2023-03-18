@@ -130,7 +130,7 @@ main > section{
     border-radius: 4px;
     width: 100px;
 }
-.register{
+.register, .registerButton{
     position: absolute;
     right: 60px;
     bottom: -20px;

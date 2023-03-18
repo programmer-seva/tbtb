@@ -199,7 +199,7 @@ $(document).ready(function(){
     	CheckBoxList();
     	page();
     });
-	
+    
 
 	/* 상품목록 체크박스 제어 */
 	//상품목록 전체체크박스 클릭
@@ -220,26 +220,6 @@ $(document).ready(function(){
     	}
     });
     
-    //삭제버튼을 이용한 상품삭제
-	$(document).on('click', '.deleteButton', function(){
-		var prodNo = $(this).val();
-		//console.log(prodNo,"prodNo");
-
-		$.ajax({
-	        url: '/Beauty/admin/product/list/delete',
-	        type: 'get',
-	        data: {prodNo: prodNo},
-	        success: function(data) {
-	            //console.log("data : ", data);
-	            //삭제된 행을 제거
-	            $(this).closest("tr").remove();
-	            CheckBoxList();
-    			page();
-	        }.bind(this)   
-        });
-		
-		
-	});
     //체크박스를 이용한 상품삭제
 	$(".delete").on("click",function(){
 		
@@ -270,6 +250,27 @@ $(document).ready(function(){
 			}
 	});
 	
+    //삭제버튼을 이용한 상품삭제
+	$(document).on('click', '.deleteButton', function(){
+		var prodNo = $(this).val();
+		//console.log(prodNo,"prodNo");
+
+		$.ajax({
+	        url: '/Beauty/admin/product/list/delete',
+	        type: 'get',
+	        data: {prodNo: prodNo},
+	        success: function(data) {
+	            //console.log("data : ", data);
+	            //삭제된 행을 제거
+	            $(this).closest("tr").remove();
+	            CheckBoxList();
+    			page();
+	        }.bind(this)   
+        });
+		
+		
+	});
+	
 	//상품검색할 때 소분류 카테고리 값 form에 담기
 	$("input[name='category2']").on("change", function() {
 	    var cate2 = $.map($("input[name='category2']:checked"), function(element){
@@ -279,7 +280,12 @@ $(document).ready(function(){
 	    $("#cate2").val(cate2);
 	    console.log(cate2);
 	  });
-});
+
+    //상품등록 버튼 클릭 시 상품등록 페이지로 이동
+    $(".registerButton").on("click",function(){
+		location.href="/Beauty/admin/product/register";
+	});
+});	
 
 /* product-register 카테고리 분류 */
 function cateChange(){

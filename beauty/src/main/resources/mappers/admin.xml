@@ -14,6 +14,7 @@
 		`price`=#{price},
 		`discount`=#{discount},
 		`disPrice`=#{disPrice},
+		`point`=#{point},
 		`company`=#{company},
 		`origin`=#{origin},
 		`rdate`=#{rdate},
@@ -32,11 +33,14 @@
 		`detail2`=#{detail2},
 		`detail3`=#{detail3};
 	</insert>
+	
 	<!-- 상품 옵션 등록 -->
-	<insert id="insertProductOption">
+	<insert id="insertOption">
 		insert into `product_option` set
-		`color`=#{color},
-		`size`=#{size};
+		`prodNo`=#{param1},
+		`color`=#{param2},
+		`colorName`=#{param3},
+		`size`=#{param4};
 	</insert>
 
 	<!-- 관리자 페이지에서 체크된 소분류 상품 목록 불러오기 -->

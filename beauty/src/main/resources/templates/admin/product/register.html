@@ -4,46 +4,80 @@
     <meta charset="UTF-8">
     <title>Beauty</title>
     <link rel="stylesheet" th:href="@{/css/admin/product.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/product.css}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script th:src="@{/js/admin.js}">
+    <script th:src="@{/js/admin.js}"></script>
+    <script>
     $(document).ready(function(){
-		
-    	$(".register").on("click", function(){
-    		productOption();
-    	});
+    	/*$("input[name=color]").on("change",function(){
+    		if($(this).prop("checked")){
+    		var	color=$(this).val();
+    		var label =$(this).parent();
+    		
+    		var text = label.contents().filter(function(){
+    			return this.nodeType === Node.TEXT_NODE;
+    		}).text().trim();
+    		console.log(text);
+    		console.log(color);
+    		}
+    	});*/
     	
-		function productOption(){
-			var colorArr = new array();
+    	//상품등록
+    	$(".register").on("click",function(e){
+    		e.preventDefault();
+    	
+			//색상,사이즈 선택된 값을 담을 배열
+			var colorArr = [];
+			var colorNameArr = [];
+			var sizeArr = [];
+			//색상 체크박스를 선택했을 때
 			$("input[name=color]:checked").each(function(){
 				colorArr.push($(this).val());
 			});
-			var colorNameArr = new array();
+			
 			$("input[name=color]:checked").each(function(){
-				colorNameArr.push($(this).text());
+				var label =$(this).parent();
+	    		
+	    		var text = label.contents().filter(function(){
+	    			return this.nodeType === Node.TEXT_NODE;
+	    		}).text().trim();
+				colorNameArr.push(text);
 			});
 			
-			var sizeArr = new array();
+			//사이즈 체크박스를 선택했을 때
 			$("input[name=size]:checked").each(function(){
 				sizeArr.push($(this).val());
 			});
-			console.log(colorArr);
-			console.log(colorNameArr);
-			console.log(sizeArr);
+			
+			//폼에 선택된 색상,사이즈 배열 추가하기
+			var form=$("#productForm")[0];
+			var formData = new FormData(form);
+			for (var i = 0; i < colorArr.length; i++) {
+			    formData.append("colorArr[]", colorArr[i]);
+			    formData.append("colorNameArr[]", colorNameArr[i]);
+			}
+			for (var i = 0; i < sizeArr.length; i++) {
+			    formData.append("sizeArr[]", sizeArr[i]);
+			}
+			
+			//색상을 선택하지 않았을 경우
 			if(colorArr.length == 0){
 				alert("선택된 색상이 없습니다.");
 			}else{
+			//ajax 요청 보내기
 				$.ajax({
 					url:'/Beauty/admin/product/register',
 					type:'post',
-					data:{'colorArr':colorArr,
-						  'sizeArr':sizeArr},
+					data:formData,
+					cache: false,
+			        contentType: false,
+			        processData: false,
 					success:function(data){
-						alert("1");
+						location.href="/Beauty/admin/product/list";
 					}	
 				});
 			}
-		}
-		
+    	});
 			
 	});
     </script>
@@ -53,7 +87,7 @@
         <th:block th:replace="~{/admin/product/_header :: headerFragment}"></th:block>
         <main>
             <section id="admin-product-register">
-                <form th:action="@{/admin/product/register}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/admin/product/register}" method="post" enctype="multipart/form-data" id="productForm">
                     <article>
                         <h3>상품 기본 정보</h3>
                         <table>
@@ -118,92 +152,35 @@
                             <tr>
                                 <th style="width: 68px;">색상</th>
                                 <td>
-                                   	<label>
-                                    <input type="checkbox" value="#000000" name="color">블랙</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#000080" name="color">네이비</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#a9a9a9" name="color">다크그레이</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#808080" name="color">그레이</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#d3d3d3" name="color">라이트그레이</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#0000ff" name="color">블루</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#87ceeb" name="color">스카이블루</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#8b0000" name="color">다크레드</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ff0000" name="color">레드</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ff7f50" name="color">코랄</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ff69b4" name="color">핫핑크</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ffc0cb" name="color">핑크</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ffb6c1" name="color">라이트핑크</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ffff00" name="color">옐로우</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ffd700" name="color">골드</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ffa500" name="color">오렌지</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#a52a2a" name="color">브라운</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#f0e68c" name="color">카키</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#006400" name="color">다크그린</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#008000" name="color">그린</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#808000" name="color">올리브</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#800080" name="color">퍼플</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ee82ee" name="color">바이올렛</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#e6e6fa" name="color">라벤더</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#f5f5dc" name="color">베이지</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#fffff0" name="color">아이보리</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#c0c0c0" name="color">실버</input>
-                                    </label>    
-                                    <label>
-                                    <input type="checkbox" value="#ffffff" name="color">화이트</input>
-                                    </label>      
+                                   	<label><input type="checkbox" value="#000000" name="color">블랙</input></label>    
+                                    <label><input type="checkbox" value="#000080" name="color">네이비</input></label>    
+                                    <label><input type="checkbox" value="#a9a9a9" name="color">다크그레이</input></label>    
+                                    <label><input type="checkbox" value="#808080" name="color">그레이</input></label>    
+                                    <label><input type="checkbox" value="#d3d3d3" name="color">라이트그레이</input></label>    
+                                    <label><input type="checkbox" value="#0000ff" name="color">블루</input></label>    
+                                    <label><input type="checkbox" value="#87ceeb" name="color">스카이블루</input></label>    
+                                    <label><input type="checkbox" value="#8b0000" name="color">다크레드</input></label>    
+                                    <label><input type="checkbox" value="#ff0000" name="color">레드</input></label>    
+                                    <label><input type="checkbox" value="#ff7f50" name="color">코랄</input></label>    
+                                    <label><input type="checkbox" value="#ff69b4" name="color">핫핑크</input></label>    
+                                    <label><input type="checkbox" value="#ffc0cb" name="color">핑크</input></label>    
+                                    <label><input type="checkbox" value="#ffb6c1" name="color">라이트핑크</input></label>    
+                                    <label><input type="checkbox" value="#ffff00" name="color">옐로우</input></label>    
+                                    <label><input type="checkbox" value="#ffd700" name="color">골드</input></label>    
+                                    <label><input type="checkbox" value="#ffa500" name="color">오렌지</input></label>    
+                                    <label><input type="checkbox" value="#a52a2a" name="color">브라운</input></label>    
+                                    <label><input type="checkbox" value="#f0e68c" name="color">카키</input></label>    
+                                    <label><input type="checkbox" value="#006400" name="color">다크그린</input></label>    
+                                    <label><input type="checkbox" value="#008000" name="color">그린</input></label>    
+                                    <label><input type="checkbox" value="#808000" name="color">올리브</input></label>    
+                                    <label><input type="checkbox" value="#800080" name="color">퍼플</input></label>    
+                                    <label><input type="checkbox" value="#ee82ee" name="color">바이올렛</input></label>    
+                                    <label><input type="checkbox" value="#e6e6fa" name="color">라벤더</input></label>    
+                                    <label><input type="checkbox" value="#f5f5dc" name="color">베이지</input></label>    
+                                    <label><input type="checkbox" value="#fffff0" name="color">아이보리</input></label>    
+                                    <label><input type="checkbox" value="#c0c0c0" name="color">실버</input></label>    
+                                    <label><input type="checkbox" value="#ffffff" name="color">화이트</input></label>      
                                 </td>
-                                <td><button>추가</button> </td>
                             </tr>                   
                             <tr>
                                 <th>소재</th>
@@ -230,7 +207,7 @@
                             <tr>
                                 <th>비침</th>
                                 <td>
-                                    <label><input type="radio" name="through" value="비침">비침</label>
+                                    <label><input type="radio" name="through" value="비침">있음</label>
                                     <label><input type="radio" name="through" value="약간있음">약간있음</label>
                                     <label><input type="radio" name="through" value="없음">없음</label>
                                 </td>
