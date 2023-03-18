@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.transaction.Transactional;
@@ -22,7 +21,6 @@ public class AdminService {
 	private AdminDAO dao;
 	
 	//��ǰ���
-	
 	public int insertProduct(Product1VO vo) {
 		//��ǰ����� �� �̹��� ���� ���ε�
 		fileUpload(vo);
@@ -50,6 +48,11 @@ public class AdminService {
 			}
 		}
 		
+
+
+		//��ǰ���
+		int result = dao.insertProduct(vo);
+
 		return result;
 	};
 	
@@ -310,7 +313,9 @@ public class AdminService {
 			
 			vo.setDetail3(newName);
 			
-			//���� ����000000000000000000000000
+
+			//���� ����
+			//���� ����
 			try {
 				file9.transferTo(new File(path, newName));
 			} catch (IllegalStateException e) {

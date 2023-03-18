@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 import kr.co.beauty.entity.MemberEntity;
 import lombok.Builder;
 import lombok.Getter;
