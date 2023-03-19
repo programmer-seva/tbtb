@@ -53,7 +53,7 @@ $(document).ready(function(){
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
-				//console.log(data);
+				console.log(data.result);
 				$('.productRow').remove();
 				//최신순 정렬
 				const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
@@ -65,10 +65,10 @@ $(document).ready(function(){
 				for(let i=0; i<sliceArr.length; i++){
 						tag += "<tr class='productRow'>";
 						tag += "<td><input type='checkbox' name='선택체크' class='rowCheck' value='"+sliceArr[i].prodNo+"'></td>";
-						tag += "<td><img src='#'></td>";
+						tag += "<td><img src='/Beauty/image/"+sliceArr[i].thumb1+"'></td>";
 						tag += "<td>"+sliceArr[i].prodNo+"</td>";
-						tag += "<td>"+sliceArr[i].prodCate1+"</td>";
-						tag += "<td>"+sliceArr[i].prodCate2+"</td>";
+						tag += "<td>"+sliceArr[i].c1Name+"</td>";
+						tag += "<td>"+sliceArr[i].c2Name+"</td>";
 						tag += "<td><a href='#'>"+sliceArr[i].prodName+"</a></td>";
 						tag += "<td>"+sliceArr[i].disPrice+"</td>";
 						tag += "<td>"+sliceArr[i].stock+"</td>";
@@ -330,3 +330,85 @@ function cateChange(){
     		}
     		
     	}
+    	
+$(document).ready(function(){
+    	/*$("input[name=color]").on("change",function(){
+    		if($(this).prop("checked")){
+    		var	color=$(this).val();
+    		var label =$(this).parent();
+    		
+    		var text = label.contents().filter(function(){
+    			return this.nodeType === Node.TEXT_NODE;
+    		}).text().trim();
+    		console.log(text);
+    		console.log(color);
+    		}
+    	});*/
+    	
+    	//상품등록
+    	$(".register").on("click",function(e){
+    		e.preventDefault();
+    	
+			//색상,사이즈 선택된 값을 담을 배열
+			var colorArr = [];
+			var colorNameArr = [];
+			var sizeArr = [];
+			//색상 체크박스를 선택했을 때
+			$("input[name=color]:checked").each(function(){
+				colorArr.push($(this).val());
+			});
+			
+			$("input[name=color]:checked").each(function(){
+				var label =$(this).parent();
+	    		
+	    		var text = label.contents().filter(function(){
+	    			return this.nodeType === Node.TEXT_NODE;
+	    		}).text().trim();
+				colorNameArr.push(text);
+			});
+			
+			//사이즈 체크박스를 선택했을 때
+			$("input[name=size]:checked").each(function(){
+				sizeArr.push($(this).val());
+			});
+			
+			//폼에 선택된 색상,사이즈 배열 추가하기
+			var form=$("#productForm")[0];
+			var formData = new FormData(form);
+			for (var i = 0; i < colorArr.length; i++) {
+			    formData.append("colorArr[]", colorArr[i]);
+			    formData.append("colorNameArr[]", colorNameArr[i]);
+			}
+			for (var i = 0; i < sizeArr.length; i++) {
+			    formData.append("sizeArr[]", sizeArr[i]);
+			}
+			
+			//색상을 선택하지 않았을 경우
+			if(colorArr.length == 0){
+				alert("선택된 색상이 없습니다.");
+			}else{
+			//ajax 요청 보내기
+				$.ajax({
+					url:'/Beauty/admin/product/register',
+					type:'post',
+					data:formData,
+					cache: false,
+			        contentType: false,
+			        processData: false,
+					success:function(data){
+						location.href="/Beauty/admin/product/list";
+					}	
+				});
+			}
+    	});
+    	
+    	//포인트 계산(할인가의 3%)
+    	$(document).on("input","#discount",function(){
+    		let price=$("#price").val();
+        	let discount=$("#discount").val();
+        	let disPrice =price*(100-discount)/100;
+        	console.log(disPrice);
+			$("#point").val(disPrice*3/100);
+    	});
+			
+	});
