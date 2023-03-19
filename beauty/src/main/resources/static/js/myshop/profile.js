@@ -22,6 +22,26 @@ $(function(){
 		
 	});
 	
+	/* 비밀번호 수정 */
+	$('#savePassword').click(function(){
+		let password = $('#pw2').val();
+		$.ajax({
+			url:'/Beauty/myshop/savePassword',
+			type:'POST',
+			data:{'password': password},
+			dataType:'json',
+			success:function(data){
+				if(data == 1){
+					alert('변경되었습니다.');
+					location.href="/Beauty/myshop/profile";
+				}else{
+					alert('변경에 실패했습니다.');
+				}
+			}
+		});
+	});
+	
+	
 	/* 정보수정 */
 	$('div.profileBtns > .apply').click(function(e){
 		e.preventDefault();

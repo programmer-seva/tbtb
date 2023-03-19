@@ -25,6 +25,7 @@
         <link rel="stylesheet" th:href="@{/css/myshop/myPage.css}">
         <link rel="stylesheet" th:href="@{/css/myshop/profile.css}">
         <!-- js -->
+        <script th:src="@{/js/myshop/myshop.js}"></script>
         <script th:src="@{/js/myshop/profile.js}"></script>
         
         <title>Profile</title>
@@ -75,7 +76,7 @@
                                                     <span class="pw result"> (영문 대소문자/숫자/특수문자 조합, 8자~16자)</span>
                                                     <br>
                                                     <input id="pw2" type="password" value="">
-                                                    <span class="btn">변경</span>
+                                                    <span class="btn" id="savePassword">변경</span>
                                                 </td>
                                             </tr>
                                             <tr>

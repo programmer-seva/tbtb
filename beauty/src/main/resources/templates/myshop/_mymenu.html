@@ -4,12 +4,12 @@
 	<!-- 마이페이지 메뉴 -->
     <aside class="myMenu">
         <ul>
-            <li th:classappend="${option == 'myorder'} ? 'on' : ''"><a th:href="@{/myshop/myorder}">주문/배송</a></li>
-            <li th:classappend="${option == 'coupon'} ? 'on' : ''"><a th:href="@{/myshop/coupon}">쿠폰</a></li>
-            <li th:classappend="${option == 'point'} ? 'on' : ''"><a th:href="@{/myshop/point}">적립금</a></li>
-            <li th:classappend="${option == 'wishlist'} ? 'on' : ''"><a th:href="@{/myshop/wishlist}">위시 리스트</a></li>
-            <li th:classappend="${option == 'myqna'} ? 'on' : ''"><a th:href="@{/myshop/myqna}">1:1문의</a></li>
-            <li th:classappend="${option == 'profile'} ? 'on' : ''"><a th:href="@{/myshop/profile}">나의 프로필</a></li>
+            <li th:classappend="${option == 'myorder'} 	? 'on' : ''"><a id="myMenuMyorder" 	th:href="@{/myshop/myorder}">주문/배송</a></li>
+            <li th:classappend="${option == 'coupon'} 	? 'on' : ''"><a id="myMenuCoupon" 	th:href="@{/myshop/coupon}"	>쿠폰</a></li>
+            <li th:classappend="${option == 'point'} 	? 'on' : ''"><a id="myMenuPoint" 	th:href="@{/myshop/point}"	>적립금</a></li>
+            <li th:classappend="${option == 'wishlist'} ? 'on' : ''"><a id="myMenuWishlist" th:href="@{/myshop/wishlist}">위시 리스트</a></li>
+            <li th:classappend="${option == 'myqna'} 	? 'on' : ''"><a id="myMenuMyqna" 	th:href="@{/myshop/myqna}"	>1:1문의</a></li>
+            <li th:classappend="${option == 'profile'} 	? 'on' : ''"><a id="myMenuProfile"	th:href="@{/myshop/profile}">나의 프로필</a></li>
         </ul>
     </aside>
 </th:block>

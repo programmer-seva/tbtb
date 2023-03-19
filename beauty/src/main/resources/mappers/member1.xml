@@ -22,6 +22,12 @@
 		WHERE `uid` = #{uid};
 	</update>
 	
+	<update id="savePassword">
+		UPDATE `member`
+		SET `password` = #{password}
+		WHERE `uid` = #{uid};
+	</update>
+	
 	<delete id="deleteMember">
 		DELETE FROM `member`
 		WHERE `uid` = #{uid};
