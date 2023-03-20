@@ -13,9 +13,27 @@ public class CsController {
 		return "community/notice";
 	}
 	
+	// 공지사항 글보기
+	@GetMapping("community/board/notice_view")
+	public String noticeView() {
+		return "community/board/notice_view";
+	}
+	
 	@GetMapping("qna")
 	public String qna() {
 		return "community/qna";
+	}
+	
+	// qna 글보기
+	@GetMapping("community/board/qna_view")
+	public String qnaView() {
+		return "community/board/qna_view";
+	}
+	
+	// qna 글쓰기
+	@GetMapping("community/board/qna_write")
+	public String qnaWrite() {
+		return "community/board/qna_write";
 	}
 	
 	@GetMapping("review")
@@ -23,9 +41,21 @@ public class CsController {
 		return "community/review";
 	}
 	
+	// 리뷰 팝업
+	@GetMapping("community/board/re_popup")
+	public String reviewPopup() {
+		return "community/board/re_popup";
+	}
+	
 	@GetMapping("event")
 	public String event() {
 		return "community/event";
+	}
+	
+	// 이벤트 글보기
+	@GetMapping("community/board/event_view")
+	public String eventView() {
+		return "community/board/event_view";
 	}
 	
 }
