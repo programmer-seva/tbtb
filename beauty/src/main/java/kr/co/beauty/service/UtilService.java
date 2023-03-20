@@ -13,7 +13,7 @@ public class UtilService {
 	@Autowired
 	private MainDAO dao;
 	
-	public int header(Principal principal, String nomember) {
+	public String header(Principal principal, String nomember) {
 		String uid = null;
 		if(principal != null) {
 			uid = principal.getName();
