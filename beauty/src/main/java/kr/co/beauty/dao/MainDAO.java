@@ -13,6 +13,6 @@ public interface MainDAO {
 	
 	public List<ProductVO> selectNewItem();
 	public List<ProductVO> selectBestItem(String cate);
-	public int countCart(String arg0, String arg1);
+	public String countCart(String arg0, String arg1);
 	
 }
