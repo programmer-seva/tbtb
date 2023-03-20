@@ -1,25 +1,11 @@
 $(function(){
     $('.cate').mouseenter(function(){
         $(this).children('ul').css('display','block');
-        $(this).children('.cate1').css('color',"#555");
+        $(this).children('.cate1').css('color',"#999");
     });
     $('.cate').mouseleave(function(){
         $(this).children('ul').css('display','none');
         $(this).children('.cate1').css('color',"#212121");
-    });
-    $('#my').mouseenter(function(){
-        $('.my').css('display','block');
-        $('.cs').css('display','none');
-    });
-    $('.my').mouseleave(function(){
-        $('.my').css('display','none');
-    });
-    $('#cs').mouseenter(function(){
-        $('.cs').css('display','block');
-        $('.my').css('display','none');
-    });
-    $('.cs').mouseleave(function(){
-        $('.cs').css('display','none');
     });
     $(window).scroll(function(){
         let now = $(document).scrollTop();
