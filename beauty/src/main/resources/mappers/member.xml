@@ -38,4 +38,8 @@
 		WHERE `uid` = #{uid}
 	</select>
 	
+	<update id="findPwResult">
+		update `member` set `pass`=#{arg1} where `uid`=#{arg0};
+	</update>
+	
 </mapper>

@@ -25,4 +25,7 @@ public interface MemberDAO {
 	
 	// 자동로그인
 	public int countByNameAndUid(String name, String uid);
+	
+	// 비밀번호 변경
+	public int findPwResult(String arg0, String arg1);
 }

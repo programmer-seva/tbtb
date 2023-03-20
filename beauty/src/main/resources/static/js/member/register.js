@@ -128,7 +128,7 @@ $(function() {
 	///////////////////
 	////// 이메일 인증 /////
 	///////////////////
-	
+
 	//email
 	var code = null;
 	$('.sendCode').click(function(e) {
@@ -137,8 +137,6 @@ $(function() {
 		if (email == '') {
 			alert('이메일을 입력해주세요');
 			return;
-		} else {
-			alert('인증번호가 발송되었습니다.');
 		}
 		$.ajax({
 			url: '/Beauty/member/emailAuth',
@@ -147,9 +145,12 @@ $(function() {
 			dataType: 'json',
 			success: function(data) {
 				if (data.status > 0) {
+					alert('인증번호가 발송되었습니다.');
 					//메일전송 성공
 					$('.auth').show();
 					code = data.code;
+					// 인증번호 타이머
+					timer();
 				} else {
 					//메일전송 실패
 					alert('메일 전송에 실패했습니다. 다시 시도해주세요');
@@ -185,16 +186,47 @@ $(function() {
 		}
 	});
 
-	
 
+	// 인증번호 타이머
+	function timer() {
 
+		function $ComTimer() {
+			//prototype extend
+		}
 
+		$ComTimer.prototype = {
+			comSecond: ""
+			, fnCallback: function() { }
+			, timer: ""
+			, domId: ""
+			, fnTimer: function() {
+				var m = Math.floor(this.comSecond / 60) + "분 " + (this.comSecond % 60) + "초";	// 남은 시간 계산
+				this.comSecond--;					// 1초씩 감소
+				console.log(m);
+				this.domId.innerText = m;
+				if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+					clearInterval(this.timer);		// 타이머 해제
+					alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+					window.close();
+					window.opener.location = "/index.do"
+				}
+			}
+			, fnStop: function() {
+				clearInterval(this.timer);
+			}
+		}
 
+		var AuthTimer = new $ComTimer()
 
+		AuthTimer.comSecond = 180; // 제한 시간
 
+		AuthTimer.fnCallback = function() { alert("다시인증을 시도해주세요.") }; // 제한 시간 만료 메세지
 
+		AuthTimer.timer = setInterval(function() { AuthTimer.fnTimer() }, 1000);
 
+		AuthTimer.domId = document.getElementById("timer");
 
+	}
 
 
 

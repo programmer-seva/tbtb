@@ -48,6 +48,9 @@ public class MemberService {
 		return dao.findPw(name, uid, phone);
 	}
 	
+	public int findPwResult(String uid, String pass) {
+		return dao.findPwResult(uid, pass);
+	}
 	
 	// 자동로그인
 	public int countByNameAndUid(String name, String uid) {

@@ -26,11 +26,11 @@
                     <h2>아이디/비밀번호 찾기</h2>
                     <table>
                         <tr>
-                            <td class="findId current">아이디 찾기</td>
-                            <td class="findPw">비밀번호 찾기</td>
+                            <td class="findId" th:classappend="${type == 1 ? 'current' : ''}">아이디 찾기</td>
+                            <td class="findPw" th:classappend="${type == 2 ? 'current' : ''}">비밀번호 찾기</td>
                         </tr>
                     </table>
-                    <article id="member" class="m1">
+                    <article id="member" class="m1" th:style="${type == 1 ? 'display:block' : 'display:none'}">
                         <div class="login">
                             <form action="#" method="post">
                                 <input type="text" name="name" placeholder="이름">
@@ -49,7 +49,7 @@
                             </p>
                         </div>
                     </article>
-                    <article id="member" class="m2">
+                    <article id="member" class="m2" th:style="${type == 2 ? 'display:block' : 'display:none'}">
                         <div class="login">
                             <form action="#" method="post">
                                 <input type="email" name="uid" class="sendMail" placeholder="이메일" style="margin-right: 10px;">
@@ -57,9 +57,8 @@
                                 <button type="submit" class="sendCode">인증번호 발송</button>
                                 
                                 <input type="text" class="insertCode" name="insertCode" placeholder="인증번호 6자리를 입력하세요" style="margin-top: 10px;">
-                                <span class="material-icons close">close</span>
                                 <span id="timer"></span>
-                                <button type="button" class="btnPw">확인</button>
+                                <button type="submit" class="btnPw">확인</button>
                             </form>
                         </div>
                         <div class="other">
