@@ -53,14 +53,14 @@ $(document).ready(function(){
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
-				console.log(data.result);
+				//console.log(data.result);
 				$('.productRow').remove();
 				//최신순 정렬
 				const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
 				//상품목록 불러오기
 				let tag = "";
-				//상품목록에 상품 개수 20개까지만 보이게 함
-				const sliceArr = sortedResult.slice(start,start+20);
+				//상품목록에 상품 개수 10개까지만 보이게 함
+				const sliceArr = sortedResult.slice(start,start+10);
 				
 				for(let i=0; i<sliceArr.length; i++){
 						tag += "<tr class='productRow'>";
@@ -71,9 +71,11 @@ $(document).ready(function(){
 						tag += "<td>"+sliceArr[i].c2Name+"</td>";
 						tag += "<td><a href='#'>"+sliceArr[i].prodName+"</a></td>";
 						tag += "<td>"+sliceArr[i].disPrice+"</td>";
+						tag += "<td>판매중</td>";
 						tag += "<td>"+sliceArr[i].stock+"</td>";
 						tag += "<td>"+sliceArr[i].hit+"</td>";
 						tag += "<td>";
+						tag += "<button class='more'>상세보기</button><br>";
 						tag += "<button class='deleteButton' value='"+sliceArr[i].prodNo+"'>삭제</button>";
 						tag += "</td>";
 						tag += "</tr>"
@@ -107,10 +109,10 @@ $(document).ready(function(){
 			success:function(data){
 				//console.log("상품개수",data.result);
 				//전체 페이지 수 정의
-				if(data.result % 20 == 0){
-					totalPage=data.result/20;
+				if(data.result % 10 == 0){
+					totalPage=data.result/10;
 				}else{
-					totalPage=Math.ceil(data.result/20);
+					totalPage=Math.ceil(data.result/10);
 				}
 				//console.log("page??",totalPage);
 				//페이지 개수 정하기
@@ -121,14 +123,16 @@ $(document).ready(function(){
 	
 	//현재 페이지 번호 기준으로 앞뒤 5개씩의 페이지 번호만 보여줌
   	function UpdatePg(totalPage){
-  		
+  		//console.log(pg);
   		var startPg = Math.max(pg-5,1);
   		
   		if(pg<6 && totalPage>=10){
   			var endPg = 10;
   		}else if(pg>=6 && totalPage>=10){
   			var endPg = Math.min(pg+4,totalPage);
-  		}
+  		}else if(pg<6 && totalPage<10){
+			var endPg = totalPage;
+		  }
   		//console.log("startPg",startPg);
   		//console.log("endPg",endPg);
   		//console.log("totalPage",totalPage);
@@ -148,7 +152,7 @@ $(document).ready(function(){
 	//페이지 번호 클릭했을 때
 	$(document).on("click",".num", function(){
 		pg = $(this).attr("data-value");
-		start=(pg-1)*20;
+		start=(pg-1)*10;
     	$(".current").attr("class","num");
 	    $(this).attr("class","current");
 		
@@ -159,7 +163,7 @@ $(document).ready(function(){
 	//이전 버튼 클릭했을 때
 	$(document).on("click",".prev", function(){
 		pg--;
-		start=(pg-1)*20;
+		start=(pg-1)*10;
 		//이전 페이지가 없을 경우
 		if(pg<1){
 			pg=1;
@@ -177,7 +181,7 @@ $(document).ready(function(){
 	//다음 버튼 클릭했을 때
 	$(document).on("click",".next", function(){
 		pg++;
-		start=(pg-1)*20;
+		start=(pg-1)*10;
 		var maxPg = $(".num").length+1;
 		//console.log(maxPg);
 		//다음 페이지가 없을 경우
@@ -281,10 +285,6 @@ $(document).ready(function(){
 	    console.log(cate2);
 	  });
 
-    //상품등록 버튼 클릭 시 상품등록 페이지로 이동
-    $(".registerButton").on("click",function(){
-		location.href="/Beauty/admin/product/register";
-	});
 });	
 
 /* product-register 카테고리 분류 */
