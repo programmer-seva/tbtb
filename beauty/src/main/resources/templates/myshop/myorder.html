@@ -27,6 +27,7 @@
         <!-- js -->
         <script th:src="@{/js/myshop/myshop.js}"></script>
         <script th:src="@{/js/myshop/myorder.js}"></script>
+        <script th:src="@{/js/myshop/track.js}"></script>
         
         
         <title>MyOrder</title>
@@ -53,8 +54,8 @@
                                 <!-- 안내 정보 -->
                                 <ul class="deliInfo">
                                     <li>픽업대기, 픽업완료는 무탠픽업(매장픽업) 주문에만 해당됩니다.</li>
-                                    <li>동일한 주문번호라도 2개 이상의 브랜드에서 주문하신 경우 출고지 주소가 달라 각각 출고됩니다. (택배 박스를 2개 이상 수령 가능)</li>
                                     <li>출고 완료 직후 교환 / 환불 요청을 하더라도 상품을 수령하신 후 택배 업체를 통해 보내주셔야 처리 가능합니다.</li>
+                                    <li>조회 기록은 기본 최근 1개월 조회이며 최대 3년까지 유지 됩니다.</li>
                                 </ul>
                                 <!-- 기간 선택 -->
                                 <div class="byDate">
@@ -67,16 +68,16 @@
                                         <label for="1year">1년</label>
                                     </div>
                                     <div class="datePeriod">
-                                        <input type="date">
+                                        <input type="date" id="startDate">
                                         ~
-                                        <input type="date">
-                                        <button type="button" class="btn">조회</button>
+                                        <input type="date" id="endDate">
+                                        <button type="button" class="btn" id="btnSearchDate">조회</button>
                                     </div>
                                 </div>
 
                                 <!-- 주문 내역 -->
                                 <div class="orderList">
-                                    <table class="">
+                                    <table class="" id="orderListTable">
                                         <thead>
                                             <tr>
                                                 <th>상품정보</th>
@@ -87,6 +88,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <!-- 비었으면 -->
+                                        <tr th:if="${#lists.size(orderList) == 0}"><td colspan='5'>장바구니에 담긴 상품이 없습니다.</td></tr>
                                         <!-- 아이템 반복 -->
                                         <th:block th:each="order:${orderList}">
                                         <tr>
@@ -96,11 +99,11 @@
                                                         <img th:src="@{/image/}+${order.thumb1}" alt=""/>
                                                     </a>
                                                     <ul class="info">
-                                                        <li id="seller">
-                                                            <a href="#">나중에 다른거 넣기</a>
+                                                        <li id="company">
+                                                            <a href="#" th:text="${order.company}"></a>
                                                         </li>
                                                         <li id="prodName">
-                                                            <a th:href="@{/product/view(pno=${order.prodNo})}" th:text="${order.prodName}"></a>
+                                                            <a th:href="@{/shop/view(pno=${order.prodNo})}" th:text="${order.prodName}"></a>
                                                         </li>
                                                         <li id="option" th:text="|[옵션 : ${order.color}, ${order.size}]|"></li>
                                                     </ul>
@@ -116,7 +119,7 @@
                                             </td>
                                             <td>
                                                 <div class="btn-set tooltip">
-                                                    <button type="button" class="btn">배송 조회</button> <br/>
+                                                    <button type="button" class="btn btnTrack">배송 조회</button> <br/>
                                                     <button type="button" class="btn">리뷰 쓰기</button><br/>
                                                     <button type="button" class="btn">반품/교환</button>
                                                 </div>

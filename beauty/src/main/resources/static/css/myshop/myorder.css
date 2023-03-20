@@ -126,7 +126,7 @@ div.myorderFrame > div.orderList > table td:first-child > div > ul {
     padding-left: 10px;
     vertical-align: top;
 }
-div.myorderFrame > div.orderList > table td:first-child > div > ul > li#seller {
+div.myorderFrame > div.orderList > table td:first-child > div > ul > li#company {
     display: block;
     color: #777777;
     font-weight: bold;

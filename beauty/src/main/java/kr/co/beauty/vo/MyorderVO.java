@@ -16,6 +16,7 @@ public class MyorderVO {
 	private int prodNo;
 	private String prodName;
 	private String thumb1;
+	private String company;
 	private int price;
 	private int disPrice;
 	private int count;
@@ -27,11 +28,8 @@ public class MyorderVO {
 	public String getRdate() {
 		return rdate.substring(2,10);
 	}
-	//add
-	public int getSalePrice() {
-		return (price-disPrice);
-	}
+	
 	public int getTotalPrice() {
-		return (getSalePrice()*count);
+		return (disPrice*count);
 	}
 }

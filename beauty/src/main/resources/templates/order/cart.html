@@ -134,11 +134,11 @@
                                                 <td class="tdTotal">
                                                 	<!-- 할인 상품 구분 -->
                                                     <th:block th:if="${cart.discount == 0}">
-                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원
+                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.disPrice, 0, 'COMMA')}"></span>원
                                                 	</th:block>
                                                 	<th:block th:unless="${cart.discount == 0}">
                                                     	<span class="oriPrice" th:text="${#numbers.formatInteger(cart.price, 0, 'COMMA')}"></span>원 <br>
-                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원 <span class="discount" th:text="${cart.discount}"></span>
+                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.disPrice, 0, 'COMMA')}"></span>원 <span class="discount" th:text="${cart.discount}"></span>
                                                 	</th:block>
                                                 	<input type="hidden" id="totalCount" name="count" th:value="${cart.count}" readonly="readonly">
                                                 </td>
@@ -248,7 +248,7 @@
 	                                        </div>
 	                                        <div class="itemInfo">
 	                                            <a th:href="@{/product/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
-	                                            <span class="price" th:text="${#numbers.formatInteger(wish.getSalePrice, 0, 'COMMA')}"></span>
+	                                            <span class="price" th:text="${#numbers.formatInteger(wish.disPrice, 0, 'COMMA')}"></span>
 	                                        </div>
 	                                    </div>
 	                                    </th:block>
