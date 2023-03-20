@@ -69,7 +69,7 @@
 			    </ul>
 			</aside>
             <section id="admin-product-list">
-                <div>
+                <div class="searchPart">
                     <form th:action="@{/admin/product/search}" method="get">
                     	<input type="hidden" name="arg0" id="cate2">
                         <select name="param2" id="search">
@@ -80,21 +80,16 @@
                         <button class="searchClick">검색</button>
                     </form>
                 </div>
-                <div>
-                    <a th:classappend="${param1}=='prodNo'?'on'" th:href="@{/admin/product/list(param1=prodNo)}">최신순 </a>|
-                    <a th:classappend="${param1}=='disPrice'?'on'" th:href="@{/admin/product/list(param1=disPrice)}">판매가격순 </a>|
-                    <a th:classappend="${param1}=='stock'?'on'" th:href="@{/admin/product/list(param1=stock)}">재고순 </a>|
-                    <a th:classappend="${param1}=='hit'?'on'" th:href="@{/admin/product/list(param1=hit)}">조회순</a>
-                </div>
                 <table id="tableList">
                     <tr>
                         <th><input type="checkbox" name="전체체크" id="checkAll"></th>
                         <th>사진</th>
-                        <th>품번</th>
+                        <th>상품번호</th>
                         <th>대분류</th>
                         <th>소분류</th>
                         <th>상품명</th>
                         <th>판매가격</th>
+                        <th>상태</th>
                         <th>재고</th>
                         <th>조회</th>
                         <th>관리</th>
@@ -111,11 +106,11 @@
                     	<td>[[${prod.hit}]]</td>
                     	<td>
                     		<button class='deleteButton' th:value="${prod.prodNo}">삭제</button>
+                    		<button class='more'>상세보기</button>
                     	</td>
                     </tr>
                 </table>
                 <input type="button" value="선택삭제" class="delete">
-                <input type="button" value="상품등록" class="registerButton">
                 <div class="page"></div>
             </section>
         </main>
