@@ -51,7 +51,7 @@ public class AdminService {
 
 
 		//��ǰ���
-		int result = dao.insertProduct(vo);
+		//int result = dao.insertProduct(vo);
 
 		return result;
 	};

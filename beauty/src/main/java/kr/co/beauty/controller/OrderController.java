@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.OrderService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.OrderVO;
@@ -45,12 +46,16 @@ public class OrderController {
 	private OrderService service;
 	@Autowired
 	private MyshopService serviceMy;
+	@Autowired
+	private UtilService util;
 	
 	/* 김동근 */
 	/* 카트 페이지 */
 	@GetMapping("order/cart")
 	public String cart(Model model, Principal principal, 
-			@CookieValue(required = false) String nomember) {
+			@CookieValue(required = false) String nomember,
+			HttpSession session
+			) {
 		
 		MemberVO member = new MemberVO();
 		List<CartVO> cartList = new ArrayList<>();
@@ -73,6 +78,9 @@ public class OrderController {
 		model.addAttribute("cartList", cartList);
 		model.addAttribute("wishList", wishList);
 		
+		int cartCount = (int) session.getAttribute("cartCount");
+		model.addAttribute("cartCount", cartCount);
+		
 		return "order/cart";
 	}
 	
@@ -80,23 +88,35 @@ public class OrderController {
 	@ResponseBody
 	@PostMapping("order/deleteAllCart")
 	public int deleteAllCart(Principal principal,
-			@CookieValue(required = false) String nomember) {
+			@CookieValue(required = false) String nomember,
+			HttpSession session
+			) {
 		if(principal != null) {
 			service.deleteAllCart(principal.getName());
 		}
 		if(nomember != null) {
 			service.deleteAllCart(nomember);
 		}
+		
+		int cartCount = util.header(principal, nomember);
+		session.setAttribute("cartCount", cartCount);
+		
 		return 1;
 	}
 	
 	//카트 - cartBtns(테이블아래버튼) - 선택상품 삭제
 	@ResponseBody
 	@PostMapping("order/deleteSelectedCart")
-	public int deleteSelectedCart(@RequestParam("chkList[]") int[] deleteList) {
+	public int deleteSelectedCart(@RequestParam("chkList[]") int[] deleteList,
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session) {
 		for(int cartNo : deleteList) {
 			service.deleteSelectedCart(cartNo);
 		}
+		
+		int cartCount = util.header(principal, nomember);
+		session.setAttribute("cartCount", cartCount);
+		
 		return 1;
 	}
 	
@@ -111,8 +131,15 @@ public class OrderController {
 	//카트 - tableBtns(테이블내부) - 삭제
 	@ResponseBody
 	@GetMapping("order/deleteSelectedCart")
-	public int deleteSelectedCart(int cartNo) {
+	public int deleteSelectedCart(int cartNo,
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session
+			) {
 		service.deleteSelectedCart(cartNo);
+		
+		int cartCount = util.header(principal, nomember);
+		session.setAttribute("cartCount", cartCount);
+		
 		return 1;
 	}
 	
@@ -194,6 +221,9 @@ public class OrderController {
 		model.addAttribute("list",list);
 		model.addAttribute("count",count);
 		
+		int cartCount = (int) session.getAttribute("cartCount");
+		model.addAttribute("cartCount", cartCount);
+		
 		if(principal == null) {
 			//로그인X
 			TermsVO terms = service.orderTerms();
@@ -235,11 +265,16 @@ public class OrderController {
 	//주문완료
 	@GetMapping("order/ordercomplete")
 	public String ordercomplete2(Model model, int ordNo,
-			Principal principal, @CookieValue(required = false) String nomember) {
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session
+			) {
 		OrdercompleteVO vo = service.selectOrdercomplete(ordNo);
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("orders", orders);
+		
+		int cartCount = (int) session.getAttribute("cartCount");
+		model.addAttribute("cartCount", cartCount);
 		
 		return "order/ordercomplete";
 	}
