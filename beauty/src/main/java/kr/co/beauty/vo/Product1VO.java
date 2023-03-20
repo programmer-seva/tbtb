@@ -65,4 +65,9 @@ public class Product1VO {
 	private MultipartFile file8;
 	private MultipartFile file9;
 	
+	//상품목록 카테고리명 수정
+	private int cate;
+	private String c1Name;
+	private int cate2;
+	private String c2Name;	
 }

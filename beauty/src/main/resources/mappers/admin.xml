@@ -44,18 +44,28 @@
 	</insert>
 
 	<!-- 관리자 페이지에서 체크된 소분류 상품 목록 불러오기 -->
-	<select id="selectProducts" resultType="Product1VO">
-		select * from `product`
+	<select id="selectProducts"  resultType="Product1VO">
+		SELECT a.*, b.*, c.`cate` AS `cate2`, c.`c2Name`   
+		FROM `product` AS a 
+		LEFT JOIN `cate1` AS b 
+		ON a.`prodCate1`=b.`cate` 
+		JOIN `cate2` AS c 
+		ON b.`c1Name`=c.`c1Name`  
 		<where>
 			<if test="collection != null and collection.size() > 0">
 			and `prodCate2` in
 			<foreach item="checkBox" collection="collection" open="(" separator="," close=")">#{checkBox}</foreach>
 			</if>
 		</where>
+		GROUP BY a.prodNo;
 	</select>
 	<!-- 관리자 페이지에서 상품 삭제하기 -->
 	<delete id="deleteProduct">
-		delete from `product` where `prodNo`=#{prodNo};
+		delete from a,b 
+		using `product` as a 
+		left join `product_option` as b 
+		on a.`prodNo`=b.`prodNo`  
+		where a.`prodNo`=#{prodNo};
 	</delete>
 	<!-- 관리자 페이지에서 상품 검색하기 -->
 	<select id="searchProduct" resultType="Product1VO">

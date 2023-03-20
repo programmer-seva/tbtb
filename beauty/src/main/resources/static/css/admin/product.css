@@ -107,9 +107,14 @@ main > section{
 }
 #admin-product-list > table tr{}
 #admin-product-list > table tr > th{}
-#admin-product-list > table tr > th > #checkAll{}
+#admin-product-list > table tr > td:first-child{
+	width: 40px;
+}
 #admin-product-list > table tr > td{
     text-align: center;
+}
+#admin-product-list > table tr > td:nth-child(2){
+	width: 75px;
 }
 #admin-product-list > table tr > td:nth-child(6){
 	text-align: left;
@@ -118,7 +123,9 @@ main > section{
     border: 0px;
     background: white;
 }
-#admin-product-list > table tr > td > img{}
+#admin-product-list > table tr > td > img{
+	height:40px
+}
 #admin-product-list > .delete{
     position: absolute;
     bottom: -15px;
