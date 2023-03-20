@@ -62,16 +62,15 @@ public class Myshop1Controller {
 	@ResponseBody
 	@PostMapping("myshop/myorderSearchDate")
 	public List<MyorderVO> myorderSearchDate(	Principal principal, 
-												//@RequestParam("pg") 	int pg,
+												@RequestParam("pg") 	int pg,
 												@RequestParam("end") 	String end, 
 												@RequestParam("start") 	String start )
 	{
 		List<MyorderVO> orderList = new ArrayList<>();
 		if (principal != null) {
 			//내 주문내역 가져오기
-			//pg = (pg < 1 ? 1:pg);
-			//int limitstart = (pg-1)*10;
-			orderList = service.selectOrderListSearchDate(principal.getName(), start, end, 0);
+			int limitstart = (pg-1)*10;
+			orderList = service.selectOrderListSearchDate(principal.getName(), start, end, limitstart);
 		}
 		return orderList;
 	}
@@ -88,7 +87,6 @@ public class Myshop1Controller {
 	//배송조회
 	@GetMapping("myshop/track")
     public String track(){
-		System.out.println("hi");
         return "myshop/track";
     }
 	

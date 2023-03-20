@@ -27,7 +27,7 @@
         <!-- js -->
         <script th:src="@{/js/myshop/myshop.js}"></script>
         <script th:src="@{/js/myshop/myorder.js}"></script>
-        <script th:src="@{/js/myshop/track.js}"></script>
+        <script th:src="@{/js/myshop/track.js}" defer></script>
         
         
         <title>MyOrder</title>
@@ -51,6 +51,7 @@
 							
                             <!-- 주문/배송 -->
                             <div class="myorderFrame">
+								
                                 <!-- 안내 정보 -->
                                 <ul class="deliInfo">
                                     <li>픽업대기, 픽업완료는 무탠픽업(매장픽업) 주문에만 해당됩니다.</li>
@@ -132,13 +133,11 @@
                                 </div>
                                 <div class="center">
                                     <div class="pagination">
-                                        <a class="firstPage" href="#">&laquo;</a>
                                         <a class="prevPage" href="#">&lsaquo;</a>
                                         
                                             <a href="#" class="active">1</a>
                                         
                                         <a class="nextPage" href="#">&rsaquo;</a>
-                                        <a class="lastPage" href="#">&raquo;</a>
                                     </div>
                                 </div>
                             </div>
