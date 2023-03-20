@@ -13,20 +13,44 @@
 		<div class="navigation">
 	    	<!-- 강중현 -->
 	    	<!-- 비로그인 사용자가 보이는 블럭 -->
-	    	<p sec:authorize="isAnonymous()">
-		        <a th:href="@{/member/login}">로그인</a>
-		        <a th:href="@{/member/register}">회원가입</a>
-	        </p>
-	        <!-- 권한이 1인(일반회원) 사용자가 보이는 블럭 -->
-           	<p sec:authorize="hasRole('1')">
-           		<a><span class="head_name" sec:authentication="principal.member.name"></span></a>
-           		<a th:href="@{/member/logout}">로그아웃</a>
-	        </p>
-	        <p>
-	        	<a th:href="@{/order/cart}">장바구니<span>([[${ct}]])</span></a>
-		        <a id="my" th:href="@{/myshop/index}">마이페이지</a>
-		        <a id="cs" th:href="@{/board/notice}">고객센터</a>
-	        </p>
+	    	<ul>
+		    	<li sec:authorize="isAnonymous()">
+			        <a th:href="@{/member/login}">로그인</a>
+		        </li>
+		    	<li sec:authorize="isAnonymous()">
+					<a th:href="@{/member/register}">회원가입</a>
+		        </li>
+		        <!-- 권한이 1인(일반회원) 사용자가 보이는 블럭 -->
+	           	<li sec:authorize="hasRole('1')">
+	           		<a><span class="head_name" sec:authentication="principal.member.name"></span></a>
+		        </li>
+	           	<li sec:authorize="hasRole('1')">
+					<a th:href="@{/member/logout}">로그아웃</a>
+		        </li>
+		        <li>
+		        	<a th:href="@{/order/cart}">장바구니<span>([[${cartCount}]])</span></a>
+			    </li>
+		        <li class="cate">
+		            <a th:href="@{/myshop/index}">마이페이지</a>
+		            <ul class="dep">
+                        <li><a th:href="@{/myshop/myorder}">주문/배송</a></li>
+                        <li><a th:href="@{/myshop/coupon}">쿠폰</a></li>
+                        <li><a th:href="@{/myshop/point}">적립금</a></li>
+                        <li><a th:href="@{/myshop/wishlist}">위시리스트</a></li>
+                        <li><a th:href="@{/myshop/myqna}">1:1문의</a></li>
+                        <li><a th:href="@{/myshop/profile}">나의프로필</a></li>
+                    </ul>
+			    </li>
+		        <li class="cate">
+			        <a th:href="@{/board/notice}">고객센터</a>
+			        <ul class="dep">
+                        <li><a th:href="@{/board/notice}">공지사항</a></li>
+                        <li><a th:href="@{/board/qna}">Q&A</a></li>
+                        <li><a th:href="@{/board/review}">리뷰</a></li>
+                        <li><a th:href="@{/board/event}">이벤트</a></li>
+                    </ul>
+			    </li>
+	        </ul>
 	    </div>
 	    <div class="logo">
 	    	<a th:href="@{/index}">Beauty Shop</a>

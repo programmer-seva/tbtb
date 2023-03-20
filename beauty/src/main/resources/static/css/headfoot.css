@@ -71,6 +71,7 @@ header > div {
     box-sizing: border-box;
     border: 1px solid #e5e5e5;
     background: rgba(255,255,255,0.9);
+    z-index: 100;
 }
 .dep > li {
     text-align: left;
@@ -78,7 +79,7 @@ header > div {
 }
 .dep > li:first-child {margin-top: 0px;}
 .dep > li > a {font-size: 14px;}
-.dep > li > a:hover {color: #555;}
+.dep > li > a:hover {color: #999;}
 .category > table tr > td {width: 16.6%; text-align: center;}
 .category > table tr > td > a {
     display: inline-block;
@@ -98,12 +99,23 @@ header > div {
     float: right;
     text-align: right;
 }
-.navigation > p {display: inline-block;}
-.navigation > p > a {
+.navigation .dep{
+	top : 75px;
+	width: 110px;
+}
+.navigation > ul {
 	display: inline-block;
-	font-size: 14px; color: #555; margin-left: 20px; height:50px;}
-.navigation > p > a:hover {color: #999;}
-.navigation > p > a > .head_name{
+}
+.navigation > ul > li {
+	float:left; 
+	position: relative;
+	height: 50px;
+}
+.navigation > ul > li > a {
+	display: inline-block;
+	font-size: 14px; color: #555; margin-left: 20px;}
+.navigation > ul > li > a:hover {color: #999;}
+.navigation > ul > li > a > .head_name{
 	font-size: 14px;
     font-weight: bold;
 }

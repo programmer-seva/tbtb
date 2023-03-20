@@ -22,15 +22,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.ProductService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.CookieManager;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.ProdCate2VO;
 import kr.co.beauty.vo.ProductVO;
 import kr.co.beauty.vo.WishVO;
+import lombok.extern.log4j.Log4j2;
 /*
  * 작업자 : 박진휘
  * 내용 : 상품리스트 & 상품보기
  */
+@Log4j2
 @Controller
 @MapperScan("kr.co.beauty.vo")
 public class ProductController {
@@ -39,14 +42,18 @@ public class ProductController {
 	private ProductService service;
 	@Autowired
 	private CookieManager cookie;
+	@Autowired
+	private UtilService util;
 	
 	//상품리스트 출력
 	@GetMapping("shop/list")
-	public String productList(Model model, int cate,
-			Principal principal, 
-			@CookieValue(required = false) String nomember,
+	public String productList(
+			Model model, int cate,
+			Principal principal, @CookieValue(required = false) String nomember,
 			@RequestParam(required=false) String sort,
-			@RequestParam(required=false) Integer pg) {
+			@RequestParam(required=false) Integer pg,
+			HttpSession session
+			) {
 		
 		if(pg == null) {
 			pg = 1;
@@ -77,17 +84,26 @@ public class ProductController {
 		model.addAttribute("sort",sort);
 		model.addAttribute("page", pageArr);
 		
+		int cartCount = (int) session.getAttribute("cartCount");
+		model.addAttribute("cartCount", cartCount);
+		
 		return "product/list";
 	}
 	
 	//상품보기
 	@GetMapping("shop/view")
-	public String productView(Model model,
-			@RequestParam("pno") String prodNo, 
-			Principal principal,
-			@CookieValue(required = false) String nomember) {
+	public String productView(
+			Model model, @RequestParam("pno") String prodNo, 
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpServletResponse resp, HttpSession session
+			) {
 		
 		ProductVO prod = service.selectProduct(prodNo);
+		
+		//쿠키만들기
+		if(nomember == null) {
+			cookie.nomemberCookie(resp);
+		}
 		
 		String uid = null;
 		if(principal != null) {
@@ -96,6 +112,9 @@ public class ProductController {
 		
 		model.addAttribute("prod", prod);
 		model.addAttribute("uid", uid);
+		
+		int cartCount = (int) session.getAttribute("cartCount");
+		model.addAttribute("cartCount", cartCount);
 		
 		return "product/view";
 	}
@@ -115,9 +134,9 @@ public class ProductController {
 	@ResponseBody
 	public Map<String, Integer> cart(
 			@RequestParam Map data, 
-			Principal principal, 
-			@CookieValue(required = false) String nomember,
-			HttpServletResponse resp) throws Exception {
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpServletResponse resp, HttpSession session
+			) throws Exception {
 		
 		String uid = null;
 		if(principal != null) {
@@ -144,11 +163,16 @@ public class ProductController {
 			if(check > 0) {
 				//장바구니에 이미 있음(수량 증가)
 				rs = service.updateCart(vo.get(i));
+				log.info("장바구니 등록 성공!");
 			}else {
 				//장바구니에 없음(새로 등록)
 				rs = service.addCart(vo.get(i));
+				log.info("장바구니 업데이트 성공!");
 			}
 		}
+	
+		int cartCount = util.header(principal, nomember);
+		session.setAttribute("cartCount", cartCount);
 		
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", rs);
@@ -160,10 +184,9 @@ public class ProductController {
 	@ResponseBody
 	public Map<String, Integer> order(
 			@RequestParam Map data, 
-			Principal principal, 
-			@CookieValue(required = false) String nomember,
-			HttpSession session,
-			HttpServletResponse resp) throws Exception {
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session, HttpServletResponse resp
+			) throws Exception {
 		
 		String uid = null;
 		if(principal != null) {

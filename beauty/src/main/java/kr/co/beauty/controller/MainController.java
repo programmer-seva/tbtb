@@ -1,15 +1,19 @@
 package kr.co.beauty.controller;
 
 import java.net.CookieManager;
+import java.security.Principal;
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MainService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.ProductVO;
 /*
  * 작업자 : 박진휘
@@ -21,11 +25,14 @@ public class MainController {
 	
 	@Autowired
 	private MainService service;
-	
-	CookieManager sessionManager = new CookieManager();
+	@Autowired
+	private UtilService util;
 	
 	@GetMapping(value = {"/", "index"})
-	public String index(Model model) {
+	public String index(Model model,
+			Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session
+			) {
 		
 		List<ProductVO> vo = service.selectNewItem();
 		List<ProductVO> outer = service.selectBestItem("100");
@@ -40,6 +47,11 @@ public class MainController {
 		model.addAttribute("bottom", bottom);
 		model.addAttribute("dress", dress);
 		model.addAttribute("etc", etc);
+		
+		//장바구니 카운터
+		int cartCount = util.header(principal, nomember);
+		session.setAttribute("cartCount", cartCount);
+		model.addAttribute("cartCount", cartCount);
 		
 		return "index";
 	}
