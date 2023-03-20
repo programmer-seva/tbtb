@@ -6,6 +6,7 @@
 package kr.co.beauty.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,6 @@ public class Myshop1Controller {
 			MemberVO member = service.selectMember(principal.getName());
 			model.addAttribute("member", member);
 		}
-		
-		
 		return "myshop/myhome";
 	}
 	
@@ -46,19 +45,52 @@ public class Myshop1Controller {
 	/* 주문내역 */
 	@GetMapping("myshop/myorder")
 	public String myorder(Principal principal, Model model) {
+		List<MyorderVO> orderList = new ArrayList<>();
 		if (principal != null) {
 			//유저 정보 받기
 			MemberVO member = service.selectMember(principal.getName());
 			model.addAttribute("member", member);
-			//내 주문내역 가져오기
-			List<MyorderVO> orderList = service.selectOrderList(principal.getName());
-			model.addAttribute("orderList", orderList);
-		}		
-		
+			//주문 내역 가져오기
+			//orderList = service.selectOrderListSearchDate(principal.getName(), start, end, 0);
+		}
+		model.addAttribute("orderList", orderList);
 		//카테고리
 		model.addAttribute("option", "myorder");
 		return "myshop/myorder";
 	}
+	
+	@ResponseBody
+	@PostMapping("myshop/myorderSearchDate")
+	public List<MyorderVO> myorderSearchDate(	Principal principal, 
+												//@RequestParam("pg") 	int pg,
+												@RequestParam("end") 	String end, 
+												@RequestParam("start") 	String start )
+	{
+		List<MyorderVO> orderList = new ArrayList<>();
+		if (principal != null) {
+			//내 주문내역 가져오기
+			//pg = (pg < 1 ? 1:pg);
+			//int limitstart = (pg-1)*10;
+			orderList = service.selectOrderListSearchDate(principal.getName(), start, end, 0);
+		}
+		return orderList;
+	}
+	
+	@ResponseBody
+	@PostMapping("myshop/countOrderList")
+	public int countOrderList(	Principal principal, 
+									@RequestParam("end") 	String end, 
+									@RequestParam("start") 	String start )
+	{
+		return service.countOrderList(principal.getName(), start, end);
+	}
+	
+	//배송조회
+	@GetMapping("myshop/track")
+    public String track(){
+		System.out.println("hi");
+        return "myshop/track";
+    }
 	
 	
 	
@@ -163,6 +195,12 @@ public class Myshop1Controller {
 	@PostMapping("myshop/checkPW")
 	public int checkPW(Principal principal, @RequestParam("pass") String pass) {
 		return service.checkPW(principal.getName(), pass);
+	}
+	
+	@ResponseBody
+	@PostMapping("myshop/savePassword")
+	public int savePassword(Principal principal, @RequestParam("pass") String pass) {
+		return service.savePassword(principal.getName(), pass);
 	}
 	
 	@ResponseBody

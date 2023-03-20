@@ -19,12 +19,15 @@ import kr.co.beauty.vo.WishVO;
 public interface MyshopDAO {
 	
 	//myorder
-	public List<MyorderVO> selectOrderList(@Param("uid") String uid);
+	public List<MyorderVO> 	selectOrderList			 (@Param("uid") String uid);
+	public List<MyorderVO> 	selectOrderListSearchDate(@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
+	public int				countOrderList			 (@Param("uid") String uid, @Param("start") String start, @Param("end") String end);
+	
 	
 	//wishlist
-	public void addWish(WishVO vo);
-	public int checkWish(WishVO vo);
-	public List<WishVO> selectWishlist(@Param("uid") String uid);
-	public void deleteSelectedWish(@Param("wishNo") int wishNo);
-	public void deleteAllWish(@Param("uid") String uid);
+	public void 		addWish				(WishVO vo);
+	public int 			checkWish			(WishVO vo);
+	public List<WishVO> selectWishlist		(@Param("uid") String uid);
+	public void 		deleteSelectedWish	(@Param("wishNo") int wishNo);
+	public void 		deleteAllWish		(@Param("uid") String uid);
 }
