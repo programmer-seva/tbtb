@@ -410,5 +410,29 @@ $(document).ready(function(){
         	console.log(disPrice);
 			$("#point").val(disPrice*3/100);
     	});
+    	
+    	//이미지파일 유효성 검사
+		imgFile = $("input[name=file]").val();
+		var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+		var maxSize = 5 * 1024 * 1024;
+		var fileSize;
+		
+		if($('input[name=file]').val() == "") {
+			alert("첨부파일은 필수!");
+		    $("input[name=file]").focus();
+		    return;
+		}
+
+		if(imgFile != "" && imageFile != null) {
+			fileSize = document.getElementByName("file").files[0].size;
+		    
+		    if(!imgFile.match(fileForm)) {
+		    	alert("이미지 파일만 업로드 가능");
+		        return;
+		    } else if(fileSize = maxSize) {
+		    	alert("파일 사이즈는 5MB까지 가능");
+		        return;
+		    }
+		}
 			
 	});

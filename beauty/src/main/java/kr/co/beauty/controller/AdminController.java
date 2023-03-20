@@ -38,8 +38,8 @@ public class AdminController {
 		//등록 후 자동 생성된 상품번호 받기
 		int param1= vo.getProdNo();
 		
-		System.out.println(vo.getProdNo()+"상품번호---------");
-		System.out.println(vo.getPoint()+"상품포인트---------");
+		//System.out.println(vo.getProdNo()+"상품번호---------");
+		//System.out.println(vo.getPoint()+"상품포인트---------");
 		//System.out.println(colorArr);
 		//System.out.println(colorNameArr);
 		//System.out.println(sizeArr);
