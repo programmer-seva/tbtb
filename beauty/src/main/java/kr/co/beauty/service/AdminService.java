@@ -30,7 +30,6 @@ public class AdminService {
 		int discount = vo.getDiscount();
 		int disPrice = price * (100-discount)/100;
 		vo.setDisPrice(disPrice);
-		vo.setPoint(disPrice*3/100);
 		
 		//��ǰ���
 		return dao.insertProduct(vo);
@@ -47,12 +46,6 @@ public class AdminService {
 				 dao.insertOption(param1,param2, param3, param4);
 			}
 		}
-		
-
-
-		//��ǰ���
-		int result = dao.insertProduct(vo);
-
 		return result;
 	};
 	
