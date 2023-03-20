@@ -1,6 +1,6 @@
 $(function(){
-    $('.btnTrack').click(function(){
-
+    $(document).on('click', '.btnTrack', function(){
+		
         // 1.빈창 팝업 생성
         var url = "/Beauty/myshop/track";
         var windowTargetName = "targetName";
@@ -12,7 +12,7 @@ $(function(){
         myForm.method="get";
         myForm.target=windowTargetName;
         myForm.submit();
-
+        
     });
 
     $('#company').change(function(){

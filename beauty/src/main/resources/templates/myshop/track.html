@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script th:src="@{/js/myshop/track.js}" defer></script>
+<link rel="stylesheet" th:href="@{/css/myshop/track.css}">
 <head>
     <meta charset="UTF-8">
     <title>팝업창</title>
@@ -48,10 +49,13 @@
             </span>
         </div>
         <div data-v-9131d49c="" class="control is-clearfix">
-            <input type="number" autocomplete="on" placeholder="송장번호" class="input" id="trackNumber">
+            <input type="text" autocomplete="on" placeholder="송장번호" class="input" id="trackNumber">
         </div>
         <a href="https://tracker.delivery/#/jp.yamato/1111111111111" target="_blank" id="btnTrack">배송조회</a>
     </div>
+    <div class="forImg" th:style="'background-image:url('+ @{/img/track.png} +');'">
+		
+	</div>
 
 </body>
 </html>

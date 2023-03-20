@@ -18,7 +18,7 @@ public class Pager {
 		this.articleNum	= totalCnt - this.start;			//게시글 번호 할당
 		this.totalPage	= (int) Math.ceil(totalCnt /(double)pageSize); //총 페이지 할당
 		this.groupStart = ((int) Math.ceil(currentPage / 10.0) -1) * 10 + 1; //1~10페이지면 1
-		this.groupEnd	= Math.min(groupStart * 10, totalPage);				//1~10 페이지면 10 또는 총 페이지 수(더 작은 값)
+		this.groupEnd	= Math.min(groupStart + 9, totalPage);				//1~10 페이지면 10 또는 총 페이지 수(더 작은 값)
 	}
 	
 	
