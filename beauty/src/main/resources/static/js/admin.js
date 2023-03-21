@@ -323,7 +323,7 @@ function cateChange(){
     		}
     		
     		$("#cate2").empty();
-    		$("#cate2").append('<option>소분류</option>');
+    		$("#cate2").append('<option value="0">소분류 선택</option>');
     		
     		for(var i = 0; i < opt.length; i++){
     			$("#cate2").append('<option value="'+optV[i]+'">'+opt[i]+'</option>');
@@ -346,7 +346,7 @@ $(document).ready(function(){
     	});*/
     	
     	//상품등록
-    	$(".register").on("click",function(e){
+    	$(document).on("click",".register",function(e){
     		e.preventDefault();
     	
 			//색상,사이즈 선택된 값을 담을 배열
@@ -384,7 +384,9 @@ $(document).ready(function(){
 			}
 			
 			//색상을 선택하지 않았을 경우
-			if(colorArr.length == 0){
+			if($("#cate2").val()=='0'){
+				alert("카테고리를 선택해주세요.");
+			}else if(colorArr.length == 0){
 				alert("선택된 색상이 없습니다.");
 			}else{
 				fileUpload(function(){
@@ -411,7 +413,7 @@ $(document).ready(function(){
         	let discount=$("#discount").val();
         	let disPrice =price*(100-discount)/100;
         	console.log(disPrice);
-			$("#point").val(disPrice*1/100);
+			$("#point").val(Math.ceil(disPrice*1/100));
     	});
     	
     	//이미지파일 유효성 검사
