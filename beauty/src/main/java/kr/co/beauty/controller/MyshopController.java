@@ -24,7 +24,7 @@ import kr.co.beauty.vo.MyorderVO;
 import kr.co.beauty.vo.WishVO;
 
 @Controller
-public class Myshop1Controller {
+public class MyshopController {
 	
 	@Autowired
 	private MyshopService service;

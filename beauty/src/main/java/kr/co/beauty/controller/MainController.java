@@ -9,10 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MainService;
 import kr.co.beauty.service.UtilService;
+import kr.co.beauty.utils.CookieManager;
 import kr.co.beauty.vo.ProductVO;
 /*
  * 작업자 : 박진휘
@@ -21,10 +25,9 @@ import kr.co.beauty.vo.ProductVO;
 @Controller
 @MapperScan("kr.co.beauty.vo")
 public class MainController {
-    @Autowired 
-    private MainService service;
-    @Autowired 
-    private UtilService util;
+    @Autowired private MainService service;
+    @Autowired private UtilService util;
+    @Autowired private CookieManager cookie;
     @GetMapping(value = {
         "/",
         "index"
@@ -49,5 +52,12 @@ public class MainController {
         }
         model.addAttribute("cartCount", cartCount);
         return "index";
+    }
+    
+    @ResponseBody
+    @PostMapping("setCookie")
+    public String setCookie(HttpServletResponse resp, @CookieValue(required = false) String nomember) {
+    	if(nomember == null) { return cookie.nomemberCookie(resp); }
+    	else { return "already exist"; }
     }
 }

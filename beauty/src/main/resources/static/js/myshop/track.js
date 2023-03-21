@@ -2,9 +2,9 @@ $(function(){
     $(document).on('click', '.btnTrack', function(){
 		
         // 1.빈창 팝업 생성
-        var url = "/Beauty/myshop/track";
-        var windowTargetName = "targetName";
-        var features = "scrollbars=yes,width=600,height=800,location=no, resizable=yes";
+        var url 			= "/Beauty/myshop/track";
+        var windowTargetName= "targetName";
+        var features 		= "scrollbars=yes,width=600,height=800,location=no, resizable=yes";
         window.open(url, windowTargetName, features);
 
         // 2.POST로 데이터 전달
@@ -17,11 +17,11 @@ $(function(){
 
     $('#company').change(function(){
 
-        let company = $(this).val();
-        let oriHref = $('#btnTrack').prop('href');
-        let companyIndex = oriHref.indexOf('#/') + 2;
-        let companyLastIndex = oriHref.lastIndexOf('/');
-        let changeCompany = oriHref.substring(companyIndex, companyLastIndex);
+        let company 		= $(this).val();
+        let oriHref 		= $('#btnTrack').prop('href');
+        let companyIndex 	= oriHref.indexOf('#/') + 2;
+        let companyLastIndex= oriHref.lastIndexOf('/');
+        let changeCompany 	= oriHref.substring(companyIndex, companyLastIndex);
         oriHref = oriHref.replace(changeCompany, company);
         $('#btnTrack').prop('href', oriHref);
 
@@ -29,9 +29,9 @@ $(function(){
 
     $('#trackNumber').focusout(function(){
 
-        let oriHref = $('#btnTrack').prop('href');
+        let oriHref 	= $('#btnTrack').prop('href');
         let numberIndex = oriHref.lastIndexOf('/') + 1;
-        let changeNumber = oriHref.substring(numberIndex);
+        let changeNumber= oriHref.substring(numberIndex);
         oriHref = oriHref.replace(changeNumber, $(this).val());
         $('#btnTrack').prop('href', oriHref);
 
@@ -40,9 +40,9 @@ $(function(){
 
 
     $.Modal = {
-        _WinModalPopup: null, // 모달 오픈객체
-        _OpenedCheckerTimer: null, // 창을 닫았는지 체크
-        _ChildFocus: null,
+        _WinModalPopup		: null, // 모달 오픈객체
+        _OpenedCheckerTimer	: null, // 창을 닫았는지 체크
+        _ChildFocus			: null,
         _IsTofficeTop: "",
         Focus: function () {
             $.Modal._WinModalPopup.focus();
@@ -89,7 +89,7 @@ $(function(){
         e.preventDefault();
 
         var windowURL = $('#btnTrack').prop('href');
-        var position = 'top=50px,left=50px,height=700px,width=500px,status=no,scroll=no' ;
+        var position  = 'top=50px,left=50px,height=700px,width=500px,status=no,scroll=no' ;
         $.Modal.Open(windowURL, "track", position,function(){});
 
     });

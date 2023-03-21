@@ -10,7 +10,7 @@ $(function(){
 	function Pop() {
 	    var cssRuleFile = "https://cookieconsent.popupsmart.com/src/css/style.css";
 	    let lnk = document.createElement("link");
-	    lnk.setAttribute("rel", "stylesheet");
+	    lnk.setAttribute("rel" , "stylesheet");
 	    lnk.setAttribute("type", "text/css");
 	    lnk.setAttribute("href", cssRuleFile);
 	    document.getElementsByTagName("head")[0].appendChild(lnk);
@@ -23,13 +23,13 @@ $(function(){
 	        expiryDays: 365 * 24 * 60 * 60 * 5000
 	    };
 	    let content = {
-	        message: "This website uses cookies to ensure you get the best experience on our website.",
-	        btnText: "Got it!",
-	        mode: "  banner bottom",
-	        theme: " theme-classic",
-	        palette: " palette1",
-	        link: "Learn more",
-	        href: "https://www.cookiesandyou.com",
+	        message:"This website uses cookies to ensure you get the best experience on our website.",
+	        btnText:"Got it!",
+	        mode: 	"  banner bottom",
+	        theme: 	" theme-classic",
+	        palette:" palette1",
+	        link: 	"Learn more",
+	        href: 	"https://www.cookiesandyou.com",
 	        target: "_blank"
 	    };
 	    let createPopUp = function () {
@@ -44,9 +44,10 @@ $(function(){
 	        document.getElementById("cookie-btn").addEventListener("click", function () {
 	            saveCookie();
 	            $.ajax({
-					url:'/Beauty/setCookie',
-					type:'POST',
-					success:function(data){
+					url		:'/Beauty/setCookie',
+					type	:'POST',
+					dataType:'text',
+					success	:function(data){
 						//쿠키설정완료
 					}
 				});
@@ -93,31 +94,31 @@ $(function(){
 	            return;
 	        
 	        if (typeof param === "object") {
-	            if ("ButtonText" in param) 
+	            if ("ButtonText"in param) 
 	                content.btnText = param.ButtonText;
 	            
-	            if ("Mode" in param) 
-	                content.mode = " " + param.Mode;
+	            if ("Mode" 		in param) 
+	                content.mode 	= " " + param.Mode;
 	            
-	            if ("Theme" in param) 
-	                content.theme = " " + param.Theme;
+	            if ("Theme" 	in param) 
+	                content.theme 	= " " + param.Theme;
 	            
-	            if ("Palette" in param) 
+	            if ("Palette" 	in param) 
 	                content.palette = " " + param.Palette;
 	            
-	            if ("Message" in param) 
+	            if ("Message" 	in param) 
 	                content.message = param.Message;
 	            
-	            if ("LinkText" in param) 
-	                content.link = param.LinkText;
+	            if ("LinkText" 	in param) 
+	                content.link 	= param.LinkText;
 	            
-	            if ("Location" in param) 
-	                content.href = param.Location;
+	            if ("Location" 	in param) 
+	                content.href 	= param.Location;
 	            
-	            if ("Target" in param) 
-	                content.target = param.Target;
+	            if ("Target" 	in param) 
+	                content.target 	= param.Target;
 	            
-	            if ("Time" in param) 
+	            if ("Time" 		in param) 
 	                setTimeout(function () {
 	                    createPopUp();
 	                }, param.Time * 1000);
@@ -127,10 +128,10 @@ $(function(){
 	    };
 	    
 	    this.init({
-		Palette:"palette1",
-		Mode:"banner bottom",
+		Palette	:"palette1",
+		Mode	:"banner bottom",
 		ButtonText:"알겠습니다.",
-		Message:"쿠키 사용에 동의하셔야 장바구니를 이용하실 수 있습니다.",
+		Message	:"쿠키 사용에 동의하셔야 장바구니를 이용하실 수 있습니다.",
 		LinkText:"쿠키 및 데이터 이용약관",
 		Location:"/Beauty/terms",
 		Time:"0"});
