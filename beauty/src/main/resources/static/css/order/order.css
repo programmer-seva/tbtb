@@ -190,6 +190,7 @@ main div.orderFrame .infoTable tr:nth-child(3) #btnZip {
     margin-bottom: 6px;
     font-size: 12px;
     display: inline-block;
+    border:1px solid black;
 }
 
 
