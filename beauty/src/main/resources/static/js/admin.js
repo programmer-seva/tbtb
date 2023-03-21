@@ -387,52 +387,235 @@ $(document).ready(function(){
 			if(colorArr.length == 0){
 				alert("선택된 색상이 없습니다.");
 			}else{
-			//ajax 요청 보내기
-				$.ajax({
-					url:'/Beauty/admin/product/register',
-					type:'post',
-					data:formData,
-					cache: false,
-			        contentType: false,
-			        processData: false,
-					success:function(data){
-						location.href="/Beauty/admin/product/list";
-					}	
+				fileUpload(function(){
+					//ajax 요청 보내기
+					$.ajax({
+						url:'/Beauty/admin/product/register',
+						type:'post',
+						data:formData,
+						cache: false,
+				        contentType: false,
+				        processData: false,
+						success:function(data){
+							location.href="/Beauty/admin/product/list";
+						}	
+					});
 				});
+				
 			}
     	});
     	
-    	//포인트 계산(할인가의 3%)
+    	//포인트 계산(할인가의 1%)
     	$(document).on("input","#discount",function(){
     		let price=$("#price").val();
         	let discount=$("#discount").val();
         	let disPrice =price*(100-discount)/100;
         	console.log(disPrice);
-			$("#point").val(disPrice*3/100);
+			$("#point").val(disPrice*1/100);
     	});
     	
     	//이미지파일 유효성 검사
-		imgFile = $("input[name=file]").val();
-		var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
-		var maxSize = 5 * 1024 * 1024;
-		var fileSize;
-		
-		if($('input[name=file]').val() == "") {
-			alert("첨부파일은 필수!");
-		    $("input[name=file]").focus();
-		    return;
-		}
-
-		if(imgFile != "" && imageFile != null) {
-			fileSize = document.getElementByName("file").files[0].size;
-		    
-		    if(!imgFile.match(fileForm)) {
-		    	alert("이미지 파일만 업로드 가능");
-		        return;
-		    } else if(fileSize = maxSize) {
-		    	alert("파일 사이즈는 5MB까지 가능");
-		        return;
-		    }
-		}
+    	function fileUpload(callback){
+			var imgFile = $('#isFile1').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
 			
+			if($('#isFile1').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile1").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile1").files[0].size;
+			    console.log(fileSize);
+			    console.log(maxSize);
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile2').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile2').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile2").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile2").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile3').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile3').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile3").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile3").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile4').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile4').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile4").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile4").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile5').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile5').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile5").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile5").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile6').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile6').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile6").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile6").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile7').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile7').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile7").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile7").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile8').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile8').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile8").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile8").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			var imgFile = $('#isFile9').val();
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+			var maxSize = 5 * 1024 * 1024;
+			var fileSize;
+			
+			if($('#isFile9').val() == "") {
+				alert("첨부파일은 필수!");
+			    $("#isFile9").focus();
+			    return;
+			}
+			
+			if(imgFile != "" && imgFile != null) {
+				fileSize = document.getElementById("isFile9").files[0].size;
+			    
+			    if(!imgFile.match(fileForm)) {
+			    	alert("이미지 파일만 업로드 가능");
+			        return;
+			    } else if(fileSize > maxSize) {
+			    	alert("파일 사이즈는 5MB까지 가능");
+			        return;
+			    }
+			}
+			//유효성 검사 끝나면 ajax 요청 보내기
+			callback();
+		}	
 	});
