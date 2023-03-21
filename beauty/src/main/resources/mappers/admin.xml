@@ -50,7 +50,7 @@
 		LEFT JOIN `cate1` AS b 
 		ON a.`prodCate1`=b.`cate` 
 		JOIN `cate2` AS c 
-		ON b.`c1Name`=c.`c1Name`  
+		ON a.`prodCate2`=c.`cate`   
 		<where>
 			<if test="collection != null and collection.size() > 0">
 			and `prodCate2` in
