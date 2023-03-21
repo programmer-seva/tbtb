@@ -53,7 +53,7 @@ $(document).ready(function(){
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
-				//console.log(data.result);
+				console.log(data.result);
 				$('.productRow').remove();
 				//최신순 정렬
 				const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
