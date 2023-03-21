@@ -21,8 +21,10 @@ import kr.co.beauty.vo.ProductVO;
 @Controller
 @MapperScan("kr.co.beauty.vo")
 public class MainController {
-    @Autowired private MainService service;
-    @Autowired private UtilService util;
+    @Autowired 
+    private MainService service;
+    @Autowired 
+    private UtilService util;
     @GetMapping(value = {
         "/",
         "index"
@@ -40,7 +42,7 @@ public class MainController {
         model.addAttribute("dress", dress);
         model.addAttribute("etc", etc);
         // 장바구니 카운터
-        String cartCount = (String)session.getAttribute("cartCount");
+        Object cartCount = session.getAttribute("cartCount");
         if (cartCount == null) {
             cartCount = util.header(principal, nomember);
             session.setAttribute("cartCount", cartCount);

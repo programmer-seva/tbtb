@@ -575,9 +575,10 @@ img {
 }
 #d4 section > p {
 	font-size: 12px;
+	margin-bottom : 30px;
 }
 #d4 table {
-    width: 1000px;
+    width: 1200px;
     border-collapse: collapse;
     table-layout: fixed;
     margin: 10px auto;
@@ -605,7 +606,7 @@ img {
 #d4 table td.title {text-align: left; padding-left: 8px;}
 #d4 #boardSearch {
 	text-align: right;
-    width: 1000px;
+    width: 1200px;
     margin: 0 auto;
 }
 #d4 .goList {
@@ -624,4 +625,114 @@ img {
     height: 30px;
     margin-top: 15px;
     cursor: pointer;
+}
+#d3 > div {
+	width: 1200px;
+	text-align: left;
+	margin: 0 auto;
+}
+#d3 > div > span {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #777;
+    margin: 0 20px 15px 15px;
+    cursor: pointer;
+}
+#d3 > div > span.sold {
+    color: #212121;
+    text-decoration: underline;
+}
+#d3 > div > article.review:nth-of-type(1) {   
+    border-top: 1px solid #e5e5e5;
+}
+#d3 > div > article.review {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+    padding: 30px 0;
+    font-size: 13px;
+}
+#d3 > div > article.review > span.heart {
+    float: left;
+}
+.heart1::after{
+    content: "♥";
+    color: brown;
+    opacity: 0.7;
+}
+.heart2::after{
+    content: "♥♥";
+    color: brown;
+    opacity: 0.7;
+}
+.heart3::after{
+    content: "♥♥♥";
+    color: brown;
+    opacity: 0.7;
+}
+.heart4::after{
+    content: "♥♥♥♥";
+    color: brown;
+    opacity: 0.7;
+}
+.heart5::after{
+    content: "♥♥♥♥♥";
+    color: brown;
+    opacity: 0.7;
+}
+#d3 > div > article.review > p.writer {
+    float: right;
+    text-align: right;
+    color: #999;
+    font-weight: bold;
+}
+#d3 > div > article.review > p.writer > span {color: #000;}
+#d3 > div > article.review > section {
+    cursor: pointer;
+    overflow: hidden;
+    float: left;
+    clear: both;
+    width: 100%;
+    height: auto;
+}
+#d3 > div > article.review > section > p {
+    float: left;
+    clear: both;
+    width: 100%;
+    height: 55px;
+    resize: none;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    white-space: pre-line;
+    font-weight: bold;
+    color: #777;
+}
+#d3 > div > article.review > section > span.more{
+    float: left;
+    clear: both;
+    font-size: 12px;
+    font-weight: bold;
+    color: green;
+}
+#d3 > section > span {
+	font-size: 20px;
+    color: #555;
+    font-weight: bold;
+}
+section.eventImg {
+    display: inline-block;
+    width: 1200px;
+    height: 384px;
+    background: url(/Beauty/img/reviewEvent.jpg) no-repeat;
+    background-size: contain;
+}
+#d3 .moreReview{
+    font-size: 14px;
+    font-weight: bold;
+    color: #777;
+    margin-right: 20px;
+    float: right;
 }

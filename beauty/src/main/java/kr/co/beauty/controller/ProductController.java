@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kr.co.beauty.service.MainService;
 import kr.co.beauty.service.ProductService;
 import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.CookieManager;
@@ -69,8 +70,11 @@ public class ProductController {
         model.addAttribute("now", cate);
         model.addAttribute("sort", sort);
         model.addAttribute("page", pageArr);
+        //베스트상품
+        List<ProductVO> best = service.selectBestItem(cate);
+        model.addAttribute("best", best);
         // 장바구니 카운터
-        String cartCount = (String)session.getAttribute("cartCount");
+        Object cartCount = session.getAttribute("cartCount");
         if (cartCount == null) {
             cartCount = util.header(principal, nomember);
             session.setAttribute("cartCount", cartCount);
@@ -92,7 +96,7 @@ public class ProductController {
         model.addAttribute("prod", prod);
         model.addAttribute("uid", uid);
         // 장바구니 카운터
-        String cartCount = (String)session.getAttribute("cartCount");
+        Object cartCount = session.getAttribute("cartCount");
         if (cartCount == null) {
             cartCount = util.header(principal, nomember);
             session.setAttribute("cartCount", cartCount);

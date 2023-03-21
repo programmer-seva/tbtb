@@ -40,6 +40,9 @@ public class ProductService {
 		}
 		return vo;
 	}
+	public List<ProductVO> selectBestItem(int cate){
+		return dao.selectBestItem(cate);
+	}
 	public List<ProductVO> selectProduct1(int cate, String sort, int start){
 		List<ProductVO> vo = dao.selectProduct1(cate, sort, start);
 		for(ProductVO i : vo) {

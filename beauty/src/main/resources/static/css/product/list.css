@@ -124,6 +124,26 @@ main > section > div > .product {
     overflow: hidden;
     text-align: left;
 }
+
+main > article:nth-of-type(1){
+	width: 100%;
+	height: auto;
+}
+main > article:nth-of-type(1) > ul {
+	width: 1200px;
+	margin: 0 auto;
+	overflow:hidden;
+	margin-top: 20px;
+}
+main > article:nth-of-type(1) > ul > li.bestItem {
+	float: left;
+}
+main > article:nth-of-type(1) > ul > li.bestItem > a > img {
+	width: 290px;
+	height: 350px;
+	margin: 5px;
+}
+
 main > section > div > .product:nth-child(4n+1){
 	clear: both;
 }

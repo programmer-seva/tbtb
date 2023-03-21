@@ -17,6 +17,7 @@ public interface ProductDAO {
 	//list
 	public List<ProductVO> selectProductNew();
 	public List<ProductVO> selectProductBest();
+	public List<ProductVO> selectBestItem(int cate);
 	public List<ProductVO> selectProduct1(int arg0, String arg1, int arg2);
 	public List<ProductVO> selectProduct2(int arg0, String arg1, int arg2);
 	public int selectProduct1Count(int cate);
