@@ -46,7 +46,7 @@
                         <td>3</td>
                         <td class="prod"><a href="#"><img src="./img/sample3.jpg" alt="상품이미지"></a></td>
                         <td>교환/반품/취소문의</td>
-                        <td class="title"><a href="#">사이즈교환</a></td>
+                        <td class="title"><a th:href="@{community/board/qna_view}">사이즈교환</a></td>
                         <td>고객님</td>
                         <td>2023-03-02</td>
                     </tr>
@@ -69,7 +69,7 @@
                 </table>
                 <div id="boardSearch">
                     <input type="text" name="search" placeholder="Search"><span class="material-icons">search</span>
-                    <button type="button">글쓰기</button>
+                    <button type="button"><a th:href="@{community/board/qna_write}">글쓰기</a></button>
                 </div>
                 <div class="page">
                     <a href="#" class="prev"><span class="material-icons">chevron_left</span></a>

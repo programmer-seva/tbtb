@@ -32,8 +32,12 @@ public class MyshopService {
 		return daoMy.selectOrderList(uid);
 	}
 	
-	
-	
+	public List<MyorderVO> selectOrderListSearchDate(String uid, String start, String end, int pg){
+		return daoMy.selectOrderListSearchDate(uid, start, end, pg);
+	}
+	public int countOrderList(String uid, String start, String end){
+		return daoMy.countOrderList(uid, start, end);
+	}
 	
 	
 	//wishlist
@@ -65,6 +69,10 @@ public class MyshopService {
 		if (new BCryptPasswordEncoder().matches(pass, vo.getPass())) {
 			return 1;
 		}else {return 0;}
+	}
+	
+	public int savePassword(String uid, String pass) {
+		return daoMem.savePassword(uid, new BCryptPasswordEncoder().encode(pass));
 	}
 	
 	public int updateMember(MemberVO vo) {

@@ -16,5 +16,6 @@ public interface Member1DAO {
 	public MemberVO selectMember(@Param("uid") String uid);
 	//내 프로필
 	public int updateMember(MemberVO vo);
+	public int savePassword(@Param("uid") String uid, @Param("pass") String pass);
 	public int deleteMember(@Param("uid") String uid);
 }

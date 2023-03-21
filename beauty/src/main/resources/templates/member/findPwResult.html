@@ -21,55 +21,6 @@
 <script th:src="@{/js/main.js}"></script>
 <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
-<script>
-	let regPass  = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-
-	$(function(){
-		$('.changePw').click(function(e){
-			e.preventDefault();
-			
-			let uid = $('.uid').text();
-			let pass1 = $('input[name=pass1]').val();
-			let pass2 = $('input[name=pass2]').val();
-			
-			console.log("hr1"+pass1);
-			console.log("hr2"+pass2);
-			
-			if(pass1 != pass2){
-				alert('비밀번호가 일치하지 않습니다.\n다시 입력해주세요.');
-				return;
-			}
-			console.log("hr3");
-			
-			if(!pass2.match(regPass)){
-				alert('영문, 숫자, 특수문자 조합하여 8~12자이어야 합니다.');
-				return;
-			}
-			
-			let jsonData = {
-					"uid": uid,
-					"pass": pass2
-			};
-			console.log("hr4");
-			
-			$.ajax({
-				url: '/Beauty/member/findPwResult',
-				type: 'post',
-				data: jsonData,
-				dataType: 'json',
-				success: function(data){
-					console.log("hr5")
-					
-					if(data.result > 0){
-						console.log("hr6")
-						alert('비밀번호가 변경되었습니다.\n다시 로그인 하십시오.');
-						location.href="/Beauty/member/login";
-					}
-				}
-			});
-		});
-	});
-</script>
 <body>
 	<main>
 		<div class="findPw">
@@ -80,7 +31,7 @@
 					<fieldset>
 						<table border="0">
 							<tr>
-								<td class="uid">고객님의 아이디는 [[${uid}]] 입니다.</td>
+								<td>고객님의 아이디는 <span class="uid">[[${uid}]]</span> 입니다.</td>
 							</tr>
 							<tr>
 								<td>새 비밀번호</td>

@@ -60,7 +60,7 @@
                                     <th:block  th:each="wish:${wishList}">
                                     <div class="item">
                                         <div class="itemThumb">
-                                            <a th:href="@{/product/view(pno=${wish.prodNo})}">
+                                            <a th:href="@{/shop/view(pno=${wish.prodNo})}">
                                                 <!--
 													<img th:src="@{/image/}+${wish.thumb1}" alt="">
                                                 -->
@@ -69,8 +69,8 @@
                                             <a class="delete" th:href="@{/myshop/deleteSelectedWish(wishNo=${wish.wishNo})}">x</a>
                                         </div>
                                         <div class="itemInfo">
-                                            <a th:href="@{/product/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
-                                            <span class="price" th:text="${#numbers.formatInteger(wish.getSalePrice, 0, 'COMMA')}"></span>
+                                            <a th:href="@{/shop/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
+                                            <span class="price" th:text="${#numbers.formatInteger(wish.disPrice, 0, 'COMMA')}"></span>
                                         </div>
                                     </div>
                                     </th:block>

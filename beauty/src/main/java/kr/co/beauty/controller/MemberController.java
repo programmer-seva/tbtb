@@ -1,12 +1,15 @@
 package kr.co.beauty.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,33 +19,50 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.EmailService;
 import kr.co.beauty.service.MemberService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@MapperScan("kr.co.beauty.dao")
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberService service;
-
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
 	@Autowired
 	private EmailService emailService;
-	
+	@Autowired
+	private UtilService util;
 
 	@GetMapping("member/login")
-	public String login() {
+	public String login(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+		//장바구니 카운터
+		String cartCount = (String) session.getAttribute("cartCount");
+		if(cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
+		
 		return "member/login";
 	}
 	
 	@GetMapping("member/register")
-	public String register(Model model) {
+	public String register(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		MemberVO vo = service.selectTerms();
 //		log.info("vo : " + vo);
 		model.addAttribute("memberVO", vo);
+		
+		//장바구니 카운터
+		String cartCount = (String) session.getAttribute("cartCount");
+		if(cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		
 		return "member/register";
 	}
@@ -68,7 +88,14 @@ public class MemberController {
 
 	// 아이디 찾기
 	@GetMapping("member/find")
-	public String find() {
+	public String find(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+		//장바구니 카운터
+		String cartCount = (String) session.getAttribute("cartCount");
+		if(cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "member/find";
 	}
 
@@ -82,36 +109,64 @@ public class MemberController {
 		return result;
 	}
 
-	@ResponseBody
-	@PostMapping("member/find2")
-	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
-
-		// System.out.println("name : " + name);
-		String rs = service.findPw(name, uid, phone);
-		session.setAttribute("rs", rs);
-		Map<String, Integer> result = new HashMap<>();
-		result.put("result", 1);
-
-		return result;
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("member/find2") public Map<String, Integer> findPw(String name,
+	 * String uid, String phone, HttpSession session) {
+	 * 
+	 * // System.out.println("name : " + name); String rs = service.findPw(name,
+	 * uid, phone); session.setAttribute("rs", rs); Map<String, Integer> result =
+	 * new HashMap<>(); result.put("result", 1);
+	 * 
+	 * return result; }
+	 */
 
 	// 아이디 찾기
 	@GetMapping("member/findIdResult")
-	public String findIdResult(Model model, HttpSession session) {
+	public String findIdResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
 		model.addAttribute("uid", uid);
 
 		// MemberVO vo = service.selectUid(uid);
 		// model.addAttribute("vo", vo);
+		//장바구니 카운터
+		String cartCount = (String) session.getAttribute("cartCount");
+		if(cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "member/findIdResult";
 	}
-
+	
+	// 비밀번호 변경
 	@GetMapping("member/findPwResult")
-	public String findPwResult(Model model, HttpSession session) {
+	public String findPwResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
 		model.addAttribute("uid", uid);
+		//장바구니 카운터
+		String cartCount = (String) session.getAttribute("cartCount");
+		if(cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "member/findPwResult";
 	}
+	
+	@ResponseBody
+	@PostMapping("member/findPwResult")
+	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
+		pass = passwordEncoder.encode(pass);
+		System.out.println(uid);
+		System.out.println(pass);
+		int result = service.findPwResult(uid, pass);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		return map;
+	}
+	
 
 	// 이메일
 	@ResponseBody
@@ -124,52 +179,9 @@ public class MemberController {
 		data.put("code", code);
 		return data;
 	}
+	
+	
+	
 
-	// 아이디 찾기
-//	@GetMapping("member/findId")
-//	public String findId() {
-//		return "member/findId";
-//	}
-
-	// 아이디 찾기
-//	@ResponseBody
-//	@PostMapping("member/findId")
-//	public Map<String, String> findId(Model model, String name, String phone, HttpSession session) {
-//		String rs = service.findId(name, phone);
-//		session.setAttribute("rs", rs);
-//		Map<String, String> result = new HashMap<>();
-//		result.put("result", rs);
-//		return result;
-//	}
-
-	// 비밀번호 찾기
-//	@GetMapping("member/findPw")
-//	public String findPw(HttpSession sess) {
-//		sess.removeAttribute("member");
-//		return "member/findPw";
-//	}
-
-//	@ResponseBody
-//	@PostMapping("member/findPw")
-//	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
-//				
-//		//System.out.println("name : " + name);
-//		String rs = service.findPw(name, uid, phone);
-//		session.setAttribute("rs", rs);
-//		Map<String, Integer> result = new HashMap<>();
-//		result.put("result", 1);
-//		
-//		return result;
-//	}
-
-	// @ResponseBody
-//	@PostMapping("member/findPwChange")
-//	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
-//		pass = PasswordEncoder.encode(pass);
-//		int result = service.findPwChange(uid, pass);
-//		Map<String, Integer> map = new HashMap<>();
-//		map.put("result", result);
-//		return map;
-//	}
 
 }

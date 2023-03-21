@@ -53,27 +53,29 @@ $(document).ready(function(){
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
-				//console.log(data);
+				//console.log(data.result);
 				$('.productRow').remove();
 				//최신순 정렬
 				const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
 				//상품목록 불러오기
 				let tag = "";
-				//상품목록에 상품 개수 20개까지만 보이게 함
-				const sliceArr = sortedResult.slice(start,start+20);
+				//상품목록에 상품 개수 10개까지만 보이게 함
+				const sliceArr = sortedResult.slice(start,start+10);
 				
 				for(let i=0; i<sliceArr.length; i++){
 						tag += "<tr class='productRow'>";
 						tag += "<td><input type='checkbox' name='선택체크' class='rowCheck' value='"+sliceArr[i].prodNo+"'></td>";
-						tag += "<td><img src='#'></td>";
+						tag += "<td><img src='/Beauty/image/"+sliceArr[i].thumb1+"'></td>";
 						tag += "<td>"+sliceArr[i].prodNo+"</td>";
-						tag += "<td>"+sliceArr[i].prodCate1+"</td>";
-						tag += "<td>"+sliceArr[i].prodCate2+"</td>";
+						tag += "<td>"+sliceArr[i].c1Name+"</td>";
+						tag += "<td>"+sliceArr[i].c2Name+"</td>";
 						tag += "<td><a href='#'>"+sliceArr[i].prodName+"</a></td>";
 						tag += "<td>"+sliceArr[i].disPrice+"</td>";
+						tag += "<td>판매중</td>";
 						tag += "<td>"+sliceArr[i].stock+"</td>";
 						tag += "<td>"+sliceArr[i].hit+"</td>";
 						tag += "<td>";
+						tag += "<button class='more'>상세보기</button><br>";
 						tag += "<button class='deleteButton' value='"+sliceArr[i].prodNo+"'>삭제</button>";
 						tag += "</td>";
 						tag += "</tr>"
@@ -107,10 +109,10 @@ $(document).ready(function(){
 			success:function(data){
 				//console.log("상품개수",data.result);
 				//전체 페이지 수 정의
-				if(data.result % 20 == 0){
-					totalPage=data.result/20;
+				if(data.result % 10 == 0){
+					totalPage=data.result/10;
 				}else{
-					totalPage=Math.ceil(data.result/20);
+					totalPage=Math.ceil(data.result/10);
 				}
 				//console.log("page??",totalPage);
 				//페이지 개수 정하기
@@ -121,14 +123,16 @@ $(document).ready(function(){
 	
 	//현재 페이지 번호 기준으로 앞뒤 5개씩의 페이지 번호만 보여줌
   	function UpdatePg(totalPage){
-  		
+  		//console.log(pg);
   		var startPg = Math.max(pg-5,1);
   		
   		if(pg<6 && totalPage>=10){
   			var endPg = 10;
   		}else if(pg>=6 && totalPage>=10){
   			var endPg = Math.min(pg+4,totalPage);
-  		}
+  		}else if(pg<6 && totalPage<10){
+			var endPg = totalPage;
+		  }
   		//console.log("startPg",startPg);
   		//console.log("endPg",endPg);
   		//console.log("totalPage",totalPage);
@@ -148,7 +152,7 @@ $(document).ready(function(){
 	//페이지 번호 클릭했을 때
 	$(document).on("click",".num", function(){
 		pg = $(this).attr("data-value");
-		start=(pg-1)*20;
+		start=(pg-1)*10;
     	$(".current").attr("class","num");
 	    $(this).attr("class","current");
 		
@@ -159,7 +163,7 @@ $(document).ready(function(){
 	//이전 버튼 클릭했을 때
 	$(document).on("click",".prev", function(){
 		pg--;
-		start=(pg-1)*20;
+		start=(pg-1)*10;
 		//이전 페이지가 없을 경우
 		if(pg<1){
 			pg=1;
@@ -177,7 +181,7 @@ $(document).ready(function(){
 	//다음 버튼 클릭했을 때
 	$(document).on("click",".next", function(){
 		pg++;
-		start=(pg-1)*20;
+		start=(pg-1)*10;
 		var maxPg = $(".num").length+1;
 		//console.log(maxPg);
 		//다음 페이지가 없을 경우
@@ -281,10 +285,6 @@ $(document).ready(function(){
 	    console.log(cate2);
 	  });
 
-    //상품등록 버튼 클릭 시 상품등록 페이지로 이동
-    $(".registerButton").on("click",function(){
-		location.href="/Beauty/admin/product/register";
-	});
 });	
 
 /* product-register 카테고리 분류 */
@@ -330,3 +330,109 @@ function cateChange(){
     		}
     		
     	}
+    	
+$(document).ready(function(){
+    	/*$("input[name=color]").on("change",function(){
+    		if($(this).prop("checked")){
+    		var	color=$(this).val();
+    		var label =$(this).parent();
+    		
+    		var text = label.contents().filter(function(){
+    			return this.nodeType === Node.TEXT_NODE;
+    		}).text().trim();
+    		console.log(text);
+    		console.log(color);
+    		}
+    	});*/
+    	
+    	//상품등록
+    	$(".register").on("click",function(e){
+    		e.preventDefault();
+    	
+			//색상,사이즈 선택된 값을 담을 배열
+			var colorArr = [];
+			var colorNameArr = [];
+			var sizeArr = [];
+			//색상 체크박스를 선택했을 때
+			$("input[name=color]:checked").each(function(){
+				colorArr.push($(this).val());
+			});
+			
+			$("input[name=color]:checked").each(function(){
+				var label =$(this).parent();
+	    		
+	    		var text = label.contents().filter(function(){
+	    			return this.nodeType === Node.TEXT_NODE;
+	    		}).text().trim();
+				colorNameArr.push(text);
+			});
+			
+			//사이즈 체크박스를 선택했을 때
+			$("input[name=size]:checked").each(function(){
+				sizeArr.push($(this).val());
+			});
+			
+			//폼에 선택된 색상,사이즈 배열 추가하기
+			var form=$("#productForm")[0];
+			var formData = new FormData(form);
+			for (var i = 0; i < colorArr.length; i++) {
+			    formData.append("colorArr[]", colorArr[i]);
+			    formData.append("colorNameArr[]", colorNameArr[i]);
+			}
+			for (var i = 0; i < sizeArr.length; i++) {
+			    formData.append("sizeArr[]", sizeArr[i]);
+			}
+			
+			//색상을 선택하지 않았을 경우
+			if(colorArr.length == 0){
+				alert("선택된 색상이 없습니다.");
+			}else{
+			//ajax 요청 보내기
+				$.ajax({
+					url:'/Beauty/admin/product/register',
+					type:'post',
+					data:formData,
+					cache: false,
+			        contentType: false,
+			        processData: false,
+					success:function(data){
+						location.href="/Beauty/admin/product/list";
+					}	
+				});
+			}
+    	});
+    	
+    	//포인트 계산(할인가의 3%)
+    	$(document).on("input","#discount",function(){
+    		let price=$("#price").val();
+        	let discount=$("#discount").val();
+        	let disPrice =price*(100-discount)/100;
+        	console.log(disPrice);
+			$("#point").val(disPrice*3/100);
+    	});
+    	
+    	//이미지파일 유효성 검사
+		imgFile = $("input[name=file]").val();
+		var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+		var maxSize = 5 * 1024 * 1024;
+		var fileSize;
+		
+		if($('input[name=file]').val() == "") {
+			alert("첨부파일은 필수!");
+		    $("input[name=file]").focus();
+		    return;
+		}
+
+		if(imgFile != "" && imageFile != null) {
+			fileSize = document.getElementByName("file").files[0].size;
+		    
+		    if(!imgFile.match(fileForm)) {
+		    	alert("이미지 파일만 업로드 가능");
+		        return;
+		    } else if(fileSize = maxSize) {
+		    	alert("파일 사이즈는 5MB까지 가능");
+		        return;
+		    }
+		}
+			
+	});

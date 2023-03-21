@@ -60,12 +60,15 @@ public class SecurityConfig {
 		
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
+			.requestMatchers("/myshop/**").authenticated()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/**").permitAll();
 				
 		//로그인 alert
 		http.exceptionHandling()
+			//권한이 부족한 경우
 			.accessDeniedHandler(accessDeniedHandler)
+			//로그인이 되지 않은 경우
 			.authenticationEntryPoint(authenticationEntryPoint);
 				
 		//로그인 설정
@@ -74,7 +77,7 @@ public class SecurityConfig {
 			.defaultSuccessUrl("/")
 			.failureUrl("/member/login?success=101")
 			.usernameParameter("uid")
-			.passwordParameter("password");	
+			.passwordParameter("password");
 			
 				
 		//로그아웃 설정

@@ -43,12 +43,12 @@
                                 <button type="submit" name="login">로그인</button>
                             </form>
                             <div class="loginlabel">
-                                <label><input type="checkbox" name="autoLogin">아이디 저장</label>
+                                <label><input type="checkbox" name="autoLogin">자동로그인</label>
                             </div>
                         </div>
                         <div class="other">
-                            <a th:href="@{/member/find}">아이디 찾기</a>
-                            <a th:href="@{/member/find}">비밀번호 찾기</a>
+                            <a th:href="@{/member/find(type=1)}">아이디 찾기</a>
+                            <a th:href="@{/member/find(type=2)}">비밀번호 찾기</a>
                             <a th:href="@{/member/register}">회원가입</a>
                         </div>
                     </article>

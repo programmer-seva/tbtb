@@ -4,7 +4,18 @@
  * 내용 : Beauty member register css
  */
 main>.mb {
-	margin: 0px 287.5px;
+	width: 1600px;
+	min-height: 600px;
+	margin-top: 80px
+}
+
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
+main>.mb>form>div {
+	width: 900px;
 }
 
 main>.mb>form>h2 {
@@ -162,7 +173,6 @@ main>.mb>form>section>.base-box {
 	height: 209px;
 	width: 858px;
 	border: 1px solid #e5e5e5;
-	margin: -1px 0 0 0;
 	padding: 20px 20px 20px 20px;
 	font-size: 12px;
 	line-height: 20px;
@@ -199,4 +209,18 @@ textarea {
 	width: 137px;
 	border: 1px solid #d5d5d5;
 	padding: 2px 4px 2px 4px;
+}
+
+button {
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	background: black;
+	outline: none;
+}
+
+#timer {
+	position: absolute;
+    left: 605px;
+    top: 334px;
 }

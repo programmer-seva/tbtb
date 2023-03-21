@@ -22,7 +22,7 @@
 		ON a.`prodNo`=b.`prodNo`
 		WHERE `prodCate1`=#{cate} GROUP BY `prodNo`	 order by `score`,`sold`,`review`,`hit` DESC LIMIT 8;
 	</select>
-	<select id="countCart" resultType="int">
+	<select id="countCart" resultType="String">
 		SELECT count(a.`prodNo`)
 		FROM `cart` AS a
 		JOIN `product` AS b 

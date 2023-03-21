@@ -21,11 +21,12 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 
-	//상품등록 - 2023/03/07 윤사랑
+	
 	@GetMapping("admin/product/register")
 	public String register() {
 		return "admin/product/register";
 	}
+	//상품등록-윤사랑
 	@ResponseBody
 	@PostMapping("admin/product/register")
 	public String register(Product1VO vo,
@@ -38,6 +39,7 @@ public class AdminController {
 		int param1= vo.getProdNo();
 		
 		//System.out.println(vo.getProdNo()+"상품번호---------");
+		//System.out.println(vo.getPoint()+"상품포인트---------");
 		//System.out.println(colorArr);
 		//System.out.println(colorNameArr);
 		//System.out.println(sizeArr);
@@ -54,16 +56,6 @@ public class AdminController {
 			@RequestParam(required=false) String arg1, 
 			@RequestParam(required=false) String pg) {
 
-		/*상품목록 페이징 처리 -2023/03/13
-		int currentPage = service.getCurrentPage(pg);
-		int param3 = service.getLimitStart(currentPage);
-		
-		int total = service.selectCountTotal();
-		int lastPageNum = service.getLastPageNum(total);
-		int pageStartNum = service.getPageStartNum(total, param3);
-		int groups[] = service.getPageGroup(currentPage, lastPageNum);
-		*/
-		
 		
 		
 		model.addAttribute("param1",  param1);
