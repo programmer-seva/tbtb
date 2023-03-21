@@ -51,8 +51,8 @@
                             <div class="wishListFrame">
                                 <div class="wishListHead">
                                     위시리스트
-                                    <span class="headCount" id="headCount" th:text="${#lists.size(wishList)}"></span>
-                                    <a class="deleteAllWish" href="#">비우기 X</a>
+                                    <span 	class="headCount" 		id="headCount" 	th:text="${#lists.size(wishList)}"></span>
+                                    <a 		class="deleteAllWish" 	href="#">비우기 X</a>
                                 </div>
                                 <article class="wishList">
 									<div class="emptyWish" th:if="${#lists.size(wishList) == 0}">찜한 상품이 없습니다.</div>
@@ -69,8 +69,8 @@
                                             <a class="delete" th:href="@{/myshop/deleteSelectedWish(wishNo=${wish.wishNo})}">x</a>
                                         </div>
                                         <div class="itemInfo">
-                                            <a th:href="@{/shop/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
-                                            <span class="price" th:text="${#numbers.formatInteger(wish.disPrice, 0, 'COMMA')}"></span>
+                                            <a 		th:href="@{/shop/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
+                                            <span 	class="price" th:text="${#numbers.formatInteger(wish.disPrice, 0, 'COMMA')}"></span>
                                         </div>
                                     </div>
                                     </th:block>
