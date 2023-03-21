@@ -67,7 +67,7 @@ public class OrderController {
         model.addAttribute("cartList", cartList);
         model.addAttribute("wishList", wishList);
         // 장바구니 카운터
-        String cartCount = (String)session.getAttribute("cartCount");
+        Object cartCount = session.getAttribute("cartCount");
         if (cartCount == null) {
             cartCount = util.header(principal, nomember);
             session.setAttribute("cartCount", cartCount);
@@ -160,7 +160,7 @@ public class OrderController {
         model.addAttribute("list", list);
         model.addAttribute("count", count);
         // 장바구니 카운터
-        String cartCount = (String)session.getAttribute("cartCount");
+        Object cartCount = session.getAttribute("cartCount");
         if (cartCount == null) {
             cartCount = util.header(principal, nomember);
             session.setAttribute("cartCount", cartCount);
@@ -205,7 +205,7 @@ public class OrderController {
         model.addAttribute("vo", vo);
         model.addAttribute("orders", orders);
         // 장바구니 카운터
-        String cartCount = (String)session.getAttribute("cartCount");
+        Object cartCount = session.getAttribute("cartCount");
         if (cartCount == null) {
             cartCount = util.header(principal, nomember);
             session.setAttribute("cartCount", cartCount);

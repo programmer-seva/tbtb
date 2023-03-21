@@ -22,6 +22,10 @@
 		ON a.`prodNo`=b.`prodNo`
 		GROUP BY `prodNo` ORDER BY `score`,`sold`,`review`,`hit` DESC LIMIT 16;
 	</select>
+	<select id="selectBestItem" resultType="productVO">
+		SELECT * FROM `product`
+		WHERE `prodCate1`=#{cate} GROUP BY `prodNo`	 order by `score`,`sold`,`review`,`hit` DESC LIMIT 8;
+	</select>
 	<select id="selectProduct1" resultType="ProductVO">
 		SELECT a.*,
 		GROUP_CONCAT(DISTINCT b.`color` ORDER BY b.`prodNo` DESC SEPARATOR ', ')  AS `color`,

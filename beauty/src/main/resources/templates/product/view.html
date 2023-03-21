@@ -6,106 +6,60 @@
 	<th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/product/view.css}">
     <link rel="stylesheet" th:href="@{/css/color.css}">
+    <script th:src="@{/js/product/product.js}"></script>
 	<script th:inline="javascript">
 	$(function(){
-		$('.selectColor').click(function(){
-			$('.selectColor').removeClass('select');
-			$(this).addClass('select on');
-			$(this).siblings('span').children().text($(this).text());
-		});
-		$('.selectSize').click(function(){
-			if($('.selector').find('.on').val() != ""){
-				alert('색상부터 선택해주세요.');
-				return false;
-			}
-			$('.selectSize').removeClass('select');
-			$(this).addClass('select');
-			$(this).siblings('span').children().text($(this).text());
-			let c = $('.c').children('.select').text();
-			let s = $('.s').children('.select').text();
-			
-			let array1 = new Array();
-			let array2 = new Array();
-			
-			$("input[name=color]").each(function(index, item){
-				   array1.push($(item).val());
-		    });
-			$("input[name=size]").each(function(index, item){
-				   array2.push($(item).val());
-		    });
-			
-			for(let i=0; i<array1.length; i++){
-				if(array1[i] == c && array2[i] == s){
-					alert('이미 추가된 상품입니다.');
-					return false;
-				}
-			}
-			
-			let tag = "<article class='orderItems'>";
-			tag += "<input type='hidden' name='prodNo' value='"+[[${prod.prodNo}]]+"'>"
-			tag += "<input type='hidden' name='color' value='"+c+"'>"
-			tag += "<input type='hidden' name='size' value='"+s+"'>"
-			tag += "<span class='colorsize'>";
-			tag += "<p class='cc'>"+c+"</p> / ";
-			tag += "<p class='ss'>"+s+"</p>";
-			tag += "</span>";
-			tag += "<div>";
-			tag += "<button type='button' id='remove'><span class='material-icons'>remove</span></button>";
-			tag += "<span class='count'>1</span>";
-			tag += "<button type='button' id='add'><span class='material-icons'>add</span></button>";
-			tag += "</div>";
-			tag += "<span class='total'></span>";
-			tag += "<span class='material-icons' id='close'>close</span>";
-			tag += "</article>";
-			$('.t1').after(tag);
-			
-			$('.result').css('display','block');
-			let tot =$('input[name=total]').val();
-			$('.total').text(format(tot));
-			result(tot);
-		});
-		$(document).on('click', '#close', function(){
-			let tot = $('input[name=total]').val();
-			let cnt = $(this).prevAll('div').children('.count').text();
-			result(tot * cnt * -1);
+		$('.selectSize').click(function() {
+		if ($('.selector').find('.on').val() != "") {
+			alert('색상부터 선택해주세요.');
+			return false;
+		}
+		$('.selectSize').removeClass('select');
+		$(this).addClass('select');
+		$(this).siblings('span').children().text($(this).text());
+		let c = $('.c').children('.select').text();
+		let s = $('.s').children('.select').text();
 
-			$(this).closest('.orderItems').remove();
-			if($('#close').length == 0){
-				$('.result').css('display','none');
-			}
+		let array1 = new Array();
+		let array2 = new Array();
+
+		$("input[name=color]").each(function(index, item) {
+			array1.push($(item).val());
 		});
-		$(document).on('click', '#remove', function(){
-			let cnt = $(this).next().text();
-			if(cnt == 1){
-				alert('최소 1개이상 주문가능합니다.');
+		$("input[name=size]").each(function(index, item) {
+			array2.push($(item).val());
+		});
+
+		for (let i = 0; i < array1.length; i++) {
+			if (array1[i] == c && array2[i] == s) {
+				alert('이미 추가된 상품입니다.');
 				return false;
 			}
-			cnt = Number(cnt) - 1;
-			let tot =$('input[name=total]').val();
-			$(this).parents().siblings('.total').text(format(tot*cnt));
-			$(this).next().text(cnt);
-			result(tot * -1);
-		});
-		$(document).on('click', '#add', function(){
-			let cnt = $(this).prev().text();
-			if(cnt == 10){
-				alert('최대 10개까지 주문가능합니다.');
-				return false;
-			}
-			cnt = Number(cnt) + 1;
-			let tot =$('input[name=total]').val();
-			$(this).parents().siblings('.total').text(format(tot*cnt));
-			$(this).prev().text(cnt);
-			result(tot);
-		});
-		function format(num){
-			return Number(num).toLocaleString();
 		}
-		function result(num){
-			let result = $('.resultprice').text();
-			$('.resultprice').text(Number(result) + Number(num));
-		}
-		
+
+		let tag = "<article class='orderItems'>";
+		tag += "<input type='hidden' name='prodNo' value='" + [[${ prod.prodNo }]] + "'>"
+		tag += "<input type='hidden' name='color' value='" + c + "'>"
+		tag += "<input type='hidden' name='size' value='" + s + "'>"
+		tag += "<span class='colorsize'>";
+		tag += "<p class='cc'>" + c + "</p> / ";
+		tag += "<p class='ss'>" + s + "</p>";
+		tag += "</span>";
+		tag += "<div>";
+		tag += "<button type='button' id='remove'><span class='material-icons'>remove</span></button>";
+		tag += "<span class='count'>1</span>";
+		tag += "<button type='button' id='add'><span class='material-icons'>add</span></button>";
+		tag += "</div>";
+		tag += "<span class='total'></span>";
+		tag += "<span class='material-icons' id='close'>close</span>";
+		tag += "</article>";
+		$('.t1').after(tag);
+
+		$('.result').css('display', 'block');
+		let tot = $('input[name=total]').val();
+		$('.total').text(format(tot));
+		result(tot);
+	});
 		var uid = [[${uid}]];
 		var prodNo = [[${prod.prodNo}]];
 		//위시리스트
@@ -134,101 +88,7 @@
 				}
 			});
 		});
-		//장바구니
-		$('.cart').click(function(){
-			check();
-			let jsonArray = resultArray();
-			$.ajax({
-				url : '/Beauty/addCart',
-				method : 'POST',
-				data : {jsonArray : JSON.stringify(jsonArray)},
-				dataType : 'JSON',
-				success : function(data){
-					if(data.result > 0){
-						$('.goCart').css('display','block');
-					}
-				}
-			});
-		});
-		//바로구매
-		$('.order').click(function(){
-			check();
-			let jsonArray = resultArray();
-			console.log(jsonArray);
-			$.ajax({
-				url : '/Beauty/addOrder',
-				method : 'POST',
-				data : {jsonArray : JSON.stringify(jsonArray)},
-				dataType : 'JSON',
-				success : function(data){
-					if(data.result > 0){
-						location.href = "/Beauty/order/orderform";
-					}
-				}
-			});
-		});
 		
-		function check(){
-			if($('.orderItems').length == 0){
-				alert('상품옵션을 선택해주세요.');
-				return false;
-			}
-		}
-		function resultArray(){
-			console.log($('article.orderItems').length);
-			let array = [];
-			$("article.orderItems").each(function(index, item){
-				let color = $(item).children('input[name=color]').val();
-				let size = $(item).children('input[name=size]').val();
-				let count = $(item).children('div').children('span.count').text();
-				let jsonData = {
-					'prodNo' : prodNo,
-					'count' : count,
-					'color' : color,
-					'size' : size
-				}
-				array.push(jsonData);
-		    });
-			return array;
-		}
-
-		$('.continue').click(function(e){
-			e.preventDefault;
-			$('.goCart').css('display','none');
-		});
-		
-		$('#itemInfo').click(function(){
-			$('.detail').children().children().children().attr('class','off');
-			$(this).addClass('current');
-			$('#d1').css('display','block');
-			$('#d2').css('display','none');
-			$('#d3').css('display','none');
-			$('#d4').css('display','none');
-		});
-		$('#shopGuide').click(function(){
-			$('.detail').children().children().children().attr('class','off');
-			$(this).addClass('current');
-			$('#d1').css('display','none');
-			$('#d2').css('display','block');
-			$('#d3').css('display','none');
-			$('#d4').css('display','none');
-		});
-		$('#itemReview').click(function(){
-			$('.detail').children().children().children().attr('class','off');
-			$(this).addClass('current');
-			$('#d1').css('display','none');
-			$('#d2').css('display','none');
-			$('#d3').css('display','block');
-			$('#d4').css('display','none');
-		});
-		$('#itemQna').click(function(){
-			$('.detail').children().children().children().attr('class','off');
-			$(this).addClass('current');
-			$('#d1').css('display','none');
-			$('#d2').css('display','none');
-			$('#d3').css('display','none');
-			$('#d4').css('display','block');
-		});
 	});
 	</script>
 </head>
