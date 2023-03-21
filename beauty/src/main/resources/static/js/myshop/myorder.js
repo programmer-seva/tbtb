@@ -1,37 +1,36 @@
 $(function(){
-	let lastPage = 1;
-	let pg = 1;
-	let today = new Date();
-	let end = formatDate(today);
+	let lastPage= 1;
+	let pg 		= 1;
+	let today 	= new Date();
+	let end 	= formatDate(today);
 	today.setMonth(today.getMonth() - 1);
-	let start = formatDate(today);
+	let start 	= formatDate(today);
 	
 	paging		(formatDate(new Date().setMonth(new Date().getMonth() - 1)), formatDate(new Date()));
 	getOrderList(formatDate(new Date().setMonth(new Date().getMonth() - 1)), formatDate(new Date()));
 	/* 기간별 조회 */
 	$('div.dateBtns > input:radio[name="chkDate"]').click(function(){
 		let chkDate = $('div.dateBtns > input:radio:checked[name="chkDate"]').val();
-		pg = 1;
-		today = new Date();
-		end = formatDate(today);
+		pg 		= 1;
+		today 	= new Date();
+		end 	= formatDate(today);
 		if(chkDate == '1month'){
-			today.setMonth(today.getMonth() - 1);
-		}else if(chkDate == '6month'){
-			today.setMonth(today.getMonth() - 6);
-		}else if(chkDate == '1year'){
-			today.setMonth(today.getMonth() - 12);
-		}
-		start = formatDate(today);
+			today.setMonth(today.getMonth() - 1); }else 
+		if(chkDate == '6month'){
+			today.setMonth(today.getMonth() - 6); }else
+		if(chkDate == '1year'){
+			today.setMonth(today.getMonth() - 12);}
+			
+		start 	= formatDate(today);
 		
 		paging		(start, end);
 		getOrderList(start, end);
-		
 	});
 	/* 기간 지정 조회 */
 	$('#btnSearchDate').click(function(){
-		pg = 1;
-		start = $('#startDate').val();
-		end = $('#endDate').val();
+		pg 		= 1;
+		start 	= $('#startDate').val();
+		end 	= $('#endDate').val();
 		if(start == "" || end == ""){
 			alert('날짜를 선택해주세요.');
 			return;
@@ -162,10 +161,10 @@ $(function(){
 	
 	//날짜 포매팅 'yyyy-MM-dd'
 	function formatDate(date) {
-	    var d = new Date(date),
-	        month = '' + (d.getMonth() + 1),
-	        day = '' + d.getDate(),
-	        year = d.getFullYear();
+	    var d 		= new Date(date),
+	        month 	= '' + (d.getMonth() + 1),
+	        day 	= '' + d.getDate(),
+	        year 	= d.getFullYear();
 	
 	    if (month.length < 2) 
 	        month = '0' + month;

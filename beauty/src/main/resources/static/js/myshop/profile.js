@@ -5,11 +5,11 @@ $(function(){
 		e.preventDefault();
 		let pass = $('#pass').val();
 		$.ajax({
-			url:'/Beauty/myshop/checkPW',
-			type:'POST',
-			data:{'pass': pass},
+			url		:'/Beauty/myshop/checkPW',
+			type	:'POST',
+			data	:{'pass': pass},
 			dataType:'json',
-			success:function(data){
+			success	:function(data){
 				if(data == 1){
 					$('div.checkPassword').hide();
 					$('div.profileInfo').show();
@@ -26,11 +26,11 @@ $(function(){
 	$('#savePassword').click(function(){
 		let pass = $('#pw2').val();
 		$.ajax({
-			url:'/Beauty/myshop/savePassword',
-			type:'POST',
-			data:{'pass': pass},
+			url		:'/Beauty/myshop/savePassword',
+			type	:'POST',
+			data	:{'pass': pass},
 			dataType:'json',
-			success:function(data){
+			success	:function(data){
 				if(data == 1){
 					alert('변경되었습니다.');
 					location.href="/Beauty/myshop/profile";
@@ -62,12 +62,12 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:'/Beauty/myshop/updateMember',
-			type:'POST',
-			data: JSON.stringify(vo),
+			url		:'/Beauty/myshop/updateMember',
+			type	:'POST',
+			data	: JSON.stringify(vo),
 			dataType:'json',
 			contentType: 'application/json',
-			success:function(data){
+			success	:function(data){
 				if(data == 1){
 					alert('변경완료');
 					location.href="/Beauty/myshop/profile"
@@ -85,11 +85,11 @@ $(function(){
 		e.preventDefault();
 		if(confirm('정말 삭제하시겠습니까?')) {
 			$.ajax({
-				url:'/Beauty/myshop/deleteMember',
-				type:'POST',
-				data:{},
+				url		:'/Beauty/myshop/deleteMember',
+				type	:'POST',
+				data	:{},
 				dataType:'json',
-				success:function(data){
+				success	:function(data){
 					if(data == 1){
 						alert('삭제 되었습니다.');
 						location.href="/Beauty";
