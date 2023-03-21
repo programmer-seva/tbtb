@@ -24,11 +24,11 @@ $(function(){
 	
 	/* 비밀번호 수정 */
 	$('#savePassword').click(function(){
-		let password = $('#pw2').val();
+		let pass = $('#pw2').val();
 		$.ajax({
 			url:'/Beauty/myshop/savePassword',
 			type:'POST',
-			data:{'password': password},
+			data:{'pass': pass},
 			dataType:'json',
 			success:function(data){
 				if(data == 1){
