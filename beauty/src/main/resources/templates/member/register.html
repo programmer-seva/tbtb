@@ -26,9 +26,6 @@
 <script th:src="@{/js/postcode.js}"></script>
 <th:block th:replace="~{/_header :: headerFragment}"></th:block>
 </head>
-
-
-
 <body>
 	<div id="wrap">
 		<main>
@@ -45,9 +42,9 @@
 								<button type="submit" class="sendCode">인증번호 발송</button>
 								<div>
 									<input type="text" class="insertCode" name="insertCode" placeholder="" style="margin-top: 10px;">
+									<span id="timer"></span>
 	                                <span>인증번호 6자리를 입력하세요</span>
                                 </div>
-                                <span id="timer"></span>
 							</td>
 						</tr>
 						<tr>
@@ -76,7 +73,7 @@
 							<td>
 								<div>
 									<input type="text" class="zip" id="orderZip" name="zip" placeholder="우편번호" required readonly>
-									<button type="button" onclick="orderPost()">우편번호</button>
+									<button type="button" onclick="orderPost()">우편번호 찾기</button>
 								</div>
 								<div>
 									<input type="text" class="addr" id="orderAddr1" name="addr1" placeholder="기본주소" readonly required>
@@ -156,9 +153,7 @@
 					</div>
 				</form>
 			</div>
-
 		</main>
-
 		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
 	</div>
 

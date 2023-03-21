@@ -172,7 +172,6 @@ main>.lg {
 	position: absolute;
 	top: 74px;
 	right: 158px;
-	cursor: pointer;
 }
 .error {
     color: red;

@@ -109,18 +109,18 @@ public class MemberController {
 		return result;
 	}
 
-	@ResponseBody
-	@PostMapping("member/find2")
-	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
-
-		// System.out.println("name : " + name);
-		String rs = service.findPw(name, uid, phone);
-		session.setAttribute("rs", rs);
-		Map<String, Integer> result = new HashMap<>();
-		result.put("result", 1);
-
-		return result;
-	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("member/find2") public Map<String, Integer> findPw(String name,
+	 * String uid, String phone, HttpSession session) {
+	 * 
+	 * // System.out.println("name : " + name); String rs = service.findPw(name,
+	 * uid, phone); session.setAttribute("rs", rs); Map<String, Integer> result =
+	 * new HashMap<>(); result.put("result", 1);
+	 * 
+	 * return result; }
+	 */
 
 	// 아이디 찾기
 	@GetMapping("member/findIdResult")
@@ -139,7 +139,8 @@ public class MemberController {
 		model.addAttribute("cartCount", cartCount);
 		return "member/findIdResult";
 	}
-
+	
+	// 비밀번호 변경
 	@GetMapping("member/findPwResult")
 	public String findPwResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
@@ -153,6 +154,19 @@ public class MemberController {
 		model.addAttribute("cartCount", cartCount);
 		return "member/findPwResult";
 	}
+	
+	@ResponseBody
+	@PostMapping("member/findPwResult")
+	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
+		pass = passwordEncoder.encode(pass);
+		System.out.println(uid);
+		System.out.println(pass);
+		int result = service.findPwResult(uid, pass);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		return map;
+	}
+	
 
 	// 이메일
 	@ResponseBody
@@ -165,52 +179,9 @@ public class MemberController {
 		data.put("code", code);
 		return data;
 	}
+	
+	
+	
 
-	// 아이디 찾기
-//	@GetMapping("member/findId")
-//	public String findId() {
-//		return "member/findId";
-//	}
-
-	// 아이디 찾기
-//	@ResponseBody
-//	@PostMapping("member/findId")
-//	public Map<String, String> findId(Model model, String name, String phone, HttpSession session) {
-//		String rs = service.findId(name, phone);
-//		session.setAttribute("rs", rs);
-//		Map<String, String> result = new HashMap<>();
-//		result.put("result", rs);
-//		return result;
-//	}
-
-	// 비밀번호 찾기
-//	@GetMapping("member/findPw")
-//	public String findPw(HttpSession sess) {
-//		sess.removeAttribute("member");
-//		return "member/findPw";
-//	}
-
-//	@ResponseBody
-//	@PostMapping("member/findPw")
-//	public Map<String, Integer> findPw(String name, String uid, String phone, HttpSession session) {
-//				
-//		//System.out.println("name : " + name);
-//		String rs = service.findPw(name, uid, phone);
-//		session.setAttribute("rs", rs);
-//		Map<String, Integer> result = new HashMap<>();
-//		result.put("result", 1);
-//		
-//		return result;
-//	}
-
-	// @ResponseBody
-//	@PostMapping("member/findPwChange")
-//	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
-//		pass = PasswordEncoder.encode(pass);
-//		int result = service.findPwChange(uid, pass);
-//		Map<String, Integer> map = new HashMap<>();
-//		map.put("result", result);
-//		return map;
-//	}
 
 }
