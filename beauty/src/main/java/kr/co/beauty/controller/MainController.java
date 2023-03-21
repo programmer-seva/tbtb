@@ -1,6 +1,5 @@
 package kr.co.beauty.controller;
 
-import java.net.CookieManager;
 import java.security.Principal;
 import java.util.List;
 
