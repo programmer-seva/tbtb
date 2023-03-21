@@ -13,6 +13,8 @@ import java.util.Map;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.annotation.security.RunAs;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.OrderService;
@@ -191,7 +194,7 @@ public class OrderController {
 	@GetMapping("order/orderform")
 	public String order2type1(Model model, 
 			HttpSession session, 
-			Principal principal, 
+			Principal principal,
 			@CookieValue(required = false) String nomember,
 			@RequestParam(required = false, value = "cartNo") int[] cartList) {
 		

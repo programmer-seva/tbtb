@@ -47,12 +47,6 @@ public class AdminService {
 				 dao.insertOption(param1,param2, param3, param4);
 			}
 		}
-		
-
-
-		//��ǰ���
-		//int result = dao.insertProduct(vo);
-
 		return result;
 	};
 	
