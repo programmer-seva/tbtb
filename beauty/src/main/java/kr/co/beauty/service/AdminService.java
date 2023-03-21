@@ -28,7 +28,7 @@ public class AdminService {
 		//���ε� �ǸŰ��� ���
 		int price = vo.getPrice();
 		int discount = vo.getDiscount();
-		int disPrice = price * (100-discount)/100;
+		int disPrice = price * discount/100;
 		vo.setDisPrice(disPrice);
 		
 		//��ǰ���
