@@ -143,7 +143,7 @@ public class OrderController {
             for (int cartNo : cartList) {
                 CartVO vo = service.selectCart(cartNo);
                 list.add(vo);
-                count ++;
+                count += vo.getCount();
             }
         } else {
             for (int i = 0; i < viewOrder.size(); i ++) {
@@ -177,24 +177,30 @@ public class OrderController {
             return "order/orderform";
         }
     }
-    @ResponseBody @PostMapping("order/orderform/type1")public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session) {
+    @ResponseBody @PostMapping("order/orderform/type1")public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session, Principal principal, @CookieValue(required = false)String nomember) {
         log.debug("회원주문");
-        List < CartVO > item = (List < CartVO >)session.getAttribute("orderItem");
+        @SuppressWarnings("unchecked")
+		List < CartVO > item = (List < CartVO >)session.getAttribute("orderItem");
         service.complete(vo, item);
         session.removeAttribute("orderItem");
+        String cartCount = util.header(principal, nomember);
+        session.setAttribute("cartCount", cartCount);
         Map < String,
         Integer > result = new HashMap<>();
         result.put("result", vo.getOrdNo());
         return result;
     }
-    @ResponseBody @PostMapping("order/orderform/type2")public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session) {
+    @ResponseBody @PostMapping("order/orderform/type2")public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session, Principal principal, @CookieValue(required = false)String nomember) {
         log.debug("비회원주문");
-        List < CartVO > item = (List < CartVO >)session.getAttribute("orderItem");
+        @SuppressWarnings("unchecked")
+		List < CartVO > item = (List < CartVO >)session.getAttribute("orderItem");
         service.complete(vo, item);
         session.removeAttribute("orderItem");
         Map < String,
         Integer > result = new HashMap<>();
         result.put("result", vo.getOrdNo());
+        String cartCount = util.header(principal, nomember);
+        session.setAttribute("cartCount", cartCount);
         return result;
     }
     // 주문완료

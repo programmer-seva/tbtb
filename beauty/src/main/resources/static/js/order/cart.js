@@ -44,8 +44,8 @@ $(function(){
 	$('#wrap table a.btnIncrease').click(function(e){
 		e.preventDefault();
 		let amount = $(this).prev().val();
-		if(amount==20){ 
-			alert('20개 초과로 주문할 수 없습니다.');
+		if(amount==10){ 
+			alert('10개 초과로 주문할 수 없습니다.');
 			return;
 		}
 		

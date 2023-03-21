@@ -17,7 +17,7 @@ public class MainService {
 	public List<ProductVO> selectNewItem(){
 		List<ProductVO> vo = dao.selectNewItem();
 		for(ProductVO i : vo) {
-			String color = i.getColor();
+			String color = i.getColorName();
 			if(color != null) {
 				String[] arr = color.split(",");
 				i.setColorArr(arr);
@@ -28,7 +28,7 @@ public class MainService {
 	public List<ProductVO> selectBestItem(String cate){
 		List<ProductVO> vo = dao.selectBestItem(cate);
 		for(ProductVO i : vo) {
-			String color = i.getColor();
+			String color = i.getColorName();
 			if(color != null) {
 				String[] arr = color.split(",");
 				i.setColorArr(arr);

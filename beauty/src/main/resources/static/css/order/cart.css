@@ -172,7 +172,7 @@ main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame{
 }
 
 main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > input[type=text] {
-    width: 22px;
+    width: 27px;
     height: 25px;
     padding: 0 0 0 5px;
     line-height: 25px;
@@ -184,12 +184,12 @@ main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > input[typ
 
 main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > .btnIncrease {
     position: absolute;
-    left: 21px;
+    left: 26px;
     top: -5px;
 }
 main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > .btnDecrease {
     position: absolute;
-    left: 21px;
+    left: 26px;
     bottom: 0px;
 }
 main div.cartFrame > .cartList > table td:nth-child(7) span {

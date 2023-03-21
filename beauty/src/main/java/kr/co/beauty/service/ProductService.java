@@ -21,7 +21,7 @@ public class ProductService {
 	public List<ProductVO> selectProductNew(){
 		List<ProductVO> vo = dao.selectProductNew();
 		for(ProductVO i : vo) {
-			String color = i.getColor();
+			String color = i.getColorName();
 			if(color != null) {
 				String[] arr = color.split(",");
 				i.setColorArr(arr);
@@ -32,7 +32,7 @@ public class ProductService {
 	public List<ProductVO> selectProductBest(){
 		List<ProductVO> vo = dao.selectProductBest();
 		for(ProductVO i : vo) {
-			String color = i.getColor();
+			String color = i.getColorName();
 			if(color != null) {
 				String[] arr = color.split(",");
 				i.setColorArr(arr);
@@ -41,12 +41,13 @@ public class ProductService {
 		return vo;
 	}
 	public List<ProductVO> selectBestItem(int cate){
+		cate = cate / 100 * 100;
 		return dao.selectBestItem(cate);
 	}
 	public List<ProductVO> selectProduct1(int cate, String sort, int start){
 		List<ProductVO> vo = dao.selectProduct1(cate, sort, start);
 		for(ProductVO i : vo) {
-			String color = i.getColor();
+			String color = i.getColorName();
 			if(color != null) {
 				String[] arr = color.split(",");
 				i.setColorArr(arr);
@@ -57,7 +58,7 @@ public class ProductService {
 	public List<ProductVO> selectProduct2(int cate, String sort, int start){
 		List<ProductVO> vo = dao.selectProduct2(cate, sort, start);
 		for(ProductVO i : vo) {
-			String color = i.getColor();
+			String color = i.getColorName();
 			if(color != null) {
 				String[] arr = color.split(",");
 				i.setColorArr(arr);
