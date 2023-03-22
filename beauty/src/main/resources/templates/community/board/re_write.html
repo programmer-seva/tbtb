@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Beauty</title>
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/community/community_board.css">
     <script th:src="@{/js/comm.js"}></script>
     
 </head>
 <body>
-    <th:block th:replace="~{/_header :: modileFragment}"></th:block>
+    <th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>
         <main>
             <div class="container">
                 <div class="path">
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </main>
-		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+		<th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 </html>

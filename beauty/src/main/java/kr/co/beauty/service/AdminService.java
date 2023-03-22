@@ -39,10 +39,10 @@ public class AdminService {
 	public int insertOption(int param1, List<String> colorArr, List<String> colorNameArr, List<String> sizeArr) {
 		int result = 0;
 
-		for (var i = 0; i < colorArr.size(); i++) {
+		for (int i = 0; i < colorArr.size(); i++) {
 			String param2 = colorArr.get(i);
 			String param3 = colorNameArr.get(i);
-			for (var j = 0; j < sizeArr.size(); j++) {
+			for (int j = 0; j < sizeArr.size(); j++) {
 				String param4 = sizeArr.get(j);
 				dao.insertOption(param1, param2, param3, param4);
 			}

@@ -61,10 +61,10 @@ public class SecurityConfig {
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
 			.requestMatchers("/myshop/**").authenticated()
-			.requestMatchers("/order/orderform/**").authenticated()
 			.requestMatchers("/order/orderform?type=guest").permitAll()
 			.requestMatchers("/order/orderform/type1/**").authenticated()
 			.requestMatchers("/order/orderform/type2/**").permitAll()
+			.requestMatchers("/order/orderform/**").authenticated()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/**").permitAll();
 				

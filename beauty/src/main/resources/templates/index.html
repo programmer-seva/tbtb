@@ -3,15 +3,15 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/color.css}">
     <script th:src="@{/js/cookieconsent.js}"></script>
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>
         <main>
             <div class="swiper swiperBanner">
                 <div class="swiper-wrapper">
@@ -241,7 +241,7 @@
             	<img th:src="@{/img/btmo_event_01.jpg}" alt="광고">
             </article>
         </main>
-        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+        <th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-	<th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+	<th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/product/list.css}">
     <link rel="stylesheet" th:href="@{/css/color.css}">
     <script th:inline="javascript">
@@ -45,9 +45,9 @@
     </script>
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-       	<th:block th:replace="~{/_header :: headerFragment}"></th:block>
+       	<th:block th:replace="~{_header :: headerFragment}"></th:block>
         <main>
             <!-- 베스트상품 -->
             <article>
@@ -134,7 +134,7 @@
                 </div>
             </section>
         </main>
-		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+		<th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 </html>
