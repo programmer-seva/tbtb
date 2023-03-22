@@ -93,17 +93,28 @@
                                 <!-- 카트 테이블 -->
                                 <article class="cartList">
                                     <table border="1" class="t1">
-                                        <thead>
+                                    <colgroup> 
+											<col width="5%">
+											<col width="10%">
+											<col width="40%">
+											<col width="10%">
+											<col width="10%">
+											<col width="10%">
+											<col width="10%">
+											<col width="9%">
+										</colgroup> 
+									<thead>
                                             <tr>
-                                                <th><input name="chkAll" type="checkbox"></th>
-                                                <th colspan="2">상품 정보</th>
-                                                <th>판매가</th>
-                                                <th>수량</th>
-                                                <th>합계</th>
-                                                <th>배송비</th>
-                                                <th>선택</th>
-                                            </tr>
-                                        </thead>
+											<th><input name="chkAll" type="checkbox"></th>
+											<th colspan="2">상품 정보</th>
+											<th>판매가</th>
+											<th>수량</th>
+											<th>합계</th>
+											<th>배송비</th>
+											<th>선택</th>
+										</tr>
+									</thead>
+									
                                         <tbody>
                                             <!-- 아이템 반복 -->
                                             <th:block th:if="${#lists.size(cartList) == 0}">

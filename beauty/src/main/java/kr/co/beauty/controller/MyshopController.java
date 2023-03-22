@@ -12,13 +12,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
+import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.MyorderVO;
 import kr.co.beauty.vo.WishVO;
@@ -28,10 +31,12 @@ public class MyshopController {
 
 	@Autowired
 	private MyshopService service;
+	@Autowired
+	private UtilService util;
 
 	/* 인덱스 */
 	@GetMapping(value = { "myshop/", "myshop/index" })
-	public String myhome(Principal principal, Model model) {
+	public String myhome(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		// 유저 정보 받기
 		if (principal != null) {
 			MemberVO member = service.selectMember(principal.getName());
@@ -39,12 +44,19 @@ public class MyshopController {
 		}
 		//카테고리
 		model.addAttribute("option", "myhome");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/myhome";
 	}
 
 	/* 주문내역 */
 	@GetMapping("myshop/myorder")
-	public String myorder(Principal principal, Model model) {
+	public String myorder(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		List<MyorderVO> orderList = new ArrayList<>();
 		if (principal != null) {
 			// 유저 정보 받기
@@ -57,6 +69,13 @@ public class MyshopController {
 		model.addAttribute("orderList", orderList);
 		// 카테고리
 		model.addAttribute("option", "myorder");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/myorder";
 	}
 
@@ -88,7 +107,7 @@ public class MyshopController {
 
 	/* 쿠폰 */
 	@GetMapping("myshop/coupon")
-	public String coupon(Principal principal, Model model) {
+	public String coupon(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		// 유저 정보 받기
 		if (principal != null) {
 			MemberVO member = service.selectMember(principal.getName());
@@ -98,12 +117,19 @@ public class MyshopController {
 
 		// 카테고리
 		model.addAttribute("option", "coupon");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/coupon";
 	}
 
 	/* 적립금 */
 	@GetMapping("myshop/point")
-	public String point(Principal principal, Model model) {
+	public String point(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		// 유저 정보 받기
 		if (principal != null) {
 			MemberVO member = service.selectMember(principal.getName());
@@ -113,12 +139,19 @@ public class MyshopController {
 
 		// 카테고리
 		model.addAttribute("option", "point");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/point";
 	}
 
 	/* 1:1문의 */
 	@GetMapping("myshop/myqna")
-	public String myqna(Principal principal, Model model) {
+	public String myqna(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		// 유저 정보 받기
 		if (principal != null) {
 			MemberVO member = service.selectMember(principal.getName());
@@ -128,12 +161,19 @@ public class MyshopController {
 
 		// 카테고리
 		model.addAttribute("option", "myqna");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/myqna";
 	}
 
 	/* 위시 리스트 */
 	@GetMapping("myshop/wishlist")
-	public String wishlist(Principal principal, Model model) {
+	public String wishlist(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		if (principal != null) {
 			// 유저 정보 받기
 			MemberVO member = service.selectMember(principal.getName());
@@ -144,6 +184,13 @@ public class MyshopController {
 		}
 		// 카테고리
 		model.addAttribute("option", "wishlist");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/wishlist";
 	}
 
@@ -164,7 +211,7 @@ public class MyshopController {
 
 	/* 나의 프로필 */
 	@GetMapping("myshop/profile")
-	public String profile(Principal principal, Model model) {
+	public String profile(Principal principal, Model model, HttpSession session, @CookieValue(required = false)String nomember) {
 		// 유저 정보 받기
 		if (principal != null) {
 			MemberVO member = service.selectMember(principal.getName());
@@ -172,6 +219,13 @@ public class MyshopController {
 		}
 		// 카테고리
 		model.addAttribute("option", "profile");
+		// 장바구니 카운터
+		Object cartCount = session.getAttribute("cartCount");
+		if (cartCount == null) {
+			cartCount = util.header(principal, nomember);
+			session.setAttribute("cartCount", cartCount);
+		}
+		model.addAttribute("cartCount", cartCount);
 		return "myshop/profile";
 	}
 

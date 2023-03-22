@@ -192,7 +192,6 @@ public class ProductController {
 		}
 		session.setAttribute("viewOrder", vo);
 		session.setAttribute("type", "guest");
-		System.out.println(session.getAttribute("type"));
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", rs);
 		return result;

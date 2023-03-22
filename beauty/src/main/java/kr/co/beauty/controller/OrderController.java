@@ -173,16 +173,23 @@ public class OrderController {
 	}
 
 	/* 박진휘 */
+	@GetMapping("order/orderWait")
+	public String orderWait(HttpSession session,
+			@RequestParam(required = false, value = "cartNo") int[] cartList) {
+		session.setAttribute("cartList", cartList);
+		return "redirect:/order/orderform";
+	}
 	// 상세보기 > 주문결제 (회원)
 	@GetMapping("order/orderform")
 	public String order2type1(Model model, HttpSession session, Principal principal,
-			@CookieValue(required = false) String nomember,
-			@RequestParam(required = false, value = "cartNo") int[] cartList) {
+			@CookieValue(required = false) String nomember) {
 		log.debug("주문페이지");
 		List<CartVO> list = new ArrayList<>();
 		int count = 0;
 		@SuppressWarnings("unchecked")
 		List<CartVO> viewOrder = (List<CartVO>) session.getAttribute("viewOrder");
+		int[] cartList = (int[]) session.getAttribute("cartList");
+		
 		if (cartList != null && cartList.length > 0) {
 			for (int cartNo : cartList) {
 				CartVO vo = service.selectCart(cartNo);
@@ -220,14 +227,15 @@ public class OrderController {
 	// 상세보기 > 주문결제 (비회원)
 	@GetMapping("order/non_orderform")
 	public String order2type2(String type, Model model, HttpSession session, Principal principal,
-			@CookieValue(required = false) String nomember,
-			@RequestParam(required = false, value = "cartNo") int[] cartList) {
+			@CookieValue(required = false) String nomember) {
 		log.debug("주문페이지");
 		if (type.equals("guest")) {
 			List<CartVO> list = new ArrayList<>();
 			int count = 0;
 			@SuppressWarnings("unchecked")
 			List<CartVO> viewOrder = (List<CartVO>) session.getAttribute("viewOrder");
+			int[] cartList = (int[]) session.getAttribute("cartList");
+			
 			if (cartList != null && cartList.length > 0) {
 				for (int cartNo : cartList) {
 					CartVO vo = service.selectCart(cartNo);
@@ -242,7 +250,7 @@ public class OrderController {
 					vo.setColor(viewOrder.get(i).getColor());
 					vo.setSize(viewOrder.get(i).getSize());
 					list.add(vo);
-					count++;
+					count += vo.getCount();
 				}
 			}
 			session.setAttribute("orderItem", list);
@@ -268,7 +276,7 @@ public class OrderController {
 	@PostMapping("order/orderform/type1")
 	public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.debug("회원주문");
+		log.info("회원주문");
 		@SuppressWarnings("unchecked")
 		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
 		service.complete(vo, item);
@@ -284,7 +292,8 @@ public class OrderController {
 	@PostMapping("order/orderform/type2")
 	public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.debug("비회원주문");
+		log.info("비회원주문");
+		System.out.println("체크");
 		@SuppressWarnings("unchecked")
 		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
 		service.complete(vo, item);
@@ -300,7 +309,7 @@ public class OrderController {
 	@GetMapping("order/ordercomplete")
 	public String ordercomplete2(Model model, int ordNo, Principal principal,
 			@CookieValue(required = false) String nomember, HttpSession session) {
-		log.debug("주문완료");
+		log.info("주문완료");
 		OrdercompleteVO vo = service.selectOrdercomplete(ordNo);
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);

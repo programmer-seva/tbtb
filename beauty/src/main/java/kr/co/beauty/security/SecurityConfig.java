@@ -63,6 +63,8 @@ public class SecurityConfig {
 			.requestMatchers("/myshop/**").authenticated()
 			.requestMatchers("/order/orderform/**").authenticated()
 			.requestMatchers("/order/orderform?type=guest").permitAll()
+			.requestMatchers("/order/orderform/type1/**").authenticated()
+			.requestMatchers("/order/orderform/type2/**").permitAll()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/**").permitAll();
 				
