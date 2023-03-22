@@ -276,7 +276,6 @@ public class OrderController {
 	@PostMapping("order/orderform/type1")
 	public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.info("회원주문");
 		@SuppressWarnings("unchecked")
 		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
 		service.complete(vo, item);
@@ -292,8 +291,6 @@ public class OrderController {
 	@PostMapping("order/orderform/type2")
 	public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.info("비회원주문");
-		System.out.println("체크");
 		@SuppressWarnings("unchecked")
 		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
 		service.complete(vo, item);
@@ -309,7 +306,6 @@ public class OrderController {
 	@GetMapping("order/ordercomplete")
 	public String ordercomplete2(Model model, int ordNo, Principal principal,
 			@CookieValue(required = false) String nomember, HttpSession session) {
-		log.info("주문완료");
 		OrdercompleteVO vo = service.selectOrdercomplete(ordNo);
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);
