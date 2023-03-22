@@ -133,5 +133,9 @@ public class ProductService {
 	public int addCart(CartVO vo) {
 		return dao.addCart(vo);
 	}
+	
+	public void updateHit(String prodNo) {
+		dao.updateHit(prodNo);
+	}
 
 }
