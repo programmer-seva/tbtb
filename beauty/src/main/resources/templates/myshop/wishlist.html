@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="itemInfo">
                                             <a 		th:href="@{/shop/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
-                                            <span 	class="price" th:text="${#numbers.formatInteger(wish.disPrice, 0, 'COMMA')}"></span>
+                                            <span 	class="price" th:text="${#numbers.formatInteger(wish.getSalePrice, 0, 'COMMA')}"></span>
                                         </div>
                                     </div>
                                     </th:block>
