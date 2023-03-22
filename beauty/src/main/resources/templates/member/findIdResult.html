@@ -24,24 +24,24 @@
 <body>
 	<main>
 		<div class="findId">
-			<h2>아이디 찾기 결과</h2>
-
 			<form action="#" method="POST">
+				<h2>아이디 찾기 결과</h2>
 				<div class="findId">
 					<fieldset>
 						<table border="0">
 							<tr>
-								<td>고객님의 아이디는 [[${uid}]] 입니다.</td>
+								<td>고객님의 아이디는 <strong>[[${uid}]]</strong> 입니다.</td>
 							</tr>
 						</table>
 						<div class="btn">
 							<a th:href="@{/member/login}" class="btnCancel">로그인</a>
-							<a th:href="@{/member/find}" class="btnNext">비밀번호 찾기</a>
+							<a th:href="@{/member/find(type=2)}" class="btnNext">비밀번호 찾기</a>
 						</div>
 					</fieldset>
 				</div>
 			</form>
 		</div>
 	</main>
+	<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
 </body>
 </html>

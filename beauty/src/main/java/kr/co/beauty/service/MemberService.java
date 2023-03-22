@@ -44,8 +44,8 @@ public class MemberService {
 	}
 	
 	// 비밀번호 찾기
-	public String findPw(String name, String uid, String phone) {
-		return dao.findPw(name, uid, phone);
+	public String findPw(String uid) {
+		return dao.findPw(uid);
 	}
 	
 	public int findPwResult(String uid, String pass) {

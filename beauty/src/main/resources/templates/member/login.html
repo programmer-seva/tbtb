@@ -11,6 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <!-- font -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 네이버 -->
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     
     <link rel="stylesheet" th:href="@{/css/headfoot.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
@@ -24,53 +27,53 @@
         
         <main>
             <div class="lg">
-                <section>
-                    <h2>로그인</h2>
-                    <table>
-                        <tr>
-                            <td class="member current">회원</td>
-                            <td class="nomember">비회원 (주문조회)</td>
-                        </tr>
-                    </table>
-                    <article id="member" class="m1">
-                        <div class="login" id="l1">
-                            <form action="#" method="post">
-                                <input type="text" name="uid" placeholder="아이디">
-	                                <span class="material-icons close">close</span>
-	                                <input type="password" name="password" placeholder="비밀번호" style="margin-top: 10px;">
-	                                <span class="material-icons eye">visibility_off</span>
-                                </input>
-                                <button type="submit" name="login">로그인</button>
-                            </form>
-                            <div class="loginlabel">
-                                <label><input type="checkbox" name="autoLogin">자동로그인</label>
-                            </div>
-                        </div>
-                        <div class="other">
-                            <a th:href="@{/member/find(type=1)}">아이디 찾기</a>
-                            <a th:href="@{/member/find(type=2)}">비밀번호 찾기</a>
-                            <a th:href="@{/member/register}">회원가입</a>
-                        </div>
-                    </article>
-                    <article id="member" class="m2">
-                        <div class="login">
-                            <form action="#" method="post">
-                                <input type="text" name="uid" placeholder="이름">
-                                <span class="material-icons close">close</span>
-                                <input type="text" name="uid" placeholder="휴대폰 번호('-'없이 입력)" style="margin-top: 10px;">
-                                <input type="text" name="uid" placeholder="주문번호" style="margin-top: 10px;">
-                                <button type="submit">주문/배송조회</button>
-                            </form>
-                        </div>
-                        <div class="other">
-                            <p>
-                                <span class="material-icons">call</span>&nbsp;&nbsp;
-                                0000-0000&nbsp;&nbsp; 평일(월~금) 11:00~19:00 (주말 및 공휴일 휴무)
-                            </p>
-                        </div>
-                    </article>
-                </section>
-            </div>
+				<section>
+					<h2>로그인</h2>
+					<table>
+						<tr>
+							<td class="member current">회원</td>
+							<td class="nomember">비회원 (주문조회)</td>
+						</tr>
+					</table>
+					<article id="member" class="m1">
+						<div class="login" id="l1">
+							<form action="#" method="post">
+								<input type="text" name="uid" placeholder="아이디">
+								<span class="material-icons close">close</span>
+								<input type="password" name="password" placeholder="비밀번호" style="margin-top: 10px;">
+								<span class="material-icons eye">visibility_off</span></input>
+								<button type="submit" name="login">로그인</button>
+							</form>
+							<div class="loginlabel">
+								<label><input type="checkbox" name="autoLogin">자동로그인</label>
+							</div>
+						</div>
+						<div class="other">
+							<a th:href="@{/member/find(type=1)}">아이디 찾기</a>
+							<a th:href="@{/member/find(type=2)}">비밀번호 찾기</a>
+							<a th:href="@{/member/register}">회원가입</a>
+						</div>
+					</article>
+					<article id="member" class="m2">
+						<div class="login">
+							<form action="#" method="post">
+								<input type="text" name="uid" placeholder="이름"> <span
+									class="material-icons close">close</span> <input type="text"
+									name="uid" placeholder="휴대폰 번호('-'없이 입력)"
+									style="margin-top: 10px;"> <input type="text"
+									name="uid" placeholder="주문번호" style="margin-top: 10px;">
+								<button type="submit">주문/배송조회</button>
+							</form>
+						</div>
+						<div class="other">
+							<p>
+								<span class="material-icons">call</span>&nbsp;&nbsp;
+								0000-0000&nbsp;&nbsp; 평일(월~금) 11:00~19:00 (주말 및 공휴일 휴무)
+							</p>
+						</div>
+					</article>
+				</section>
+			</div>
         </main>
         <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
     </div>
