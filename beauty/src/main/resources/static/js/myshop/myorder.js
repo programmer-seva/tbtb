@@ -28,6 +28,7 @@ $(function(){
 	});
 	/* 기간 지정 조회 */
 	$('#btnSearchDate').click(function(){
+		$('div.dateBtns > input:radio[name="chkDate"]').prop('checked', false);
 		pg 		= 1;
 		start 	= $('#startDate').val();
 		end 	= $('#endDate').val();

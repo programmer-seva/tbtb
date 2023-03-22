@@ -4,7 +4,7 @@ $(function(){
         // 1.빈창 팝업 생성
         var url 			= "/Beauty/myshop/track";
         var windowTargetName= "targetName";
-        var features 		= "scrollbars=yes,width=600,height=800,location=no, resizable=yes";
+        var features 		= "scrollbars=no,width=600,height=800,location=no";
         window.open(url, windowTargetName, features);
 
         // 2.POST로 데이터 전달
