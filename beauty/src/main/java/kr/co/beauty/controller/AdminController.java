@@ -48,13 +48,10 @@ public class AdminController {
 		return "";
 	}
 
-	// 상품목록 분류 - 2023/03/07 윤사랑
+	
+	//상품목록 - 2023/03/07 윤사랑
 	@GetMapping("admin/product/list")
-	public String list(Model model, @RequestParam(required = false) String param1,
-			@RequestParam(required = false) String arg1, @RequestParam(required = false) String pg) {
-
-		model.addAttribute("param1", param1);
-		model.addAttribute("arg1", arg1);
+	public String list() {
 
 		return "admin/product/list";
 	}
@@ -111,16 +108,19 @@ public class AdminController {
 		return result + "";
 	}
 
-	// 상품목록에서 상품 검색 - 2023/03/17 윤사랑
+	//상품목록에서 상품 검색 - 2023/03/17 윤사랑
 	@GetMapping("admin/product/search")
-	public String search(Model model, @RequestParam(required = false) String[] arg0, String arg2, String param2) {
+	public String search(Model model, @RequestParam(required=false) String[] arg0, String arg2, String param2) {
 		List<Product1VO> products = service.searchProduct(arg0, param2, arg2);
-		// System.out.println(arg0);
-		// System.out.println(arg2);
-		// System.out.println(param2);
-		// System.out.println(products);
-		model.addAttribute("products", products);
-
+		//System.out.println(arg0);
+		//System.out.println(arg2);
+		//System.out.println(param2);
+		//System.out.println(products);
+		model.addAttribute("products",  products);
+		model.addAttribute("arg0",  arg0);
+		model.addAttribute("param2",  param2);
+		model.addAttribute("arg2",  arg2);
+		
 		return "admin/product/search";
 	}
 }
