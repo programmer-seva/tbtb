@@ -419,9 +419,9 @@ $(document).ready(function(){
     	$(document).on("input","#discount",function(){
     		let price=$("#price").val();
         	let discount=$("#discount").val();
-        	let disPrice =price*(100-discount)/100;
+        	let disPrice =price*(discount/100);
         	console.log(disPrice);
-			$("#point").val(Math.ceil(disPrice*1/100));
+			$("#point").val(Math.ceil((price-disPrice)*1/100));
     	});
     	
     	//이미지파일 유효성 검사
