@@ -91,6 +91,7 @@ div.myorderFrame > div.orderList > table th {
 }
 
 div.myorderFrame > div.orderList > table td {
+	width: 12.5%;
     height: 70px;
     font-size: 14px;
     text-align: center;
@@ -102,11 +103,10 @@ div.myorderFrame > div.orderList > table td {
 }
 
 div.myorderFrame > div.orderList > table td:nth-child(4) {
-    width: 12.5%;
     font-weight: bold;
 }
-div.myorderFrame > div.orderList > table td:nth-child(3){
-    width: 17.5%;
+div.myorderFrame > div.orderList > table td:first-child {
+	width:50%;
 }
 
 div.myorderFrame > div.orderList > table td:first-child > div {
@@ -135,6 +135,7 @@ div.myorderFrame > div.orderList > table td:first-child > div > ul > li#company 
 }
 div.myorderFrame > div.orderList > table td:first-child > div > ul > li#prodName {
     display: block;
+    width: 400px;
     font-size: 15px;
     font-weight: bold;
     overflow: hidden;

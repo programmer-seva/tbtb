@@ -61,6 +61,8 @@ public class SecurityConfig {
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
 			.requestMatchers("/myshop/**").authenticated()
+			.requestMatchers("/order/orderform/**").authenticated()
+			.requestMatchers("/order/orderform?type=guest").permitAll()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/**").permitAll();
 				
