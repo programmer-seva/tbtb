@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Beauty</title>
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/community/community.css}">
   	<link rel="stylesheet" th:href="@{/css/community/reviwPopup.css}">
     <script th:src="@{/js/review.js}"></script>
@@ -33,9 +33,9 @@
   	
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>
         <main>
             <div>
                 <section>
@@ -244,8 +244,8 @@
 							});
 						</script>            
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -253,7 +253,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -261,8 +261,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -270,7 +270,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -278,8 +278,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -287,7 +287,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -295,8 +295,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -304,7 +304,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -312,8 +312,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -321,7 +321,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -329,8 +329,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -338,7 +338,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -346,8 +346,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -355,7 +355,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -363,8 +363,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -372,7 +372,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -380,8 +380,8 @@
                             </a>
                         </article>
                         <article>
-                            <a href="#">
-                                <img src="./img/sample2.jpg" alt="리뷰이미지">
+                            <a href="#" id="re_popup">
+                                <img th:src="@{/img/sample2.jpg}" alt="리뷰이미지">
                                 <div class="replyContent">
                                     <p>댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용댓글내용</p>
                                     <span>박**</span><span>2023. 03. 03</span>
@@ -389,7 +389,7 @@
                             </a>
                             <a href="#">
                                 <div class="replyProd">
-                                    <img src="./img/sample2.jpg" alt="상품이미지">
+                                    <img th:src="@{/img/sample2.jpg}" alt="상품이미지">
                                     <p>상품명상품명상품명상품명상품명상품명상품명상품명</p>
                                     <span>리뷰 <strong>3</strong></span>
                                     <span>평점 <strong>5.0</strong></span>
@@ -414,7 +414,7 @@
                 </article>
             </div>
         </main>
-        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+        <th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 </html>

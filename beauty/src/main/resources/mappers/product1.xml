@@ -96,5 +96,7 @@
 		INSERT INTO `cart` (`uid`, `prodNo`, `count`, `color`, `size`, `rdate`) 
 		VALUES (#{uid}, #{prodNo}, #{count}, #{color}, #{size}, NOW());
 	</insert>
-	
+	<update id="updateHit">
+		UPDATE `product` SET `hit`=`hit`+1 WHERE `prodNo`=#{prodNo};
+	</update>
 </mapper>

@@ -46,10 +46,11 @@ main > .complete > section:nth-of-type(2) > div > article {
 }
 main > .complete > section:nth-of-type(2) > div > article > span {
 	float: left;
-	width: 85%;
+	width: 80%;
 	height: auto;
-	line-height: 80px;
+	line-height: 30px;
 	margin-left: 30px;
+	padding-top: 10px;
 }
 main > .complete > section:nth-of-type(2) > div > article > img {
     float: left;

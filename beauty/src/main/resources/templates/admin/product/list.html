@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="wrapper">
-        <th:block th:replace="~{/admin/product/_header :: headerFragment}"></th:block>
+        <th:block th:replace="~{admin/product/_header :: headerFragment}"></th:block>
         <main>
             <aside>
 			    <ul>
@@ -88,7 +88,8 @@
                         <th>대분류</th>
                         <th>소분류</th>
                         <th>상품명</th>
-                        <th>판매가격</th>
+                        <th>원가</th>
+                        <th>할인율</th>
                         <th>상태</th>
                         <th>재고</th>
                         <th>조회</th>
@@ -101,7 +102,9 @@
                     	<td>[[${prod.prodCate1}]]</td>
                     	<td>[[${prod.prodCate2}]]</td>
                     	<td>[[${prod.prodName}]]</td>
-                    	<td>[[${prod.disPrice}]]</td>
+                    	<td>[[${prod.price}]]</td>
+                    	<td>[[${prod.discount}]]</td>
+                    	<td>판매중</td>
                     	<td>[[${prod.stock}]]</td>
                     	<td>[[${prod.hit}]]</td>
                     	<td>

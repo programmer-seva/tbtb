@@ -230,7 +230,7 @@ $(function(){
 				chkList.push(parseInt($(this).val()));
 			}
 		});
-		redirectGet('/Beauty/order/orderform', chkList);
+		redirectGet('/Beauty/order/orderWait', chkList);
 	});
 	/* 전체주문하기 */
 	$('#btnOrderAll').click(function(e){
@@ -243,7 +243,7 @@ $(function(){
 		$('input[name=chkCart]').each(function(){
 			chkList.push(parseInt($(this).val()));
 		});
-		redirectGet('/Beauty/order/orderform', chkList);
+		redirectGet('/Beauty/order/orderWait', chkList);
 	});
 	
 	
