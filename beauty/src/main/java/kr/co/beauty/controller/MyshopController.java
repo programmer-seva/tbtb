@@ -37,6 +37,8 @@ public class MyshopController {
 			MemberVO member = service.selectMember(principal.getName());
 			model.addAttribute("member", member);
 		}
+		//카테고리
+		model.addAttribute("option", "myhome");
 		return "myshop/myhome";
 	}
 	

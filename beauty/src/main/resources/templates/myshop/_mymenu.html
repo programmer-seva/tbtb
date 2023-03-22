@@ -4,6 +4,7 @@
 	<!-- 마이페이지 메뉴 -->
     <aside class="myMenu">
         <ul>
+            <li th:classappend="${option == 'myhome'} 	? 'on' : ''"><a id="myMenuMyhome" 	th:href="@{/myshop/index}">마이 페이지</a></li>
             <li th:classappend="${option == 'myorder'} 	? 'on' : ''"><a id="myMenuMyorder" 	th:href="@{/myshop/myorder}">주문/배송</a></li>
             <li th:classappend="${option == 'coupon'} 	? 'on' : ''"><a id="myMenuCoupon" 	th:href="@{/myshop/coupon}"	>쿠폰</a></li>
             <li th:classappend="${option == 'point'} 	? 'on' : ''"><a id="myMenuPoint" 	th:href="@{/myshop/point}"	>적립금</a></li>

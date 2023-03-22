@@ -6,7 +6,7 @@ $(function(){
 		location.href="/Beauty/index";
 	});
 	$('.detail').click(function(){
-		location.href="/Beauty/myshop/orderDetail";
+		location.href="/Beauty/myshop/myorder";
 	});
 	
 	$('.order').children('article.orderItem').slice(0,1).show();
