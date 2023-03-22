@@ -12,14 +12,13 @@ public class UtilService {
 
 	@Autowired
 	private MainDAO dao;
-	
+
 	public String header(Principal principal, String nomember) {
 		String uid = null;
-		if(principal != null) {
+		if (principal != null) {
 			uid = principal.getName();
 		}
 		return dao.countCart(uid, nomember);
 	}
-	
-	
+
 }
