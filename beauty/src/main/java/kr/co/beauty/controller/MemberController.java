@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -52,7 +54,6 @@ public class MemberController {
 		session.removeAttribute("type");
 		return "member/login";
 	}
-
 	@GetMapping("member/register")
 	public String register(Model model, Principal principal, @CookieValue(required = false) String nomember,
 			HttpSession session) {
@@ -92,9 +93,9 @@ public class MemberController {
 
 	// 아이디 찾기
 	@GetMapping("member/find")
-	public String find(Model model, Principal principal, @CookieValue(required = false) String nomember,
-			HttpSession session) {
-		// 장바구니 카운터
+	public String find(int type, Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+		model.addAttribute("type", type);
+		//장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
 		if (cartCount == null) {
 			cartCount = util.header(principal, nomember);
@@ -114,18 +115,16 @@ public class MemberController {
 		return result;
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("member/find2") public Map<String, Integer> findPw(String name,
-	 * String uid, String phone, HttpSession session) {
-	 * 
-	 * // System.out.println("name : " + name); String rs = service.findPw(name,
-	 * uid, phone); session.setAttribute("rs", rs); Map<String, Integer> result =
-	 * new HashMap<>(); result.put("result", 1);
-	 * 
-	 * return result; }
-	 */
+	@ResponseBody
+	@PostMapping("member/find2")
+	public int findPw(@RequestParam("uid") String uid, HttpSession session) {
+	  
+		// System.out.println("name : " + name);
+		String rs = service.findPw(uid);
+		session.setAttribute("uid", uid);
+	  
+		return 1;
+	}
 
 	// 아이디 찾기
 	@GetMapping("member/findIdResult")
@@ -148,9 +147,9 @@ public class MemberController {
 
 	// 비밀번호 변경
 	@GetMapping("member/findPwResult")
-	public String findPwResult(Model model, Principal principal, @CookieValue(required = false) String nomember,
-			HttpSession session) {
-		String uid = (String) session.getAttribute("rs");
+	public String findPwResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+		String uid = (String) session.getAttribute("uid");
+
 		model.addAttribute("uid", uid);
 		// 장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");

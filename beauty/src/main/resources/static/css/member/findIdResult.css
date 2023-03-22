@@ -3,16 +3,21 @@
  * 이름 : 강중현 
  * 내용 : Beauty member findIdResult
  */
-main>.findId {
-	height: 500px;
-	width: 900px;
-	margin: 50px 288px 50px 288px;
-	font-size: 12px;
+ 
+* {
+	margin: 0 auto;
+	padding: 0;
 }
 
-main>.findId>h2 {
+main>.findId {
+	width: 1600px;
+	min-height: 600px;
+	margin-top: 80px
+}
+
+main>.findId>form>h2 {
 	height: 22px;
-	width: 1328px;
+	width: 900px;
 	font-size: 18px;
 	font-weight: 700;
 	text-align: left;
@@ -35,7 +40,7 @@ main>.findId>form>.findId>fieldset {
 	border: 0px none;
 }
 
-main>.findId>form>.findId>fieldset>table>tbody>tr>td{
+main>.findId>form>.findId>fieldset>table>tbody>tr>td {
 	font-size: 20px;
 }
 

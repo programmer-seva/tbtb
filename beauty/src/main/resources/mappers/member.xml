@@ -29,7 +29,7 @@
 	</select>
 	<!-- 비밀번호 찾기 -->
 	<select id="findPw" resultType="String">
-		select `pass` from `member` where `name`=#{arg0} and `uid`=#{arg1} and `phone`=#{arg2};
+		select `pass` from `member` where `uid`=#{arg1};
 	</select>
 	
 	<!--  -->
