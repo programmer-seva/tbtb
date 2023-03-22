@@ -31,7 +31,7 @@
                     	<span class="material-icons" id="less" style="display: none">expand_less</span>
                     	<article th:each="order : ${orders}" class="orderItem" style="display: none">
                     		<img th:src="@{/image/}+${order.thumb1}" alt="상품썸네일">
-                        	<span th:text="${order.prodName}+' '+${order.count}+'개 [옵션: '+${order.color}+', '+${order.size}+']'"></span>
+                        	<span>[[${order.prodName}]] [[${order.count}]]개</span><span>&#91;옵션: [[${order.color}]], [[${order.size}]]&#93;</span>
                         </article>
                     </div>
                 </section>

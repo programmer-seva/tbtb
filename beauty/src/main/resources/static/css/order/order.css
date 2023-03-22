@@ -118,9 +118,18 @@ main div.orderFrame .prodList table td:nth-child(1) > img {
     height: 80px;
 }
 
+main div.orderFrame .prodList table td:nth-child(2) {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 main div.orderFrame .prodList table td:nth-child(2) > span {
     display: block;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 230px;
 }
 main div.orderFrame .prodList table td:nth-child(2) > span:nth-child(2) {
     font-size: 12px;
