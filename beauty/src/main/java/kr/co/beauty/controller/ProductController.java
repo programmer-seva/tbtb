@@ -96,6 +96,8 @@ public class ProductController {
 	public String productView(Model model, @RequestParam("pno") String prodNo, Principal principal,
 			@CookieValue(required = false) String nomember, HttpServletResponse resp, HttpSession session) {
 		ProductVO prod = service.selectProduct(prodNo);
+		//조회수+1
+		service.updateHit(prodNo);
 		// 쿠키만들기
 		if (nomember == null) {
 			cookie.nomemberCookie(resp);
