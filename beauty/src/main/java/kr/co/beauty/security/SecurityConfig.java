@@ -62,8 +62,8 @@ public class SecurityConfig {
 		http.authorizeHttpRequests()
 			.requestMatchers("/myshop/**").authenticated()
 			.requestMatchers("/order/orderform?type=guest").permitAll()
+			.requestMatchers("/order/orderform/**").permitAll()
 			.requestMatchers("/order/orderform/type1/**").authenticated()
-			.requestMatchers("/order/orderform/type2/**").permitAll()
 			.requestMatchers("/order/orderform/**").authenticated()
 			.requestMatchers("/member/**").permitAll()
 			.requestMatchers("/**").permitAll();

@@ -79,7 +79,7 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr>
+                                            <tr th:classappend="${member.level == '0'} 	? 'on' : ''">
                                                 <th>
                                                     <span>Lv.0 브론즈</span>
                                                     <span>~1,000점</span>
@@ -89,7 +89,7 @@
                                                 <td>2% 할인 쿠폰 3개</td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
+                                            <tr th:classappend="${member.level == '1'} 	? 'on' : ''">
                                                 <th>
                                                     <span>Lv.1 실버</span>
                                                     <span>1,000~3,000점</span>
@@ -99,7 +99,7 @@
                                                 <td>4% 할인 쿠폰 3개</td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
+                                            <tr th:classappend="${member.level == '2'} 	? 'on' : ''">
                                                 <th>
                                                     <span>Lv.2 골드</span>
                                                     <span>3,000~10,000점</span>
@@ -109,7 +109,7 @@
                                                 <td>6% 할인 쿠폰 3개</td>
                                                 <td>10% 할인 쿠폰 1개</td>
                                             </tr>
-                                            <tr>
+                                            <tr th:classappend="${member.level == '3'} 	? 'on' : ''">
                                                 <th>
                                                     <span>Lv.3 다이아몬드</span>
                                                     <span>10,000점~</span>
