@@ -90,7 +90,7 @@ $(document).ready(function(){
 	
 	//페이징 처리
 	function page(){
-		
+		if(window.location.href !== "/Beauty/admin/product/search"){
 		//체크박스 값 배열에 담기
 		var collection = new Array();
 	  	if($('input:checkbox[name=category2]:checked').length == 0){
@@ -123,6 +123,7 @@ $(document).ready(function(){
 				UpdatePg(totalPage);
 			}
 	  	});
+	  }
 	}
 	
 	//현재 페이지 번호 기준으로 앞뒤 5개씩의 페이지 번호만 보여줌

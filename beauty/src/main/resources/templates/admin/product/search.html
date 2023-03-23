@@ -75,6 +75,7 @@
                 <div class="searchPart">
                     <form th:action="@{/admin/product/search}" method="get">
                     	<input type="hidden" name="arg0" id="cate2">
+                    	<input type="hidden" name="pg" value="1">
                         <select name="param2" id="search">
                             <option value="prodName" th:if="${param2 == 'prodName'}">상품명</option>
                             <option value="prodNo" th:if="${param2 == 'prodNo'}">상품번호</option>
@@ -118,7 +119,19 @@
                     </tr>
                 </table>
                 <input type="button" value="선택삭제" class="delete">
-                <div class="page"></div>
+                <div class="page">
+                	<th:block th:if="${groups[0]>1}">
+			            <a th:href="@{/admin/product/search(arg0=${arg0},pg=${groups[0]-1},param2=${param2},arg2=${arg2})}" class="prev">이전</a>
+			        </th:block>
+			
+			        <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+			            <a th:href="@{/admin/product/search(arg0=${arg0},pg=${num},param2=${param2},arg2=${arg2})}" th:class="${num==currentPage? 'current':'num'}">[[${num}]]</a>
+			        </th:block>
+			
+			        <th:block th:if="${groups[1]<lastPageNum}">
+			            <a th:href="@{/admin/product/search(arg0=${arg0},pg=${groups[1]+1},param2=${param2},arg2=${arg2})}" class="next">다음</a>
+			        </th:block>
+                </div>
             </section>
         </main>
     </div>
