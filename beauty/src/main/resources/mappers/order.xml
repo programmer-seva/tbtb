@@ -56,7 +56,7 @@
 			SELECT DISTINCT po.prodNo,  po.colorName
 			FROM `cart` AS c JOIN `product_option` AS po
 			ON c.`prodNo` = po.`prodNo`
-			WHERE c.`cartNo` = '167'
+			WHERE c.`cartNo` = #{cartNo}
 		) A
 		GROUP BY `prodNo`;
 	</select>

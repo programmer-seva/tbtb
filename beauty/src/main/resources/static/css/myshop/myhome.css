@@ -35,6 +35,10 @@ div.myhomeFrame > div.benefit > table {
     margin: 15px 0 30px 0;
 }
 
+div.benefit > table tr.on > td {
+	background-color: #BFFFFF;
+}
+
 div.benefit > table th {
     height: 50px;
     background-color: #f5f5f5;
