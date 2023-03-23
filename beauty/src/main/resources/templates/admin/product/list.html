@@ -72,6 +72,7 @@
                 <div class="searchPart">
                     <form th:action="@{/admin/product/search}" method="get">
                     	<input type="hidden" name="arg0" id="cate2">
+                    	<input type="hidden" name="pg" value="1">
                         <select name="param2" id="search">
                             <option value="prodName">상품명</option>
                             <option value="prodNo">상품번호</option>

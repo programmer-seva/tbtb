@@ -1,5 +1,6 @@
 package kr.co.beauty.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,16 +111,34 @@ public class AdminController {
 
 	//상품목록에서 상품 검색 - 2023/03/17 윤사랑
 	@GetMapping("admin/product/search")
-	public String search(Model model, @RequestParam(required=false) String[] arg0, String arg2, String param2) {
-		List<Product1VO> products = service.searchProduct(arg0, param2, arg2);
-		//System.out.println(arg0);
-		//System.out.println(arg2);
-		//System.out.println(param2);
+	public String search(Model model, @RequestParam(required=false) String[] arg0, String arg2, String param2, String pg) {
+		
+		//검색결과 목록 페이징 처리
+		int currentPage = service.getCurrentPage(pg);
+        int arg3 = service.getLimitStart(currentPage);
+       
+        int total = service.selectCountProductByKeyword(param2, arg2);//검색한 상품 총 개수
+        int lastPageNum = service.getLastPageNum(total);
+        int pageStartNum = service.getPageStartNum(total, arg3);
+        int groups[] = service.getPageGroup(currentPage, lastPageNum);
+        //System.out.println("arg2=="+arg2);
+		//System.out.println("param2=="+param2);
+		//System.out.println("arg1=="+arg3);
+        
+        //검색한 상품 목록 불러오기
+        List<Product1VO> products = service.searchProduct(arg0, param2, arg2, arg3);
+		System.out.println(groups[0]);
+		System.out.println(groups[1]);
+		
 		//System.out.println(products);
 		model.addAttribute("products",  products);
 		model.addAttribute("arg0",  arg0);
 		model.addAttribute("param2",  param2);
 		model.addAttribute("arg2",  arg2);
+		model.addAttribute("groups", groups);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("lastPageNum", lastPageNum);
+        model.addAttribute("pageStartNum", pageStartNum);
 		
 		return "admin/product/search";
 	}
