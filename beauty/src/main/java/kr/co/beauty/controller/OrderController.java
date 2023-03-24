@@ -81,6 +81,7 @@ public class OrderController {
 		}
 		model.addAttribute("cartCount", cartCount);
 		session.setAttribute("type", "guest");
+		session.removeAttribute("viewOrder");
 		return "order/cart";
 	}
 
@@ -190,11 +191,11 @@ public class OrderController {
 		List<CartVO> viewOrder = (List<CartVO>) session.getAttribute("viewOrder");
 		int[] cartList = (int[]) session.getAttribute("cartList");
 		
-		if (cartList != null && cartList.length > 0) {
+		if (cartList != null && cartList.length > 0 && viewOrder == null) {
 			for (int cartNo : cartList) {
 				CartVO vo = service.selectCart(cartNo);
+				count = count + vo.getCount();
 				list.add(vo);
-				count += vo.getCount();
 			}
 		} else {
 			for (int i = 0; i < viewOrder.size(); i++) {
@@ -204,7 +205,7 @@ public class OrderController {
 				vo.setColor(viewOrder.get(i).getColor());
 				vo.setSize(viewOrder.get(i).getSize());
 				list.add(vo);
-				count++;
+				count = count + vo.getCount();
 			}
 		}
 		session.setAttribute("orderItem", list);
