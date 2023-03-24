@@ -166,7 +166,8 @@ $(function(){
 	
 	
 	//결제하기
-	$('.btnOrder').click(function(){
+	$('.btnOrder').click(function(e){
+		e.preventDefault;
 		if(!ordererOk){
 			alert('고객명을 확인하세요.')
 			$('input[name=orderer]').focus();

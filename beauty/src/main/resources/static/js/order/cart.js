@@ -116,7 +116,6 @@ $(function(){
 			data:{'cartNo': cartNo},
 			dataType:'json',
 			success:function(data){
-				console.log(data);
 				if(data == 1){
 					//장바구니 개수 변경, 가격 반영, 행 삭제
 					tr.remove();

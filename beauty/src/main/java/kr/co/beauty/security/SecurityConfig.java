@@ -56,13 +56,13 @@ public class SecurityConfig {
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		//사이트 위조 방지 설정 -> 배포시 제거
-		http.cors().and().csrf().disable();
+		//http.cors().and().csrf().disable();
 		
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
 			.requestMatchers("/myshop/**").authenticated()
 			.requestMatchers("/order/orderform?type=guest").permitAll()
-			.requestMatchers("/order/orderform/**").permitAll()
+			.requestMatchers("/order/orderform/type2/**").permitAll()
 			.requestMatchers("/order/orderform/type1/**").authenticated()
 			.requestMatchers("/order/orderform/**").authenticated()
 			.requestMatchers("/member/**").permitAll()
