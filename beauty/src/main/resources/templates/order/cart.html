@@ -1,7 +1,7 @@
 <!--
 날짜 : 2023/03/07, 03/11 modal
 이름 : 김동근
-내용 : 포트폴리오01 SpringBoot wishlist
+내용 : 포트폴리오01 SpringBoot cart
 -->
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
@@ -9,7 +9,7 @@
 				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
-        <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+        <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
         
         <!-- Private index, headfoot settings -->
         <!-- font -->
@@ -69,7 +69,7 @@
     <body>
         <div id="wrap">
             <!-- 헤더 -->
-            <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+            <th:block th:replace="~{_header :: headerFragment}"></th:block>
             
             <!-- 메인 -->
             <main>
@@ -93,17 +93,28 @@
                                 <!-- 카트 테이블 -->
                                 <article class="cartList">
                                     <table border="1" class="t1">
-                                        <thead>
+                                    <colgroup> 
+											<col width="5%">
+											<col width="10%">
+											<col width="40%">
+											<col width="10%">
+											<col width="10%">
+											<col width="10%">
+											<col width="10%">
+											<col width="9%">
+										</colgroup> 
+									<thead>
                                             <tr>
-                                                <th><input name="chkAll" type="checkbox"></th>
-                                                <th colspan="2">상품 정보</th>
-                                                <th>판매가</th>
-                                                <th>수량</th>
-                                                <th>합계</th>
-                                                <th>배송비</th>
-                                                <th>선택</th>
-                                            </tr>
-                                        </thead>
+											<th><input name="chkAll" type="checkbox"></th>
+											<th colspan="2">상품 정보</th>
+											<th>판매가</th>
+											<th>수량</th>
+											<th>합계</th>
+											<th>배송비</th>
+											<th>선택</th>
+										</tr>
+									</thead>
+									
                                         <tbody>
                                             <!-- 아이템 반복 -->
                                             <th:block th:if="${#lists.size(cartList) == 0}">
@@ -134,17 +145,17 @@
                                                 <td class="tdTotal">
                                                 	<!-- 할인 상품 구분 -->
                                                     <th:block th:if="${cart.discount == 0}">
-                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.disPrice, 0, 'COMMA')}"></span>원
+                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원
                                                 	</th:block>
                                                 	<th:block th:unless="${cart.discount == 0}">
                                                     	<span class="oriPrice" th:text="${#numbers.formatInteger(cart.price, 0, 'COMMA')}"></span>원 <br>
-                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.disPrice, 0, 'COMMA')}"></span>원 <span class="discount" th:text="${cart.discount}"></span>
+                                                    	<span class="price" th:text="${#numbers.formatInteger(cart.getSalePrice, 0, 'COMMA')}"></span>원 <span class="discount" th:text="${cart.discount}"></span>
                                                 	</th:block>
                                                 	<input type="hidden" id="totalCount" name="count" th:value="${cart.count}" readonly="readonly">
                                                 </td>
                                                 <td class="tdCount">
                                                     <span class="countFrame">
-                                                        <input id="count" type="text"  name="count" th:value="${cart.count}" readonly="readonly">
+                                                        <input type="text"  name="count" th:value="${cart.count}" readonly="readonly">
                                                         <a class="btnIncrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif" alt="수량증가"></a>
                                                         <a class="btnDecrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소"></a>
                                                     </span>
@@ -248,7 +259,7 @@
 	                                        </div>
 	                                        <div class="itemInfo">
 	                                            <a th:href="@{/product/view(pno=${wish.prodNo})}" th:text="${wish.prodName}"></a>
-	                                            <span class="price" th:text="${#numbers.formatInteger(wish.disPrice, 0, 'COMMA')}"></span>
+	                                            <span class="price" th:text="${#numbers.formatInteger(wish.getSalePrice, 0, 'COMMA')}"></span>
 	                                        </div>
 	                                    </div>
 	                                    </th:block>
@@ -328,7 +339,7 @@
 
             <!-- 푸터 -->
             
-            <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+            <th:block th:replace="~{_footer :: footerFragment}"></th:block>
         </div>
     </body>
 </html>

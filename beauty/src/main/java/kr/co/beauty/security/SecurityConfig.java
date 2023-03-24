@@ -8,6 +8,7 @@ package kr.co.beauty.security;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,8 +33,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 	
+	/*
 	@Autowired
 	AccessDeniedHandlerImpl accessDeniedHandler;
+	*/
 	@Autowired
 	AuthenticationEntryPointImpl authenticationEntryPoint;
 	
@@ -56,21 +59,26 @@ public class SecurityConfig {
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		//사이트 위조 방지 설정 -> 배포시 제거
-		http.cors().and().csrf().disable();
+		//http.cors().and().csrf().disable();
 		
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
+			.requestMatchers("/**").permitAll()
 			.requestMatchers("/myshop/**").authenticated()
-			.requestMatchers("/member/**").permitAll()
-			.requestMatchers("/**").permitAll();
+			.requestMatchers("/order/orderform?type=guest").permitAll()
+			.requestMatchers("/order/orderform/type2/**").permitAll()
+			.requestMatchers("/order/orderform/type1/**").authenticated()
+			.requestMatchers("/order/orderform/**").authenticated();
 				
+		/*
 		//로그인 alert
 		http.exceptionHandling()
 			//권한이 부족한 경우
 			.accessDeniedHandler(accessDeniedHandler)
 			//로그인이 되지 않은 경우
 			.authenticationEntryPoint(authenticationEntryPoint);
-				
+		*/
+		
 		//로그인 설정
 		http.formLogin()
 			.loginPage("/member/login")
@@ -96,6 +104,7 @@ public class SecurityConfig {
 		return http.build();
 	}
 	
+	/*
 	// 자동로그인
 	@Bean
     public PersistentTokenRepository tokenRepository() {
@@ -115,7 +124,7 @@ public class SecurityConfig {
 		// 로그인 인증 처리 서비스, 암호화 방식 설정(필수 설정)
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-	
+	*/
 	// 비밀번호 암호화
 	@Bean
     public PasswordEncoder encoder() {

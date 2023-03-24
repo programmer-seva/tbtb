@@ -29,18 +29,42 @@
 	</select>
 	<!-- 비밀번호 찾기 -->
 	<select id="findPw" resultType="String">
-		select `pass` from `member` where `name`=#{arg0} and `uid`=#{arg1} and `phone`=#{arg2};
-	</select>
-	
-	<!--  -->
-	<select id="selectMember" resultType="MemberVO">
-		SELECT * FROM `member`
-		WHERE `uid` = #{uid}
+		select `pass` from `member` where `uid`=#{arg1};
 	</select>
 	
 	<!-- 비밀번호 변경 -->
 	<update id="findPwResult">
 		update `member` set `pass`=#{arg1} where `uid`=#{arg0};
 	</update>
+	
+	
+	<!-- 김동근 -->
+	<select id="selectMember" resultType="MemberVO">
+		SELECT * FROM `member`
+		WHERE `uid` = #{uid};
+	</select>
+	
+	<!-- 내 프로필 -->
+	<update id="updateMember">
+		UPDATE `member`
+		SET `phone` = #{phone},
+			`zip` 	= #{zip},
+			`addr1` = #{addr1},
+			`addr2` = #{addr2},
+			`height`= #{height},
+			`weight`= #{weight}
+		WHERE `uid` = #{uid};
+	</update>
+	
+	<update id="savePassword">
+		UPDATE `member`
+		SET `pass` = #{pass}
+		WHERE `uid` = #{uid};
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM `member`
+		WHERE `uid` = #{uid};
+	</delete>
 	
 </mapper>

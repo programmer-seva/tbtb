@@ -53,15 +53,17 @@ $(document).ready(function(){
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
-				console.log(data.result);
+				//console.log(data.result);
 				$('.productRow').remove();
 				//최신순 정렬
 				const sortedResult = data.result.sort((a,b)=>b.prodNo-a.prodNo);
+				//console.log("sortedResult",sortedResult);
 				//상품목록 불러오기
 				let tag = "";
 				//상품목록에 상품 개수 10개까지만 보이게 함
 				const sliceArr = sortedResult.slice(start,start+10);
-				
+				//console.log("start",start);
+				//console.log("sliceArr",sliceArr);
 				for(let i=0; i<sliceArr.length; i++){
 						tag += "<tr class='productRow'>";
 						tag += "<td><input type='checkbox' name='선택체크' class='rowCheck' value='"+sliceArr[i].prodNo+"'></td>";
@@ -70,7 +72,8 @@ $(document).ready(function(){
 						tag += "<td>"+sliceArr[i].c1Name+"</td>";
 						tag += "<td>"+sliceArr[i].c2Name+"</td>";
 						tag += "<td><a href='#'>"+sliceArr[i].prodName+"</a></td>";
-						tag += "<td>"+sliceArr[i].disPrice+"</td>";
+						tag += "<td>"+sliceArr[i].price.toLocaleString()+"</td>";
+						tag += "<td>"+sliceArr[i].discount+"</td>";
 						tag += "<td>판매중</td>";
 						tag += "<td>"+sliceArr[i].stock+"</td>";
 						tag += "<td>"+sliceArr[i].hit+"</td>";
@@ -87,6 +90,7 @@ $(document).ready(function(){
 	
 	//페이징 처리
 	function page(){
+		if(window.location.pathname !== "/Beauty/admin/product/search"){
 		//체크박스 값 배열에 담기
 		var collection = new Array();
 	  	if($('input:checkbox[name=category2]:checked').length == 0){
@@ -119,11 +123,12 @@ $(document).ready(function(){
 				UpdatePg(totalPage);
 			}
 	  	});
+	  }
 	}
 	
 	//현재 페이지 번호 기준으로 앞뒤 5개씩의 페이지 번호만 보여줌
   	function UpdatePg(totalPage){
-  		//console.log(pg);
+  		console.log(pg);
   		var startPg = Math.max(pg-5,1);
   		
   		if(pg<6 && totalPage>=10){
@@ -133,9 +138,9 @@ $(document).ready(function(){
   		}else if(pg<6 && totalPage<10){
 			var endPg = totalPage;
 		  }
-  		//console.log("startPg",startPg);
-  		//console.log("endPg",endPg);
-  		//console.log("totalPage",totalPage);
+  		console.log("startPg",startPg);
+  		console.log("endPg",endPg);
+  		console.log("totalPage",totalPage);
   		$(".page").empty();
 		//페이지 만들기
   		let tag = "<span><a class='prev' href='#'>이전</a></span>";
@@ -199,10 +204,14 @@ $(document).ready(function(){
 	});
 	
   	//메뉴 체크박스가 변화할 때마다 상품목록 불러오기
-	$("ul").find("input[type=checkbox]").on("change",function(){
-    	CheckBoxList();
-    	page();
-    });
+  	$("ul").find("input[type=checkbox]").on("change",function(){
+		pg=1;
+		start=0;
+		CheckBoxList();
+		page();
+    	
+	});
+	
     
 
 	/* 상품목록 체크박스 제어 */
@@ -411,9 +420,9 @@ $(document).ready(function(){
     	$(document).on("input","#discount",function(){
     		let price=$("#price").val();
         	let discount=$("#discount").val();
-        	let disPrice =price*(100-discount)/100;
+        	let disPrice =price*(discount/100);
         	console.log(disPrice);
-			$("#point").val(Math.ceil(disPrice*1/100));
+			$("#point").val(Math.ceil((price-disPrice)*1/100));
     	});
     	
     	//이미지파일 유효성 검사

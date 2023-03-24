@@ -30,5 +30,5 @@ public interface ProductDAO {
 	public int checkCart(CartVO vo);
 	public int updateCart(CartVO vo);
 	public int addCart(CartVO vo);
-	
+	public void updateHit(String prodNo);
 }

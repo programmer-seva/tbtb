@@ -3,58 +3,49 @@
  * 이름 : 강중현 
  * 내용 : Beauty member findPwResult
  */
+  
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
 main>.findPw {
 	height: 500px;
 	width: 900px;
-	margin: 50px 288px 50px 288px;
+	margin: 100px auto 100px auto;
 	font-size: 12px;
 }
 
 main>.findPw>h2 {
 	height: 22px;
-	width: 1328px;
+	width: 100%;
 	font-size: 18px;
 	font-weight: 700;
 	text-align: left;
-	margin: 25px 250px;
+	margin: 10px 50px;
 }
 
 main>.findPw>form>.findPw {
+	line-height: 70px;
 	height: 350px;
-	width: 375px;
+	width: 450px;
 	border: 1px solid #dddddd;
-	margin: 0 426px 0 426px;
+	margin: 20px 100px;
 	padding: 50px 50px 50px 50px;
 }
 
 main>.findPw>form>.findPw>fieldset {
-	height: 300px;
-	width: 375px;
 	min-width: min-content;
 	vertical-align: top;
 	border: 0px none;
 }
 
-main>.findPw>form>.findPw>fieldset>table>tbody>tr>td {
+main>.findPw>form>.findPw>fieldset>.h2 {
 	font-size: 20px;
+	margin-button: 5px;
 }
 
-main>.findPw>form>.findPw>fieldset>p {
-	height: 34px;
-	width: 375px;
-	margin: 7px 0 0 0;
-	display: block;
-}
-
-main>.findPw>form>.findPw>fieldset>p>strong {
-	height: 16px;
-	width: 125px;
-	margin: 0 0 5px 0;
-	padding: 0 4px 0 4px;
-	display: inline-block;
-}
-
-main>.findPw>form>.findPw>fieldset>p>.findPw-input {
+input {
 	height: 28px;
 	width: 226px;
 	border: 1px solid #d5d5d5;
@@ -64,18 +55,23 @@ main>.findPw>form>.findPw>fieldset>p>.findPw-input {
 	display: inline-block;
 }
 
+main>.findPw>form>.findPw>fieldset>table>tbody>tr>td {
+	font-size: 20px;
+	margin: 10px;
+	width: 200px;
+}
+
 main>.findPw>form>.findPw>fieldset>div {
 	height: 150px;
-	width: 375px;
+	width: 500px;
 	padding: 10px 0 10px 0;
 }
 
 main>.findPw>form>.findPw>fieldset>div>.changePw {
-	height: 40px;
-	width: 326px;
+	width: 420px;
 	border: 1px solid #ffffff;
 	margin: 0 2px 5px 2px;
-	padding: 10px 8px 10px 8px;
+	padding: 20px 8px 20px 8px;
 	background-color: #444444;
 	color: #ffffff;
 	line-height: 18px;
@@ -85,11 +81,10 @@ main>.findPw>form>.findPw>fieldset>div>.changePw {
 }
 
 main>.findPw>form>.findPw>fieldset>div>.btnLogin {
-	height: 40px;
-	width: 150px;
+	width: 190px;
 	border: 1px solid #ffffff;
 	margin: 0 2px 0 2px;
-	padding: 10px 8px 10px 8px;
+	padding: 15px 10px 15px 10px;
 	background-color: #444444;
 	color: #ffffff;
 	line-height: 18px;
@@ -99,11 +94,10 @@ main>.findPw>form>.findPw>fieldset>div>.btnLogin {
 }
 
 main>.findPw>form>.findPw>fieldset>div>.findId {
-	height: 40px;
-	width: 150px;
+	width: 190px;
 	border: 1px solid #ffffff;
 	margin: 0 2px 0 2px;
-	padding: 10px 8px 10px 8px;
+	padding: 15px 10px 15px 10px;
 	background-color: #444444;
 	color: #ffffff;
 	line-height: 18px;

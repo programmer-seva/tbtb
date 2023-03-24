@@ -38,32 +38,35 @@ public class MemberController {
 	private UtilService util;
 
 	@GetMapping("member/login")
-	public String login(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
-		//장바구니 카운터
+	public String login(Model model, Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session) {
+		// 장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
-		if(cartCount == null) {
+		if (cartCount == null) {
 			cartCount = util.header(principal, nomember);
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
-		
+		String type = (String) session.getAttribute("type");
+		model.addAttribute("type", type);
+		session.removeAttribute("type");
 		return "member/login";
 	}
-	
 	@GetMapping("member/register")
-	public String register(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+	public String register(Model model, Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session) {
 		MemberVO vo = service.selectTerms();
 //		log.info("vo : " + vo);
 		model.addAttribute("memberVO", vo);
-		
-		//장바구니 카운터
+
+		// 장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
-		if(cartCount == null) {
+		if (cartCount == null) {
 			cartCount = util.header(principal, nomember);
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
-		
+
 		return "member/register";
 	}
 
@@ -88,10 +91,11 @@ public class MemberController {
 
 	// 아이디 찾기
 	@GetMapping("member/find")
-	public String find(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+	public String find(int type, Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+		model.addAttribute("type", type);
 		//장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
-		if(cartCount == null) {
+		if (cartCount == null) {
 			cartCount = util.header(principal, nomember);
 			session.setAttribute("cartCount", cartCount);
 		}
@@ -109,52 +113,52 @@ public class MemberController {
 		return result;
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("member/find2") public Map<String, Integer> findPw(String name,
-	 * String uid, String phone, HttpSession session) {
-	 * 
-	 * // System.out.println("name : " + name); String rs = service.findPw(name,
-	 * uid, phone); session.setAttribute("rs", rs); Map<String, Integer> result =
-	 * new HashMap<>(); result.put("result", 1);
-	 * 
-	 * return result; }
-	 */
+	@ResponseBody
+	@PostMapping("member/find2")
+	public int findPw(@RequestParam("uid") String uid, HttpSession session) {
+	  
+		// System.out.println("name : " + name);
+		String rs = service.findPw(uid);
+		session.setAttribute("uid", uid);
+	  
+		return 1;
+	}
 
 	// 아이디 찾기
 	@GetMapping("member/findIdResult")
-	public String findIdResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
+	public String findIdResult(Model model, Principal principal, @CookieValue(required = false) String nomember,
+			HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
 		model.addAttribute("uid", uid);
 
 		// MemberVO vo = service.selectUid(uid);
 		// model.addAttribute("vo", vo);
-		//장바구니 카운터
+		// 장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
-		if(cartCount == null) {
+		if (cartCount == null) {
 			cartCount = util.header(principal, nomember);
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
 		return "member/findIdResult";
 	}
-	
+
 	// 비밀번호 변경
 	@GetMapping("member/findPwResult")
 	public String findPwResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
-		String uid = (String) session.getAttribute("rs");
+		String uid = (String) session.getAttribute("uid");
+
 		model.addAttribute("uid", uid);
-		//장바구니 카운터
+		// 장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
-		if(cartCount == null) {
+		if (cartCount == null) {
 			cartCount = util.header(principal, nomember);
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
 		return "member/findPwResult";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("member/findPwResult")
 	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
@@ -166,7 +170,6 @@ public class MemberController {
 		map.put("result", result);
 		return map;
 	}
-	
 
 	// 이메일
 	@ResponseBody
@@ -179,9 +182,5 @@ public class MemberController {
 		data.put("code", code);
 		return data;
 	}
-	
-	
-	
-
 
 }

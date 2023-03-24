@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
     <script th:src="@{/js/main.js}"></script>
     <script th:src="@{/js/member/find.js}"></script>
     
-    <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+    <th:block th:replace="~{_header :: headerFragment}"></th:block>
 </head>
 <body>
     <div id="wrap">
@@ -71,7 +72,7 @@
                 </section>
             </div>
         </main>
-        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+        <th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 

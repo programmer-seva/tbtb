@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Beauty</title>
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/community/community.css}">
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>
         <main>
             <div>
                 <section>
@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td class="prod"><a href="#"><img src="./img/sample3.jpg" alt="상품이미지"></a></td>
+                        <td class="prod"><a href="#"><img th:src="@{/img/sample3.jpg}" alt="상품이미지"></a></td>
                         <td>교환/반품/취소문의</td>
                         <td class="title"><a th:href="@{community/board/qna_view}">사이즈교환</a></td>
                         <td>고객님</td>
@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td class="prod"><a href="#"><img src="./img/sample3.jpg" alt="상품이미지"></a></td>
+                        <td class="prod"><a href="#"><img th:src="@{/img/sample3.jpg}" alt="상품이미지"></a></td>
                         <td>교환/반품/취소문의</td>
                         <td class="title"><a href="#">사이즈교환</a></td>
                         <td>고객님</td>
@@ -60,7 +60,7 @@
                     </tr>
                     <tr>
                         <td>1</td>
-                        <td class="prod"><a href="#"><img src="./img/sample3.jpg" alt="상품이미지"></a></td>
+                        <td class="prod"><a href="#"><img th:src="@{/img/sample3.jpg}" alt="상품이미지"></a></td>
                         <td>교환/반품/취소문의</td>
                         <td class="title"><a href="#">사이즈교환</a></td>
                         <td>고객님</td>
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </main>
-        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+        <th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 </html>

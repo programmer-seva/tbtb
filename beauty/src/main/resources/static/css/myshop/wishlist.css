@@ -86,17 +86,23 @@ main div.wishListFrame > .wishList > .item > .itemThumb:hover .delete {
 }
 
 main div.wishListFrame > .wishList > .item > .itemInfo {
+	width: 100%;
     text-align: center;
     font-size: 13px;
     position: absolute;
     top: 200px;
+    margin-top: 3px;
 }
 
 main div.wishListFrame > .wishList > .item > .itemInfo > a {
-    display: block;
+    display: -webkit-box;
+    height: 34px;
     font-weight: lighter;
     border-bottom: solid 1px #e5e5e5;
     margin: 0 20px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+	overflow: hidden;
 }
 main div.wishListFrame > .wishList > .item > .itemInfo > span {
     color: #555555;

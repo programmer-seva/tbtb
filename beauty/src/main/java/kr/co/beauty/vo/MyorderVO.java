@@ -29,7 +29,11 @@ public class MyorderVO {
 		return rdate.substring(2,10);
 	}
 	
+	public int getSalePrice() {
+		return (price-disPrice);
+	}
+	
 	public int getTotalPrice() {
-		return (disPrice*count);
+		return (getSalePrice()*count);
 	}
 }

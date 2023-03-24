@@ -145,7 +145,8 @@ $(function() {
 	});
 
 	//email code check
-	$('.btnPw').click(function() {
+	$('.btnPw').click(function(e) {
+		e.preventDefault();
 		let insertCode = $('input[name=insertCode]').val();
 		let receivedCode = $('input[name=insertCode]').val();
 		//그냥 확인
@@ -162,7 +163,24 @@ $(function() {
 		if (code == receivedCode) {
 			//인증ㅇ
 			alert('인증완료 되었습니다.');
-			location.href = "/Beauty/member/findPwResult?uid=" + uid;
+			let uid = $('input[name=uid]').val();
+			let jsonData = {
+				"uid": uid
+			};
+			$.ajax({
+				url: '/Beauty/member/find2',
+				type: 'post',
+				data: jsonData,
+				dataType: 'json',
+				success: function(data) {
+					if (data == 1) {
+						location.href = "/Beauty/member/findPwResult";
+					} else {
+						alert('해당하는 사용자가 존재하지 않습니다.\n아이디와 이메일을 다시 확인하십시오.');
+					}
+				}
+			});
+			return false;
 		} else {
 			//인증x
 			alert('잘못된 인증번호입니다.');
@@ -170,7 +188,14 @@ $(function() {
 		}
 	});
 
+	
+	// 비밀번호 찾기
+	$('.btnPw').click(function() {
+		
+	});
+	
 
+	
 	// 비밀번호 변경
 	$(function() {
 		$('.changePw').click(function(e) {
