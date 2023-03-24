@@ -90,7 +90,7 @@ $(document).ready(function(){
 	
 	//페이징 처리
 	function page(){
-		if(window.location.href !== "/Beauty/admin/product/search"){
+		if(window.location.pathname !== "/Beauty/admin/product/search"){
 		//체크박스 값 배열에 담기
 		var collection = new Array();
 	  	if($('input:checkbox[name=category2]:checked').length == 0){
