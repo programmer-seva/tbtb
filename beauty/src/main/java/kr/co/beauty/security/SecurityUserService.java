@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.beauty.entity.MemberEntity;
 import kr.co.beauty.repository.MemberRepo;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class SecurityUserService implements UserDetailsService{
 	

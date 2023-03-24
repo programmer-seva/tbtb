@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import kr.co.beauty.service.MainService;
 import kr.co.beauty.service.ProductService;
 import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.CookieManager;
