@@ -3,6 +3,12 @@
  * 이름 : 강중현 
  * 내용 : Beauty member findPwResult
  */
+  
+* {
+	margin: 0 auto;
+	padding: 0;
+}
+
 main>.findPw {
 	height: 500px;
 	width: 900px;
