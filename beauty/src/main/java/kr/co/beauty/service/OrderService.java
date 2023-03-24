@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import kr.co.beauty.dao.Member1DAO;
+import kr.co.beauty.dao.MemberDAO;
 import kr.co.beauty.dao.OrderDAO;
 import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.MemberVO;
@@ -18,7 +18,7 @@ import kr.co.beauty.vo.TermsVO;
 public class OrderService {
 
 	@Autowired
-	private Member1DAO daoMem;
+	private MemberDAO daoMem;
 	@Autowired
 	private OrderDAO daoOrd;
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import kr.co.beauty.dao.Member1DAO;
+import kr.co.beauty.dao.MemberDAO;
 import kr.co.beauty.dao.MyshopDAO;
 import kr.co.beauty.vo.MemberVO;
 import kr.co.beauty.vo.MyorderVO;
@@ -17,7 +17,7 @@ public class MyshopService {
 
 	// JPA
 	@Autowired
-	private Member1DAO daoMem;
+	private MemberDAO daoMem;
 	@Autowired
 	private MyshopDAO daoMy;
 
