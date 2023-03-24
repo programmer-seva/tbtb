@@ -1,4 +1,6 @@
 $(function(){
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
 	totalPrice();
 	
     /* total Table에 쓰이는 변수 */
@@ -61,7 +63,10 @@ $(function(){
 			url:'/Beauty/order/cartIncrease',
 			type:'POST',
 			data:{'cartNo': cartNo},
-			dataType:'json'
+			dataType:'json',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    }
 		});
 	});
 	
@@ -86,7 +91,10 @@ $(function(){
 			url:'/Beauty/order/cartDecrease',
 			type:'POST',
 			data:{'cartNo': cartNo},
-			dataType:'json'
+			dataType:'json',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    }
 		});
 	});
 	
@@ -111,6 +119,9 @@ $(function(){
 			type:'GET',
 			data:{'cartNo': cartNo},
 			dataType:'json',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success:function(data){
 				if(data == 1){
 					//장바구니 개수 변경, 가격 반영, 행 삭제
@@ -142,6 +153,9 @@ $(function(){
 				type:'POST',
 				data:{},
 				dataType:'json',
+					beforeSend: function(xhr){
+			        xhr.setRequestHeader(header, token);
+			    },
 				success:function(data){
 					if(data == 1){
 						//장바구니 개수 변경
@@ -182,6 +196,9 @@ $(function(){
 			type:'POST',
 			data:{'chkList': chkList},
 			dataType:'json',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success:function(data){
 				if(data == 1){
 					for(let chk of chkList){

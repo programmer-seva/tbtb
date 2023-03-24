@@ -33,10 +33,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 	
-	/*
 	@Autowired
 	AccessDeniedHandlerImpl accessDeniedHandler;
-	*/
 	@Autowired
 	AuthenticationEntryPointImpl authenticationEntryPoint;
 	
@@ -63,12 +61,12 @@ public class SecurityConfig {
 		
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
-			.requestMatchers("/**").permitAll()
 			.requestMatchers("/myshop/**").authenticated()
 			.requestMatchers("/order/orderform?type=guest").permitAll()
 			.requestMatchers("/order/orderform/type2/**").permitAll()
 			.requestMatchers("/order/orderform/type1/**").authenticated()
-			.requestMatchers("/order/orderform/**").authenticated();
+			.requestMatchers("/order/orderform/**").authenticated()
+			.requestMatchers("/**").permitAll();
 				
 		/*
 		//로그인 alert

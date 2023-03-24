@@ -9,6 +9,10 @@
 				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
+	    <!-- 스프링 시큐리티 csrf token 누락 -->
+	    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+		<meta name="_csrf" th:content="${_csrf.token}">
+		<!-- 스프링 시큐리티 csrf token 누락 -->
         <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
         
         <!-- Private index, headfoot settings -->
@@ -37,6 +41,8 @@
         <title>Cart</title>
         <script th:inline="javaScript">
             $(function(){
+        		var header = $("meta[name='_csrf_header']").attr('content');
+        		var token = $("meta[name='_csrf']").attr('content');
                 $('[data-bs-toggle="popover"]').popover(); 
             	
                 // 관심상품등록
@@ -53,6 +59,9 @@
             			type:'POST',
             			data:{'prodNo': prodNo},
             			dataType:'json',
+        				beforeSend: function(xhr){
+        			        xhr.setRequestHeader(header, token);
+        			    },
             			success:function(data){
             				if(data == 1){
             					alert('등록되었습니다.');

@@ -2,6 +2,8 @@
  * 
  */
 $(function(){
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
 	//정규표현식
 	let regName = /^[가-힣]{2,4}$/
 	let regHp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
@@ -267,6 +269,9 @@ $(function(){
 			method : 'POST',
 			data : jsonData,
 			dataType : 'JSON',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success : function(data){
 				location.href="/Beauty/order/ordercomplete?ordNo="+data.result;
 			}

@@ -3,12 +3,19 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+    <!-- 스프링 시큐리티 csrf token 누락 -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!-- 스프링 시큐리티 csrf token 누락 -->
 	<th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <link rel="stylesheet" th:href="@{/css/product/view.css}">
     <link rel="stylesheet" th:href="@{/css/color.css}">
     <script th:src="@{/js/product/product.js}"></script>
 	<script th:inline="javascript">
 	$(function(){
+		var header = $("meta[name='_csrf_header']").attr('content');
+		var token = $("meta[name='_csrf']").attr('content');
+		
 		$('.selectColor').click(function() {
 			$('.selectColor').removeClass('select');
 			$(this).addClass('select on');
@@ -125,6 +132,9 @@
 				method : 'POST',
 				data : jsonData,
 				dataType : "JSON",
+				beforeSend: function(xhr){
+			        xhr.setRequestHeader(header, token);
+			    },
 				success : function(data){
 					if(data.result > 0){
 						alert('위시리스트에 등록되었습니다.');
@@ -143,6 +153,9 @@
 				method: 'POST',
 				data: { jsonArray: JSON.stringify(jsonArray) },
 				dataType: 'JSON',
+				beforeSend: function(xhr){
+			        xhr.setRequestHeader(header, token);
+			    },
 				success: function(data) {
 					if (data.result > 0) {
 						$('.goCart').css('display', 'block');
@@ -160,6 +173,9 @@
 				method: 'POST',
 				data: { jsonArray: JSON.stringify(jsonArray) },
 				dataType: 'JSON',
+				beforeSend: function(xhr){
+			        xhr.setRequestHeader(header, token);
+			    },
 				success: function(data) {
 					if (data.result > 0) {
 						location.href = "/Beauty/order/orderform";
