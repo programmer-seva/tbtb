@@ -1,7 +1,7 @@
 <!--
 날짜 : 2023/03/07, 03/11 modal
 이름 : 김동근
-내용 : 포트폴리오01 SpringBoot wishlist
+내용 : 포트폴리오01 SpringBoot cart
 -->
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
@@ -155,7 +155,7 @@
                                                 </td>
                                                 <td class="tdCount">
                                                     <span class="countFrame">
-                                                        <input id="count" type="text"  name="count" th:value="${cart.count}" readonly="readonly">
+                                                        <input type="text"  name="count" th:value="${cart.count}" readonly="readonly">
                                                         <a class="btnIncrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_up.gif" alt="수량증가"></a>
                                                         <a class="btnDecrease" href="#"><img src="//img.echosting.cafe24.com/skin/base/common/btn_quantity_down.gif" alt="수량감소"></a>
                                                     </span>
