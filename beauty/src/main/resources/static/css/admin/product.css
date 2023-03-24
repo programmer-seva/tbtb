@@ -151,8 +151,35 @@ main > section{
 #admin-product-list > table tr > td:nth-child(2){
 	width: 75px;
 }
+#admin-product-list > table tr > td:nth-child(3){
+	width: 70px;
+}
+#admin-product-list > table tr > td:nth-child(4){
+	width: 50px;
+}
+#admin-product-list > table tr > td:nth-child(5){
+	width: 90px;
+}
 #admin-product-list > table tr > td:nth-child(6){
 	text-align: left;
+}
+#admin-product-list > table tr > td:nth-child(7){
+	width: 70px;
+}
+#admin-product-list > table tr > td:nth-child(8){
+	width: 50px;
+}
+#admin-product-list > table tr > td:nth-child(9){
+	width: 60px;
+}
+#admin-product-list > table tr > td:nth-child(10){
+	width: 50px;
+}
+#admin-product-list > table tr > td:nth-child(11){
+	width: 40px;
+}
+#admin-product-list > table tr > td:nth-child(12){
+	width: 80px;
 }
 #admin-product-list > table tr > td:last-child > input{
     border: 0px;

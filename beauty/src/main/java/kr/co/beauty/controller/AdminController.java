@@ -128,8 +128,8 @@ public class AdminController {
         
         //검색한 상품 목록 불러오기
         List<Product1VO> products = service.searchProduct(arg0, param2, arg2, arg3);
-		System.out.println(groups[0]);
-		System.out.println(groups[1]);
+		//System.out.println(groups[0]);
+		//System.out.println(groups[1]);
 		
 		//System.out.println(products);
 		model.addAttribute("products",  products);
