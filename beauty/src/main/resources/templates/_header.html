@@ -22,7 +22,7 @@
 		        </li>
 		        <!-- 권한이 1인(일반회원) 사용자가 보이는 블럭 -->
 	           	<li sec:authorize="hasAnyRole('1','3')">
-	           		<a><span class="head_name" sec:authentication="principal.member.name"></span></a>
+	           		<a th:href="@{/myshop/index}"><span class="head_name" sec:authentication="principal.member.name"></span></a>
 		        </li>
 	           	<li sec:authorize="hasAnyRole('1','3')">
 					<a th:href="@{/member/logout}">로그아웃</a>
