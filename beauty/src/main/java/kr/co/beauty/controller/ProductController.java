@@ -51,6 +51,7 @@ public class ProductController {
 	public String productList(Model model, int cate, Principal principal,
 			@CookieValue(required = false) String nomember, @RequestParam(required = false) String sort,
 			@RequestParam(required = false) Integer pg, HttpSession session) {
+		log.info("상품리스트 출력");
 		if (pg == null) {
 			pg = 1;
 		}
@@ -95,6 +96,7 @@ public class ProductController {
 	@GetMapping("shop/view")
 	public String productView(Model model, @RequestParam("pno") String prodNo, Principal principal,
 			@CookieValue(required = false) String nomember, HttpServletResponse resp, HttpSession session) {
+		log.info("상품 보기 : " + prodNo);
 		ProductVO prod = service.selectProduct(prodNo);
 		//조회수+1
 		service.updateHit(prodNo);

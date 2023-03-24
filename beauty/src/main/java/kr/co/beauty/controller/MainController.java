@@ -18,11 +18,13 @@ import kr.co.beauty.service.MainService;
 import kr.co.beauty.service.UtilService;
 import kr.co.beauty.utils.CookieManager;
 import kr.co.beauty.vo.ProductVO;
+import lombok.extern.log4j.Log4j2;
 
 /*
  * 작업자 : 박진휘
  * 내용 : 메인페이지
  */
+@Log4j2
 @Controller
 @MapperScan("kr.co.beauty.vo")
 public class MainController {
@@ -36,6 +38,7 @@ public class MainController {
 	@GetMapping(value = { "/", "index" })
 	public String index(Model model, Principal principal, @CookieValue(required = false) String nomember,
 			HttpSession session) {
+		log.info("메인페이지");
 		List<ProductVO> vo = service.selectNewItem();
 		List<ProductVO> outer = service.selectBestItem("100");
 		List<ProductVO> top = service.selectBestItem("200");
