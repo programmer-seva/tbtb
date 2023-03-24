@@ -72,7 +72,7 @@ $(document).ready(function(){
 						tag += "<td>"+sliceArr[i].c1Name+"</td>";
 						tag += "<td>"+sliceArr[i].c2Name+"</td>";
 						tag += "<td><a href='#'>"+sliceArr[i].prodName+"</a></td>";
-						tag += "<td>"+sliceArr[i].price+"</td>";
+						tag += "<td>"+sliceArr[i].price.toLocaleString()+"</td>";
 						tag += "<td>"+sliceArr[i].discount+"</td>";
 						tag += "<td>판매중</td>";
 						tag += "<td>"+sliceArr[i].stock+"</td>";
