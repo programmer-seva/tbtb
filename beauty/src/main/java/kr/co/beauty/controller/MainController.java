@@ -38,19 +38,26 @@ public class MainController {
 	@GetMapping(value = { "/", "index" })
 	public String index(Model model, Principal principal, @CookieValue(required = false) String nomember,
 			HttpSession session) {
+		
 		log.info("메인페이지");
+		
+		// 새상품
 		List<ProductVO> vo = service.selectNewItem();
+		
+		// 대분류상품
 		List<ProductVO> outer = service.selectBestItem("100");
 		List<ProductVO> top = service.selectBestItem("200");
 		List<ProductVO> bottom = service.selectBestItem("300");
 		List<ProductVO> dress = service.selectBestItem("400");
 		List<ProductVO> etc = service.selectBestItem("500");
+		
 		model.addAttribute("lists", vo);
 		model.addAttribute("outer", outer);
 		model.addAttribute("top", top);
 		model.addAttribute("bottom", bottom);
 		model.addAttribute("dress", dress);
 		model.addAttribute("etc", etc);
+		
 		// 장바구니 카운터
 		Object cartCount = session.getAttribute("cartCount");
 		if (cartCount == null) {
@@ -58,6 +65,7 @@ public class MainController {
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
+		
 		return "index";
 	}
 
