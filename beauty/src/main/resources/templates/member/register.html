@@ -2,29 +2,21 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<meta charset="UTF-8">
-<title>Beauty</title>
-<!-- 제이쿼리 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- swiper -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<!-- font -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<!-- 주소 -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<link rel="stylesheet" th:href="@{/css/headfoot.css}">
-<link rel="stylesheet" th:href="@{/css/index.css}">
-<link rel="stylesheet" th:href="@{/css/member/register.css}">
-
-<script th:src="@{/js/main.js}"></script>
-<script th:src="@{/js/member/register.js}"></script>
-<script th:src="@{/js/postcode.js}"></script>
-<th:block th:replace="~{_header :: headerFragment}"></th:block>
+	<meta charset="UTF-8">
+	<th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
+	<!-- 주소 -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<!-- 배포 ajax통신 403에러 -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!-- css -->
+	<link rel="stylesheet" th:href="@{/css/index.css}">
+	<link rel="stylesheet" th:href="@{/css/member/register.css}">
+	<!-- js -->
+	<script th:src="@{/js/member/register.js}"></script>
+	<script th:src="@{/js/postcode.js}"></script>
+	
+	<th:block th:replace="~{_header :: headerFragment}"></th:block>
 </head>
 <body>
 	<div id="wrap">

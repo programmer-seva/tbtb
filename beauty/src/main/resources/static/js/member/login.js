@@ -1,7 +1,10 @@
 
-let regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+
 
 $(function() {
+	
+	let regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+	
 	$('.member').click(function() {
 		$('.m1').css('display', 'block');
 		$('.m2').css('display', 'none');

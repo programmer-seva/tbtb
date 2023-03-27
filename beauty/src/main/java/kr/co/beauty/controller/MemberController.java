@@ -37,9 +37,9 @@ public class MemberController {
 	@Autowired
 	private UtilService util;
 
+	// 로그인
 	@GetMapping("member/login")
-	public String login(Model model, Principal principal, @CookieValue(required = false) String nomember,
-			HttpSession session) {
+	public String login(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		// 장바구니 카운터
 		String cartCount = (String) session.getAttribute("cartCount");
 		if (cartCount == null) {
@@ -52,9 +52,10 @@ public class MemberController {
 		session.removeAttribute("type");
 		return "member/login";
 	}
+	
+	// 회원가입
 	@GetMapping("member/register")
-	public String register(Model model, Principal principal, @CookieValue(required = false) String nomember,
-			HttpSession session) {
+	public String register(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		MemberVO vo = service.selectTerms();
 //		log.info("vo : " + vo);
 		model.addAttribute("memberVO", vo);
@@ -69,7 +70,8 @@ public class MemberController {
 
 		return "member/register";
 	}
-
+	
+	// 회원가입
 	@PostMapping("member/register")
 	public String register(MemberVO vo, HttpServletRequest req) {
 		String regip = req.getRemoteAddr();
@@ -103,6 +105,7 @@ public class MemberController {
 		return "member/find";
 	}
 
+	// 아이디 찾기 - 이름, 휴대폰 번호 입력 후 아이디 표시(고객님의 아이디는 xxx입니다)
 	@ResponseBody
 	@PostMapping("member/find1")
 	public Map<String, String> find(Model model, String name, String phone, HttpSession session) {
@@ -113,10 +116,11 @@ public class MemberController {
 		return result;
 	}
 
+	// 비밀번호 찾기 - 이메일 인증 후 아이디 표시 (고객님의 아이디는 xxx입니다)
 	@ResponseBody
 	@PostMapping("member/find2")
 	public int findPw(@RequestParam("uid") String uid, HttpSession session) {
-	  
+
 		// System.out.println("name : " + name);
 		String rs = service.findPw(uid);
 		session.setAttribute("uid", uid);
@@ -124,10 +128,9 @@ public class MemberController {
 		return 1;
 	}
 
-	// 아이디 찾기
+	// 아이디 찾기 - (고객님의 아이디는 xxx입니다)
 	@GetMapping("member/findIdResult")
-	public String findIdResult(Model model, Principal principal, @CookieValue(required = false) String nomember,
-			HttpSession session) {
+	public String findIdResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		String uid = (String) session.getAttribute("rs");
 		model.addAttribute("uid", uid);
 
@@ -143,7 +146,7 @@ public class MemberController {
 		return "member/findIdResult";
 	}
 
-	// 비밀번호 변경
+	// 비밀번호 변경 - (고객님의 아이디는 xxx입니다) + 비밀번호 변경
 	@GetMapping("member/findPwResult")
 	public String findPwResult(Model model, Principal principal, @CookieValue(required = false) String nomember, HttpSession session) {
 		String uid = (String) session.getAttribute("uid");
@@ -158,7 +161,8 @@ public class MemberController {
 		model.addAttribute("cartCount", cartCount);
 		return "member/findPwResult";
 	}
-
+	
+	// 비밀번호 변경 - (고객님의 아이디는 xxx입니다) + 비밀번호 변경
 	@ResponseBody
 	@PostMapping("member/findPwResult")
 	public Map<String, Integer> findPwChange(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
@@ -171,7 +175,7 @@ public class MemberController {
 		return map;
 	}
 
-	// 이메일
+	// 이메일 발송(회원가입, 비밀번호 찾기)
 	@ResponseBody
 	@PostMapping("member/emailAuth")
 	public Map<String, Integer> checkEmail(@RequestParam("email") String email) throws Exception {
