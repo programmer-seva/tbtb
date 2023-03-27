@@ -77,47 +77,52 @@ public class OrderService {
 	public int saveOption(CartVO vo) {
 		return daoOrd.saveOption(vo);
 	}
-
-	/* 박진휘 */
-	// 주문완료
+	
+	/********************************************************************************************************************/
+	/********************************************************************************************************************/
+	/* 박진휘 (주문, 주문완료 처리) */
+	
+	// 주문완료 검색
 	public OrdercompleteVO selectOrdercomplete(int ordNo) {
 		return daoOrd.selectOrdercomplete(ordNo);
 	}
 
+	// 주문제품 낱개 검색
 	public List<OrderVO> selectOrder(int ordNo) {
 		return daoOrd.selectOrder(ordNo);
 	}
 
-	// 주문결제 페이지
-	public CartVO selectProdut(int prodNo) {
+	// 상세보기 > 주문하기 :: 제품 검색
+	public CartVO selectProduct(int prodNo) {
 		return daoOrd.selectProdut(prodNo);
 	}
-
+	// 장바구니 > 주문하기 :: 장바구니 검색
 	public CartVO selectCart(int cartNo) {
 		return daoOrd.selectCart(cartNo);
 	}
 
-	// 구매약관
+	// 비회원 구매약관
 	public TermsVO orderTerms() {
 		return daoOrd.orderTerms();
 	}
 
+	// 트랜잭션
 	@Transactional
 	public void complete(OrdercompleteVO vo, List<CartVO> item) {
-		// 주문완료 테이블
+		// 주문완료 Insert
 		daoOrd.completeInsert(vo);
 
 		// 유저 포인트 차감,적립
 		daoOrd.updateMemberPoint(vo);
 
-		// 상품판매기록 & 장바구니삭제
+		// 주문 Insert & 장바구니 Delete
 		for (int i = 0; i < item.size(); i++) {
 			insertOrder(vo.getOrdNo(), item.get(i));
 			deleteCart(item.get(i).getCartNo());
 		}
 	}
 
-	// 주문완료전 주문테이블삽입
+	// 주문완료전 주문 Insert
 	public void insertOrder(int ordNo, CartVO vo) {
 		OrderVO result = new OrderVO();
 		result.setOrdNo(ordNo);
@@ -133,12 +138,12 @@ public class OrderService {
 		daoOrd.insertOrder(result);
 	}
 
-	// 주문완료전 장바구니삭제
+	// 주문완료전 장바구니 Delete
 	public void deleteCart(int cartNo) {
 		daoOrd.deleteCart(cartNo);
 	}
 
-	// 주문(회원)
+	// 주문완료전 주문완료 Insert
 	public void completeInsert(OrdercompleteVO vo) {
 		daoOrd.completeInsert(vo);
 	}

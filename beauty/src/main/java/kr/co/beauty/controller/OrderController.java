@@ -13,8 +13,6 @@ import java.util.Map;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.annotation.security.RunAs;
 import jakarta.servlet.http.HttpSession;
 import kr.co.beauty.service.MyshopService;
 import kr.co.beauty.service.OrderService;
@@ -173,24 +170,39 @@ public class OrderController {
 		return service.saveOption(vo);
 	}
 
-	/* 박진휘 */
+	/********************************************************************************************************************/
+	/********************************************************************************************************************/
+	/* 박진휘 (주문, 주문완료 처리) */
 	@GetMapping("order/orderWait")
 	public String orderWait(HttpSession session,
 			@RequestParam(required = false, value = "cartNo") int[] cartList) {
+		
+		log.debug("장바구니 > 주문하기");
+		
+		// 장바구니에서 주문하기로 가면 보안에 걸려서 파라미터가 날라기기 때문에 세션에 잠시 넣어준다.
 		session.setAttribute("cartList", cartList);
+		
 		return "redirect:/order/orderform";
 	}
 	// 상세보기 > 주문결제 (회원)
 	@GetMapping("order/orderform")
 	public String order2type1(Model model, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
+
 		log.debug("회원 주문페이지");
+		
+		// 상품정보를 담을 리스트 선언
 		List<CartVO> list = new ArrayList<>();
+		// 상품 총 개수를 위한 count
 		int count = 0;
+		
+		// 상품보기 > 주문 클릭시 viewOrder != null
 		@SuppressWarnings("unchecked")
 		List<CartVO> viewOrder = (List<CartVO>) session.getAttribute("viewOrder");
+		// 장바구니 > 주문 클릭시 cartList != null
 		int[] cartList = (int[]) session.getAttribute("cartList");
 		
+		// 리스트, 개수 추가
 		if (cartList != null && cartList.length > 0 && viewOrder == null) {
 			for (int cartNo : cartList) {
 				CartVO vo = service.selectCart(cartNo);
@@ -199,7 +211,7 @@ public class OrderController {
 			}
 		} else {
 			for (int i = 0; i < viewOrder.size(); i++) {
-				CartVO vo = service.selectProdut(viewOrder.get(i).getProdNo());
+				CartVO vo = service.selectProduct(viewOrder.get(i).getProdNo());
 				vo.setCartNo(0);
 				vo.setCount(viewOrder.get(i).getCount());
 				vo.setColor(viewOrder.get(i).getColor());
@@ -211,6 +223,7 @@ public class OrderController {
 		session.setAttribute("orderItem", list);
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
+		
 		// 장바구니 카운터
 		Object cartCount = session.getAttribute("cartCount");
 		if (cartCount == null) {
@@ -218,10 +231,12 @@ public class OrderController {
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
-		// 로그인ㅇ
+		
+		// 로그인한 유저의 정보
 		String uid = principal.getName();
 		MemberVO vo = service.selectMember(uid);
 		model.addAttribute("member", vo);
+		
 		return "order/orderform";
 	}
 
@@ -229,15 +244,24 @@ public class OrderController {
 	@GetMapping("order/non_orderform")
 	public String order2type2(String type, Model model, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.debug("비회원 주문페이지");
+		
+		log.info("비회원 주문페이지");
+		
+		// 비회원 type 확인
 		if (type.equals("guest")) {
+			// 상품정보를 담을 리스트 선언
 			List<CartVO> list = new ArrayList<>();
+			// 상품 총 개수를 위한 count
 			int count = 0;
+			
+			// 상품보기 > 주문 클릭시 viewOrder != null
 			@SuppressWarnings("unchecked")
 			List<CartVO> viewOrder = (List<CartVO>) session.getAttribute("viewOrder");
+			// 장바구니 > 주문 클릭시 cartList != null
 			int[] cartList = (int[]) session.getAttribute("cartList");
 			
-			if (cartList != null && cartList.length > 0) {
+			// 리스트, 개수 추가
+			if (cartList != null && cartList.length > 0 && viewOrder == null) {
 				for (int cartNo : cartList) {
 					CartVO vo = service.selectCart(cartNo);
 					list.add(vo);
@@ -245,7 +269,7 @@ public class OrderController {
 				}
 			} else {
 				for (int i = 0; i < viewOrder.size(); i++) {
-					CartVO vo = service.selectProdut(viewOrder.get(i).getProdNo());
+					CartVO vo = service.selectProduct(viewOrder.get(i).getProdNo());
 					vo.setCartNo(0);
 					vo.setCount(viewOrder.get(i).getCount());
 					vo.setColor(viewOrder.get(i).getColor());
@@ -257,6 +281,7 @@ public class OrderController {
 			session.setAttribute("orderItem", list);
 			model.addAttribute("list", list);
 			model.addAttribute("count", count);
+			
 			// 장바구니 카운터
 			Object cartCount = session.getAttribute("cartCount");
 			if (cartCount == null) {
@@ -264,10 +289,14 @@ public class OrderController {
 				session.setAttribute("cartCount", cartCount);
 			}
 			model.addAttribute("cartCount", cartCount);
+			
+			//비회원 약관
 			TermsVO terms = service.orderTerms();
 			model.addAttribute("terms", terms);
+			
 			return "order/non-orderform";
 		} else {
+			// 타입이 없으면 메인페이지로
 			return "redirect:/Beauty/index";
 		}
 
@@ -277,15 +306,27 @@ public class OrderController {
 	@PostMapping("order/orderform/type1")
 	public Map<String, Integer> order2type1(OrdercompleteVO vo, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.debug("회원 주문처리");
+		
+		log.info("회원 주문처리");
+		
+		// 주문페이지에서 가져온 제품정보
 		@SuppressWarnings("unchecked")
 		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
+		
+		// 주문완료, 주문테이블 Insert
 		service.complete(vo, item);
+		
+		// 사용한 제품정보 제거
 		session.removeAttribute("orderItem");
-		String cartCount = util.header(principal, nomember);
-		session.setAttribute("cartCount", cartCount);
+		
+		// JSON 리턴
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", vo.getOrdNo());
+		
+		// 장바구니 카운터 재계산
+		String cartCount = util.header(principal, nomember);
+		session.setAttribute("cartCount", cartCount);
+		
 		return result;
 	}
 
@@ -293,15 +334,27 @@ public class OrderController {
 	@PostMapping("order/orderform/type2")
 	public Map<String, Integer> order2type2(OrdercompleteVO vo, HttpSession session, Principal principal,
 			@CookieValue(required = false) String nomember) {
-		log.debug("비회원 주문처리");
+		
+		log.info("비회원 주문처리");
+		
+		// 주문페이지에서 가져온 제품정보
 		@SuppressWarnings("unchecked")
 		List<CartVO> item = (List<CartVO>) session.getAttribute("orderItem");
+		
+		// 주문완료, 주문테이블 Insert
 		service.complete(vo, item);
+		
+		// 사용한 제품정보 제거
 		session.removeAttribute("orderItem");
+		
+		// JSON 리턴
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", vo.getOrdNo());
+		
+		// 장바구니 카운터 재계산
 		String cartCount = util.header(principal, nomember);
 		session.setAttribute("cartCount", cartCount);
+		
 		return result;
 	}
 
@@ -309,11 +362,17 @@ public class OrderController {
 	@GetMapping("order/ordercomplete")
 	public String ordercomplete2(Model model, int ordNo, Principal principal,
 			@CookieValue(required = false) String nomember, HttpSession session) {
-		log.debug("주문완료 페이지");
+		
+		log.info("주문완료 페이지");
+		
+		// 주문완료 검색
 		OrdercompleteVO vo = service.selectOrdercomplete(ordNo);
+		
+		// 주문제품 낱개 검색
 		List<OrderVO> orders = service.selectOrder(ordNo);
 		model.addAttribute("vo", vo);
 		model.addAttribute("orders", orders);
+		
 		// 장바구니 카운터
 		Object cartCount = session.getAttribute("cartCount");
 		if (cartCount == null) {
@@ -321,6 +380,7 @@ public class OrderController {
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
+		
 		return "order/ordercomplete";
 	}
 }

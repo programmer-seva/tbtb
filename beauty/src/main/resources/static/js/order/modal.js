@@ -1,5 +1,7 @@
 $(function(){
-    
+    var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
+	
     let selectedRow;
     
     /* 옵션변경모달버튼 */
@@ -16,6 +18,9 @@ $(function(){
 			type:'POST',
 			data: {'cartNo':cartNo},
 			dataType:'text',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success:function(data){
 				//값 구분 후 추가
 				$('#optionTable div.color').empty();
@@ -61,6 +66,9 @@ $(function(){
 					'color'	:color
 				},
 				dataType:'text',
+				beforeSend: function(xhr){
+			        xhr.setRequestHeader(header, token);
+			    },
 				success:function(data){
 					//버튼 초기화
 					$('#optionTable td > div.size > input[name=chkSize]').prop('disabled', 'disabled');
@@ -111,6 +119,9 @@ $(function(){
 				data: JSON.stringify(vo),
 				dataType:'json',
 				contentType: 'application/json',
+				beforeSend: function(xhr){
+			        xhr.setRequestHeader(header, token);
+			    },
 				success:function(data){
 					//테이블 옵션 값 동적변경
 					selectedRow.children('td:nth-child(3)').children('span:nth-child(2)').children('span.color').text(color);
