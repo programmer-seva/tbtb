@@ -50,14 +50,21 @@ public class ProductController {
 	public String productList(Model model, int cate, Principal principal,
 			@CookieValue(required = false) String nomember, @RequestParam(required = false) String sort,
 			@RequestParam(required = false) Integer pg, HttpSession session) {
+		
 		log.info("상품리스트 출력");
+		
+		// 리스트 페이지 변수
 		if (pg == null) {
 			pg = 1;
 		}
 		int start = (pg - 1) * 20;
 		int[] pageArr = new int[4];
+		// 상품을 담을 vo
 		List<ProductVO> vo = new ArrayList<>();
+		// 총 상품 개수
 		int count = 0;
+		
+		// if 카테고리
 		if (cate == 1000) {
 			vo = service.selectProductNew();
 		} else if (cate == 1001) {
@@ -71,16 +78,21 @@ public class ProductController {
 			count = service.selectProduct2Count(cate);
 			pageArr = service.page(count, pg);
 		}
+		
+		// 소분류 카테고리 이름
 		List<ProdCate2VO> category = service.selectCate(cate);
+		
 		model.addAttribute("lists", vo);
 		model.addAttribute("count", count);
 		model.addAttribute("cate", category);
 		model.addAttribute("now", cate);
 		model.addAttribute("sort", sort);
 		model.addAttribute("page", pageArr);
+		
 		// 베스트상품
 		List<ProductVO> best = service.selectBestItem(cate);
 		model.addAttribute("best", best);
+		
 		// 장바구니 카운터
 		Object cartCount = session.getAttribute("cartCount");
 		if (cartCount == null) {
@@ -88,6 +100,7 @@ public class ProductController {
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
+		
 		return "product/list";
 	}
 
@@ -95,20 +108,28 @@ public class ProductController {
 	@GetMapping("shop/view")
 	public String productView(Model model, @RequestParam("pno") String prodNo, Principal principal,
 			@CookieValue(required = false) String nomember, HttpServletResponse resp, HttpSession session) {
+		
 		log.info("상품 보기 : " + prodNo);
+		
+		// 상품정보
 		ProductVO prod = service.selectProduct(prodNo);
-		//조회수+1
+		model.addAttribute("prod", prod);
+		
+		// 조회수+1
 		service.updateHit(prodNo);
+		
 		// 쿠키만들기
 		if (nomember == null) {
 			cookie.nomemberCookie(resp);
 		}
+		
+		// 로그인 체크
 		String uid = null;
 		if (principal != null) {
 			uid = principal.getName();
 		}
-		model.addAttribute("prod", prod);
 		model.addAttribute("uid", uid);
+		
 		// 장바구니 카운터
 		Object cartCount = session.getAttribute("cartCount");
 		if (cartCount == null) {
@@ -116,6 +137,7 @@ public class ProductController {
 			session.setAttribute("cartCount", cartCount);
 		}
 		model.addAttribute("cartCount", cartCount);
+		
 		return "product/view";
 	}
 
@@ -123,9 +145,13 @@ public class ProductController {
 	@PostMapping("addWish")
 	@ResponseBody
 	public Map<String, Integer> wish(WishVO vo) {
+		
+		log.info("상품보기:: 위시리스트");
+		
 		Map<String, Integer> result = new HashMap<>();
 		int rs = service.addWish(vo);
 		result.put("result", rs);
+		
 		return result;
 	}
 
@@ -135,36 +161,55 @@ public class ProductController {
 	public Map<String, Integer> cart(@RequestParam Map data, Principal principal,
 			@CookieValue(required = false) String nomember, HttpServletResponse resp, HttpSession session)
 			throws Exception {
+		
+		log.info("상품보기:: 장바구니담기");
+		
+		// 장바구니에 아이디 값
 		String uid = null;
-		if (principal != null) { // 회원ㅇ 로그인 상태
+		
+		if (principal != null) { 
+			// 로그인 했으면
 			uid = principal.getName();
-		} else if (nomember == null) { // 쿠키가 없을 때(새 쿠키생성 2일짜리)
-			uid = cookie.nomemberCookie(resp);
-		} else { // 쿠키가 있을 때(기존 쿠키 값)
+		} else if (nomember != null) { 
+			// 로그인을 하지 않고 쿠키가 존재하면
 			uid = nomember;
+		} else { 
+			// 로그인을 하지 않고 쿠키가 존재하지 않으면
+			uid = cookie.nomemberCookie(resp);
 		}
+		
 		// 배열 AJAX 처리
 		String json = data.get("jsonArray").toString();
 		ObjectMapper mapper = new ObjectMapper();
 		List<CartVO> vo = mapper.readValue(json, new TypeReference<ArrayList<CartVO>>() {
 		});
-		// 장바구니
+		
+		// 장바구니에 이미 있는 제품인지 검색
 		int rs = 0;
 		for (int i = 0; i < vo.size(); i++) {
 			vo.get(i).setUid(uid);
+			
+			// 있으면 1 없으면 0
 			int check = service.checkCart(vo.get(i));
-			if (check > 0) { // 장바구니에 이미 있음(수량 증가)
+			if (check > 0) { 
+				// 장바구니에 이미 있음(수량 증가)
 				rs = service.updateCart(vo.get(i));
-				log.info("장바구니 등록 성공!");
-			} else { // 장바구니에 없음(새로 등록)
+				log.info("장바구니 새상품 등록");
+			} else { 
+				// 장바구니에 없음(새로 등록)
 				rs = service.addCart(vo.get(i));
-				log.info("장바구니 업데이트 성공!");
+				log.info("장바구니 기존상품 추가");
 			}
 		}
+		
+		//장바구니 카운터 재계산
 		String cartCount = util.header(principal, nomember);
 		session.setAttribute("cartCount", cartCount);
+		
+		//JSON 리턴
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", rs);
+		
 		return result;
 	}
 
@@ -174,19 +219,29 @@ public class ProductController {
 	public Map<String, Integer> order(@RequestParam Map data, Principal principal,
 			@CookieValue(required = false) String nomember, HttpSession session, HttpServletResponse resp)
 			throws Exception {
+		
+		log.info("상품보기:: 주문하기");
+		
+		// 장바구니에 아이디 값
 		String uid = null;
-		if (principal != null) { // 회원ㅇ 로그인 상태
+		
+		if (principal != null) { 
+			// 로그인 했으면
 			uid = principal.getName();
-		} else if (nomember == null) { // 쿠키가 없을 때(새 쿠키생성 2일짜리)
-			uid = cookie.nomemberCookie(resp);
-		} else { // 쿠키가 있을 때
+		} else if (nomember != null) { 
+			// 로그인을 하지 않고 쿠키가 존재하면
 			uid = nomember;
+		} else { 
+			// 로그인을 하지 않고 쿠키가 존재하지 않으면
+			uid = cookie.nomemberCookie(resp);
 		}
+		
 		// 배열 AJAX 처리
 		String json = data.get("jsonArray").toString();
 		ObjectMapper mapper = new ObjectMapper();
 		List<CartVO> vo = mapper.readValue(json, new TypeReference<ArrayList<CartVO>>() {
 		});
+		
 		// 데이터를 세션에 저장 > 주문하기에서 세션체크해서 가져오기
 		int rs = 0;
 		for (int i = 0; i < vo.size(); i++) {
@@ -195,8 +250,11 @@ public class ProductController {
 		}
 		session.setAttribute("viewOrder", vo);
 		session.setAttribute("type", "guest");
+		
+		// JSON 리턴
 		Map<String, Integer> result = new HashMap<>();
 		result.put("result", rs);
+		
 		return result;
 	}
 }
