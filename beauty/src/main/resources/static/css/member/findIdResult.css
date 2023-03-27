@@ -16,7 +16,7 @@ main>.findId {
 	font-size: 12px;
 }
 
-main>.findId>form>h2 {
+main>.findId>h2 {
 	height: 22px;
 	width: 100%;
 	font-size: 18px;
@@ -25,7 +25,7 @@ main>.findId>form>h2 {
 	margin: 10px 50px;
 }
 
-main>.findId>form>.findId {
+main>.findId>.findId {
 	line-height: 70px;
 	height: 350px;
 	width: 450px;
@@ -34,26 +34,26 @@ main>.findId>form>.findId {
 	padding: 50px 50px 50px 50px;
 }
 
-main>.findId>form>.findId>fieldset {
+main>.findId>.findId>fieldset {
 	min-width: min-content;
 	vertical-align: top;
 	border: 0px none;
 }
 
-main>.findId>form>.findId>fieldset>table>tbody>tr>td {
+main>.findId>.findId>fieldset>table>tbody>tr>td {
 	font-size: 20px;
 	margin: 10px;
 }
 
 
-main>.findId>form>.findId>fieldset>div {
+main>.findId>.findId>fieldset>div {
 	height: 40px;
 	width: 375px;
 	padding: 40px 0 10px 0;
 	display: flex;
 }
 
-main>.findId>form>.findId>fieldset>div>.btnNext {
+main>.findId>.findId>fieldset>div>.btnNext {
 	width: 190px;
     height: 20px;
     border: 1px solid #ffffff;
@@ -67,7 +67,7 @@ main>.findId>form>.findId>fieldset>div>.btnNext {
     display: inline-block;
 }
 
-main>.findId>form>.findId>fieldset>div>.btnLogin {
+main>.findId>.findId>fieldset>div>.btnLogin {
 	width: 190px;
     height: 20px;
     border: 1px solid #ffffff;
