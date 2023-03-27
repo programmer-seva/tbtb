@@ -10,7 +10,10 @@
     <head>
 		<meta charset="UTF-8">
         <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
-        
+        <!-- 스프링 시큐리티 csrf token 누락 -->
+	    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+		<meta name="_csrf" th:content="${_csrf.token}">
+		<!-- 스프링 시큐리티 csrf token 누락 -->
         <!-- Private index, headfoot settings -->
         <!-- font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

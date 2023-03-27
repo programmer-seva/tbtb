@@ -1,5 +1,6 @@
 $(function(){
-
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
 	/* 진입전 비밀번호 확인 */
 	$('#btnCheckPW').click(function(e){
 		e.preventDefault();
@@ -9,6 +10,9 @@ $(function(){
 			type	:'POST',
 			data	:{'pass': pass},
 			dataType:'json',
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+		    },
 			success	:function(data){
 				if(data == 1){
 					$('div.checkPassword').hide();
@@ -30,6 +34,9 @@ $(function(){
 			type	:'POST',
 			data	:{'pass': pass},
 			dataType:'json',
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+		    },
 			success	:function(data){
 				if(data == 1){
 					alert('변경되었습니다.');
@@ -67,6 +74,9 @@ $(function(){
 			data	: JSON.stringify(vo),
 			dataType:'json',
 			contentType: 'application/json',
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+		    },
 			success	:function(data){
 				if(data == 1){
 					alert('변경완료');
@@ -89,6 +99,9 @@ $(function(){
 				type	:'POST',
 				data	:{},
 				dataType:'json',
+				beforeSend: function(xhr){
+	        		xhr.setRequestHeader(header, token);
+			    },
 				success	:function(data){
 					if(data == 1){
 						alert('삭제 되었습니다.');

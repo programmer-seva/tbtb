@@ -1,12 +1,19 @@
 
-let regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
-let regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-let regPass = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-
-let checkEmail = false;
-let checkPhone = false;
 
 $(function() {
+	
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
+	
+	
+	let regPhone = /^\d{3}-\d{3,4}-\d{4}$/;
+	let regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	let regPass = /^.*(?=^.{8,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	
+	let checkEmail = false;
+	let checkPhone = false;
+	
+	
 	$('.member').click(function() {
 		$('.m1').css('display', 'block');
 		$('.m2').css('display', 'none');
@@ -95,6 +102,9 @@ $(function() {
 			type: 'post',
 			data: jsonData,
 			dataType: 'json',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success: function(data) {
 				//				console.log('here3');
 				if (data.result != null) {
@@ -123,19 +133,22 @@ $(function() {
 			alert('이메일을 입력해주세요');
 			return;
 		}
+		// 인증번호 타이머
+		timer();
 		$.ajax({
 			url: '/Beauty/member/emailAuth',
 			method: 'post',
 			data: { "email": email },
 			dataType: 'json',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success: function(data) {
 				if (data.status > 0) {
 					alert('인증번호가 발송되었습니다.');
 					//메일전송 성공
 					$('.auth').show();
 					code = data.code;
-					// 인증번호 타이머
-					timer();
 				} else {
 					//메일전송 실패
 					alert('메일 전송에 실패했습니다. 다시 시도해주세요');
@@ -172,6 +185,9 @@ $(function() {
 				type: 'post',
 				data: jsonData,
 				dataType: 'json',
+				beforeSend: function(xhr){
+		        	xhr.setRequestHeader(header, token);
+		    	},
 				success: function(data) {
 					if (data == 1) {
 						location.href = "/Beauty/member/findPwResult";
@@ -230,6 +246,9 @@ $(function() {
 				type: 'post',
 				data: jsonData,
 				dataType: 'json',
+				beforeSend: function(xhr){
+		        	xhr.setRequestHeader(header, token);
+		    	},
 				success: function(data) {
 					console.log(data)
 

@@ -2,46 +2,36 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<meta charset="UTF-8">
-<title>Beauty</title>
-<!-- 제이쿼리 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- swiper -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<!-- font -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-
-<link rel="stylesheet" th:href="@{/css/headfoot.css}">
-<link rel="stylesheet" th:href="@{/css/index.css}">
-<link rel="stylesheet" th:href="@{/css/member/findIdResult.css}">
-<script th:src="@{/js/main.js}"></script>
-<th:block th:replace="~{_header :: headerFragment}"></th:block>
+	<meta charset="UTF-8">
+	<th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
+	<!-- 배포 ajax통신 403에러 -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!-- css -->
+	<link rel="stylesheet" th:href="@{/css/index.css}">
+	<link rel="stylesheet" th:href="@{/css/member/findIdResult.css}">
+	
+	<th:block th:replace="~{_header :: headerFragment}"></th:block>
 </head>
 <body>
 	<main>
 		<div class="findId">
-			<form action="#" method="POST">
-				<h2>아이디 찾기 결과</h2>
-				<div class="findId">
-					<fieldset>
-						<table border="0">
-							<tr>
-								<td>고객님의 아이디는 <strong>[[${uid}]]</strong> 입니다.</td>
-							</tr>
-						</table>
-						<div class="btn">
-							<a th:href="@{/member/login}" class="btnLogin">로그인</a>
-							<a th:href="@{/member/find(type=2)}" class="btnNext">비밀번호 찾기</a>
-						</div>
-					</fieldset>
-				</div>
-			</form>
+			<h2>아이디 찾기 결과</h2>
+			<div class="findId">
+				<fieldset>
+					<table border="0">
+						<tr>
+							<td>고객님의 아이디는 <strong>[[${uid}]]</strong> 입니다.</td>
+						</tr>
+					</table>
+					<div class="btn">
+						<a th:href="@{/member/login}" class="btnLogin">로그인</a>
+						<a th:href="@{/member/find(type=2)}" class="btnNext">비밀번호 찾기</a>
+					</div>
+				</fieldset>
+			</div>
 		</div>
 	</main>
-	<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+	<th:block th:replace="~{_footer :: footerFragment}"></th:block>
 </body>
 </html>

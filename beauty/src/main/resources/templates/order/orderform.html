@@ -7,7 +7,6 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
 	<meta name="_csrf" th:content="${_csrf.token}">
 	<!-- 스프링 시큐리티 csrf token 누락 -->
-    <title>Beauty</title>
     <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <!-- 웹 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,6 +25,7 @@
     <script type="text/javascript" th:src="@{/js/order/order.js?ver=1}"></script>
     <script th:inline="javascript">
     	$(function(){
+    		// 주문할 제품 총 합계 계산기
 			let value = [[${list}]];
 			
 			totalPrice(value);
@@ -57,6 +57,7 @@
     			$('input[name=ordCount]').val(count);
     		}
     		
+    		// 회원전용 포인트 사용
     		$('.used').focusout(function(){
     			$('input[name=total]').val($('input[name=oriTotal]').val());
     			let myPoint = [[${member.point}]];
@@ -310,79 +311,9 @@
 						</div>
 						</section>
 					</div>
-					<div class="wrap-right">
-						<section class="total">
-						<p>
-							결제정보
-						</p>
-						<div class="orderBox">
-							<div class="totalLeft">
-								<p>
-									상품가격
-								</p>
-								<p>
-									할인금액
-								</p>
-								<p>
-									배송비
-								</p>
-								<p>
-									사용적립금
-								</p>
-								<p>
-									적립금
-								</p>
-							</div>
-							<div class="totalRight">
-								<p>
-									<input type="number" name="ordPrice" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="ordDisprice" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="ordDelivery" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="usedPoint" value="0" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="savePoint" readonly></input>원
-								</p>
-							</div>
-							<div class="totalBottom">
-								<p>
-									총 주문금액
-								</p>
-								<p>
-									<strong><input type="number" name="total" readonly><input type="hidden" name="oriTotal" readonly></input><input type="hidden" name="ordCount" readonly></input></strong>원
-								</p>
-							</div>
-						</div>
-						</section>
-						<section class="payment">
-						<p>
-							결제수단
-						</p>
-						<div class="orderBox">
-							<div class="paymentList">
-								<input type="radio" id="chk1" name="payment" value="1" checked="checked">
-								<label for="chk1">카드결제</label>
-								<input type="radio" id="chk2" name="payment" value="2">
-								<label for="chk2">실시간계좌이체</label>
-								<input type="radio" id="chk3" name="payment" value="3">
-								<label for="chk3">무통장입금</label>
-								<input type="radio" id="chk4" name="payment" value="4">
-								<label for="chk4">휴대폰결제</label>
-								<input type="radio" id="chk5" name="payment" value="5">
-								<label for="chk5">카카오페이</label>
-								<input type="radio" id="chk6" name="payment" value="6">
-								<label for="chk6">네이버페이</label>
-							</div>
-						</div>
-						</section>
-						<a href="#" class="btnOrder">결제하기</a>
-					</div>
+					
+					<th:block th:replace="~{order/_order :: total}"></th:block>
+					
 				</div>
 				</section>
 			</div>

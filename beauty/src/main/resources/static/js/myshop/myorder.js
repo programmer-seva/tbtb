@@ -1,4 +1,7 @@
 $(function(){
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
+	
 	let lastPage= 1;
 	let pg 		= 1;
 	let today 	= new Date();
@@ -83,6 +86,9 @@ $(function(){
 				'end'	: end
 			},
 			dataType:'json',
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+		    },
 			success:function(data){
 				//마지막 페이지 설정
 				lastPage = Math.ceil(data/10.0);
@@ -116,6 +122,9 @@ $(function(){
 				'pg'	: pg
 			},
 			dataType:'json',
+			beforeSend: function(xhr){
+        		xhr.setRequestHeader(header, token);
+		    },
 			success:function(data){
 				$('#orderListTable > tbody').empty();
 				inputOrderList(data);
