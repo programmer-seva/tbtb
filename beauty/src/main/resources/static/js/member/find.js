@@ -185,9 +185,9 @@ $(function() {
 				type: 'post',
 				data: jsonData,
 				dataType: 'json',
-				beforeSend: function(xhr){
-		        	xhr.setRequestHeader(header, token);
-		    	},
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader(header, token);
+				},
 				success: function(data) {
 					if (data == 1) {
 						location.href = "/Beauty/member/findPwResult";
@@ -238,16 +238,19 @@ $(function() {
 			type: 'post',
 			data: jsonData,
 			dataType: 'json',
-			beforeSend: function(xhr){
-	        	xhr.setRequestHeader(header, token);
-	    	},
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(header, token);
+			},
 			success: function(data) {
 				console.log("hr4 : " + JSON.stringify(data))
 
-				if (data.result == 0) {
+				if (data.result == 1) {
 					console.log("hr5")
 					alert('비밀번호가 변경되었습니다.\n다시 로그인 하십시오.');
 					location.href = "/Beauty/member/login";
+				}else{
+					alert("변경에 실패했습니다. 잠시후에 다시 시도해주세요.");
+					return false;
 				}
 			}
 		});
