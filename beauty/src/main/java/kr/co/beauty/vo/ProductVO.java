@@ -5,7 +5,6 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,8 +51,11 @@ public class ProductVO {
 	private String through;
 	private String lining;
 	private String color;
+	private String[] colorArr;
 	private String size;
+	private String[] sizeArr;
 	private String rdate;
+	private String colorName;
 	
 	//상품등록 추가
 	private MultipartFile file1;

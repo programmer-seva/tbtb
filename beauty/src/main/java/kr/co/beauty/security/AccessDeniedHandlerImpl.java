@@ -29,8 +29,13 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('"+ msg.toString() +"'); location.href='/beauty/';</script>");
+		out.println("<script>alert('"+ msg.toString() +"'); location.href='/Beauty/';</script>");
 		out.flush();
+		
+		
+		
     }
+	
+	
 
 }

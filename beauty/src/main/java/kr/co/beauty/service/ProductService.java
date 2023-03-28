@@ -1,84 +1,141 @@
 package kr.co.beauty.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.beauty.dao.Product1DAO;
 import kr.co.beauty.dao.ProductDAO;
-import kr.co.beauty.vo.ProdCate1VO;
+import kr.co.beauty.vo.CartVO;
 import kr.co.beauty.vo.ProdCate2VO;
-import kr.co.beauty.vo.Product1VO;
 import kr.co.beauty.vo.ProductVO;
+import kr.co.beauty.vo.WishVO;
 
 @Service
 public class ProductService {
-	
+
 	@Autowired
 	private ProductDAO dao;
-	
-	public List<ProductVO> selectProductByParam(String param) {
-		return dao.selectProductByParam(param);
-	}
-	public List<ProductVO> selectProducts(String arg0, String arg1, String arg2,int arg3) {
-		return dao.selectProducts(arg0,arg1,arg2,arg3);
-	}
-	public int selectCountTotal(String arg0, String arg1){
-        return dao.selectCountTotal(arg0,arg1);
-    }
-		
 
-	
-	
-	// list 페이징 처리
-	// 현재 페이지 번호
-	public int getCurrentPage(String pg) {
-	  int currentPage = 1;
-	
-	  if(pg != null) {
-	      currentPage = Integer.parseInt(pg);
-	  }
-	  return currentPage;
+	public List<ProductVO> selectProductNew() {
+		List<ProductVO> vo = dao.selectProductNew();
+		for (ProductVO i : vo) {
+			String color = i.getColorName();
+			if (color != null) {
+				String[] arr = color.split(",");
+				i.setColorArr(arr);
+			}
+		}
+		return vo;
+	}
+
+	public List<ProductVO> selectProductBest() {
+		List<ProductVO> vo = dao.selectProductBest();
+		for (ProductVO i : vo) {
+			String color = i.getColorName();
+			if (color != null) {
+				String[] arr = color.split(",");
+				i.setColorArr(arr);
+			}
+		}
+		return vo;
+	}
+
+	public List<ProductVO> selectBestItem(int cate) {
+		cate = cate / 100 * 100;
+		return dao.selectBestItem(cate);
+	}
+
+	public List<ProductVO> selectProduct1(int cate, String sort, int start) {
+		List<ProductVO> vo = dao.selectProduct1(cate, sort, start);
+		for (ProductVO i : vo) {
+			String color = i.getColorName();
+			if (color != null) {
+				String[] arr = color.split(",");
+				i.setColorArr(arr);
+			}
+		}
+		return vo;
+	}
+
+	public List<ProductVO> selectProduct2(int cate, String sort, int start) {
+		List<ProductVO> vo = dao.selectProduct2(cate, sort, start);
+		for (ProductVO i : vo) {
+			String color = i.getColorName();
+			if (color != null) {
+				String[] arr = color.split(",");
+				i.setColorArr(arr);
+			}
+		}
+		return vo;
+	}
+
+	public int selectProduct1Count(int cate) {
+		return dao.selectProduct1Count(cate);
+	}
+
+	public int selectProduct2Count(int cate) {
+		return dao.selectProduct2Count(cate);
+	}
+
+	public List<ProdCate2VO> selectCate(int cate) {
+		cate = (cate / 100) * 100;
+		return dao.selectCate(cate);
+	}
+
+	public int[] page(int count, int pg) {
+		int lastPage = 1;
+		if (count % 20 == 0) {
+			lastPage = count / 20;
+		} else {
+			lastPage = count / 20 + 1;
+		}
+		int current = (int) Math.ceil(pg / 20.0);
+		int groupStart = (current - 1) * 10 + 1;
+		int groupEnd = current * 10;
+		if (groupEnd > lastPage) {
+			groupEnd = lastPage;
+		}
+		int[] result = { groupStart, groupEnd, lastPage, pg };
+		return result;
+	}
+
+	// ��ǰ view
+	public ProductVO selectProduct(String prodNo) {
+		ProductVO vo = dao.selectProduct(prodNo);
+		String color = vo.getColorName();
+		String size = vo.getSize();
+		if (color != null) {
+			String[] arr = color.split(",");
+			Arrays.sort(arr);
+			vo.setColorArr(arr);
+		}
+		if (size != null) {
+			String[] arr = size.split(",");
+			vo.setSizeArr(arr);
+		}
+		return vo;
+	}
+
+	public int addWish(WishVO vo) {
+		return dao.addWish(vo);
+	}
+
+	public int checkCart(CartVO vo) {
+		return dao.checkCart(vo);
+	}
+
+	public int updateCart(CartVO vo) {
+		return dao.updateCart(vo);
+	}
+
+	public int addCart(CartVO vo) {
+		return dao.addCart(vo);
 	}
 	
-	// 페이지 시작값
-	public int getLimitStart(int currentPage) {
-	  return (currentPage - 1) * 10;
+	public void updateHit(String prodNo) {
+		dao.updateHit(prodNo);
 	}
-	
-	// 마지막 페이지 번호
-	public int getLastPageNum(int total) {
-	
-	  int lastpageNum = 0;
-	
-	  if(total % 10 == 0) {
-	      lastpageNum = total / 10;
-	
-	  }else {
-	      lastpageNum = total / 10 + 1;
-	  }
-	  return lastpageNum;
-	}
-	
-	// 페이지 시작 번호
-	public int getpageStartNum(int total, int start) {
-	  return total - start;
-	}
-	
-	// 페이지 그룹
-	public int[] getPageGroup(int currentPage, int lastPageNum) {
-	
-	  int groupCurrent = (int) Math.ceil(currentPage / 10.0);
-	  int groupStart = (groupCurrent - 1) * 10 + 1;
-	  int groupEnd = groupCurrent * 10;
-	
-	  if(groupEnd > lastPageNum) {
-	      groupEnd = lastPageNum;
-	  }
-	
-	  int[] groups = {groupStart, groupEnd};
-	
-	  return groups;
-	}
+
 }

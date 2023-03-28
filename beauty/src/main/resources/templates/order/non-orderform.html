@@ -3,8 +3,11 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Beauty</title>
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <!-- 스프링 시큐리티 csrf token 누락 -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!-- 스프링 시큐리티 csrf token 누락 -->
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <!-- 웹 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +25,7 @@
     <script th:src="@{/js/order/non-order.js}"></script>
     <script th:inline="javascript">
     	$(function(){
+    		// 주문할 제품 총 합계 계산기
     		let value = [[${list}]];
 			totalPrice(value);
     		function totalPrice(value){
@@ -54,9 +58,9 @@
     </script>
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>   
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>   
 		<!-- 메인 -->
 		<main>
 		<div class="mainBackgorund">
@@ -95,9 +99,6 @@
 									수량
 								</th>
 								<th>
-									적립
-								</th>
-								<th>
 									합계
 								</th>
 							</tr>
@@ -110,14 +111,11 @@
 								</td>
 								<td>
 									<span id="prodName" th:text="${item.prodName}"></span>
-									<span id="prodOption" th:text="${item.color}"></span>
+									<span id="prodOption" th:text="|${item.color}, ${item.size}|"></span>
 									<span id="prodPrice" th:text="${#numbers.formatInteger(item.price, 0, 'COMMA')}"></span>
 								</td>
 								<td>
 									<span id="prodCount" th:text="${item.count}"></span>개
-								</td>
-								<td>
-									<span id="prodSavePoint" th:text="${#numbers.formatInteger(item.point, 0, 'COMMA')}"></span>점
 								</td>
 								<td>
 									<span id="prodTotal" th:text="${#numbers.formatInteger((item.price-item.disPrice)*item.count, 0, 'COMMA')}"></span>원
@@ -202,7 +200,7 @@
 								</th>
 								<td>
 									<p>
-										<input id="text" name="pass" size="16" type="password"/>
+										<input name="pass" size="16" type="password"/>
 									</p>
 									(숫자, 특수문자가 각각 최소 1개이상, 최소 6자이상)
 									<p class="misValid" style="display:none; color:red;">유효하지 않는 비밀번호입니다.</p>
@@ -215,7 +213,7 @@
 								</th>
 								<td>
 									<p>
-										<input id="text" name="password" size="16" type="password"/>
+										<input name="password" size="16" type="password"/>
 									</p>
 									<p class="misMatch" style="display:none; color:red;">비밀번호가 일치하지 않습니다.</p>
 									<p class="misMatchOk" style="display:none; color:green;">비밀번호가 일치합니다.</p>
@@ -291,102 +289,16 @@
 						</div>
 						</section>
 					</div>
-					<div class="wrap-right">
-						<section class="total">
-						<p>
-							결제정보
-						</p>
-						<div class="orderBox">
-							<div class="totalLeft">
-								<p>
-									상품가격
-								</p>
-								<p>
-									할인금액
-								</p>
-								<p>
-									배송비
-								</p>
-								<p>
-									사용적립금
-								</p>
-								<p>
-									적립금
-								</p>
-							</div>
-							<div class="totalRight">
-								<p>
-									<input type="number" name="ordPrice"  readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="ordDisprice" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="ordDelivery" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="usedPoint" value="0" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="savePoint" readonly></input>원
-								</p>
-							</div>
-							<div class="totalBottom">
-								<p>
-									총 주문금액
-								</p>
-								<p>
-									<strong><input type="number" name="total" readonly><input type="hidden" name="oriTotal" readonly></input><input type="hidden" name="ordCount" readonly></input></strong>원
-								</p>
-							</div>
-						</div>
-						</section>
-						<section class="payment">
-						<p>
-							결제수단
-						</p>
-						<div class="orderBox">
-							<div class="paymentList">
-								<input type="radio" id="chk1" name="payment" value="1" checked="checked">
-								<label for="chk1">카드결제</label>
-								<input type="radio" id="chk2" name="payment" value="2">
-								<label for="chk2">실시간계좌이체</label>
-								<input type="radio" id="chk3" name="payment" value="3">
-								<label for="chk3">무통장입금</label>
-								<input type="radio" id="chk4" name="payment" value="4">
-								<label for="chk4">휴대폰결제</label>
-								<input type="radio" id="chk5" name="payment" value="5">
-								<label for="chk5">카카오페이</label>
-								<input type="radio" id="chk6" name="payment" value="6">
-								<label for="chk6">네이버페이</label>
-							</div>
-						</div>
-						</section>
-						<a href="#" class="btnOrder">결제하기</a>
-					</div>
 					
-					<div>
-					<section class="terms">
-						<p>
-							비회원 구매 약관
-						</p>
-						<div class="orderBox">
-							<div>
-								<label>
-								<input type="checkbox" name="non-chkTerms">
-								<span>비회원 구매 시 개인정보수집 이용동의</span>
-								</label><br/>
-								<textarea id="rMessage" name="non-terms"  readonly maxlength="255" cols="45" rows="5">[[${terms.nonmember}]]</textarea><br/>
-							</div>
-						</div>
-					</section>
-					</div>
+					<th:block th:replace="~{order/_order :: total}"></th:block>
+					<th:block th:replace="~{order/_order :: terms}"></th:block>
+					
 				</div>
 				</section>
 			</div>
 		</div>
 		</main>
-		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+		<th:block th:replace="~{_footer :: footerFragment}"></th:block>
 	</div>
 </body>
 </html>

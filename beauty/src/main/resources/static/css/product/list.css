@@ -8,11 +8,13 @@ main {
 
 .swiper-pagination-bullet-active {background: #fff;}
 main > section {
-    width: 1700px;
-    height: auto;
+    width: 1520px;
+    min-height: 1000px;
     margin: 0px auto;
     overflow: hidden;
     text-align: center;
+    padding: 100px 0;
+    box-sizing: border-box;
 }
 main > article {
     width: 100%;
@@ -111,12 +113,39 @@ main > article > div.swiper .swiper-pagination-bullet-active > span {padding-bot
 main > article > div.swiper > .swiper-button-prev {color: #999; margin-left: 50px; margin-top: 10px;}
 main > article > div.swiper > .swiper-button-next {color: #999; margin-right: 50px; margin-top: 10px;}
 main > section > div > .product {
-    display: inline-block;
+	float: left;
     width: 22%;
-    height: 500px;
+    min-height: 500px;
     margin: 10px;
+    margin-left: 27px;
     margin-bottom: 30px;
     box-sizing: border-box;
+    vertical-align: top;
+    overflow: hidden;
+    text-align: left;
+}
+
+main > article:nth-of-type(1){
+	width: 100%;
+	height: auto;
+}
+main > article:nth-of-type(1) > ul {
+	width: 1200px;
+	margin: 0 auto;
+	overflow:hidden;
+	margin-top: 20px;
+}
+main > article:nth-of-type(1) > ul > li.bestItem {
+	float: left;
+}
+main > article:nth-of-type(1) > ul > li.bestItem > a > img {
+	width: 290px;
+	height: 350px;
+	margin: 5px;
+}
+
+main > section > div > .product:nth-child(4n+1){
+	clear: both;
 }
 main > section > span {
     display: inline-block;
@@ -127,21 +156,22 @@ main > section > span {
 }
 .product > a > img {
     width: 100%;
-    height: 350px;
+    height: 400px;
     object-fit: cover;
+    border-radius: 10px;
 }
 .product > span {
     display: inline-block; 
-    width: 100%;
-    text-align: left;
 }
-.colorCodeBox {text-align: left;}
+.colorCodeBox {
+	text-align: left;
+	margin-top: 10px;
+}
 .colorCode {
     display: inline-block;
     width: 10px;
     height: 10px;
-    border: 1px solid #efefef;
-    border-radius: 20px;
+    border: 1px solid #d3d3d3;
 
 }
 .name {
@@ -156,26 +186,28 @@ main > section > span {
     border-bottom: 1px solid #e5e5e5;
 }
 .oriPrice {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #999; 
     text-decoration: line-through;
 }
 .price {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
     color: #555;
 }
 .discount {
-    font-size: 20px;
+    float: right;
+    font-size: 16px;
     font-weight: bold;
-    color: pink;
+    color: crimson;
     margin-left: 10px; 
 }
 .descript {
     font-size: 12px;
     color: #999;
     margin-top: 6px;
+    white-space: pre-wrap;
 }
 
 .title2 {
@@ -197,23 +229,13 @@ main > section > span {
     text-align: center;
 }
 
-.menuCategory > li {
-    display: inline-block;
-    margin: 0 10px 0;
-    font-size: 12px;
-}
-
-.menuCategory > li > a {
-    color: #a8a8a8;
-    padding: 7px 0 5px;
-}
 
 .headcate {
     text-align: left;
     display: inline-block;
     width: 100%;
     height: 80px;
-    margin-left: 70px;
+    margin-left: 28px;
     margin-bottom: 30px;
     box-sizing: border-box;
 }
@@ -236,7 +258,7 @@ main > section > span {
 }
 
 .item-info {
-    width: 1555px;
+    width: 1450px;
     height: 30px;
     margin-bottom: 40px;
     margin-top: 10px;
@@ -272,17 +294,23 @@ padding: 7px 0 5px;
 font-weight: bold;
 }
 
-.item-order li:first-of-type a {
+.item-order li.selected a {
 bottom: 10px;
 font-size: 13px;
 color: #545454 !important;
 font-weight: bold;
 border-bottom: 2px solid #e0d8d0;;
 }
-
+.center {
+	float: left;
+	width: 100%;
+	height: auto;
+	text-align: center;
+}
 .pagination {
-display: inline-block;
-font-size: 15px;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 100px;
 }
 
 .pagination a {

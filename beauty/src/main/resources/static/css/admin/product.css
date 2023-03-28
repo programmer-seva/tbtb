@@ -4,6 +4,7 @@
     padding: 0;
     font-size: 12px;
 }
+body{background: #eeeeee;}
 li{list-style: none;}
 a{
     text-decoration: none;
@@ -14,12 +15,15 @@ input{outline: none;}
 
 header{
     width: 100%;
-    text-align: center;
-    padding: 50px;
+    height: 48px;
+    border-bottom: 2px solid #e1e1e1;
+    background: #ffffff;
 }
 header > div{}
 header > div > h3{
-    margin-bottom: 20px;
+    font-size: 20px;
+    float: left;
+    margin: 10px 20px;
 }
 header > div > .register{
     border-left: 1px solid #dad6d6;
@@ -27,37 +31,55 @@ header > div > .register{
     padding: 0 10px;
 }
 header > div > a{
-    color: #dad6d6;
-    padding: 0 10px;
+    font-size: 15px;
+    padding: 5px 30px;
+    border: 1px solid #dad6d6;
+    float: right;
+    margin: 8px 20px 5px -15px;
+}
+header > div > a:last-child{
+    padding: 5px 40px;
+}
+header > div > a:nth-child(2){
+    background: #cecece;
+    color: #ffffff;
+}
+header > div > a:nth-child(3){
+    background: #1f70ff;
+    color: #ffffff;
 }
        
 main{
-    width: 1500px;
-    height: auto;
+    height: 900px;
     margin: 0 auto;
+    padding: 13px 0 0 8px;
+    width: 1895px;
 }
 main > aside{
+    background: #ffffff;
+    margin-left: 6px;
+    width: 198px;
     float: left;
-    width: 200px;
+    height: 860px;
 }
-main > aside > ul{
-    
+main > aside > ul > li:first-child{
+    margin-top: 4px;
 }
 main > aside > ul > li{
-    margin: 30px;
+    margin: 10px 0;
     text-align: center;
 }
 main > aside > ul > li > a{
     border-bottom: 1px solid #bdb5b58f;
-    padding: 10px;
+    padding: 4px;
     box-sizing: border-box;
 }
 main > aside > ul > li > ul{
-    margin-top: 25px;
-    display: none;
+    margin-top: 11px;
+    display: block;
 }
 main > aside > ul > li > ul > li{
-    padding: 5px 5px 5px 34px;
+    padding: 5px 5px 5px 42px;
     text-align: left;
 }
 main > aside > ul > li > ul > li > label > input{
@@ -65,30 +87,40 @@ main > aside > ul > li > ul > li > label > input{
 }
 
 main > section{
-    padding: 30px;
-    height: auto;
-    position: relative;
+    padding: 20px;
+    height: 758px;
+    background: #ffffff;
+    width: 1625px;
     float: right;
-    width: 82%;
+    position: relative;
+    margin: 60px 13px;
 }
 #admin-product-list > div{
-    padding: 0 30px 10px;
     float: left;
 }
+#admin-product-list > .searchPart{
+    background: #ffffff;
+    padding: 10px;
+    width: 1000px;
+    position: absolute;
+    top: -60px;
+    left: 0;
+}
 #admin-product-list > div #search{
-    padding: 2px;
     border: 1px solid #dad6d6;
+    height: 27px;
+    width: 152px;
 }
 #admin-product-list > div input{
     border: 0px;
     border-bottom: 1px solid #dad6d6;
-    height: 22px;
+    height: 26px;
+    width: 796px;
 }
 #admin-product-list > div .searchClick{
     border: 1px solid #dad6d9;
     color: #dad6d9;
-    padding: 4px;
-    border-radius: 7px;
+    padding: 4px 8px;
     background: white;
 }
 #admin-product-list > div:nth-child(2){
@@ -102,65 +134,117 @@ main > section{
 }
 #admin-product-list > table{
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 5px;
+    border-collapse: collapse;
 }
 #admin-product-list > table tr{}
-#admin-product-list > table tr > th{}
-#admin-product-list > table tr > th > #checkAll{}
+#admin-product-list > table tr > th{
+	border-bottom: 1px solid #cecece;
+    font-size: 14px;
+    padding-bottom: 14px;
+}
+#admin-product-list > table tr > td:first-child{
+	width: 40px;
+}
 #admin-product-list > table tr > td{
     text-align: center;
 }
+#admin-product-list > table tr > td:nth-child(2){
+	width: 75px;
+}
+#admin-product-list > table tr > td:nth-child(3){
+	width: 70px;
+}
+#admin-product-list > table tr > td:nth-child(4){
+	width: 50px;
+}
+#admin-product-list > table tr > td:nth-child(5){
+	width: 90px;
+}
 #admin-product-list > table tr > td:nth-child(6){
 	text-align: left;
+}
+#admin-product-list > table tr > td:nth-child(7){
+	width: 70px;
+}
+#admin-product-list > table tr > td:nth-child(8){
+	width: 50px;
+}
+#admin-product-list > table tr > td:nth-child(9){
+	width: 60px;
+}
+#admin-product-list > table tr > td:nth-child(10){
+	width: 50px;
+}
+#admin-product-list > table tr > td:nth-child(11){
+	width: 40px;
+}
+#admin-product-list > table tr > td:nth-child(12){
+	width: 80px;
 }
 #admin-product-list > table tr > td:last-child > input{
     border: 0px;
     background: white;
 }
-#admin-product-list > table tr > td > img{}
+#admin-product-list > table tr > td > img{
+	height: 60px;
+    width: 60px;
+    margin-top: 5px;
+}
+#admin-product-list > table td > button:last-child{
+	background: #d2d2d2;
+    color: #ffffff;
+    border: 1px solid #dad6d6;
+    padding: 2px 16px;
+}
+#admin-product-list > table td > button:first-child{
+	border: 1px solid #dad6d6;
+    padding: 2px 4px;
+    margin-bottom: 5px;
+    background: #ffffff;
+}
 #admin-product-list > .delete{
-    position: absolute;
-    bottom: -15px;
-    left: 38px;
-    background: #e0dadf;
-    color: white;
-    padding: 5px;
+    background: #cecece;
+    color: #ffffff;
+    padding: 5px 30px;
     border: 0px;
-    border-radius: 4px;
-    width: 100px;
+    font-size: 15px;
+    margin-top: 20px;
 }
 .register{
-    position: absolute;
-    right: 60px;
-    bottom: -20px;
     background: white;
     color: #b1acb0;
-    padding: 5px;
-    border: 1px solid #b1acb0;
-    border-radius: 4px;
     width: 100px;
+    margin: 0 48%;
+    border: 1px solid #dad6d6;
+    padding: 2px 4px;
+    font-size: 14px;
 }
-#admin-product-list > div:last-child{
-    position: absolute;
-    left: 500px;
-    bottom: -30px;
-}
-#admin-product-list > div > span{
-    
+#admin-product-list > .page{
+    float: right;
+    margin-right: 726px;
+    margin-top: 20px;
 }
 #admin-product-list > div > span > a{
-    padding: 2px;
+    padding: 6px;
+    font-size: 14px;
 }
-#admin-product-list > div > span > .current{
+#admin-product-list .current{
     border-bottom: 1px solid #b1acb0;
 }
 
 /* admin-product-register */
+#admin-product-register{
+	float: left;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0px;
+    height: auto;
+}
 #admin-product-register article > h3{
     border-bottom: 2px solid black;
     padding: 10px;
     margin: 10px 0;
+    font-size: 15px;
 }
 #admin-product-register article > table{
     width: 100%;
@@ -194,6 +278,7 @@ main > section{
 }
 #admin-product-register article > table tr > td > label > input{
     margin-right: 5px;
+    margin-bottom: 8px;
 }
 #admin-product-register article:nth-child(3) > table tr > td{}
 #admin-product-register article:nth-child(3) > table tr > td > label{}
@@ -205,31 +290,23 @@ main > section{
     margin-right: 5px;
 }
 #admin-product-register article:nth-child(3) > table tr > td > label:last-child > span{border: 1px solid #000000;}
-#admin-product-register article:nth-child(3) > .image{    
+#admin-product-register article > .image{    
     position: relative;
 }
-#admin-product-register article:nth-child(3) > .image > table:nth-child(1){}
-#admin-product-register article:nth-child(3) > .image > table:nth-child(2){
-    position: absolute;
-    top: 0;
-    left: 368px;
+#admin-product-register article > .image > table{
+	float: left;
 }
-#admin-product-register article:nth-child(3) > .image > table:nth-child(3){
-    position: absolute;
-    top: 0;
-    right: 200px;
-}
-#admin-product-register article:nth-child(3) > section > table{
+#admin-product-register article > section > table{
     border-collapse: separate;
     border-spacing: 17px;
 }
-#admin-product-register article:nth-child(3) > .image > table tr{}
-#admin-product-register article:nth-child(3) > .image > table tr > th{
+#admin-product-register article > .image > table tr{}
+#admin-product-register article > .image > table tr > th{
     border-bottom: 2px solid #111;
     padding: 10px;
 }
-#admin-product-register article:nth-child(3) > .image > table tr > td{}
-#admin-product-register article:nth-child(3) > section > table tr > td > input{
+#admin-product-register article > .image > table tr > td{}
+#admin-product-register article > section > table tr > td > input{
     margin: 5px;
 }
 #admin-product-list .on{

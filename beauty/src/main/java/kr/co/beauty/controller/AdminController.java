@@ -1,63 +1,146 @@
 package kr.co.beauty.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.beauty.service.AdminService;
 import kr.co.beauty.vo.Product1VO;
 
+@MapperScan("kr.co.beauty.dao")
 @Controller
 public class AdminController {
-	
+
 	@Autowired
 	private AdminService service;
 
-	//상품 등록 - 2023/03/07 윤사랑
 	@GetMapping("admin/product/register")
 	public String register() {
 		return "admin/product/register";
 	}
-	
-	@PostMapping("admin/product/register")
-	public String register(Product1VO vo) {
-		int result = service.insertProduct(vo);
-		
-		return "admin/product/list";
-	}
-	
-	//상품 리스트 - 2023/03/07 윤사랑
-	@GetMapping("admin/product/list")
-	public String list(Model model, String param1, String arg1) {
-		
-		List<Product1VO> products = null;
-		
-		if(arg1 == null) {
-			products = service.selectProducts(param1);
-		}else {
-			products = service.selectProductByCate1(param1, arg1);
-		}
-		model.addAttribute("products",  products);
-		model.addAttribute("param1",  param1);
-		model.addAttribute("arg1",  arg1);
-		
-		return "admin/product/list";
-	}
-	
-	@PostMapping(value="admin/product/list")
+
+	// 상품등록-윤사랑
 	@ResponseBody
-	public String list(@RequestParam("checkBoxArr") List<String> checkBoxArr,Model model) {
-		List<Product1VO> products = service.selectProductByCheckBox(checkBoxArr);
-		System.out.println(products);
-		model.addAttribute("products",products);
-		
+	@PostMapping("admin/product/register")
+	public String register(Product1VO vo, @RequestParam(value = "colorArr[]") List<String> colorArr,
+			@RequestParam(value = "colorNameArr[]") List<String> colorNameArr,
+			@RequestParam(value = "sizeArr[]") List<String> sizeArr) {
+		// product 테이블 상품 등록
+		service.insertProduct(vo);
+		// 등록 후 자동 생성된 상품번호 받기
+		int param1 = vo.getProdNo();
+
+		// System.out.println(vo.getProdNo()+"상품번호---------");
+		// System.out.println(vo.getPoint()+"상품포인트---------");
+		// System.out.println(colorArr);
+		// System.out.println(colorNameArr);
+		// System.out.println(sizeArr);
+		// product_option 테이블에 상품 옵션 등록
+		int result = service.insertOption(param1, colorArr, colorNameArr, sizeArr);
+
+		return "";
+	}
+
+	
+	//상품목록 - 2023/03/07 윤사랑
+	@GetMapping("admin/product/list")
+	public String list() {
+
 		return "admin/product/list";
+	}
+
+	// 상품목록 분류 - 2023/03/13 윤사랑
+	@ResponseBody
+	@PostMapping("admin/product/list")
+	public Map<String, List<Product1VO>> list(@RequestParam(value = "collection[]") List<String> collection) {
+
+		List<Product1VO> products = service.selectProducts(collection);
+		Map<String, List<Product1VO>> result = new HashMap<>();
+
+		result.put("result", products);
+		// System.out.println(result);
+		return result;
+	}
+
+	// 상품 개수 세기 - 2023/03/15 윤사랑
+	@ResponseBody
+	@PostMapping("admin/product/listCount")
+	public Map<String, Integer> count(@RequestParam(value = "collection[]") List<String> collection) {
+
+		int result = service.selectCountProducts(collection);
+
+		Map<String, Integer> map = new HashMap<>();
+		map.put("result", result);
+		// System.out.println(result);
+		// System.out.println(map);
+
+		return map;
+	}
+
+	// 삭제버튼을 이용한 상품 삭제 - 2023/03/17 윤사랑
+	@GetMapping("admin/product/list/delete")
+	@ResponseBody
+	public String delete(String prodNo) {
+		// System.out.println(prodNo);
+		int result = service.deleteProduct(prodNo);
+
+		return result + "";
+	}
+
+	// 체크박스를 이용한 상품 삭제 - 2023/03/09 윤사랑
+	@PostMapping("admin/product/list/delete")
+	@ResponseBody
+	public String delete(@RequestParam(value = "checkBoxArr[]") List<String> checkBoxArr) {
+
+		int result = 0;
+
+		for (int i = 0; i < checkBoxArr.size(); i++) {
+			result = service.deleteProduct(checkBoxArr.get(i));
+		}
+		// System.out.println(checkBoxArr);
+		return result + "";
+	}
+
+	//상품목록에서 상품 검색 - 2023/03/17 윤사랑
+	@GetMapping("admin/product/search")
+	public String search(Model model, @RequestParam(required=false) String[] arg0, String arg2, String param2, String pg) {
+		
+		//검색결과 목록 페이징 처리
+		int currentPage = service.getCurrentPage(pg);
+        int arg3 = service.getLimitStart(currentPage);
+       
+        int total = service.selectCountProductByKeyword(param2, arg2);//검색한 상품 총 개수
+        int lastPageNum = service.getLastPageNum(total);
+        int pageStartNum = service.getPageStartNum(total, arg3);
+        int groups[] = service.getPageGroup(currentPage, lastPageNum);
+        //System.out.println("arg2=="+arg2);
+		//System.out.println("param2=="+param2);
+		//System.out.println("arg1=="+arg3);
+        
+        //검색한 상품 목록 불러오기
+        List<Product1VO> products = service.searchProduct(arg0, param2, arg2, arg3);
+		//System.out.println(groups[0]);
+		//System.out.println(groups[1]);
+		
+		//System.out.println(products);
+		model.addAttribute("products",  products);
+		model.addAttribute("arg0",  arg0);
+		model.addAttribute("param2",  param2);
+		model.addAttribute("arg2",  arg2);
+		model.addAttribute("groups", groups);
+		model.addAttribute("currentPage", currentPage);
+        model.addAttribute("lastPageNum", lastPageNum);
+        model.addAttribute("pageStartNum", pageStartNum);
+		
+		return "admin/product/search";
 	}
 }

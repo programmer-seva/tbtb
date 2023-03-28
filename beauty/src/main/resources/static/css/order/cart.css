@@ -1,9 +1,13 @@
 /* 카트는 나중에 myContent div바꿔야 함 */
 main div.mainContent > .myContent {
-    width: 1200px;
 }
-
+:root{
+--bs-link-hover-color: #000;
+}
 /* 현재페이지 */
+main div.mainContent > section.myContent {
+    width: 100%;
+}
 main div.cartFrame > .nav {
     display: block;
     text-align: right;
@@ -37,7 +41,7 @@ main div.cartFrame > .nav > p.current span {
     background: #81cb49;
 }
 
-/*마이페이지 - 콘텐츠 - 위시리스트*/
+/*마이페이지 - 콘텐츠 - 카트*/
 main div.cartFrame {
     width: 1200px;
     margin: 0 auto;
@@ -75,6 +79,7 @@ main div.cartFrame > .cartList > table {
     border-collapse: collapse;
     border-spacing: 0;
     border: 0px solid #e5e7eb;
+    table-layout: fixed;
 }
 
 main div.cartFrame > .cartList > table th {
@@ -110,9 +115,15 @@ main div.cartFrame > .cartList > table td:nth-child(-n+3){
 }
 main div.cartFrame > .cartList > table td:nth-child(1) {
     padding-left: 10px;
+    width: 110px;
 }
 main div.cartFrame > .cartList > table td:nth-child(2) {
     width: 130px;
+}
+main div.cartFrame > .cartList > table td:nth-child(3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 main div.cartFrame > .cartList > table td:nth-child(4) {
 	width: 120px;
@@ -133,6 +144,7 @@ main div.cartFrame > .cartList > table td:nth-child(3) {
 }
 main div.cartFrame > .cartList > table td:nth-child(3) span {
     font-size: 12px;
+    font-weight: bold;
     color: #666666;
 }
 main div.cartFrame > .cartList > table td:nth-child(3) .btn {
@@ -166,7 +178,7 @@ main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame{
 }
 
 main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > input[type=text] {
-    width: 22px;
+    width: 27px;
     height: 25px;
     padding: 0 0 0 5px;
     line-height: 25px;
@@ -178,12 +190,12 @@ main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > input[typ
 
 main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > .btnIncrease {
     position: absolute;
-    left: 21px;
-    top: -4px;
+    left: 26px;
+    top: -5px;
 }
 main div.cartFrame > .cartList > table td:nth-child(5) > .countFrame > .btnDecrease {
     position: absolute;
-    left: 21px;
+    left: 26px;
     bottom: 0px;
 }
 main div.cartFrame > .cartList > table td:nth-child(7) span {
@@ -193,6 +205,7 @@ main div.cartFrame > .cartList > table td:nth-child(7) span {
 main div.cartFrame > .cartList > table td:last-child a {
     display: block;
     width: 100px;
+    font-size: 13px;
     text-align: center;
     font-weight: bold;
     color: rgba(79, 79, 79, 0.6);
@@ -219,7 +232,7 @@ main div.cartFrame .totalTable {
     width: 1200px;
     border-top: 1px solid;
     border-bottom: 1px solid;
-    margin-top: 90px;
+    margin-top: 50px;
 }
 main div.cartFrame .totalTable th {
     border-bottom: 1px solid #e5e7eb;
@@ -262,17 +275,17 @@ main div.cartFrame .totalTable .im-icon {
 }
 
 /*마이페이지 - 콘텐츠 - 카트 - 주문버튼*/
-main div.cartFrame > .cartBtns {
+main section.myContent > .cartBtns {
     width: auto;
     margin: 50px auto;
     text-align: center;
 }
-main div.cartFrame > .cartBtns > a {
+main section.myContent > .cartBtns > a {
     display: block;
     margin: 0 auto;
 }
 
-main div.cartFrame > .cartBtns > a.btnOrder {
+main section.myContent > .cartBtns > a.btnOrder {
     display: inline-block;
     width: 200px;
     height: 50px;
@@ -285,14 +298,14 @@ main div.cartFrame > .cartBtns > a.btnOrder {
     padding: 0 24px;
     margin: 0 5px;
 }
-main div.cartFrame > .cartBtns > a.all {
+main section.myContent> .cartBtns > a.all {
     border: none;
 }
-main div.cartFrame > .cartBtns > a.select {
+main section.myContent > .cartBtns > a.select {
     color: #6d6bff;
     background: #fff;
 }
-main div.cartFrame > .cartBtns > a.keepShopping {
+main section.myContent > .cartBtns > a.keepShopping {
     text-decoration: underline;
     font-size: 15px;
     font-weight: lighter;
@@ -405,12 +418,17 @@ main div.wishListFrame > .wishList > .item > .itemInfo > span {
 	font-weight: bold;
 	font-size: 20px;
 	text-align: center;
-	margin: 30px 0;	
+	margin: 30px 0;
 }
 .cartFrame > article.cartList > div.emptyCart {
+	height:200px;
 	color: #555555;
 	font-weight: bold;
 	font-size: 20px;
 	text-align: center;
-	margin: 30px 0;	
+	line-height: 200px;
+	margin: 30px 0;
+	background: #fbfbfb;
+	border: 1px solid #555;
+	border-radius: 20px;	
 }

@@ -4,149 +4,193 @@
  * 내용 : Beauty member login css
  */
 main>.lg {
-    height: 510px;
-    width: 1328px;
-    margin: 50px 288px 50px 288px;
-    min-height: 500px;
-    max-width: 1328px;
-
+	width: 1600px;
+	min-height: 600px;
+	margin: 80px auto 0 auto;
 }
 
-main>.lg>h2 {
-    height: 22px;
-    width: 1328px;
-    font-size: 18px;
-    font-weight: 700;
-    text-align: left;
-    margin: 25px 250px;
+.lg>section {
+	width: 800px;
+	margin: 0 auto;
 }
 
-main>.lg> form > fieldset {
-    font-size: 11px;
-    line-height: 18px;
-    text-align: center;
-    vertical-align: top;
-    height: 435px;
-    width: 400px;
-    border: 0px none rgb(46, 46, 46);
-    margin-left: 459.5px;
+.lg>section>h2 {
+	height: 100px;
+	width: 100%;
+	font-size: 40px;
+	font-weight: 500;
+	line-height: 100px;
+	text-align: center;
+	margin: 10px 0;
 }
 
-main>.lg>form>fieldset>.lg-input {
-    display: inline-block;
-    font-size: 13px;
-    line-height: 45px;
-    padding: 2px 2px 2px 7px;
-    height: 45px;
-    width: 398px;
-    border: 1px solid #d5d5d5;
+.lg>section>table {
+	width: 500px;
+	border-collapse: collapse;
+	margin: 0 auto;
 }
 
-main>.lg>form>fieldset>p {
-    height: 18px;
-    width: 400px;
-    margin: 10px 0 20px 0;
-    text-align: left;
+.lg>section>table tr>td {
+	width: 50%;
+	height: 50px;
+	color: #555;
+	text-align: center;
+	border-bottom: 3px solid #e5e5e5;
+	cursor: pointer;
 }
 
-main>.lg>form>fieldset>p>label {
-    height: auto;
-    width: auto;
-    margin: 0 4px 0 2px;
+.lg>section>table tr>td.current {
+	font-weight: bold;
+	color: black;
+	border-color: black;
 }
 
-main>.lg>form>fieldset>p>label>.lg-save-id {
-    height: 13px;
-    width: 13px;
-    margin: -1px 2px 0 0;
+#member>.login {
+	width: 500px;
+	margin: 50px auto;
+	position: relative;
 }
 
-main>.lg>form>fieldset>.btn-base-box {
-    height: 110px;
-    width: 400px;
-    margin: 0 0 3px 0;
-    padding: 10px 0 10px 0;
+.sendMail {
+	width: 215px !important;
+	height: 50px;
+	padding: 10px 20px;
+	border: 1px solid #e5e5e5;
+	box-sizing: border-box;
 }
 
-main>.lg>form>fieldset>div>.btn-login {
-    height: 48px;
-    width: 400px;
-    border: 1px solid #fff;
-    margin: 0 0 7px 0;
-    padding: 14px 16px 14px 16px;
-    min-width: 80px;
-    font-size: 13px;
-    line-height: 18px;
-    text-align: center;
-    background-color: #444444;
-    color: #fff;
-}
-main>.lg>form>fieldset>div>.btn-login:hover {
-	color: #fff;
-    background-color: #c0c0c0;
-    
+#member>.login input {
+	width: 350px;
+	height: 50px;
+	padding: 10px 20px;
+	border: 1px solid #e5e5e5;
+	box-sizing: border-box;
 }
 
-main>.lg>form>fieldset>div>.btn-register {
-    height: 48px;
-    width: 400px;
-    border: 1px solid #d5d5d5;
-    margin: 0 0 7px 0;
-    padding: 14px 16px 14px 16px;
-    min-width: 80px;
-    font-size: 13px;
-    line-height: 18px;
-    text-align: center;
-    background-color: #fff;
+#member>.login input:focus {
+	outline: 1px solid;
 }
 
-main>.lg>form>fieldset>div>.btn-register:hover {
-	color: #fff;
-    background-color: #c0c0c0;
-}
-main>.lg>form>fieldset>ul>.btn-nonecus-order {
-    height: 48px;
-    width: 400px;
-    border: 1px solid #d5d5d5;
-    margin: 0 0 7px 0;
-    padding: 14px 16px 14px 16px;
-    min-width: 80px;
-    font-size: 13px;
-    line-height: 18px;
-    text-align: center;
-    background-color: #fff;
+#member>.login form>button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 125px;
+	height: 100%;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	background: black;
+	outline: none;
 }
 
-main>.lg>form>fieldset>ul>.btn-nonecus-order:hover {
-	color: #fff;
-    background-color: #c0c0c0;
+#member>.login form>.sendCode {
+	position: absolute;
+	top: 0;
+	right: 150px !important;
+	width: 125px;
+	height: 50px;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	background: #c0c0c0;
+	outline: none;
 }
 
-main>.lg>form>fieldset>ul {
-    height: 25px;
-    width: 400px;
-    padding: 20px 0 5px 0;
-    font-size: 0px;
-    line-height: 0px;
-    text-align: center;
+.reg {
+	float: left;
+	width: 100%;
+	color: red;
+	font-size: 13px;
+	margin-top: 6px;
 }
 
-main>.lg>form>fieldset>ul>li {
-    height: 25px;
-    width: auto;
-    padding: 0 9px 0 13px;
-
+#member>.login>.loginlabel {
+	float: left;
+	width: 100%;
+	height: auto;
+	font-size: 13px;
 }
 
-main>.lg>form>fieldset>ul>li>a {
+#member>.login>.loginlabel>label {
+	cursor: pointer;
+}
 
-    height: auto;
-    width: auto;
+#member>.login>.loginlabel>label>input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	margin: 10px 10px 0;
+	vertical-align: bottom;
+	outline: none;
+}
+
+#member>.other {
+	width: 500px;
+	height: 75px;
+	margin: 60px auto 0 auto;
+	text-align: center;
+	background: #f7f7f7;
+}
+
+#member>.other>a {
+	font-size: 12px;
+	line-height: 75px;
+	margin: 0 40px;
+}
+
+#member>.other>p {
+	font-size: 13px;
+	color: #555;
+	line-height: 75px;
+}
+
+.other span {
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+.m2 {
+	display: none;
+}
+
+.eye {
+	position: absolute;
+	top: 74px;
+	right: 158px;
+	cursor: pointer;
+}
+
+.close {
+	display: none;
+	position: absolute;
+	top: 14px;
+	right: 158px;
+	cursor: pointer;
+}
+
+#timer {
+	position: absolute;
+	top: 74px;
+	right: 158px;
+}
+.error {
+    color: red;
     font-size: 12px;
-    line-height: 25px;
-    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+    margin-left: 150px;
 }
-
-textarea{
-	resize: none;
+.nomember {
+	text-align: center;
+    margin-top: 30px;
+}
+.nomember > a {
+    display: inline-block;
+    width: 230px;
+    height: 60px;
+    line-height: 60px;
+    background: #000;
+    color: #fff;
+    font-weight: bold;
 }

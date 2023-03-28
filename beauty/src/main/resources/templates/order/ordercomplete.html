@@ -3,8 +3,11 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Beauty</title>
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <!-- 스프링 시큐리티 csrf token 누락 -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!-- 스프링 시큐리티 csrf token 누락 -->
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <!--폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +15,9 @@
     <script type="text/javascript" th:src="@{/js/order/ordercomplete.js?ver=1}"></script>
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>  
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>  
         <main>
             <div class="complete">
                 <section>
@@ -31,7 +34,7 @@
                     	<span class="material-icons" id="less" style="display: none">expand_less</span>
                     	<article th:each="order : ${orders}" class="orderItem" style="display: none">
                     		<img th:src="@{/image/}+${order.thumb1}" alt="상품썸네일">
-                        	<span th:text="${order.prodName}+' '+${order.count}+개"></span>
+                        	<span>[[${order.prodName}]] [[${order.count}]]개</span><span>&#91;옵션: [[${order.color}]], [[${order.size}]]&#93;</span>
                         </article>
                     </div>
                 </section>
@@ -69,7 +72,7 @@
                 <button type="button" class="detail">주문내역상세</button>
             </div>
         </main>
-        <th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+        <th:block th:replace="~{_footer :: footerFragment}"></th:block>
     </div>
 </body>
 </html>

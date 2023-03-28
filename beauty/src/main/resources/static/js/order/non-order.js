@@ -2,13 +2,15 @@
  * 
  */
 $(function(){
-	//정규표현식
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
+	// 정규표현식
 	let regName = /^[가-힣]{2,4}$/
 	let regHp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
 	let regMail = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/
 	let regPass = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,}$/
 	
-	//고객명 유효성검사
+	// 고객명 유효성검사
 	let ordererOk = false;
 	$('input[name=orderer]').focusout(function(){
 		let value = $(this).val();
@@ -18,7 +20,8 @@ $(function(){
 			ordererOk = false;
 		}
 	});
-	//수령인 유효성검사
+	
+	// 수령인 유효성검사
 	let recipNameOk = false;
 	$('input[name=recipName]').focusout(function(){
 		recipName();
@@ -32,7 +35,7 @@ $(function(){
 		}
 	}
 	
-	//주문자 휴대전화 조립
+	// 주문자 휴대전화 조립
 	$('select[name=oHp1]').change(function(){
 		orderHp();
 	});
@@ -54,7 +57,8 @@ $(function(){
 			orderHpOk = false;
 		}
 	}
-	//받는사람 휴대전화 조립
+	
+	// 받는사람 휴대전화 조립
 	$('select[name=rHp1]').change(function(){
 		recipHp();
 	});
@@ -79,7 +83,8 @@ $(function(){
 			recipHpOk = false;
 		}
 	}
-	//주문자 이메일 조립
+	
+	// 주문자 이메일 조립
 	$('input[name=bEmail1]').focusout(function(){
 		orderMail();
 	});
@@ -104,6 +109,7 @@ $(function(){
 		}
 	}
 	
+	// 주문자 정보와 동일
 	$('#same').click(function(){
 		$('input[name=recipName]').val($('input[name=orderer]').val());
 		$('select[name=rHp1]').val($('select[name=oHp1]').val()).prop("selected", true);
@@ -116,6 +122,8 @@ $(function(){
 		recipName();
 		matchHp();
 	});
+	
+	// 새 배송지
 	$('#new').click(function(){
 		$('input[name=recipName]').val("");
 		$('select[name=rHp1]').val("010").prop("selected", true);
@@ -129,7 +137,7 @@ $(function(){
 		matchHp();
 	});
 	
-	//비회원 비밀번호
+	// 비회원 비밀번호
 	let passOk = false;
 	let passOk2 = false;
 	$('input[name=pass]').keyup(function(){
@@ -165,8 +173,9 @@ $(function(){
 	});
 	
 	
-	//결제하기
-	$('.btnOrder').click(function(){
+	// 결제하기
+	$('.btnOrder').click(function(e){
+		e.preventDefault;
 		if(!ordererOk){
 			alert('고객명을 확인하세요.')
 			$('input[name=orderer]').focus();
@@ -213,7 +222,7 @@ $(function(){
 			alert('수령인 상세주소를 확인하세요.');
 			return false;
 		}
-		//비회원약관
+		// 비회원약관
 		if(!$('input[name=non-chkTerms]').is(":checked")){
 			alert('약관에 동의해주세요.');
 			return false;
@@ -224,8 +233,6 @@ $(function(){
 		let ordPrice = $('input[name=ordPrice]').val();
 		let ordDisprice = $('input[name=ordDisprice]').val();
 		let ordDelivery = $('input[name=ordDelivery]').val();
-		let savePoint = $('input[name=savePoint]').val();
-		let usedPoint = $('input[name=usedPoint]').val();
 		let total = $('input[name=total]').val();
 		let orderer = $('input[name=orderer]').val();
 		let orderHp = $('input[name=orderHp]').val();
@@ -242,14 +249,12 @@ $(function(){
 		let payment = $('input[name=payment]:checked').val();
 		
 		let jsonData = {
-			'uid' : 'notMember',
+			'uid' : getCookie("nomember"),
 			'password' : password,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,
 			'ordDisprice' : ordDisprice,
 			'ordDelivery' : ordDelivery,
-			'savePoint' : savePoint,
-			'usedPoint' : usedPoint,
 			'total' : total,
 			'orderer' : orderer,
 			'orderHp' : orderHp,
@@ -270,9 +275,28 @@ $(function(){
 			method : 'POST',
 			data : jsonData,
 			dataType : 'JSON',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success : function(data){
 				location.href="/Beauty/order/ordercomplete?ordNo="+data.result;
 			}
 		});
 	});
+	
+	// 비회원 쿠키 가져오기
+	function getCookie(c_name)
+	{
+		var i,x,y,ARRcookies=document.cookie.split(";");
+		for (i=0;i<ARRcookies.length;i++)
+		{
+		  x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+		  y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+		  x=x.replace(/^\s+|\s+$/g,"");
+		  if (x==c_name)
+			{
+			return unescape(y);
+			}
+		  }
+	}
 });

@@ -2,14 +2,15 @@
  * 
  */
 $(function(){
-	
-	//정규표현식
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
+	// 정규표현식
 	let regName = /^[가-힣]{2,4}$/
 	let regHp = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
 	let regMail = /^[a-z0-9\.\-_]+@([a-z0-9\-]+\.)+[a-z]{2,6}$/
 	
-	//고객명 유효성검사
-	let ordererOk = false;
+	// 고객명 유효성검사
+	let ordererOk = true;
 	$('input[name=orderer]').focusout(function(){
 		let value = $(this).val();
 		if(value.match(regName)){
@@ -18,7 +19,8 @@ $(function(){
 			ordererOk = false;
 		}
 	});
-	//수령인 유효성검사
+	
+	// 수령인 유효성검사
 	let recipNameOk = false;
 	$('input[name=recipName]').focusout(function(){
 		recipName();
@@ -32,7 +34,9 @@ $(function(){
 		}
 	}
 	
-	//주문자 휴대전화 조립
+	// 주문자 휴대전화 조립
+	orderHp();
+	
 	$('select[name=oHp1]').change(function(){
 		orderHp();
 	});
@@ -42,7 +46,6 @@ $(function(){
 	$('input[name=oHp3]').focusout(function(){
 		orderHp();
 	});
-	let orderHpOk = false;
 	function orderHp(){
 		let hp1 = $('select[name=oHp1]').val();
 		let hp2 = $('input[name=oHp2]').val();
@@ -54,7 +57,8 @@ $(function(){
 			orderHpOk = false;
 		}
 	}
-	//받는사람 휴대전화 조립
+	
+	// 받는사람 휴대전화 조립
 	$('select[name=rHp1]').change(function(){
 		recipHp();
 	});
@@ -79,7 +83,10 @@ $(function(){
 			recipHpOk = false;
 		}
 	}
-	//주문자 이메일 조립
+	
+	// 주문자 이메일 조립
+	orderMail();
+	
 	$('input[name=bEmail1]').focusout(function(){
 		orderMail();
 	});
@@ -92,7 +99,6 @@ $(function(){
 		$('input[name=bEmail2]').val(value);
 		orderMail();
 	});
-	let orderEmailOk = false;
 	function orderMail(){
 		let mail1 = $('input[name=bEmail1]').val();
 		let mail2 = $('input[name=bEmail2]').val();
@@ -104,6 +110,7 @@ $(function(){
 		}
 	}
 	
+	// 주문자 정보와 동일
 	$('#same').click(function(){
 		$('input[name=recipName]').val($('input[name=orderer]').val());
 		$('select[name=rHp1]').val($('select[name=oHp1]').val()).prop("selected", true);
@@ -116,6 +123,8 @@ $(function(){
 		recipName();
 		matchHp();
 	});
+	
+	// 새 배송지
 	$('#new').click(function(){
 		$('input[name=recipName]').val("");
 		$('select[name=rHp1]').val("010").prop("selected", true);
@@ -129,7 +138,7 @@ $(function(){
 		matchHp();
 	});
 	
-	//결제하기
+	// 결제하기
 	$('.btnOrder').click(function(){
 		if(!ordererOk){
 			alert('고객명을 확인하세요.')
@@ -173,7 +182,7 @@ $(function(){
 			return false;
 		}
 		
-		let uid = $('input[name=orderEmail]').val();
+		let uid = $('input[name=uid]').val();
 		let ordCount = $('input[name=ordCount]').val();
 		let ordPrice = $('input[name=ordPrice]').val();
 		let ordDisprice = $('input[name=ordDisprice]').val();
@@ -196,7 +205,7 @@ $(function(){
 		let payment = $('input[name=payment]:checked').val();
 		
 		let jsonData = {
-			'uid' : '유저아이디',
+			'uid' : uid,
 			'ordCount' : ordCount,
 			'ordPrice' : ordPrice,
 			'ordDisprice' : ordDisprice,
@@ -223,6 +232,9 @@ $(function(){
 			method : 'POST',
 			data : jsonData,
 			dataType : 'JSON',
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			success : function(data){
 				location.href="/Beauty/order/ordercomplete?ordNo="+data.result;
 			}

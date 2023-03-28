@@ -3,8 +3,11 @@
 				xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Beauty</title>
-    <th:block th:replace="~{/_config :: indexConfigFragment}"></th:block>
+    <!-- 스프링 시큐리티 csrf token 누락 -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<!-- 스프링 시큐리티 csrf token 누락 -->
+    <th:block th:replace="~{_config :: indexConfigFragment}"></th:block>
     <!-- 웹 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +25,9 @@
     <script type="text/javascript" th:src="@{/js/order/order.js?ver=1}"></script>
     <script th:inline="javascript">
     	$(function(){
+    		// 주문할 제품 총 합계 계산기
 			let value = [[${list}]];
+			
 			totalPrice(value);
     		function totalPrice(value){
     			let price = 0;
@@ -52,11 +57,23 @@
     			$('input[name=ordCount]').val(count);
     		}
     		
+    		// 회원전용 포인트 사용
     		$('.used').focusout(function(){
     			$('input[name=total]').val($('input[name=oriTotal]').val());
+    			let myPoint = [[${member.point}]];
     			let r1 = $(this).val();
+    			if(r1 < 3000){
+    				alert('3000점 이상 사용가능합니다.');
+    				$(this).val(0);
+    				return false;
+    			}
     			if($('input[name=oriTotal]').val() - r1 < 0){
     				alert('0원 이하로 포인트를 사용할 수 없습니다.');
+    				$(this).val(0);
+    				return false;
+    			}
+    			if(r1 > myPoint){
+    				alert('보유포인트 이상으로 사용할 수 없습니다.');
     				$(this).val(0);
     				return false;
     			}
@@ -68,9 +85,9 @@
     </script>
 </head>
 <body>
-	<th:block th:replace="~{/_header :: modileFragment}"></th:block>
+	<th:block th:replace="~{_header :: modileFragment}"></th:block>
     <div id="wrap">
-        <th:block th:replace="~{/_header :: headerFragment}"></th:block>   
+        <th:block th:replace="~{_header :: headerFragment}"></th:block>   
 		<!-- 메인 -->
 		<main>
 		<div class="mainBackgorund">
@@ -145,6 +162,7 @@
 						<p>
 							주문자 정보
 						</p>
+						<input type="hidden" name="uid" th:value="${member.uid}">
 						<div class="orderBox">
 							<table border="0" class="infoTable">
 							<tbody>
@@ -153,7 +171,7 @@
 									고객명 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
 								</th>
 								<td>
-									<input id="bName" name="orderer" placeholder="" size="10" type="text">
+									<input id="bName" name="orderer" placeholder="" size="10" type="text" th:value="${member.name}">
 								</td>
 							</tr>
 							<tr>
@@ -162,15 +180,15 @@
 								</th>
 								<td>
 									<select id="bPh1" name="oHp1">
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="016">016</option>
-										<option value="017">017</option>
-										<option value="018">018</option>
-										<option value="019">019</option>
+										<option value="010" th:selected="${member.phone1 == '010'}">010</option>
+										<option value="011" th:selected="${member.phone1 == '011'}">011</option>
+										<option value="016" th:selected="${member.phone1 == '016'}">016</option>
+										<option value="017" th:selected="${member.phone1 == '017'}">017</option>
+										<option value="018" th:selected="${member.phone1 == '018'}">018</option>
+										<option value="019" th:selected="${member.phone1 == '019'}">019</option>
 									</select>
-									 - <input id="bPh2" name="oHp2" maxlength="4" size="4" type="text">
-									- <input id="bPh3" name="oHp3" maxlength="4" size="4" type="text">
+									 - <input id="bPh2" name="oHp2" maxlength="4" size="4" type="text" th:value="${member.phone2}">
+									- <input id="bPh3" name="oHp3" maxlength="4" size="4" type="text" th:value="${member.phone3}">
 									<input type="hidden" name="orderHp"/>
 								</td>
 							</tr>
@@ -179,9 +197,9 @@
 									주소<img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
 								</th>
 								<td>
-									<input id="orderZip" name="orderZip" size="6" readonly="readonly" type="text"><a href="#" class="btn" id="btnZip" onclick="orderPost()"> 주소 검색</a><br>
-									<input id="orderAddr1" name="orderAddr1" size="30" readonly="readonly" type="text"><br>
-									<input id="orderAddr2" name="orderAddr2" size="30" type="text">
+									<input id="orderZip" name="orderZip" size="6" readonly="readonly" type="text" th:value="${member.zip}"><a href="#" class="btn" id="btnZip" onclick="orderPost()"> 주소 검색</a><br>
+									<input id="orderAddr1" name="orderAddr1" size="30" readonly="readonly" type="text" th:value="${member.addr1}"><br>
+									<input id="orderAddr2" name="orderAddr2" size="30" type="text" th:value="${member.addr2}">
 								</td>
 							</tr>
 							<tr>
@@ -189,18 +207,18 @@
 									이메일 <img src="//img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수">
 								</th>
 								<td>
-									<input id="bEmail1" name="bEmail1" size="13" type="text">@<input id="bEmail2" name="bEmail2" size="13" type="text">
+									<input id="bEmail1" name="bEmail1" size="13" type="text" th:value="${member.email1}">@<input id="bEmail2" name="bEmail2" size="13" type="text" th:value="${member.email2}">
 									<select id="bEmail3" name="bEmail3">
-										<option value="" selected="selected">- 이메일 선택 -</option>
-										<option value="naver.com">naver.com</option>
-										<option value="daum.net">daum.net</option>
-										<option value="nate.com">nate.com</option>
-										<option value="hotmail.com">hotmail.com</option>
-										<option value="yahoo.com">yahoo.com</option>
-										<option value="empas.com">empas.com</option>
-										<option value="korea.com">korea.com</option>
-										<option value="dreamwiz.com">dreamwiz.com</option>
-										<option value="gmail.com">gmail.com</option>
+										<option value="">- 이메일 선택 -</option>
+										<option value="naver.com" th:selected="${member.email2 == 'naver.com'}">naver.com</option>
+										<option value="daum.net" th:selected="${member.email2 == 'daum.net'}">daum.net</option>
+										<option value="nate.com" th:selected="${member.email2 == 'nate.com'}">nate.com</option>
+										<option value="hotmail.com" th:selected="${member.email2 == 'hotmail.com'}">hotmail.com</option>
+										<option value="yahoo.com" th:selected="${member.email2 == 'yahoo.com'}">yahoo.com</option>
+										<option value="empas.com" th:selected="${member.email2 == 'empas.com'}">empas.com</option>
+										<option value="korea.com" th:selected="${member.email2 == 'korea.com'}">korea.com</option>
+										<option value="dreamwiz.com" th:selected="${member.email2 == 'dreamwiz.com'}">dreamwiz.com</option>
+										<option value="gmail.com" th:selected="${member.email2 == 'gmail.com'}">gmail.com</option>
 										<option value="etc">직접입력</option>
 									</select>
 									<input type="hidden" name="orderEmail">
@@ -216,7 +234,9 @@
 								</th>
 								<td>
 									<p>
-										<input id="input_mile" class="used" name="input_mile" size="10" type="number"> 원 (총 사용가능 적립금 : <strong id="usedPoint">1,000</strong>원)
+										<input id="input_mile" class="used" name="input_mile" size="10" type="number"> 원 
+										(총 사용가능 적립금 : <strong id="usedPoint" th:text="${#numbers.formatInteger(member.point, 0, 'COMMA')}"></strong>원)
+										<input type="hidden" name="myPoint" th:value="${member.point}">
 									</p>
 									적립금은 최소 3,000원 이상일 때 결제가 가능합니다.
 								</td>
@@ -291,85 +311,15 @@
 						</div>
 						</section>
 					</div>
-					<div class="wrap-right">
-						<section class="total">
-						<p>
-							결제정보
-						</p>
-						<div class="orderBox">
-							<div class="totalLeft">
-								<p>
-									상품가격
-								</p>
-								<p>
-									할인금액
-								</p>
-								<p>
-									배송비
-								</p>
-								<p>
-									사용적립금
-								</p>
-								<p>
-									적립금
-								</p>
-							</div>
-							<div class="totalRight">
-								<p>
-									<input type="number" name="ordPrice" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="ordDisprice" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="ordDelivery" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="usedPoint" value="0" readonly></input>원
-								</p>
-								<p>
-									<input type="number" name="savePoint" readonly></input>원
-								</p>
-							</div>
-							<div class="totalBottom">
-								<p>
-									총 주문금액
-								</p>
-								<p>
-									<strong><input type="number" name="total" readonly><input type="hidden" name="oriTotal" readonly></input><input type="hidden" name="ordCount" readonly></input></strong>원
-								</p>
-							</div>
-						</div>
-						</section>
-						<section class="payment">
-						<p>
-							결제수단
-						</p>
-						<div class="orderBox">
-							<div class="paymentList">
-								<input type="radio" id="chk1" name="payment" value="1" checked="checked">
-								<label for="chk1">카드결제</label>
-								<input type="radio" id="chk2" name="payment" value="2">
-								<label for="chk2">실시간계좌이체</label>
-								<input type="radio" id="chk3" name="payment" value="3">
-								<label for="chk3">무통장입금</label>
-								<input type="radio" id="chk4" name="payment" value="4">
-								<label for="chk4">휴대폰결제</label>
-								<input type="radio" id="chk5" name="payment" value="5">
-								<label for="chk5">카카오페이</label>
-								<input type="radio" id="chk6" name="payment" value="6">
-								<label for="chk6">네이버페이</label>
-							</div>
-						</div>
-						</section>
-						<a href="#" class="btnOrder">결제하기</a>
-					</div>
+					
+					<th:block th:replace="~{order/_order :: total}"></th:block>
+					
 				</div>
 				</section>
 			</div>
 		</div>
 		</main>
-		<th:block th:replace="~{/_footer :: footerFragment}"></th:block>
+		<th:block th:replace="~{_footer :: footerFragment}"></th:block>
 	</div>
 </body>
 </html>

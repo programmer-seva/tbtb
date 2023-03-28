@@ -5,10 +5,15 @@
  */
 package kr.co.beauty.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -16,19 +21,31 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 	
 	@Autowired
 	AccessDeniedHandlerImpl accessDeniedHandler;
 	@Autowired
 	AuthenticationEntryPointImpl authenticationEntryPoint;
+	
+	// 자동로그인
+	private final DataSource dataSource;
+	// 자동로그인
 	@Autowired
-	UserDetailsService userDetailsService;
+	private SecurityUserService userService;
+	
+	// 로그인 alert
+//	private final AuthenticationFailureHandler customFailureHandler;
 	
 	@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -40,25 +57,34 @@ public class SecurityConfig {
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		//사이트 위조 방지 설정 -> 배포시 제거
-		http.cors().and().csrf().disable();
+		//http.cors().and().csrf().disable();
 		
 		//인가(접근권한) 설정
 		http.authorizeHttpRequests()
-			.requestMatchers("/**").permitAll()
-			.requestMatchers("/member/**").permitAll();
+			.requestMatchers("/myshop/**").authenticated()
+			.requestMatchers("/order/orderform?type=guest").permitAll()
+			.requestMatchers("/order/orderform/type2/**").permitAll()
+			.requestMatchers("/order/orderform/type1/**").authenticated()
+			.requestMatchers("/order/orderform/**").authenticated()
+			.requestMatchers("/**").permitAll();
 				
+		/*
 		//로그인 alert
 		http.exceptionHandling()
+			//권한이 부족한 경우
 			.accessDeniedHandler(accessDeniedHandler)
+			//로그인이 되지 않은 경우
 			.authenticationEntryPoint(authenticationEntryPoint);
-				
+		*/
+		
 		//로그인 설정
 		http.formLogin()
 			.loginPage("/member/login")
 			.defaultSuccessUrl("/")
 			.failureUrl("/member/login?success=101")
 			.usernameParameter("uid")
-			.passwordParameter("pass");
+			.passwordParameter("password");
+			
 				
 		//로그아웃 설정
 		http.logout()
@@ -66,20 +92,41 @@ public class SecurityConfig {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 			.logoutSuccessUrl("/member/login?success=200");
 		
-		// 자동로그인
-		http.rememberMe() // rememberMe 기능 작동함
-		  .rememberMeParameter("remember-me") // default: remember-me, checkbox 등의 이름과 맞춰야함
-		  .tokenValiditySeconds(3600) // 쿠키의 만료시간 설정(초), default: 14일
-		  .alwaysRemember(false) // 사용자가 체크박스를 활성화하지 않아도 항상 실행, default: false
-		  .userDetailsService(userDetailsService); // 기능을 사용할 때 사용자 정보가 필요함. 반드시 이 설정 필요함.
+		// 자동로그인 설정(수정된부분)
+		http.rememberMe()
+			.rememberMeParameter("autoLogin")
+			.tokenValiditySeconds(60*60*24*3)
+			.userDetailsService(userService);
 		
 		
 		return http.build();
 	}
 	
+	/*
+	// 자동로그인
+	@Bean
+    public PersistentTokenRepository tokenRepository() {
+      // JDBC 기반의 tokenRepository 구현체
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource); // dataSource 주입
+        return jdbcTokenRepository;
+    }
+	
+	// 자동로그인
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// Security 사용자에 대한 권한 설정 (noop은 평문으로 저장해줌)
+		//auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
+		//auth.inMemoryAuthentication().withUser("manager").password("{noop}1234").roles("MANAGER");
+		//auth.inMemoryAuthentication().withUser("member").password("{noop}1234").roles("MEMBER");
+	
+		// 로그인 인증 처리 서비스, 암호화 방식 설정(필수 설정)
+		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
+	}
+	*/
+	// 비밀번호 암호화
 	@Bean
     public PasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
-    
+
 	}
 }

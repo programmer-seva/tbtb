@@ -2,13 +2,17 @@
  * 
  */
 $(function(){
+	// 쇼핑계속하기
 	$('.continue').click(function(){
 		location.href="/Beauty/index";
 	});
+	
+	// 주문상세보기
 	$('.detail').click(function(){
-		location.href="/Beauty/myshop/orderDetail";
+		location.href="/Beauty/myshop/myorder";
 	});
 	
+	// 더보기, 간단히보기
 	$('.order').children('article.orderItem').slice(0,1).show();
 	$('#more').click(function(){
 		$(this).hide();
