@@ -1,5 +1,7 @@
 /* admin-prodcut-list */
 $(document).ready(function(){
+	var header = $("meta[name='_csrf_header']").attr('content');
+	var token = $("meta[name='_csrf']").attr('content');
 	//기본 시작 전체 체크 해제
 	$(".allCheck").attr("checked", false);
 	
@@ -50,6 +52,9 @@ $(document).ready(function(){
 	  	$.ajax({
 			type:"post",
 			url:"/Beauty/admin/product/list",
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
@@ -104,10 +109,14 @@ $(document).ready(function(){
 				collection.push($(this).val());
 			});	
 	  	}
+	  	
 		//ajax 요청 보내기
 	  	$.ajax({
 			type:"post",
 			url:"/Beauty/admin/product/listCount",
+			beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 			data: {'collection':collection},
 			dataType: 'json',
 			success:function(data){
@@ -248,6 +257,9 @@ $(document).ready(function(){
 			}else{
 				$.ajax({
 					url:'/Beauty/admin/product/list/delete',
+					beforeSend: function(xhr){
+				        xhr.setRequestHeader(header, token);
+				    },
 					type:'post',
 					data:{'checkBoxArr':checkBoxArr},
 					success:function(data){
@@ -267,9 +279,12 @@ $(document).ready(function(){
 	$(document).on('click', '.deleteButton', function(){
 		var prodNo = $(this).val();
 		//console.log(prodNo,"prodNo");
-
+		
 		$.ajax({
 	        url: '/Beauty/admin/product/list/delete',
+	        beforeSend: function(xhr){
+		        xhr.setRequestHeader(header, token);
+		    },
 	        type: 'get',
 	        data: {prodNo: prodNo},
 	        success: function(data) {
@@ -392,9 +407,13 @@ $(document).ready(function(){
 			    formData.append("sizeArr[]", sizeArr[i]);
 			}
 			
-			//색상을 선택하지 않았을 경우
+			var header = $("meta[name='_csrf_header']").attr('content');
+			var token = $("meta[name='_csrf']").attr('content');
+			
+			//카테고리를 선택하지 않았을 경우
 			if($("#cate2").val()=='0'){
 				alert("카테고리를 선택해주세요.");
+			//색상을 선택하지 않았을 경우
 			}else if(colorArr.length == 0){
 				alert("선택된 색상이 없습니다.");
 			}else{
@@ -402,6 +421,9 @@ $(document).ready(function(){
 					//ajax 요청 보내기
 					$.ajax({
 						url:'/Beauty/admin/product/register',
+						beforeSend: function(xhr){
+					        xhr.setRequestHeader(header, token);
+					    },
 						type:'post',
 						data:formData,
 						cache: false,
