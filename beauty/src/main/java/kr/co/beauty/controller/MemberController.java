@@ -177,7 +177,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("member/findPwResult")
 	public Map<String, Integer> findPwResult(@RequestParam("uid") String uid, @RequestParam("pass") String pass) {
-		log.info("1212");
+		log.info("비밀번호 변경 완료");
 		pass = passwordEncoder.encode(pass);
 		System.out.println(uid);
 		System.out.println(pass);
