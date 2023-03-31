@@ -198,5 +198,18 @@ public class MemberController {
 		data.put("code", code);
 		return data;
 	}
+	
+	// 비회원 주문조회
+	@GetMapping("member/joinNonOrder")
+	public String joinNonOrder() {
+		return "member/joinNonOrder";
+	}
+	
+//	@ResponseBody
+//	@PostMapping("member/joinNonOrder")
+//	public String joinNonOrder(Model model) {
+//		
+//		return result;
+//	}
 
 }
