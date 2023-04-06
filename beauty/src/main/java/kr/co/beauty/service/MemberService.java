@@ -55,4 +55,13 @@ public class MemberService {
 	public int countByNameAndUid(String name, String uid) {
 		return repo.countByNameAndUid(name, uid);
 	}
+	
+	// 비회원 주문번호 찾기
+	public String joinNonOrder(String name, String phone, String orderNumber) {
+		return dao.joinNonOrder(name, phone, orderNumber);
+	}
+	
+	
+	
+	
 }
