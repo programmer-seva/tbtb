@@ -103,6 +103,12 @@ $(function() {
 		let phone = $('input[name=phone]').val();
 		let orderNumber = $('input[name=orderNumber]').val();
 		
+		let jsonData = {
+			"name": name,
+			"phone": phone,
+			"orderNumber": orderNumber
+		};
+		
 		console.log("hr1 : " + name);
 		console.log("hr2 : " + phone);
 		console.log("hr3 : " + orderNumber);
@@ -121,15 +127,21 @@ $(function() {
 			return false;
 		}
 		$.ajax({
-			url: '/Beauty/member/joinNonOrder',
+			url: '/Beauty/member/nonOrder',
 			type: 'post',
 			data: jsonData,
+			dataType: 'json',
 			beforeSend: function(xhr){
 		        xhr.setRequestHeader(header, token);
 		    },
 		    success: function(data){
-				console.log('here4');
-				location.href="/Beauty/member/joinNonOrder";
+				if(data.result != null){
+					console.log('here4');
+					let uid = data.result;
+					location.href="/Beauty/member/joinNonOrder";
+				}else{
+					console.log('here5')
+				}
 			}
 		});
 		

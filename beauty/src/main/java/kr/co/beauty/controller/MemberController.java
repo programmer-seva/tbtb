@@ -201,15 +201,29 @@ public class MemberController {
 	
 	// 비회원 주문조회
 	@GetMapping("member/joinNonOrder")
-	public String joinNonOrder() {
+	public String joinNonOrder(Model model, HttpSession session) {
+		log.info("비회원 주문조회 화면 출력");
+		String uid = (String) session.getAttribute("rs");
+		model.addAttribute("uid", uid);
 		return "member/joinNonOrder";
 	}
 	
-//	@ResponseBody
-//	@PostMapping("member/joinNonOrder")
-//	public String joinNonOrder(Model model) {
-//		
-//		return result;
-//	}
-
+	
+	
+	@ResponseBody
+	@PostMapping("member/nonOrder")
+	public String joinNonOrder(Model model, String name, String phone, String orderNumber, HttpSession session) {
+		log.info("이름(joinNonOrder) : " + name);
+		log.info("휴대폰 번호(joinNonOrder) : " + phone);
+		log.info("비회원주문 번호(joinNonOrder) : " + orderNumber);
+		
+		// 아이디 찾기 정보(이름, 휴대전화)
+		String rs = service.joinNonOrder(name, phone, orderNumber);
+		session.setAttribute("rs", rs);
+		Map<String, String> result = new HashMap<>();
+		result.put("result", rs);
+		return "result";
+	}
+	
+	
 }
