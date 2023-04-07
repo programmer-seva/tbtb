@@ -27,7 +27,7 @@ public interface MemberDAO {
 	public int findPwResult(String arg0, String arg1);
 	
 	// 비회원 주문번호 찾기
-	public String joinNonOrder(String name, String phone, String orderNumber);
+	public int joinNonOrder(String arg0, String arg1, String arg2);
 	
 	// 김동근
 	public MemberVO selectMember(@Param("uid") String uid);
