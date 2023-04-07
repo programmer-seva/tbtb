@@ -24,7 +24,7 @@
 	                <img th:src="@{/img/default_profile.png}" alt="">
 	            </a>
 	        </div>
-	        <div class="userInfo" th:with="levelPoint=${2500}">
+	        <div class="userInfo" th:with="levelPoint=${member.boughtPrice / 100}">
 	            <div><span id="userNick" th:text="${member.name}"></span>님</div>
 	            
 	            <!-- 등급 -->
@@ -44,7 +44,7 @@
 	            <div>
 	                <div class="boughtPrice">
 	                    <span>누적 구매 금액</span>
-	                    <span id="boughtPrice">250,000</span>
+	                    <span id="boughtPrice" th:text="${#numbers.formatInteger(member.boughtPrice, 0, 'COMMA')}"></span>
 	                </div>
 	                <div class="point">
 	                    <span>현재 포인트</span>
