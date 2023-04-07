@@ -212,17 +212,16 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping("member/nonOrder")
-	public String joinNonOrder(Model model, String name, String phone, String orderNumber, HttpSession session) {
+	public Map<String, Integer> joinNonOrder(Model model, String name, String phone, String orderNumber) {
 		log.info("이름(joinNonOrder) : " + name);
 		log.info("휴대폰 번호(joinNonOrder) : " + phone);
 		log.info("비회원주문 번호(joinNonOrder) : " + orderNumber);
 		
 		// 아이디 찾기 정보(이름, 휴대전화)
-		String rs = service.joinNonOrder(name, phone, orderNumber);
-		session.setAttribute("rs", rs);
-		Map<String, String> result = new HashMap<>();
+		int rs = service.joinNonOrder(name, phone, orderNumber);
+		Map<String, Integer> result = new HashMap<>();
 		result.put("result", rs);
-		return "result";
+		return result;
 	}
 	
 	

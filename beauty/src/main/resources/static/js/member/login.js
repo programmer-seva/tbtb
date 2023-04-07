@@ -108,11 +108,11 @@ $(function() {
 			"phone": phone,
 			"orderNumber": orderNumber
 		};
-		
+		/*
 		console.log("hr1 : " + name);
 		console.log("hr2 : " + phone);
 		console.log("hr3 : " + orderNumber);
-		
+		*/
 		// 공백시  팝업
 		if (name == '') {
 			alert('이름을 입력해주세요.');
@@ -126,21 +126,22 @@ $(function() {
 			alert('주문번호를 입력해주세요.');
 			return false;
 		}
+		//alert('here2');
 		$.ajax({
 			url: '/Beauty/member/nonOrder',
-			type: 'post',
+			method: 'post',
 			data: jsonData,
 			dataType: 'json',
 			beforeSend: function(xhr){
 		        xhr.setRequestHeader(header, token);
 		    },
 		    success: function(data){
-				if(data.result != null){
-					console.log('here4');
+				if(data.result){
+					//alert('here4');
 					let uid = data.result;
 					location.href="/Beauty/member/joinNonOrder";
 				}else{
-					console.log('here5')
+					alert('주문정보를 다시 확인 후 입력해 주세요.');
 				}
 			}
 		});
