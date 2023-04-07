@@ -40,7 +40,9 @@
 	
 	<!-- 김동근 -->
 	<select id="selectMember" resultType="MemberVO">
-		SELECT * FROM `member`
+		SELECT m.*, SUM(oc.`total`) AS boughtPrice
+		FROM `member` AS m
+		JOIN `ordercomplete` AS oc USING(`uid`)
 		WHERE `uid` = #{uid};
 	</select>
 	

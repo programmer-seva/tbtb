@@ -38,6 +38,7 @@ public class MemberVO {
 	private String phone3;
 	private String email1;
 	private String email2;
+	private int boughtPrice;
 	
 	// terms
 	private String terms;
