@@ -38,6 +38,10 @@ public class MyshopService {
 	public int countOrderList(String uid, String start, String end) {
 		return daoMy.countOrderList(uid, start, end);
 	}
+	
+	public int orderConfirm (int ordNo) {
+		return daoMy.orderConfirm(ordNo);
+	}
 
 	// wishlist
 	public int addWish(WishVO vo) {

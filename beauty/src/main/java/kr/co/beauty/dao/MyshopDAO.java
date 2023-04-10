@@ -22,7 +22,7 @@ public interface MyshopDAO {
 	public List<MyorderVO> 	selectOrderList			 (@Param("uid") String uid);
 	public List<MyorderVO> 	selectOrderListSearchDate(@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
 	public int				countOrderList			 (@Param("uid") String uid, @Param("start") String start, @Param("end") String end);
-	
+	public int				orderConfirm			 (@Param("ordNo") int ordNo);
 	
 	//wishlist
 	public void 		addWish				(WishVO vo);
