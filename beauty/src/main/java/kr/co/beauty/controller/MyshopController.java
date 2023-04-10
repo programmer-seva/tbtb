@@ -104,6 +104,21 @@ public class MyshopController {
 	public String track() {
 		return "myshop/track";
 	}
+	
+	// 구매 확정
+	@ResponseBody
+	@PostMapping("myshop/orderConfirm")
+	public int orderConfirm(@RequestParam("ordNo") int ordNo) {
+		return service.orderConfirm(ordNo);
+	}
+	
+	/*
+	// 리뷰 작성
+	@GetMapping("myshop/track")
+	public String track() {
+		return "myshop/track";
+	}
+	*/
 
 	/* 쿠폰 */
 	@GetMapping("myshop/coupon")
