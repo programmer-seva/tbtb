@@ -138,10 +138,10 @@ $(function() {
 		    success: function(data){
 				if(data.result){
 					//alert('here4');
-					let uid = data.result;
+					let name = data.result;
 					location.href="/Beauty/member/joinNonOrder";
 				}else{
-					alert('주문정보를 다시 확인 후 입력해 주세요.');
+					alert('일치하는 주문정보가 없습니다\n 확인 후 다시 입력해 주세요.');
 				}
 			}
 		});
