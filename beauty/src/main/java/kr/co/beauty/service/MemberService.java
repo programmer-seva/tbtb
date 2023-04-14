@@ -61,6 +61,10 @@ public class MemberService {
 		return dao.joinNonOrder(name, phone, orderNumber);
 	}
 	
+	// 비회원 주문 상품 리스트
+	public String selectNonOrder(String name) {
+		return dao.selectNonOrder(name);
+	}
 	
 	
 	

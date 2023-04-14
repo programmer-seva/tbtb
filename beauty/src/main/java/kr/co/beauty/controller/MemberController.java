@@ -2,6 +2,7 @@ package kr.co.beauty.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -21,6 +22,7 @@ import kr.co.beauty.service.EmailService;
 import kr.co.beauty.service.MemberService;
 import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.MemberVO;
+import kr.co.beauty.vo.Product1VO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -203,7 +205,7 @@ public class MemberController {
 	
 	// 비회원 주문조회
 	@GetMapping("member/joinNonOrder")
-	public String joinNonOrder(Model model, HttpSession session) {
+	public String joinNonOrder(Principal principal, Model model, HttpSession session) {
 		log.info("비회원 주문조회 화면 출력");
 		
 		// 아래 Post에 선언된 session을 html로 당겨옴
@@ -214,6 +216,11 @@ public class MemberController {
 		model.addAttribute("name", name);
 		model.addAttribute("phone", phone);
 		model.addAttribute("orderNumber", orderNumber);
+		
+		// 상품 가져오기
+		// 비회원 주문 상품 리스트
+//		nonOrder = service.selectNonOrder(principal.getName());
+//		model.addAttribute("nonOrder", nonOrder);
 		
 		return "member/joinNonOrder";
 	}

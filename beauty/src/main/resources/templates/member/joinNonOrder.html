@@ -75,6 +75,7 @@
                                         </thead>
                                         <tbody>
                                         <!-- 아이템 반복 -->
+                                        <th:block th:each="nonOrder:${nonOrder}">
 	                                        <tr>
 	                                            <td>
 	                                                <div>
@@ -109,6 +110,7 @@
 	                                                </div>
 	                                            </td>
 	                                        </tr>
+	                                        </th:block>
                                         <!-- 아이템 반복 종료 -->
                                         </tbody>
                                     </table>
