@@ -29,6 +29,9 @@ public interface MemberDAO {
 	// 비회원 주문번호 찾기
 	public int joinNonOrder(String arg0, String arg1, String arg2);
 	
+	// 비회원 주문 상품 리스트
+	public String selectNonOrder(@Param("name") String name);
+	
 	// 김동근
 	public MemberVO selectMember(@Param("uid") String uid);
 	//내 프로필
