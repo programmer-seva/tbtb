@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.beauty.vo.MyorderVO;
+import kr.co.beauty.vo.PointVO;
 import kr.co.beauty.vo.WishVO;
 
 @Mapper
@@ -23,6 +24,13 @@ public interface MyshopDAO {
 	public List<MyorderVO> 	selectOrderListSearchDate(@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
 	public int				countOrderList			 (@Param("uid") String uid, @Param("start") String start, @Param("end") String end);
 	public int				orderConfirm			 (@Param("ordNo") int ordNo);
+	
+	//point
+	public List<PointVO> selectSavePointListSearchDate  (@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
+	public List<PointVO> selectUsedPointListSearchDate  (@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
+	public int			 countSavePointList				(@Param("uid") String uid, @Param("start") String start, @Param("end") String end);
+	public int			 countUsedPointList				(@Param("uid") String uid, @Param("start") String start, @Param("end") String end);
+	
 	
 	//wishlist
 	public void 		addWish				(WishVO vo);

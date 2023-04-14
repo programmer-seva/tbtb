@@ -54,7 +54,32 @@
 		SET `ordComplete` = 6
 		WHERE `ordNo` = #{ordNo};
 	</update>
-
+	
+	<!-- 포인트 -->
+	<select id="selectSavePointListSearchDate" resultType="PointVO">
+		SELECT `ordDate`, `ordNo`, `savePoint`, `ordComplete`
+		FROM `ordercomplete`
+		WHERE `uid` = #{uid} AND DATE(`ordDate`) BETWEEN #{start} AND #{end}
+		ORDER BY `ordDate` DESC LIMIT #{pg}, 10;
+	</select>
+	<select id="countSavePointList" resultType="int">
+		SELECT COUNT(*) 
+		FROM `ordercomplete`
+		WHERE `uid` = #{uid} AND DATE(`ordDate`) BETWEEN #{start} AND #{end};
+	</select>
+	
+	<select id="selectUsedPointListSearchDate" resultType="PointVO">
+		SELECT `ordDate`, `ordNo`, `usedPoint`, `ordComplete`
+		FROM `ordercomplete`
+		WHERE `uid` = #{uid} AND `usedPoint`>0 AND DATE(`ordDate`) BETWEEN #{start} AND #{end}
+		ORDER BY `ordDate` DESC LIMIT #{pg}, 10;
+	</select>
+	<select id="countUsedPointList" resultType="int">
+		SELECT COUNT(*) 
+		FROM `ordercomplete`
+		WHERE `uid` = #{uid} AND `usedPoint`>0 AND DATE(`ordDate`) BETWEEN #{start} AND #{end};
+	</select>
+	
 
 	<!-- 위시리스트 -->
 	<insert id="addWish">
