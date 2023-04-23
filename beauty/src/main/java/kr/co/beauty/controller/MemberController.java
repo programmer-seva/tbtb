@@ -203,7 +203,7 @@ public class MemberController {
 		return data;
 	}
 	
-	// 비회원 주문조회
+	// 비회원 주문 고객정보 조회
 	@GetMapping("member/joinNonOrder")
 	public String joinNonOrder(Principal principal, Model model, HttpSession session) {
 		log.info("비회원 주문조회 화면 출력");
@@ -226,7 +226,7 @@ public class MemberController {
 	}
 	
 	
-	
+	// 비회원 주문 고객정보 조회
 	@ResponseBody
 	@PostMapping("member/nonOrder")
 	public Map<String, Integer> joinNonOrder(HttpSession session, Model model, String name, String phone, String orderNumber) {
