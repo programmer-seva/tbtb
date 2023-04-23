@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import kr.co.beauty.vo.MemberVO;
+import kr.co.beauty.vo.MyorderVO;
 
 @Mapper
 @Repository
@@ -26,11 +27,14 @@ public interface MemberDAO {
 	// 비밀번호 변경
 	public int findPwResult(String arg0, String arg1);
 	
-	// 비회원 주문번호 찾기
+	// 비회원 주문 고객정보 조회
 	public int joinNonOrder(String arg0, String arg1, String arg2);
 	
 	// 비회원 주문 상품 리스트
-	public String selectNonOrder(@Param("name") String name);
+	// public String selectNonOrder(@Param("name") String name);
+	
+	// 비회원 주문 상품 리스트
+	public List<MyorderVO> 	selectNonOrder(@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
 	
 	// 김동근
 	public MemberVO selectMember(@Param("uid") String uid);
