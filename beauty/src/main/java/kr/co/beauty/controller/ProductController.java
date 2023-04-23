@@ -196,11 +196,11 @@ public class ProductController {
 			if (check > 0) { 
 				// 장바구니에 이미 있음(수량 증가)
 				rs = service.updateCart(vo.get(i));
-				log.info("장바구니 새상품 등록");
+				log.info("장바구니 기존상품 업데이트");
 			} else { 
 				// 장바구니에 없음(새로 등록)
 				rs = service.addCart(vo.get(i));
-				log.info("장바구니 기존상품 추가");
+				log.info("장바구니 새상품 추가");
 			}
 		}
 		
