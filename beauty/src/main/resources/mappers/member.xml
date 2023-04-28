@@ -45,7 +45,7 @@
 	
 	<!-- 비회원 주문조회 상품목록 -->
 	<select id="selectNonOrder" resultType="MyorderVO">
-		SELECT
+		SELECT 
 			p.`prodNo`,
 			p.`prodName`,
 			p.`thumb1`, 
@@ -61,8 +61,8 @@
 		FROM `ordercomplete` AS oc
 		JOIN `order` AS o USING (`ordNo`)
 		JOIN `product` AS p USING (`prodNo`)
-		WHERE `uid` = #{uid} AND DATE(o.`rdate`) BETWEEN #{start} AND #{end}
-		ORDER BY o.`rdate` DESC LIMIT #{pg}, 10;
+		WHERE `orderer`='강중현' AND `orderHp`='010-1234-1234'
+		ORDER BY o.`rdate` DESC;
 	</select>
 	
 	<!-- 김동근 -->

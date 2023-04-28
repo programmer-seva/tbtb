@@ -34,7 +34,7 @@ public interface MemberDAO {
 	// public String selectNonOrder(@Param("name") String name);
 	
 	// 비회원 주문 상품 리스트
-	public List<MyorderVO> 	selectNonOrder(@Param("uid") String uid, @Param("start") String start, @Param("end") String end, @Param("pg") int pg);
+	public List<MyorderVO> selectNonOrder(@Param("orderer") String orderer, @Param("orderHp") String orderHp);
 	
 	// 김동근
 	public MemberVO selectMember(@Param("uid") String uid);

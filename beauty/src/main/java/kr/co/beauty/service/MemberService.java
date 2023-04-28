@@ -69,8 +69,8 @@ public class MemberService {
 //		return dao.selectNonOrder(name);
 //	}
 	
-	public List<MyorderVO> selectNonOrder(String uid, String start, String end, int pg) {
-		return dao.selectNonOrder(uid, start, end, pg);
+	public List<MyorderVO> selectNonOrder(String orderer, String orderHp) {
+		return dao.selectNonOrder(orderer, orderHp);
 	}
 	
 }
