@@ -22,6 +22,7 @@ import kr.co.beauty.service.EmailService;
 import kr.co.beauty.service.MemberService;
 import kr.co.beauty.service.UtilService;
 import kr.co.beauty.vo.MemberVO;
+import kr.co.beauty.vo.MyorderVO;
 import kr.co.beauty.vo.Product1VO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -204,6 +205,7 @@ public class MemberController {
 	}
 	
 	// 비회원 주문 고객정보 조회
+	/*
 	@GetMapping("member/joinNonOrder")
 	public String joinNonOrder(Principal principal, Model model, HttpSession session) {
 		log.info("비회원 주문조회 화면 출력");
@@ -212,16 +214,37 @@ public class MemberController {
 		String name = (String) session.getAttribute("name");
 		String phone = (String) session.getAttribute("phone");
 		String orderNumber = (String) session.getAttribute("orderNumber");
+//		String orderNumber = (String) session.getAttribute("orderNumber");
+//		String orderNumber = (String) session.getAttribute("orderNumber");
+//		String orderNumber = (String) session.getAttribute("orderNumber");
+		
 		
 		model.addAttribute("name", name);
 		model.addAttribute("phone", phone);
 		model.addAttribute("orderNumber", orderNumber);
 		
-		// 상품 가져오기
-		// 비회원 주문 상품 리스트
-//		nonOrder = service.selectNonOrder(principal.getName());
+		// 비회원 주문 상품 가져오기
+//		nonOrderList = service.selectNonOrder(principal.getName());
 //		model.addAttribute("nonOrder", nonOrder);
 		
+		return "member/joinNonOrder";
+	}
+	*/
+	
+	@GetMapping("member/joinNonOrder")
+	public String joinNonOrder(Principal principal, Model model, HttpSession session) {
+		log.info("비회원 주문조회 화면 출력");
+		
+		String name = (String) session.getAttribute("name");
+		String phone = (String) session.getAttribute("phone");
+		String orderNumber = (String) session.getAttribute("orderNumber");
+		
+		List<MyorderVO> orderList = service.joinNonOrder(name, phone, orderNumber);
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("name", name);
+		model.addAttribute("phone", phone);
+		model.addAttribute("orderNumber", orderNumber);
+
 		return "member/joinNonOrder";
 	}
 	
@@ -229,22 +252,31 @@ public class MemberController {
 	// 비회원 주문 고객정보 조회
 	@ResponseBody
 	@PostMapping("member/nonOrder")
-	public Map<String, Integer> joinNonOrder(HttpSession session, Model model, String name, String phone, String orderNumber) {
+	public Map<String, List<MyorderVO>> joinNonOrder(HttpSession session, Model model, String name, String phone, String orderNumber) {
 		log.info("이름(joinNonOrder) : " + name);
 		log.info("휴대폰 번호(joinNonOrder) : " + phone);
 		log.info("비회원주문 번호(joinNonOrder) : " + orderNumber);
+//		
+		
+//		session.setAttribute("rs", rs);
 		
 		// HttpSession session 선언, name, phone, orderNumber (get으로 넘김)
 		session.setAttribute("name", name);
 		session.setAttribute("phone", phone);
 		session.setAttribute("orderNumber", orderNumber);
 		
-		// 아이디 찾기 정보(이름, 휴대전화)
-		int rs = service.joinNonOrder(name, phone, orderNumber);
-		Map<String, Integer> result = new HashMap<>();
+		// 아이디 찾기 정보(이름, 휴대전화, 주문번호)
+		List<MyorderVO> rs = service.joinNonOrder(name, phone, orderNumber);
+		Map<String, List<MyorderVO>> result = new HashMap<>();
 		result.put("result", rs);
+		
+
 		return result;
 	}
+	
+	// 주문번호 찾기
+//	findOrderNumber
+	
 	
 	
 }
