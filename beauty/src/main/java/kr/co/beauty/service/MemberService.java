@@ -60,17 +60,13 @@ public class MemberService {
 	}
 	
 	// 비회원 주문 고객정보 조회
-	public int joinNonOrder(String name, String phone, String orderNumber) {
+	public List<MyorderVO> joinNonOrder(String name, String phone, String orderNumber) {
 		return dao.joinNonOrder(name, phone, orderNumber);
 	}
 	
 	// 비회원 주문 상품 리스트
-//	public String selectNonOrder(String name) {
-//		return dao.selectNonOrder(name);
+//	public List<MyorderVO> selectNonOrder(String orderer, String orderHp, String ordNo) {
+//		return dao.selectNonOrder(orderer, orderHp, ordNo);
 //	}
-	
-	public List<MyorderVO> selectNonOrder(String orderer, String orderHp) {
-		return dao.selectNonOrder(orderer, orderHp);
-	}
 	
 }

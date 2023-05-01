@@ -138,7 +138,6 @@ $(function() {
 		    success: function(data){
 				if(data.result){
 					//alert('here4');
-					let name = data.result;
 					location.href="/Beauty/member/joinNonOrder";
 				}else{
 					alert('일치하는 주문정보가 없습니다\n 확인 후 다시 입력해 주세요.');

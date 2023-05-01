@@ -32,34 +32,14 @@
             <th:block th:replace="~{_header :: headerFragment}"></th:block>
             
             <!-- 메인 -->
-            
             <main>
-	            <h2>비회원 주문조회</h2>
-	            <div><strong>[[${name}]]</strong> 님 반갑습니다.</div>
-	            <div>휴대폰 : [[${phone}]]</div>
-	            <div>주문번호 : <strong>[[${orderNumber}]]</strong></div>
-                <div class="mainBackgorund">
+			<div class="mainBackgorund">
                     <div class="mainContent">
 	                    <section class="myContent">
 	                    	<div class="myorderFrame">
-	                    		<!-- 기간 선택 -->
+								<!-- 기간 선택 -->
                                 <div class="byDate">
-                                    <div class="dateBtns">
-                                        <input type="radio" id="1month" name="chkDate" value="1month" checked="checked">
-                                        <label for="1month">1개월</label>
-                                        
-                                        <input type="radio" id="6month" name="chkDate" value="6month">
-                                        <label for="6month">6개월</label>
-                                        
-                                        <input type="radio" id="1year" 	name="chkDate" value="1year">
-                                        <label for="1year">1년</label>
-                                    </div>
-                                    <div class="datePeriod">
-                                        <input type="date" id="startDate">
-                                        ~
-                                        <input type="date" id="endDate">
-                                        <button type="button" class="btn" id="btnSearchDate">조회</button>
-                                    </div>
+                                <div><strong>[[${name}]]</strong> 고객님 주문 내역</div>
                                 </div>
                                 <!-- 주문 내역 -->
                                 <div class="orderList">
@@ -74,43 +54,45 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                         <!-- 비었으면 -->
+                                        <tr th:if="${#lists.size(orderList) == 0}"><td colspan='5'>장바구니에 담긴 상품이 없습니다.</td></tr>
                                         <!-- 아이템 반복 -->
-                                        <!-- <th:block th:each="nonOrder:${nonOrder}"> -->
-	                                        <tr>
-	                                            <td>
-	                                                <div>
-	                                                    <a href="#">
-	                                                        <img src="#" alt=""/>
-	                                                    </a>
-	                                                    <ul class="info">
-	                                                        <li id="company">
-	                                                            <a href="#">회사명</a>
-	                                                        </li>
-	                                                        <li id="prodName">
-	                                                            <a href="#">상품명</a>
-	                                                        </li>
-	                                                        <li id="option">[옵션 : 컬러, 사이즈 ]</li>
-	                                                    </ul>
-	                                                </div>
-	                                            </td>
-	                                            <td>23-03-01(주문일자)</td>
-	                                            <td>
-	                                                <a href="#">[[${orderNumber}]]</a>
-	                                            </td>
-	                                            <td>
-	                                                <span id="disPrice">50,000원</span> <br/>
-	                                                <span id="count">2개(수량)</span>
-	                                            </td>
-	                                            <td>
-	                                                <div class="btn-set tooltip">
-	                                                    <button type="button" class="btn btnTrack">배송 조회</button> <br/>
-	                                                    <button type="button" class="btn btnReview">리뷰 쓰기</button><br/>
-	                                                    <button type="button" class="btn btnConfirm">구매 확정</button><br/>
-	                                                    <button type="button" class="btn">반품/교환</button>
-	                                                </div>
-	                                            </td>
-	                                        </tr>
-	                                        <!-- </th:block> -->
+                                        <th:block th:each="order:${orderList}">
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <a href="#">
+                                                        <img th:src="@{/image/}+${order.thumb1}" alt=""/>
+                                                    </a>
+                                                    <ul class="info">
+                                                        <li id="company">
+                                                            <a href="#" th:text="${order.company}"></a>
+                                                        </li>
+                                                        <li id="prodName">
+                                                            <a th:href="@{/shop/view(pno=${order.prodNo})}" th:text="${order.prodName}"></a>
+                                                        </li>
+                                                        <li id="option" th:text="|[옵션 : ${order.color}, ${order.size}]|"></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td th:text="${order.rdate}"></td>
+                                            <td>
+                                                <a href="#" th:text="${order.ordNo}"></a>
+                                            </td>
+                                            <td>
+                                                <span id="disPrice" th:text="${#numbers.formatInteger(order.getTotalPrice, 0, 'COMMA')}+'원'"></span> <br/>
+                                                <span id="count" th:text="${#numbers.formatInteger(order.count, 0, 'COMMA')}+'개'"></span>
+                                            </td>
+                                            <td>
+                                                <div class="btn-set tooltip">
+                                                    <button type="button" class="btn btnTrack">배송 조회</button> <br/>
+                                                    <button type="button" th:if="${order.ordComplete == 6}" class="btn btnReview">리뷰 쓰기</button><br/>
+                                                    <button type="button" th:unless="${order.ordComplete == 6}" class="btn btnConfirm">구매 확정</button><br/>
+                                                    <button type="button" class="btn">반품/교환</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </th:block>
                                         <!-- 아이템 반복 종료 -->
                                         </tbody>
                                     </table>
