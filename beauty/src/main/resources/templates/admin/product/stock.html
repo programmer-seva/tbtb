@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<meta name="_csrf" th:content="${_csrf.token}">
+    <title>Beauty</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/admin/product.css}">
+    <script th:src="@{/js/admin.js}"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <th:block th:replace="~{admin/product/_header :: headerFragment}"></th:block>
+        <main>
+            <section id="admin-product-stock">
+                <table>
+                    <tr>
+                        <th>상품번호</th>
+                        <th>대분류</th>
+                        <th>소분류</th>
+                        <th>상품명</th>
+                        <th>판매가</th>
+                        <th>총 수량</th>
+                        <th>관리</th>
+                    </tr>
+                    <tr th:each="prod:${products}">
+                    	<td>[[${prod.prodNo}]]</td>
+                    	<td>[[${prod.c1Name}]]</td>
+                    	<td>[[${prod.c2Name}]]</td>
+                    	<td>[[${prod.prodName}]]</td>
+                    	<td>[[${prod.price - prod.disPrice}]]</td>
+                    	<td>[[${prod.stock}]]</td>
+                    	<td>
+                    		<button class='btnModify' th:value="${prod.prodNo}">재고등록</button><br>
+                    		<button class='more' th:value="${prod.prodNo}">상세보기</button>
+                    	</td>
+                    </tr>
+                </table>
+                <div class="page">
+                	<th:block th:if="${groups[0]>1}">
+			            <a th:href="@{/admin/product/stock(pg=${pg-1})}" class="prev">이전</a>
+			        </th:block>
+			
+			        <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+			            <a th:href="@{/admin/product/stock(pg=${num})}" th:class="${num==currentPage? 'current':'num'}">[[${num}]]</a>
+			        </th:block>
+			
+			        <th:block th:if="${groups[1]<lastPageNum}">
+			            <a th:href="@{/admin/product/stock(pg=${pg+1})}" class="next">다음</a>
+			        </th:block>
+                </div>
+                <!-- modal -->
+				<div id="registerStock" class="modal">
+				  <div class="modal-register">
+				    <span class="close">&times;</span>
+				    <nav id="prodNo"></nav>
+			    	<table id="selectOption">
+			    		
+			    	</table>
+			    	<button class="btnRegister">등록</button>
+				  </div>
+				</div>
+				<div id="myModal" class="modal">
+				  <div class="modal-content">
+				    <span class="close">&times;</span>
+				    <p id="modalData"></p>
+				  </div>
+				</div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
