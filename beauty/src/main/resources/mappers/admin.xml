@@ -69,7 +69,12 @@
 	</delete>
 	<!-- 관리자 페이지에서 상품 검색하기 -->
 	<select id="searchProduct" resultType="Product1VO">
-		select * from `product` 
+		SELECT a.*, b.*, c.`cate` AS `cate2`, c.`c2Name`   
+		FROM `product` AS a 
+		LEFT JOIN `cate1` AS b 
+		ON a.`prodCate1`=b.`cate` 
+		JOIN `cate2` AS c 
+		ON a.`prodCate2`=c.`cate`   
 		<choose>
 		<when test="arg0 != null and arg0.length > 0">
 			where `prodCate2` in
@@ -96,7 +101,7 @@
 	    </where>
 	    ;
 	</select>
-	<!-- 상품목록 페이지 처리를 위해 상품 개수 세기 -->
+	<!-- 상품검색결과 목록 페이지 처리를 위해 상품 개수 세기 -->
 	<select id="selectCountProductByKeyword" resultType="int">
 		<choose>
 			<when test="param2 == 'prodName'">
@@ -107,4 +112,53 @@
 			</otherwise>
 		</choose>
 	</select> 
+	
+	<!-- 재고관리 페이지에서 상품목록 불러오기 -->
+	<select id="selectProduct"  resultType="Product1VO">
+		SELECT a.*, b.*, c.`cate` AS `cate2`, c.`c2Name`   
+		FROM `product` AS a 
+		LEFT JOIN `cate1` AS b 
+		ON a.`prodCate1`=b.`cate` 
+		JOIN `cate2` AS c 
+		ON a.`prodCate2`=c.`cate`   
+		GROUP BY a.prodNo 
+		order by a.`prodNo` desc 
+		limit #{arg3},10;
+	</select>
+	<!-- 재고관리 페이지에서 재고정보 상세보기 -->
+	<!-- 사이즈 정보 중복없이 불러오기 -->
+	<select id="selectProductSize" resultType="String">
+		SELECT distinct `size` FROM `product_option` 
+		WHERE `prodNo`=#{prodNo};
+	</select>
+	<!-- 색상 정보 중복없이 불러오기 -->
+	<select id="selectProductColorName" resultType="String">
+		SELECT distinct `colorName` FROM `product_option` 
+		WHERE `prodNo`=#{prodNo};
+	</select>
+	<!-- 사이즈와 색상에 따른 재고 정보 불러오기 -->
+	<select id="selectProductSold" resultType="int">
+		SELECT  `sold`
+		FROM `product_option`
+		WHERE `prodNo` = #{param1} and `size`=#{param2} and `colorName`=#{param3};
+	</select>
+
+	<!-- 재고관리 페이지에서 재고 등록하기 -->
+	<update id="updateStock">
+		UPDATE `product_option` 
+		SET `sold`=#{arg0} 
+		WHERE `prodNo`=#{arg1} AND 
+		`colorName`=#{arg2} AND
+		`size`=#{arg3};
+	</update>
+	<!-- 총 재고수량 등록하기 -->
+	<update id="UpdateTotalStock">
+		UPDATE `product`
+		SET `stock` = (
+		    SELECT SUM(`sold`) 
+		    FROM `product_option` 
+		    WHERE `prodNo`=#{prodNo}
+		)
+		WHERE `prodNo` = #{prodNo};
+	</update>
 </mapper>
