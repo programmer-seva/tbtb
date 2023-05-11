@@ -2,4 +2,7 @@
 *.log
 log/
 beauty/.metadata/
+<<<<<<< HEAD
 *.properties
+=======
+>>>>>>> 35e3d1590cbffbbc6cf23c48b19a678ba338379d
