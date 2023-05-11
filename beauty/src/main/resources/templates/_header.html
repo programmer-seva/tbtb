@@ -31,10 +31,10 @@
 		        <li sec:authorize="hasRole('5')">
 		        	<a th:href="@{/admin/product/list}">관리자 페이지</a>
 		        </li>
-		        <li sec:authorize="hasAnyRole('1','2','3','4')">
+		        <li>
 		        	<a th:href="@{/order/cart}">장바구니<span>([[${cartCount}]])</span></a>
 			    </li>
-		        <li class="cate" sec:authorize="hasAnyRole('1','2','3','4')">
+		        <li>
 		            <a th:href="@{/myshop/index}">마이페이지</a>
 		            <ul class="dep">
                         <li><a th:href="@{/myshop/myorder}">주문/배송</a></li>
