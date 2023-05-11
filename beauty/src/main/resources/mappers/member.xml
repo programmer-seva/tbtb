@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 강중현 -->
+<mapper namespace="kr.co.beauty.dao.MemberDAO">
+	<select id="selectTerms" resultType="MemberVO">
+		select * from `terms`;
+	</select>
+
+	<insert id="insertMember">
+		insert into `member` set
+			`uid`=#{uid},
+			`pass`=#{pass},
+			`name`=#{name},
+			`zip`=#{zip},
+			`addr1`=#{addr1},
+			`addr2`=#{addr2},
+			`phone`=#{phone},
+			`regip`=#{regip},
+			`rdate`=NOW(),
+			`height`=#{height},
+			`weight`=#{weight};
+	</insert>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="String">
+		select `uid` from `member` where `name`=#{arg0} and `phone`=#{arg1};
+	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" resultType="String">
+		select `pass` from `member` where `uid`=#{arg1};
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="findPwResult">
+		update `member` set `pass`=#{arg1} where `uid`=#{arg0};
+	</update>
+	
+	<!-- 비회원 주문 고객정보 조회 -->
+	<select id="joinNonOrder" resultType="MyorderVO">
+		SELECT 
+				p.`prodNo`,
+				p.`prodName`,
+				p.`thumb1`, 
+				p.`price`, 
+				p.`disPrice`, 
+				p.`company`,
+				o.`ordNo`, 
+				o.`count`, 
+				o.`color`, 
+				o.`size`, 
+				o.`rdate`,
+				oc.`ordComplete`
+			FROM `ordercomplete` AS oc
+			JOIN `order` AS o USING (`ordNo`)
+			JOIN `product` AS p USING (`prodNo`)
+			WHERE `orderer`=#{arg0} AND `orderHp`=#{arg1} AND `ordNo`=#{arg2}
+			ORDER BY o.`rdate` DESC LIMIT 10;
+	</select>
+	<!-- 
+		SELECT count(`ordNo`) FROM `ordercomplete` WHERE `orderer` = #{arg0} 
+		and `orderHp` = #{arg1} and `ordNo` = #{arg2};
+	 -->
+	<!-- 비회원 주문조회 상품목록 -->
+	<!-- 
+	<select id="selectNonOrder" resultType="MyorderVO">
+		SELECT 
+			p.`prodNo`,
+			p.`prodName`,
+			p.`thumb1`, 
+			p.`price`, 
+			p.`disPrice`, 
+			p.`company`,
+			o.`ordNo`, 
+			o.`count`, 
+			o.`color`, 
+			o.`size`, 
+			o.`rdate`,
+			oc.`ordComplete`
+		FROM `ordercomplete` AS oc
+		JOIN `order` AS o USING (`ordNo`)
+		JOIN `product` AS p USING (`prodNo`)
+		WHERE `orderer` = #{arg0} and `orderHp` = #{arg1} and `ordNo` = #{arg2}
+		ORDER BY o.`rdate` DESC LIMIT 10;
+	</select>
+	 -->
+	
+	<!-- 김동근 -->
+	<select id="selectMember" resultType="MemberVO">
+		SELECT m.*, SUM(oc.`total`) AS boughtPrice
+		FROM `member` AS m
+		JOIN `ordercomplete` AS oc USING(`uid`)
+		WHERE `uid` = #{uid};
+	</select>
+	
+	<!-- 내 프로필 -->
+	<update id="updateMember">
+		UPDATE `member`
+		SET `phone` = #{phone},
+			`zip` 	= #{zip},
+			`addr1` = #{addr1},
+			`addr2` = #{addr2},
+			`height`= #{height},
+			`weight`= #{weight}
+		WHERE `uid` = #{uid};
+	</update>
+	
+	<update id="savePassword">
+		UPDATE `member`
+		SET `pass` = #{pass}
+		WHERE `uid` = #{uid};
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM `member`
+		WHERE `uid` = #{uid};
+	</delete>
+	
+</mapper>
