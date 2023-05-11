@@ -1,0 +1,5 @@
+/.metadata/
+*.log
+log/
+beauty/.metadata/
+*.properties
